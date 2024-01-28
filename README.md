@@ -1,6 +1,8 @@
-# Team Photo
+# Group 20 Team Photo
 
-# Group 20
+# Game Ideas
+
+# Members
 Klaudia Żymełka, ex23530@bristol.ac.uk, klaudz9
 
 
