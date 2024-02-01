@@ -1,7 +1,5 @@
 # Group 20 Team Photo
 ![alt text](https://raw.githubusercontent.com/UoB-COMSM0110/2024-group-20/main/AGC_20240129_105205114.jpg?raw=true)
-# Game Ideas
-
 # Members
 Klaudia Żymełka, ex23530@bristol.ac.uk, klaudz9
 
