@@ -11,4 +11,7 @@ Kelvin Lu, rl17487@bristol.ac.uk, LurchK
 
 Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
 
+# Game ideas
+1) Squirrel Jump
 
+2) Flappy Bat
