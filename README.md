@@ -25,7 +25,7 @@ Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
 
 # Paper Prototype
 ## Flappy Bat
-[![Paper prototype of flappy bat](GameIdeaImage/BatVideoCover.PNG "BatVideoCover")](https://youtube.com/shorts/NdrY11o-Ys4)
+[<img src="GameIdeaImage/BatVideoCover.jpg" alt="Paper prototype of flappy bat" title="BatVideoCover" style="zoom: 50%;" />](https://youtube.com/shorts/NdrY11o-Ys4)
 
 ## Nervious Pig 
-[![Paper prototype of Nervous Pig](GameIdeaImage/PigVideoCover.PNG "PigVideoCover")](https://youtu.be/iyaCUZtQJD4)
+[![Paper prototype of Nervous Pig](GameIdeaImage/PigVideoCover.jpg "PigVideoCover")](https://youtu.be/iyaCUZtQJD4)
