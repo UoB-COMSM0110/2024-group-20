@@ -21,6 +21,6 @@ Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
 -> doodle jump (twist: multi player challenge: multi-player game, different objects to collect which have functions, map generation)
 
 # Final Game
- -> Nervous Game -> movement of pig, budget in the level, falling birds (different birds have different effects), game interface (start, exit, new levels), structure allocation, rotating structures, real life physics (can kill the pig), difficulty(-different birds, structure of terrain also changes sometimes can build sometimes can't), possibly more than one pig 
+ -> Nervous Game -> challenge: movement of pig, budget in the level, falling birds (different birds have different effects), game interface (start, exit, new levels), structure allocation, rotating structures, real life physics (can kill the pig), difficulty(-different birds, structure of terrain also changes sometimes can build sometimes can't), possibly more than one pig 
 
 
