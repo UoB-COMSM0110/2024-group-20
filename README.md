@@ -12,6 +12,13 @@ Kelvin Lu, rl17487@bristol.ac.uk, LurchK
 Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
 
 # Game ideas
-1) Squirrel Jump
+-> Snake (twists: two snakes, challenges: detect collisions, snake movement, trails logic)
 
-2) Flappy Bat
+-> flappy bat (twist: you don't see the whole map just the area around you bat and ultrasounds, challenges: radar, map generation, moving pipes or two players)
+
+-> space invaders (twist: but we're the aliens invading, challenge: enemy movement, making barriers that lose life, shooting system)
+
+-> doodle jump (twist: multi player challenge: multi-player game, different objects to collect which have functions, map generation)
+
+ 
+
