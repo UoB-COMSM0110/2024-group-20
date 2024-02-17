@@ -11,21 +11,34 @@ Kelvin Lu, rl17487@bristol.ac.uk, LurchK
 
 Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
 
-# Game ideas
--> Snake (twists: two snakes, challenges: detect collisions, snake movement, trails logic)
-
--> flappy bat (twist: you don't see the whole map just the area around you bat and ultrasounds, challenges: radar, map generation, moving pipes or two players)
-
--> space invaders (twist: but we're the aliens invading, challenge: enemy movement, making barriers that lose life, shooting system)
-
--> doodle jump (twist: multi player challenge: multi-player game, different objects to collect which have functions, map generation)
-
 # Final Game
- -> Nervous Game -> challenge: movement of pig, budget in the level, falling birds (different birds have different effects), game interface (start, exit, new levels), structure allocation, rotating structures, real life physics (can kill the pig), difficulty(-different birds, structure of terrain also changes sometimes can build sometimes can't), possibly more than one pig 
+ -> Nervous Pigs 
+    twist: The game was inspired by a well-known game where birds try to kill green pigs. In our version, the roles are reversed and the player is in charge of building a structure that can protect the pigs.
+    challenges: implementing real-life physics in the game so that all elements of the game are affected by it, making the levels different and increasingly hard, implementing of the highest scores page for all users   
+    Paper prototype:
+    [![Paper prototype of Nervous Pig](GameIdeaImage/PigVideoCover.jpg "PigVideoCover")](https://youtu.be/iyaCUZtQJD4)
 
-# Paper Prototype
+# Previous Game ideas
+-> Snake 
+    twist: two snakes
+    challenges: detect collisions, snake movement, trails logic
+
+-> flappy bat 
+    twist: you don't see the whole map just the area around the bat (ultrasound)
+    challenges: radar, map generation, moving pipes or two players
+
+-> space invaders 
+    twist: we're the aliens invading
+    challenge: enemy movement, making barriers that lose life, shooting system
+
+-> doodle jump 
+    twist: multi player 
+    challenge: multi-player game, different objects to collect which have functions, map generation
+
+
+# Other Paper Prototypes
 ## Flappy Bat
 [<img src="GameIdeaImage/BatVideoCover.jpg" alt="Paper prototype of flappy bat" title="BatVideoCover" style="zoom: 50%;" />](https://youtube.com/shorts/NdrY11o-Ys4)
 
-## Nervious Pig 
-[![Paper prototype of Nervous Pig](GameIdeaImage/PigVideoCover.jpg "PigVideoCover")](https://youtu.be/iyaCUZtQJD4)
+
+# Requirements
