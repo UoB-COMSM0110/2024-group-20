@@ -58,7 +58,8 @@ Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
 ## Use-case Specifications
 Viewing the scoreboard
 >  Description: The player starts the game and wants to see the scoreboard.
- Basic Flow:
+>
+> Basic Flow:
 > 1) When a user starts the game main menu opens with options to select from.
 > 2) The user uses a mouse or touchpad to click on the "Scoreboard" button.
 > 3) A new page is opened with the top 5 players (their names) and the scores they achieved.
@@ -66,7 +67,8 @@ Viewing the scoreboard
 
 Start A Game
 > Description: The player wants to start a game.
- Basic Flow:
+>
+> Basic Flow:
 > 1) The user is back to the main menu.
 > 2) The user uses a mouse or touchpad to click on the "Start" button.
 > 3) The user is asked to enter the name which will be then displayed on the scoreboard page if the score achieved is high enough.
@@ -75,11 +77,13 @@ Start A Game
 
 Building Shelter for Pigs
 > Description: In the first stage of the game the player is asked to build a structure to protect the pigs.
- Basic Flow:
+>
+> Basic Flow:
 > 1) The user is in the 'building screen'.
 > 2) The player uses buttons representing different materials (e.g. wood, steel) to build a structure that won't collapse. (The player has a budget for this task)
 > 3) The player uses a button to place n amount of pigs on the screen (n is different for different levels and the user can't start the game without placing all of the required pigs)
 > 4) The user clicks on the "Start" button.
+>
 > Alternative Flow: 
 > 1) The user is in the 'building screen'.
 > 2) The player uses a button to place n amount of pigs on the screen (n is different for different levels and the user can't start the game without placing all of the required pigs)
@@ -88,12 +92,14 @@ Building Shelter for Pigs
 
 Birds Attack
 > Description: In the second stage of the game the player does nothing but watch the events happening.
+>
 > Basic Flow: Player Wins
 > 1) Birds start falling.
 > 2) Materials get damaged.
 > 3) At least one pig survives the attack.
 > 4) Points are calculated (points are given for the amount of budget left and amount of pigs that survived)
 > 5) The "Win" screen is displayed with the current score.
+>
 > Alternative Flow: Player Loses
 > 1) Birds start falling.
 > 2) Materials get damaged.
@@ -103,21 +109,25 @@ Birds Attack
 
 Win Screen
 > Description: When a user wins a level they are displayed a "win" screen.
+>
 > Basic Flow: The player won level 1 or level 2.
 > 1) Player can see their current score displayed on the screen.
 > 2) There is one button on the screen -> "Next Level" button that needs to be pressed in order to continue.
+>
 > Alternative Flow: The player won level 3 which is the last level in the game.
 > 1) Player can see their current score displayed on the screen.
 > 2) There is one button on the screen -> "End Game" button that needs to be pressed to display the main menu.
 
 Loose Screen
 > Description: When a user loses a level they are displayed a "loose" screen.
+>
 > Basic Flow: 
 > 1) Player can see their final score displayed on the screen.
 > 2) There is one button on the screen -> "Return" button that needs to be pressed to display the main menu.
 
 Exit Game
 > Description: The player wants to exit the game after finishing the game.
+>
 > Basic Flow:
 > 1) The user is back to the main menu.
 > 2) The user uses a mouse or touchpad to click on the "Scoreboard" button.
