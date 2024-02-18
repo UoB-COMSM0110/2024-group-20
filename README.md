@@ -48,12 +48,12 @@ Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
 + markers (teachers)
 
 ## User Stories
-> As a player I want to protect the pigs the best I can so that I get a high score.
-> As a player I want to get a high score in order to be the best at the game.
-> As a player I want to be informed how to play in order for me to be able to enjoy the gameplay.
-> As a developer I want to have a clear idea of what I am expected to implement to be able to deliver the best code.
-> As a developer I want to have a clear idea of what I am expected to implement to find the task enjoyable.
-> As a marker I want to see clear documentation so I can mark the game fairly and accurately
++ As a player I want to protect the pigs the best I can so that I get a high score.
++ As a player I want to get a high score in order to be the best at the game.
++ As a player I want to be informed how to play in order for me to be able to enjoy the gameplay.
++ As a developer I want to have a clear idea of what I am expected to implement to be able to deliver the best code.
++ As a developer I want to have a clear idea of what I am expected to implement to find the task enjoyable.
++ As a marker I want to see clear documentation so I can mark the game fairly and accurately
 
 ## Use-case Specifications
 Viewing the scoreboard
@@ -123,3 +123,6 @@ Exit Game
 > 2) The user uses a mouse or touchpad to click on the "Scoreboard" button.
 > 3) A new page is opened with the top 5 players (their names) and the scores they achieved.
 > 4) To return to the main menu the user clicks on the "Return" button.
+
+## Case-use Diagram
+![alt text]()
