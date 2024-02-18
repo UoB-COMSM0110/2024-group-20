@@ -1,5 +1,5 @@
 # Group 20 Team Photo
-![alt text](https://raw.githubusercontent.com/UoB-COMSM0110/2024-group-20/main/AGC_20240129_105205114.jpg?raw=true)
+![alt text](https://raw.githubusercontent.com/UoB-COMSM0110/2024-group-20/main/OrganisationFiles/AGC_20240129_105205114.jpg?raw=true)
 # Members
 Klaudia Żymełka, ex23530@bristol.ac.uk, klaudz9
 
@@ -53,7 +53,7 @@ Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
 + As a player I want to be informed how to play in order for me to be able to enjoy the gameplay.
 + As a developer I want to have a clear idea of what I am expected to implement to be able to deliver the best code.
 + As a developer I want to have a clear idea of what I am expected to implement to find the task enjoyable.
-+ As a marker I want to see clear documentation so I can mark the game fairly and accurately
++ As a marker I want to see clear documentation so I can mark the game fairly and accurately.
 
 ## Use-case Specifications
 Viewing the scoreboard
@@ -125,4 +125,4 @@ Exit Game
 > 4) To return to the main menu the user clicks on the "Return" button.
 
 ## Case-use Diagram
-![alt text]()
+![alt text](https://github.com/UoB-COMSM0110/2024-group-20/blob/main/Images/Use-Case%20Diagram.png)
