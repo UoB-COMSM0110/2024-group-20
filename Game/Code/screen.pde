@@ -1,11 +1,17 @@
+PImage gameLogo;
 PImage startImage;
+PImage scoreImage;
+PImage exitImage;
+PImage menuImage;
 PImage bgImage;
+
+Score playerScore;
 
 int screen = 0;
 
 void setup (){
-  fullScreen();
-  
+  playerScore = new Score();
+  fullScreen();  
 }
 
 void draw (){
@@ -72,59 +78,60 @@ void mousePressed(){
 
 void startScreen(){
   // setting background
-  bgImage = loadImage("../../Images/map.png");
+  bgImage = loadImage("../Images/map.png");
   image(bgImage, 0, 0, width, height);
   
+  // logo on screen
+  startImage = loadImage("../Images/AnxiousPigsLogo.png");
+  image(startImage, width/2 - width/6,height/2 - height/6 - height/4,width/3,height/3);
+
   //start button
-  startImage = loadImage("../../Images/startButton.png");
+  startImage = loadImage("../Images/startButton.png");
   image(startImage, width/2 - width/10,height/2 - height/20,width/5,height/10);
 
   //score button
-  startImage = loadImage("../../Images/startButton.png");
-  image(startImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);
+  scoreImage = loadImage("../Images/scoreButton.png");
+  image(scoreImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);
 
   //exit
-  startImage = loadImage("../../Images/startButton.png");
-  image(startImage, width/2 - width/10,height/2 - height/20 + 2*height/7,width/5,height/10);
+  exitImage = loadImage("../Images/exitButton.png");
+  image(exitImage, width/2 - width/10,height/2 - height/20 + 2*height/7,width/5,height/10);
 }
 
 void scoreScreen(){
   // setting background
-  bgImage = loadImage("../../Images/map.png");
+  bgImage = loadImage("../Images/map.png");
   image(bgImage, 0, 0, width, height);
+  fill(139,69,19);
+  rect(width/5, height/10, width - 2 * width/5, height - height/5);
   //return button
-  startImage = loadImage("../../Images/startButton.png");
-  image(startImage, width - width/5,height - height/10,width/5,height/10);
-  String[] scores = loadStrings("scores.txt");
-  for(int i=0; i<6;i=i +2){
-    text(scores[i],width/2,height/2+i*height/20);
-    text(scores[i+1],width/2 + 40,height/2+i*height/20);
-
-  }
+  menuImage = loadImage("../Images/menuButton.png");
+  image(menuImage, width - width/5,height - height/10,width/5,height/10);
+  // printing scores from a text file
+  playerScore.printScoresFile();
 }
 
 void gameScreen() {
-  bgImage = loadImage("../../Images/map.png");
+  bgImage = loadImage("../Images/map.png");
   image(bgImage, 0, 0, width, height);
   //return button
-  startImage = loadImage("../../Images/startButton.png");
-  image(startImage, width - width/5,height - height/10,width/5,height/10);
+  menuImage = loadImage("../Images/menuButton.png");
+  image(menuImage, width - width/5,height - height/10,width/5,height/10);
   //add wood 
-  startImage = loadImage("../../Images/startButton.png");
+  startImage = loadImage("../Images/startButton.png");
   image(startImage, 0,height/3,width/10,height/20);
   //add glass
-  startImage = loadImage("../../Images/startButton.png");
+  startImage = loadImage("../Images/startButton.png");
   image(startImage, 0,4*height/9,width/10,height/20);
   //add stone
-  startImage = loadImage("../../Images/startButton.png");
+  startImage = loadImage("../Images/startButton.png");
   image(startImage, 0,5*height/9,width/10,height/20);
   //Ready?
-  startImage = loadImage("../../Images/startButton.png");
+  startImage = loadImage("../Images/startButton.png");
   image(startImage, width/2-width/10,height/9,width/5,height/10);
   //score
-  startImage = loadImage("../../Images/startButton.png");
-  image(startImage, width-width/10,height/20,width/10,height/15);
+  playerScore.printCurrentPlayerScore();
   //budget
-  startImage = loadImage("../../Images/startButton.png");
+  startImage = loadImage("../Images/startButton.png");
   image(startImage, width-width/10,height/20+height/15,width/10,height/15);
 }
