@@ -25,7 +25,7 @@ public abstract class RigidBody {
     mass = area * density;
   }
   
-  public abstract void calculateArea();
+  protected abstract void calculateArea();
   
   public boolean areValuesValid() {
     

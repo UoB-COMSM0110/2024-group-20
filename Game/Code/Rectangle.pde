@@ -11,7 +11,7 @@ public class Rectangle extends RigidBody{
     this.height = height;
   }
   
-  public void calculateArea() {
+  protected void calculateArea() {
     area = width * height;
   }
 }
