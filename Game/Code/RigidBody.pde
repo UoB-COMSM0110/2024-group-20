@@ -1,28 +1,57 @@
 // area, mass, speed, position, density
 
 public abstract class RigidBody {
-  private enum ShapeType {
+  protected static enum ShapeType {
     CIRCLE, RECTANGLE
   }
   
-  private PVector position;
-  private PVector linearVelocity;
-  private float rotation;
-  private float rotationVelocity;
+  protected PVector position;
+  protected PVector linearVelocity;
+  protected float rotation;
+  protected float rotationVelocity;
   
-  private float density;
-  private float mass;
-  private float restitution;
-  private float area;
+  protected float density;
+  protected float mass;
+  protected float restitution;
+  protected float area;
   
-  private boolean isStatic;
+  protected boolean isStatic;
   
-  private ShapeType shapeType;
+  protected ShapeType shapeType;
+  
+  protected String errorMessage = "";
   
   public void calculateMass() {
     mass = area * density;
   }
   
   public abstract void calculateArea();
+  
+  public boolean areValuesValid() {
+    
+    if (area < 0.01f * 0.01f){
+      errorMessage = "Area is too small. Min area is 0.01f * 0.01f.";
+      return false;
+    }
+    
+    if (area > 64f * 64f){
+      errorMessage = "Area is too large. Min area is 64f * 64f.";
+      return false;
+    }
+    
+    if (density < 0.5f){
+      errorMessage = "Density is too small. Min density is 0.5f.";
+      return false;
+    }
+    
+    if (density > 21.4f){
+      errorMessage = "Density is too large. Min density is 21.4f.";
+      return false;
+    }
+    
+    restitution = constrain(restitution, 0f, 1f);
+    
+    return true;
+  }
   
 }
