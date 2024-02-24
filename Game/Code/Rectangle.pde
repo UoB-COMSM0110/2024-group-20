@@ -1,1 +1,45 @@
-// width, height, area, mass, speed, position, density, shapeType
+public class Rectangle extends RigidBody{
+  float width;
+  float height;
+  float area = width * height;
+  float density;
+  float restitution;
+  boolean isStatic;
+  
+  float mass = area * density;
+  String errorMessage = "";
+  
+  float speed;
+  float position;
+  //FlatVector position;
+  //Shape shapeType
+  
+  public boolean isSize() {
+    
+    if (area < 0.01f * 0.01f){
+      errorMessage = "Area is too small. Min area is 0.01f * 0.01f.";
+      return false;
+    }
+    
+    if (area > 64f * 64f){
+      errorMessage = "Area is too large. Min area is 64f * 64f.";
+      return false;
+    }
+    
+    if (density < 0.5f){
+      errorMessage = "Density is too small. Min density is 0.5f.";
+      return false;
+    }
+    
+    if (density > 21.4f){
+      errorMessage = "Density is too large. Min density is 21.4f.";
+      return false;
+    }
+    
+    restitution = constrain(restitution, 0f, 1f);
+    
+    body = new FlatBody(position, density, mass, restitution, area, isStatic, width, height);
+    
+    return true;
+  }
+  
