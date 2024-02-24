@@ -1,9 +1,8 @@
-// area, mass, speed, position, density
+public enum ShapeType {
+  CIRCLE, RECTANGLE
+}
 
 public abstract class RigidBody {
-  protected static enum ShapeType {
-    CIRCLE, RECTANGLE
-  }
   
   protected PVector position;
   protected PVector linearVelocity;

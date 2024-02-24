@@ -9,6 +9,9 @@ public class Rectangle extends RigidBody{
     this.isStatic = isStatic;
     this.width = width;
     this.height = height;
+    this.shapeType = ShapeType.RECTANGLE;
+    calculateArea();
+    calculateMass();
   }
   
   protected void calculateArea() {
