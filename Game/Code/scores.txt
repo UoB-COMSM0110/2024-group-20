@@ -1,6 +1,6 @@
-7654321
-Anna
-20
-Klementyna
-20
-Zuza
+0
+Unknown
+0
+Unknown
+0
+Unknown
