@@ -6,11 +6,13 @@ PImage menuImage;
 PImage bgImage;
 
 Score playerScore;
+Tutorial tutorial;
 
 int screen = 0;
 
 void setup (){
   playerScore = new Score();
+  tutorial = new Tutorial(400, 300, 100); 
   fullScreen();  
 }
 
@@ -26,8 +28,11 @@ void draw (){
   //gameScreen
   if (screen == 2){
     gameScreen();
-   
   }
+  background(255); 
+
+    // Update and draw the tutorial
+  tutorial.update();
 }
 
 void mousePressed(){
@@ -74,6 +79,7 @@ void mousePressed(){
       }
     }
   }
+  tutorial.checkInteraction();
 }
 
 void startScreen(){
