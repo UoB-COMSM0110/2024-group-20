@@ -12,7 +12,7 @@ int screen = 0;
 
 void setup (){
   playerScore = new Score();
-  tutorial = new Tutorial(400, 300, 100); 
+  tutorial = new Tutorial();
   fullScreen();  
 }
 
@@ -28,11 +28,9 @@ void draw (){
   //gameScreen
   if (screen == 2){
     gameScreen();
+    //tutorial.update();
+    tutorial.display();
   }
-  background(255); 
-
-    // Update and draw the tutorial
-  tutorial.update();
 }
 
 void mousePressed(){
@@ -72,6 +70,7 @@ void mousePressed(){
         screen = 0;
       }
     }
+    tutorial.mousePressed();
     //Are you ready?
     if (mouseX >= width/2 - width/10 && mouseX <= width/2+width/10){
       if (mouseY <= height/9+height/10 && mouseY >= height/9){
@@ -79,7 +78,6 @@ void mousePressed(){
       }
     }
   }
-  tutorial.checkInteraction();
 }
 
 void startScreen(){
