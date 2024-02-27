@@ -7,6 +7,8 @@ PImage emptyButtonImage;
 PImage bgImage;
 
 UserScore playerScore;
+Tutorial tutorial;
+
 
 int screen = 0;
 int firstLevel = 0;
@@ -14,6 +16,7 @@ int NOLETTERSNAME = 10;
 
 void setup (){
   playerScore = new UserScore();
+  tutorial = new Tutorial();
   fullScreen();  
 }
 
@@ -29,7 +32,8 @@ void draw (){
   //gameScreen
   if (screen == 2){
     gameScreen();
-   
+    //tutorial.update();
+    tutorial.display();
   }
 }
 
@@ -70,6 +74,7 @@ void mousePressed(){
         screen = 0;
       }
     }
+    tutorial.mousePressed();
     //Are you ready?
     if (mouseX >= width/2 - width/10 && mouseX <= width/2+width/10){
       if (mouseY <= height/9+height/10 && mouseY >= height/9){
@@ -223,3 +228,4 @@ void keyPressed(){
     
   }
 }
+
