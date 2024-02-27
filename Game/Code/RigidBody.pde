@@ -26,6 +26,10 @@ public abstract class RigidBody {
   
   protected abstract void calculateArea();
   
+  public PVector getPosition() {
+    return position;
+  }
+  
   public boolean areValuesValid() {
     
     if (area < 0.01f * 0.01f){

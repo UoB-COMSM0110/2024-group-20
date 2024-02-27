@@ -1,18 +1,22 @@
 public class Circle extends RigidBody {
-  protected float radius;
+  protected float circleRadius;
  
-  public Circle(PVector position, float density, float restitution, boolean isStatic, float radius) {
+  public Circle(PVector position, float density, float restitution, boolean isStatic, float circleRadius) {
     this.position = position;
     this.density = density;
     this.restitution = restitution;
     this.isStatic = isStatic;
-    this.radius = radius;
+    this.circleRadius = circleRadius;
     this.shapeType = ShapeType.CIRCLE;
     calculateArea();
     calculateMass();
   }
   
   protected void calculateArea() {
-    area = radius * radius * (float)Math.PI;
+    area = circleRadius * circleRadius * (float)Math.PI;
+  }
+  
+  public float getRadius() {
+    return circleRadius;
   }
 }
