@@ -1,7 +1,21 @@
-public class Score{
+public class UserScore{
   
   String playerName;
+  String tempName;
+  int noLetters;
+  int indx;
   int playerScore;
+  
+  UserScore(){
+    playerName = "";
+    tempName = "_ _ _ _ _ _ _ _ _ _";  
+    noLetters = 0;
+    indx = 0;
+  }
+  
+  /////
+  // Need to add a function updating the score based on the result of the level
+  /////
   
   public void setScore(int score){
     playerScore = score;  
@@ -11,16 +25,44 @@ public class Score{
     return playerScore;
   }
   
-  /////
-  // Need to add a function updating the score based on the result of the level
-  /////
   
-  public void setName(String name){
-    playerName = name;  
+  public int getNoLetters(){
+    return noLetters;  
   }
   
   public String getName(){
     return playerName;
+  }
+  
+  // Function for entering the name by the user 
+  public void addLetter(char letter){
+    tempName = tempName.substring(0, indx) + letter + tempName.substring(indx + 1);
+    indx = indx + 2;
+    noLetters = noLetters + 1;
+  }
+  
+  // Function for entering the name by the user   
+  public void deleteLetter(){
+    indx = indx - 2;
+    noLetters = noLetters - 1;   
+    tempName = tempName.substring(0, indx) + '_' + tempName.substring(indx + 1);
+  }
+  
+  // Function for entering the name by the user   
+  public void noMoreLettes(){
+    tempName = tempName.replaceAll("_", "");
+    noLetters = 10;
+  }
+  
+  // Displaying to the player what name they entered so far
+  public void printTempName(){
+   text(tempName, width/2, height/2); 
+   textAlign(CENTER);
+  }
+  
+  // Updating name to the final name that player chose
+  public void setToFinalName(){
+    playerName = tempName.replaceAll(" ", "");
   }
   
   // Method writting current player's score to the text file
@@ -70,4 +112,6 @@ public class Score{
      textSize(40);
      text(playerName + "   Score: " + str(playerScore), width-width/5,height/15);
   }  
+
+
 }

@@ -3,15 +3,19 @@ PImage startImage;
 PImage scoreImage;
 PImage exitImage;
 PImage menuImage;
+PImage emptyButtonImage;
 PImage bgImage;
 
-Score playerScore;
+UserScore playerScore;
 Tutorial tutorial;
 
+
 int screen = 0;
+int firstLevel = 0;
+int NOLETTERSNAME = 10;
 
 void setup (){
-  playerScore = new Score();
+  playerScore = new UserScore();
   tutorial = new Tutorial();
   fullScreen();  
 }
@@ -122,20 +126,106 @@ void gameScreen() {
   menuImage = loadImage("../Images/menuButton.png");
   image(menuImage, width - width/5,height - height/10,width/5,height/10);
   //add wood 
-  startImage = loadImage("../Images/startButton.png");
-  image(startImage, 0,height/3,width/10,height/20);
+  emptyButtonImage = loadImage("../Images/emptyButton.png");
+  image(emptyButtonImage, 0,height/3,width/10,height/20);
   //add glass
-  startImage = loadImage("../Images/startButton.png");
-  image(startImage, 0,4*height/9,width/10,height/20);
+  emptyButtonImage = loadImage("../Images/emptyButton.png");
+  image(emptyButtonImage, 0,4*height/9,width/10,height/20);
   //add stone
-  startImage = loadImage("../Images/startButton.png");
-  image(startImage, 0,5*height/9,width/10,height/20);
+  emptyButtonImage = loadImage("../Images/emptyButton.png");
+  image(emptyButtonImage, 0,5*height/9,width/10,height/20);
   //Ready?
-  startImage = loadImage("../Images/startButton.png");
-  image(startImage, width/2-width/10,height/9,width/5,height/10);
-  //score
-  playerScore.printCurrentPlayerScore();
+  emptyButtonImage = loadImage("../Images/emptyButton.png");
+  image(emptyButtonImage, width/2-width/10,height/9,width/5,height/10);
+
   //budget
-  startImage = loadImage("../Images/startButton.png");
-  image(startImage, width-width/10,height/20+height/15,width/10,height/15);
+  emptyButtonImage = loadImage("../Images/emptyButton.png");
+  image(emptyButtonImage, width-width/10,height/20+height/15,width/10,height/15);
+  
+  // Player being able to enter his name
+  if(firstLevel == 0){
+    playerName();
+  }else{
+    playerScore.setToFinalName();
+    //score
+    playerScore.printCurrentPlayerScore();
+  }
 }
+
+// Displaying the text when the player is entering their name
+void playerName(){
+  fill(0 ,0, 0);
+  textSize(50);
+  text("Enter your name:", width/2, height/3);
+  textAlign(CENTER);
+  
+  playerScore.printTempName();    
+  
+  // Switching flag when name is entered
+  if(playerScore.getNoLetters() >= NOLETTERSNAME){
+   firstLevel = 1; 
+  }
+}
+
+void keyPressed(){
+  // Key Detection for entering the name of the player
+  if(firstLevel == 0 && screen == 2){
+    if(key == 'a' || key == 'A'){
+     playerScore.addLetter('A'); 
+    }else if(key == 'b' || key == 'B'){
+     playerScore.addLetter('B');
+    }else if(key == 'c' || key == 'C'){
+     playerScore.addLetter('C');
+    }else if(key == 'd' || key == 'D'){
+     playerScore.addLetter('D');
+    }else if(key == 'e' || key == 'E'){
+     playerScore.addLetter('E');
+    }else if(key == 'f' || key == 'F'){
+     playerScore.addLetter('F');
+    }else if(key == 'g' || key == 'G'){
+     playerScore.addLetter('G');
+    }else if(key == 'h' || key == 'H'){
+     playerScore.addLetter('H');
+    }else if(key == 'i' || key == 'I'){
+     playerScore.addLetter('I');
+    }else if(key == 'j' || key == 'J'){
+     playerScore.addLetter('J');
+    }else if(key == 'k' || key == 'K'){
+     playerScore.addLetter('K');
+    }else if(key == 'l' || key == 'L'){
+     playerScore.addLetter('L');
+    }else if(key == 'm' || key == 'M'){
+     playerScore.addLetter('M');
+    }else if(key == 'n' || key == 'N'){
+     playerScore.addLetter('N');
+    }else if(key == 'o' || key == 'O'){
+     playerScore.addLetter('O');
+    }else if(key == 'p' || key == 'P'){
+     playerScore.addLetter('P');
+    }else if(key == 'q' || key == 'Q'){
+     playerScore.addLetter('Q');
+    }else if(key == 'r' || key == 'R'){
+     playerScore.addLetter('R');
+    }else if(key == 's' || key == 'S'){
+     playerScore.addLetter('S');
+    }else if(key == 't' || key == 'T'){
+     playerScore.addLetter('T');
+    }else if(key == 'u' || key == 'U'){
+     playerScore.addLetter('U');
+    }else if(key == 'v' || key == 'V'){
+     playerScore.addLetter('V');
+    }else if(key == 'w' || key == 'W'){
+     playerScore.addLetter('W');
+    }else if(key == 'y' || key == 'Y'){
+     playerScore.addLetter('Y');
+    }else if(key == 'z' || key == 'Z'){
+     playerScore.addLetter('Z');
+    }else if(key == BACKSPACE){
+     playerScore.deleteLetter();
+    }else if(key == ENTER){
+     playerScore.noMoreLettes();
+    }
+    
+  }
+}
+
