@@ -33,7 +33,7 @@ public class Menu {
    rect(x, y, width, height);
 
    // Draw buttons (need to add new art materials)
-   nextImage = loadImage("../Images/startButton.png");
+   nextImage = loadImage("../Images/nextButton.png");
    skipImage = loadImage("../Images/exitButton.png");
    image(nextImage,x + width * 0.05, y + height - height * 0.2, width * 0.2, height * 0.15); // Next Button 1
    image(skipImage,x + width - width * 0.25, y + height - height * 0.2, width * 0.2, height * 0.15); // Skip Button 2

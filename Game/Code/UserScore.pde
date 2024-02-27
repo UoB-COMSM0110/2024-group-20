@@ -34,11 +34,32 @@ public class UserScore{
     return playerName;
   }
   
+  public void pressedKey(char key){
+    if('a' <= key && key <= 'z'){
+      addLetter(key);
+    }
+    if('A' <= key && key <= 'Z'){
+      addLetter(key);
+    }
+    if('0' <= key && key <= '9'){
+      addLetter(key);
+    }
+    if(key == BACKSPACE){
+      deleteLetter();
+    } 
+    if(key == ENTER){
+      noMoreLettes();
+    }
+    
+  }
   // Function for entering the name by the user 
   public void addLetter(char letter){
     tempName = tempName.substring(0, indx) + letter + tempName.substring(indx + 1);
     indx = indx + 2;
     noLetters = noLetters + 1;
+    if(noLetters == 10){
+      setToFinalName();
+    }
   }
   
   // Function for entering the name by the user   
@@ -52,12 +73,21 @@ public class UserScore{
   public void noMoreLettes(){
     tempName = tempName.replaceAll("_", "");
     noLetters = 10;
+    setToFinalName();
   }
   
   // Displaying to the player what name they entered so far
   public void printTempName(){
    text(tempName, width/2, height/2); 
    textAlign(CENTER);
+  }
+  
+  void enterPlayerName(){
+      fill(0 ,0, 0);
+      textSize(50);
+      text("Enter your name:", width/2, height/3);
+      textAlign(CENTER);
+      printTempName();    
   }
   
   // Updating name to the final name that player chose
