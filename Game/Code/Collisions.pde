@@ -109,16 +109,17 @@ public static class Colllisions {
 
     }
     
-    float[] depthResult = new float[1];
-    
     if (intersecting) {
-      normal.set(minAxis);
-      depthResult[0] = depth;
-      return true;
-    } else {
-      return false;
-    }
+      PVector centerA =  findArithmeticMean(vertexA);
+      PVector centerB =  findArithmeticMean(vertexB);
+      PVector direction = PVector.sub(centerB, centerA); 
     
+      if (PVector.dot(direction, normal) < 0) {
+        normal.mult(-1);
+      }
+    }
+
+    return true;
 }
 
   private static void projectOnAxis(PVector[] vertex, PVector axis, float[] result) {
@@ -141,7 +142,7 @@ public static class Colllisions {
     result[1] = max;
   }
     
-  PVector FindArithmeticMean(PVector[] vertex){
+  private static PVector findArithmeticMean(PVector[] vertex){
     float sumX = 0f;
     float sumY = 0f;
 
@@ -151,7 +152,7 @@ public static class Colllisions {
       sumY += v.y;
     }
 
-    return new PVector(sumX / (float)vertex.length, sumY / (float)vertex.length);
+    return new PVector(sumX / vertex.length, sumY / vertex.length);
   }
   
 }
