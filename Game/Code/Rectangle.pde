@@ -1,6 +1,7 @@
 public class Rectangle extends RigidBody{
   protected float rectWidth;
   protected float rectHeight;
+  protected float rectAngle;
     
   public Rectangle(PVector position, float density, float restitution, boolean isStatic, float rectWidth, float rectHeight) {
     this.position = position;
@@ -44,5 +45,6 @@ public class Rectangle extends RigidBody{
     }
     return position.add(relativePosition.rotate(rotation));
   }
+
 }
   

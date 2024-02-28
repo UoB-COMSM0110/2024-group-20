@@ -47,4 +47,111 @@ public static class Colllisions {
     
     return true;
   }
+  
+  private static boolean intersectRectangle(Rectangle rectangle) {
+    PVector[] vertexA;
+    PVector[] vertexB;
+    PVector normal;
+    PVector minAxis;
+    float depth;
+    
+    normal.set(0, 0);
+    depth = Float.MaxValue;
+    boolean intersecting = true;
+    
+    //Check the sides of polygon A
+    for (int i = 0; i < vertexA.length; i++){
+      PVector edge = PVector.sub(vertexA[(i + 1) % vertexA.length], vertexA[i]);
+      PVector axis = new PVector(-edge.y, edge.x);
+      axis.normalize();
+      
+      float[] projA = new float[2];
+      float[] projB = new float[2];
+      projectOnAxis(vertexA, axis, projA);
+      projectOnAxis(vertexB, axis, projB);
+      
+      if (projA[0] > projB[1] || projB[0] > projA[1]){
+        intersecting = false;
+        break;
+      }
+      
+      float axisDepth = Math.min(projA[1], projB[1]) - Math.max(projA[0], projB[0]);
+      
+      if (axisDepth < depth) {
+        depth = axisDepth;
+        minAxis.set(axis);
+      }
+
+    }
+    
+    //Check the sides of polygon B
+    for (int i = 0; i < vertexB.length; i++){
+      PVector edge = PVector.sub(vertexB[(i + 1) % vertexB.length], vertexB[i]);
+      PVector axis = new PVector(-edge.y, edge.x);
+      axis.normalize();
+      
+      float[] projA = new float[2];
+      float[] projB = new float[2];
+      projectOnAxis(vertexA, axis, projA);
+      projectOnAxis(vertexB, axis, projB);
+      
+      if (projA[0] > projB[1] || projB[0] > projA[1]){
+        intersecting = false;
+        break;
+      }
+      
+      float axisDepth = Math.min(projA[1], projB[1]) - Math.max(projA[0], projB[0]);
+      
+      if (axisDepth < depth) {
+        depth = axisDepth;
+        minAxis.set(axis);
+      }
+
+    }
+    
+    float[] depthResult = new float[1];
+    
+    if (intersecting) {
+      normal.set(minAxis);
+      depthResult[0] = depth;
+      return true;
+    } else {
+      return false;
+    }
+    
+}
+
+  private static void projectOnAxis(PVector[] vertex, PVector axis, float[] result) {
+    float min = Float.MaxValue;
+    float max = -Float.MinValee;
+    
+    for (int i = 0; i < vertex.length; i++) {
+      PVector v = vertex[i];
+      float proj = PVector.dot(v, axis);
+      
+      if (proj < min) {
+        min = proj;
+      }
+      if (proj > max){
+        max = proj;
+      }
+    }
+    
+    result[0] = min;
+    result[1] = max;
+  }
+    
+  PVector FindArithmeticMean(PVector[] vertex){
+    float sumX = 0f;
+    float sumY = 0f;
+
+    for(int i = 0; i < vertex.length; i++){
+      PVector v = vertex[i];
+      sumX += v.x;
+      sumY += v.y;
+    }
+
+    return new PVector(sumX / (float)vertex.length, sumY / (float)vertex.length);
+  }
+  
 }
