@@ -13,10 +13,6 @@ public class UserScore{
     indx = 0;
   }
   
-  /////
-  // Need to add a function updating the score based on the result of the level
-  /////
-  
   public void setScore(int score){
     playerScore = score;  
   }
@@ -25,15 +21,11 @@ public class UserScore{
     return playerScore;
   }
   
-  
   public int getNoLetters(){
     return noLetters;  
   }
   
-  public String getName(){
-    return playerName;
-  }
-  
+  // Function detecting which key was pressed and updating players name according to that
   public void pressedKey(char key){
     if('a' <= key && key <= 'z'){
       addLetter(key);
@@ -49,10 +41,10 @@ public class UserScore{
     } 
     if(key == ENTER){
       noMoreLettes();
-    }
-    
+    } 
   }
-  // Function for entering the name by the user 
+  
+  // Function for adding letters and numbers to the name of the user 
   public void addLetter(char letter){
     tempName = tempName.substring(0, indx) + letter + tempName.substring(indx + 1);
     indx = indx + 2;
@@ -62,14 +54,14 @@ public class UserScore{
     }
   }
   
-  // Function for entering the name by the user   
+  // Function to delete a letter or number entered bu the user in their name 
   public void deleteLetter(){
     indx = indx - 2;
     noLetters = noLetters - 1;   
     tempName = tempName.substring(0, indx) + '_' + tempName.substring(indx + 1);
   }
   
-  // Function for entering the name by the user   
+  // Function for signaling that the user entered their name
   public void noMoreLettes(){
     tempName = tempName.replaceAll("_", "");
     noLetters = 10;
@@ -82,6 +74,7 @@ public class UserScore{
    textAlign(CENTER);
   }
   
+  // Function allowing player to enter their name
   void enterPlayerName(){
       fill(0 ,0, 0);
       textSize(50);
@@ -93,6 +86,11 @@ public class UserScore{
   // Updating name to the final name that player chose
   public void setToFinalName(){
     playerName = tempName.replaceAll(" ", "");
+  }
+  
+  // Method for updating the user's score
+  public void updateScore(int newPoints){
+    playerScore = playerScore + newPoints;
   }
   
   // Method writting current player's score to the text file

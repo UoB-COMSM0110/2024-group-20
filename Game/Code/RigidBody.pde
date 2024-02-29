@@ -53,4 +53,11 @@ public abstract class RigidBody {
     return true;
   }
   
+  public float getCoorX(){
+    return position.x;
+  }
+  
+   public float getCoorY(){
+    return position.y;
+  }
 }
