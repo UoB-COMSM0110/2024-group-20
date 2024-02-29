@@ -2,7 +2,7 @@ public class BirdBlack extends Bird{
   
   public BirdBlack(PVector location){
     //PVector location,float density, float restitution, boolean isStatic, float radius, BirdType birdType
-    super(location, BirdType.BLACK);
+    super(location, 0.5f, 0.4f, false, 4, BirdType.BLACK);
   }
 
   public void drawBird(){
