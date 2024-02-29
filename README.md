@@ -16,7 +16,7 @@ Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
 + twist: The game was inspired by a well-known game where birds try to kill green pigs. In our version, the roles are reversed and the player is in charge of building a structure that can protect the pigs.
 + challenges: implementing real-life physics in the game so that all elements of the game are affected by it, making the levels different and increasingly hard, implementing of the highest scores page for all users   
 + Paper prototype:
-    [![Paper prototype of Nervous Pig](GameIdeaImage/PigVideoCover.jpg "PigVideoCover")](https://youtu.be/iyaCUZtQJD4)
+    [![Paper prototype of Nervous Pig](Images/PigVideoCover.jpg "PigVideoCover")](https://youtu.be/iyaCUZtQJD4)
 
 # Previous Game ideas
 -> Snake 
@@ -38,7 +38,7 @@ Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
 
 # Other Paper Prototypes
 ## Flappy Bat
-[<img src="GameIdeaImage/BatVideoCover.jpg" alt="Paper prototype of flappy bat" title="BatVideoCover" style="zoom: 50%;" />](https://youtube.com/shorts/NdrY11o-Ys4)
+[<img src="Images/BatVideoCover.jpg" alt="Paper prototype of flappy bat" title="BatVideoCover" style="zoom: 50%;" />](https://youtube.com/shorts/NdrY11o-Ys4)
 
 
 # Requirements
@@ -136,3 +136,6 @@ Exit Game
 
 ## Case-use Diagram
 ![alt text](https://github.com/UoB-COMSM0110/2024-group-20/blob/main/Images/Use-Case%20Diagram.png)
+
+## Reflections 
+The most beneficial for the group turned out to be the exercises that required us to create a user-case diagram and user-case specifications. After creating the paper prototype of the game we knew that everyone had the same idea about how the game would look like and what needed to be implemented. However, it turned out we didn't think deeply enough about some of the game elements. For example, we did not discuss how the points would be calculated. In order to find the scenario that would allow for achieving a wide range of scores we changed some of the initial ideas. Now pigs instead of being placed by the player would stay on the ground and only one pig remaining after the birds' attack would be enough to move to another level. The amount of pig that would stay alive at the end of the level would impact the score. Another element that we realised was that we didn't discuss in what way the levels would become harder and harder.  
