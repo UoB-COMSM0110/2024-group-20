@@ -1,4 +1,5 @@
-public static class Colllisions {
+
+/*public static class Colllisions {
   public static boolean intersect(Circle circle, Rectangle rectangle) {
     return intersectCircleRectangle(circle, rectangle);
   }
@@ -155,4 +156,4 @@ public static class Colllisions {
     return new PVector(sumX / vertex.length, sumY / vertex.length);
   }
   
-}
+}*/

@@ -1,4 +1,4 @@
-class Level{
+/*class Level{
   
   boolean levelFailed;
   int budget;
@@ -36,4 +36,4 @@ class Level{
   
   
   
-}
+}*/

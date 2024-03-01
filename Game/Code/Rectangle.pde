@@ -27,7 +27,7 @@ public class Rectangle extends RigidBody{
     return rectHeight;
   }
   
-  public PVector getVertex(int index) {
+  /*public PVector getVertex(int index) {
     PVector relativePosition;
     switch(index%4) {
       case 0: 
@@ -44,7 +44,7 @@ public class Rectangle extends RigidBody{
         break;
     }
     return position.add(relativePosition.rotate(rotation));
-  }
+  }*/
 
 }
   
