@@ -64,4 +64,9 @@ public abstract class RigidBody {
    public float getCoorY(){
     return position.y;
   }
+  
+  public void step(float frameTime) {
+    position.add(linearVelocity.mult(frameTime));
+    rotation += rotationVelocity * frameTime;
+  }
 }

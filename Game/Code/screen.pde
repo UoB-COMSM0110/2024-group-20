@@ -14,35 +14,8 @@ Tutorial tutorial;
 int screen = 0;
 int firstLevel = 0;
 
-void setup (){
-  playerScore = new UserScore();
-  tutorial = new Tutorial();
-  fullScreen();  
-}
 
-void draw (){
-  //start screen
-  if(screen == 0){
-    startScreen();
-  }
-  //scoreScreen
-  if (screen == 1){
-    scoreScreen();
-  }
-  //gameScreen
-  if (screen == 2){
-    gameScreen();
-    // Player being able to enter his name
-    if(playerScore.getNoLetters() < 10){
-      playerScore.enterPlayerName();
-    }else{
-      //score Display
-      playerScore.printCurrentPlayerScore();
-      //tutorial.update();
-      tutorial.display();
-    }
-  }
-}
+
 
 void startScreen(){
   // setting background
