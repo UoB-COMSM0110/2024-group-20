@@ -7,6 +7,9 @@ PImage readyImage;
 PImage emptyButtonImage;
 PImage bgImage;
 
+PImage woodBoardImage;
+
+
 UserScore playerScore;
 Tutorial tutorial;
 Level allLevels[];
@@ -28,11 +31,13 @@ void setup (){
 void draw (){
   //start screen
   if(screen == 0){
+    playerScore.deletePlayer();
+    // HAVE TO RESET LEVEL VALUES
+    currentLevel = 0;
     startScreen();
   }
   //scoreScreen
   if (screen == 1){
-    playerScore.deletePlayer();
     scoreScreen();
   }
   //gameScreen
@@ -176,8 +181,8 @@ void imagesScoreScreen(){
   image(bgImage, 0, 0, width, height);
   
   // Board to display scores on 
-  fill(139,69,19);
-  rect(width/5, height/10, width - 2 * width/5, height - height/5);
+  woodBoardImage = loadImage("../Images/woodBoard.png");
+  image(woodBoardImage, width/5, height/10, width - 2 * width/5, height - height/5);
   
   // return button
   menuImage = loadImage("../Images/menuButton.png");

@@ -112,8 +112,6 @@ public class UserScore{
       String[] finalScores = loadStrings("scores.txt");
     
       for(int i = 0; i < 6; i = i + 2){
-        print(i);
-        print('\n');
         if(Integer.parseInt(loadedScores[i]) <= playerScore && flag == 0){
           if(i == 0){
             finalScores[i+4] = loadedScores[i+2];
