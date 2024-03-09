@@ -1,4 +1,4 @@
-/*public class BirdBlue extends Bird{
+public class BirdBlue extends Bird{
   
   public BirdBlue(PVector location){
     //PVector location,float density, float restitution, boolean isStatic, float radius, BirdType birdType
@@ -9,4 +9,4 @@
     fill(0, 0, 255);
     circle(this.getCoorX(), this.getCoorY(),width/20); 
   }
-}*/
+}

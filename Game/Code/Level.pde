@@ -67,9 +67,7 @@ class Level{
       pigsOnLevel[i].drawPig();  
     }
   }
-  
-  
-}
+
   public void printAllBirds(){
     if(structureBuild){
       for(int i = 0; i < noBirds; i++){
