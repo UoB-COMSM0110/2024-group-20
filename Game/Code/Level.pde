@@ -68,6 +68,8 @@ class Level{
     }
   }
   
+  
+}
   public void printAllBirds(){
     if(structureBuild){
       for(int i = 0; i < noBirds; i++){

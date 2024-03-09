@@ -26,8 +26,8 @@ public class Rectangle extends RigidBody{
   public float getHeight() {
     return rectHeight;
   }
-  /*
-  public PVector getVertex(int index) {
+  
+  /*public PVector getVertex(int index) {
     PVector relativePosition;
     switch(index%4) {
       case 0: 

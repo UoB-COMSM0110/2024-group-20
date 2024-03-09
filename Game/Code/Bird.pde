@@ -1,4 +1,4 @@
-public enum BirdType {
+/*public enum BirdType {
   RED, BLUE, BLACK
 }
 
@@ -14,4 +14,4 @@ public class Bird extends Circle{
   public void drawBird(){
   }
 
-}
+}*/

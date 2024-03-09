@@ -13,6 +13,7 @@ PFont font;
 
 UserScore playerScore;
 Tutorial tutorial;
+ArrayList<Material> materials = new ArrayList<Material>(); // A list to keep track of all materials
 Level allLevels[];
 
 int screen = 0;
@@ -57,6 +58,10 @@ void draw (){
       allLevels[currentLevel].printLevelBudget();
       //tutorial.update();
       tutorial.display();
+    }
+    //draw all the materials 
+    for (Material material : materials) {
+      material.draw(g); 
     }
   }
   if(screen == 3){
@@ -131,6 +136,24 @@ void mousePressed(){
       }
     }
     tutorial.mousePressed();
+    //add glass
+    if (mouseX >= 0 && mouseX <= width/10){
+      if (mouseY <= height/3+height/20 && mouseY >= height/3 ){
+        materials.add(new Glass(new PVector(x, y), 0.5, 0.3, false, 50, 50));
+      }
+    }
+    //add wood
+    if (mouseX >= 0 && mouseX <= width/10){
+      if (mouseY <= 4*height/9+height/20 && mouseY >= 4*height/9){
+        materials.add(new Wood(new PVector(x, y), 0.5, 0.3, false, 50, 50));
+      }
+    }
+    //add stone
+    if (mouseX >= 0 && mouseX <= width/10){
+      if (mouseY <= 5*height/9+height/20 && mouseY >= 45height/9){
+        materials.add(new Stone(new PVector(x, y), 0.5, 0.3, false, 50, 50));
+      }
+    }
     //Are you ready?
     if (mouseX >= width/2 - width/10 && mouseX <= width/2+width/10){
       if (mouseY <= height/9+height/10 && mouseY >= height/9){
