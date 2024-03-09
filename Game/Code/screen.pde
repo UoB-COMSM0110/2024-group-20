@@ -203,6 +203,7 @@ void keyPressed(){
     playerScore.pressedKey(key);
   }
   if(screen == 2){
+    print("1");
    if(key == '['){
      if(currentLevel < 2){
         //Calculating points
@@ -214,6 +215,13 @@ void keyPressed(){
    if(key == ']'){
        screen = 4;
     }
+    if ((key == 'd' ||key=='D') && draggedMaterial != null) {
+      
+    draggedMaterial.rotate(PI / 36); // Rotate by 10 degrees
+  }
+  if ((key == 'a'||key == 'A' ) && draggedMaterial != null) {
+    draggedMaterial.rotate(-PI / 18); 
+  }
    }
 }
 //////////////////////////////////////////////////////////////////////////
