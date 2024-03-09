@@ -9,6 +9,7 @@ PImage bgImage;
 
 PImage woodBoardImage;
 
+PFont font;
 
 UserScore playerScore;
 Tutorial tutorial;
@@ -21,6 +22,8 @@ int currentLevel = 0;
 void setup (){
   playerScore = new UserScore();
   tutorial = new Tutorial();
+  font = createFont("angrybirds-regular.ttf", 128);
+  
   allLevels = new Level[3];
   allLevels[0] = new Level(200, 1, 3, 0, 0);
   allLevels[1] = new Level(150, 2, 3, 3, 0);
@@ -161,7 +164,7 @@ void keyPressed(){
     playerScore.pressedKey(key);
   }
   if(screen == 2){
-   if(key == 'w' || key == 'W'){
+   if(key == '['){
      if(currentLevel < 2){
         //Calculating points
         currentLevel++;
@@ -169,7 +172,7 @@ void keyPressed(){
        screen = 3; 
      }
    }
-   if(key == 's' || key == 'S'){
+   if(key == ']'){
        screen = 4;
     }
    }
@@ -251,6 +254,7 @@ void imagesWinScreen(){
   
   // win text
   fill(0,0,0);
+  textFont(font);
   text("You WON!!!", width/2, height/3);
   playerScore.printFinalScore();
 
@@ -266,6 +270,7 @@ void imagesLooseScreen(){
   
   // win text
   fill(0,0,0);
+  textFont(font);
   text("You LOST!!!", width/2, height/3);
   playerScore.printFinalScore();
   

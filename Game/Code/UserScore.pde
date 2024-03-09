@@ -27,6 +27,8 @@ public class UserScore{
     return noLetters;  
   }
   
+  ////NAME ENTERING/////////////////////////////////////////////////////////////////////////
+  
   // Function detecting which key was pressed and updating players name according to that
   public void pressedKey(char key){
     if('a' <= key && key <= 'z'){
@@ -58,9 +60,11 @@ public class UserScore{
   
   // Function to delete a letter or number entered bu the user in their name 
   public void deleteLetter(){
-    indx = indx - 2;
-    noLetters = noLetters - 1;   
-    tempName = tempName.substring(0, indx) + '_' + tempName.substring(indx + 1);
+    if(noLetters > 0){
+      indx = indx - 2;
+      noLetters = noLetters - 1;   
+      tempName = tempName.substring(0, indx) + '_' + tempName.substring(indx + 1);
+    }
   }
   
   // Function for signaling that the user entered their name
@@ -72,6 +76,7 @@ public class UserScore{
   
   // Displaying to the player what name they entered so far
   public void printTempName(){
+   textFont(font);
    text(tempName, width/2, height/2); 
    textAlign(CENTER);
   }
@@ -99,8 +104,16 @@ public class UserScore{
     playerName = tempName.replaceAll(" ", "");
   }
   
+  ////SCORE RELATED/////////////////////////////////////////////////////////////////////////
+  
   // Method for updating the user's score
-  public void updateScore(int newPoints){
+  public void updateScore(Level currentLevel, int levelNo){
+    // Budget    
+    int newPoints = currentLevel.getBudget();
+    // Pigs Alive
+    newPoints = newPoints + currentLevel.numberPigsAlive() * 100;
+    // Level
+    newPoints = newPoints + levelNo * 100;
     playerScore = playerScore + newPoints;
   }
   
@@ -138,9 +151,13 @@ public class UserScore{
     }
   }
   
+  ////PRINTING/////////////////////////////////////////////////////////////////////////
+  
   // Method for scoreScreen printin the score.txt file to screen
   public void printScoresFile(){
      fill(0, 0, 0);
+     textAlign(CENTER);
+     textFont(font);
      textSize(50);
     String[] scores = loadStrings("scores.txt");
     for(int i=0; i<6;i=i +2){
@@ -158,12 +175,14 @@ public class UserScore{
   // Method for gameScreen printin the name and score to screen
   public void printCurrentPlayerScore(){
      fill(0, 0, 0);
+     textFont(font);
      textSize(40);
      text(playerName + "   Score: " + str(playerScore), width-width/5,height/15);
   }  
   
   public void printFinalScore(){
      fill(0, 0, 0);
+     textFont(font);
      textSize(40);
      text("Your Final Score is: " + str(playerScore), width/2, height/2);
      updateScoresFile();

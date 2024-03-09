@@ -1,16 +1,24 @@
 class Level{
   
-  boolean levelFailed;
-  boolean structureBuild; 
-  int budget;
+  private boolean levelFailed;
+  private boolean structureBuild; 
+  private int budget;
   
-  int noPigs;
-  Pig pigsOnLevel[];
+  private int noPigs;
+  private Pig pigsOnLevel[];
   
-  int noBirds;
-  Bird birdsOnLevel[];
+  private int noBirds;
+  private Bird birdsOnLevel[];
   
   // Array of structures(wood, glass, steel)
+  
+  public int getBudget(){
+    return budget;
+  }
+  
+  public boolean isLevelFailed(){
+    return levelFailed;
+  }
   
   public Level(int budget, int noPigs, int noBirdsRed, int noBirdsBlue, int noBirdsBlack){
     this.levelFailed = false;
@@ -43,6 +51,16 @@ class Level{
      textSize(40);
      text("Budget: " + str(budget), width-width/5,height/10);
   }  
+  
+  public int numberPigsAlive(){
+    int alivePigs = 0;
+    for(int i = 0; i < noPigs; i++){
+       if(pigsOnLevel[i].isAlive()){
+         alivePigs ++; 
+       }
+    }
+    return alivePigs;
+  }
   
   public void printAllPigs(){
     for(int i = 0; i < noPigs; i++){
