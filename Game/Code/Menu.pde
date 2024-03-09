@@ -29,9 +29,9 @@ public class Menu {
    // Display the menu
   void display() {
    // Draw the menu background
-   fill(139,69,19); // White background
-   rectMode(CORNER);
-   rect(x, y, width, height);
+   fill(139,0,0); // White background
+  woodBoardImage = loadImage("../Images/woodBoard.png");
+  image(woodBoardImage, x, y, width, height);
 
    // Draw buttons (need to add new art materials)
    nextImage = loadImage("../Images/nextButton.png");
