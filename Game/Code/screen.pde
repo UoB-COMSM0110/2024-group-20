@@ -58,6 +58,7 @@ void draw (){
       //budget
       allLevels[currentLevel].printLevelBudget();
       //tutorial.update();
+      textAlign(LEFT);
       tutorial.display();
     }
     //draw all the materials 
@@ -146,7 +147,7 @@ void mousePressed(){
   }
 
     if (mouseX >= 0 && mouseX <= width/10){
-      PVector newPosition = new PVector(mouseX, mouseY);
+      PVector newPosition = new PVector(random(0,width/3), random(2*height/3,height));
       if (mouseY <= height/3+height/20 && mouseY >= height/3 ){
         materials.add(new Glass(newPosition, 0.5, 0.3, false, 50, 200));
       }
