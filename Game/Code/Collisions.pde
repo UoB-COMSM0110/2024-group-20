@@ -7,6 +7,20 @@ public static class Colllisions {
     return intersectCircleRectangle(circle, rectangle);
   }
   
+  private static boolean intersectCircleCircle(Circle circle1, Circle circle2){
+    PVector circleOnePosition =  circle1.getPosition();
+    PVector circleTwoPosition = circle2.getPosition();
+    float radiusSum = circle1.getRadius() + circle2.getRadius();
+    
+    float distanceX = circleOnePosition.x - circleTwoPosition.y;
+    float distanceY = circleOnePosition.y - circleTwoPosition.y;
+    
+    if(distanceX * distanceX + distanceY * distanceY <= radiusSum * radiusSum){
+      return false;
+    }
+    return true;
+  }
+  
   private static boolean intersectCircleRectangle(Circle circle, Rectangle rectangle) {
     PVector circlePosition = circle.getPosition();
     float circleRadius = circle.getRadius();
