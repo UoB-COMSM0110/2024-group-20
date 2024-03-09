@@ -1,3 +1,4 @@
+/*
 class Level{
   
   boolean levelFailed;
@@ -37,3 +38,4 @@ class Level{
   
   
 }
+*/

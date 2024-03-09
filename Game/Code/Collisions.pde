@@ -48,19 +48,24 @@ public static class Colllisions {
     return true;
   }
   
-  private static boolean intersectRectangle(Rectangle rectangle) {
+  public static boolean intersect(Rectangle rectangle1, Rectangle rectangle2) {
+    return intersectPolygons(rectangle1, rectangle2);
+  }
+  
+  private static boolean intersectPolygons(Rectangle rectangle1, Rectangle rectangle2) {
     PVector[] vertexA;
     PVector[] vertexB;
     PVector normal;
     PVector minAxis;
     float depth;
     
-    normal.set(0, 0);
-    depth = Float.MaxValue;
+    normal = new PVector(0, 0);
+    depth = Float.MAX_VALUE;
     boolean intersecting = true;
     
+    
     //Check the sides of polygon A
-    for (int i = 0; i < vertexA.length; i++){
+    for(int i = 0; i < vertexA.length; i++){
       PVector edge = PVector.sub(vertexA[(i + 1) % vertexA.length], vertexA[i]);
       PVector axis = new PVector(-edge.y, edge.x);
       axis.normalize();

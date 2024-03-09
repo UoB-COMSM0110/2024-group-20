@@ -1,3 +1,4 @@
+/*
 public class BirdBlack extends Bird{
   
   public BirdBlack(PVector location){
@@ -10,3 +11,4 @@ public class BirdBlack extends Bird{
     circle(this.getCoorX(), this.getCoorY(),width/20); 
   }
 }
+*/
