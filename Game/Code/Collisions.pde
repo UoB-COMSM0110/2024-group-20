@@ -1,4 +1,3 @@
-
 /*public static class Colllisions {
   public static boolean intersect(Circle circle, Rectangle rectangle) {
     return intersectCircleRectangle(circle, rectangle);

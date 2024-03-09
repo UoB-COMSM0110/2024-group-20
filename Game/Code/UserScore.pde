@@ -5,12 +5,14 @@ public class UserScore{
   int noLetters;
   int indx;
   int playerScore;
+  boolean scoreUpdated;
   
   UserScore(){
     playerName = "";
     tempName = "_ _ _ _ _ _ _ _ _ _";  
     noLetters = 0;
     indx = 0;
+    scoreUpdated = false;
   }
   
   public void setScore(int score){
@@ -24,6 +26,8 @@ public class UserScore{
   public int getNoLetters(){
     return noLetters;  
   }
+  
+  ////NAME ENTERING/////////////////////////////////////////////////////////////////////////
   
   // Function detecting which key was pressed and updating players name according to that
   public void pressedKey(char key){
@@ -56,9 +60,11 @@ public class UserScore{
   
   // Function to delete a letter or number entered bu the user in their name 
   public void deleteLetter(){
-    indx = indx - 2;
-    noLetters = noLetters - 1;   
-    tempName = tempName.substring(0, indx) + '_' + tempName.substring(indx + 1);
+    if(noLetters > 0){
+      indx = indx - 2;
+      noLetters = noLetters - 1;   
+      tempName = tempName.substring(0, indx) + '_' + tempName.substring(indx + 1);
+    }
   }
   
   // Function for signaling that the user entered their name
@@ -70,6 +76,7 @@ public class UserScore{
   
   // Displaying to the player what name they entered so far
   public void printTempName(){
+   textFont(font);
    text(tempName, width/2, height/2); 
    textAlign(CENTER);
   }
@@ -83,43 +90,74 @@ public class UserScore{
       printTempName();    
   }
   
+  void deletePlayer(){
+    playerName = "";
+    tempName = "_ _ _ _ _ _ _ _ _ _";  
+    noLetters = 0;
+    indx = 0;
+    playerScore = 0;
+    scoreUpdated = false;
+  }
+  
   // Updating name to the final name that player chose
   public void setToFinalName(){
     playerName = tempName.replaceAll(" ", "");
   }
   
+  ////SCORE RELATED/////////////////////////////////////////////////////////////////////////
+  
   // Method for updating the user's score
-  public void updateScore(int newPoints){
+  public void updateScore(Level currentLevel, int levelNo){
+    // Budget    
+    int newPoints = currentLevel.getBudget();
+    // Pigs Alive
+    newPoints = newPoints + currentLevel.numberPigsAlive() * 100;
+    // Level
+    newPoints = newPoints + levelNo * 100;
     playerScore = playerScore + newPoints;
   }
   
   // Method writting current player's score to the text file
   public void updateScoresFile(){
-    int flag = 0;
-    String[] loadedScores = loadStrings("scores.txt");
-    String[] finalScores = loadStrings("scores.txt");
+    if(!this.scoreUpdated){
+      int flag = 0;
+      String[] loadedScores = loadStrings("scores.txt");
+      String[] finalScores = loadStrings("scores.txt");
     
-    for(int i = 0; i < 6; i = i + 2){
-      if(Integer.parseInt(loadedScores[i]) <= playerScore && flag == 0){
-        finalScores[i] = str(playerScore);
-        finalScores[i+1] = playerName;
-        if(i+2 < 6){
-          finalScores[i+2] = loadedScores[i];
-          finalScores[i+3] = loadedScores[i+1];
-          i = i + 2;
-          flag = 1;
+      for(int i = 0; i < 6; i = i + 2){
+        if(Integer.parseInt(loadedScores[i]) <= playerScore && flag == 0){
+          if(i == 0){
+            finalScores[i+4] = loadedScores[i+2];
+            finalScores[i+5] = loadedScores[i+3];
+            finalScores[i+2] = loadedScores[i];
+            finalScores[i+3] = loadedScores[i+1];
+            finalScores[i] = str(playerScore);
+            finalScores[i+1] = playerName;
+            flag = 1;  
+          }else if(i == 2){
+            finalScores[i+2] = loadedScores[i];
+            finalScores[i+3] = loadedScores[i+1];
+            finalScores[i] = str(playerScore);
+            finalScores[i+1] = playerName;
+            flag = 1;
+          }else{
+            finalScores[i] = str(playerScore);
+            finalScores[i+1] = playerName;
+          }
         }
-      }else{
-        finalScores[i] = loadedScores[i];
-        finalScores[i+1] = loadedScores[i+1];
       }
+      saveStrings("scores.txt", finalScores);
+      this.scoreUpdated = true;
     }
-    saveStrings("scores.txt", finalScores);
   }
+  
+  ////PRINTING/////////////////////////////////////////////////////////////////////////
   
   // Method for scoreScreen printin the score.txt file to screen
   public void printScoresFile(){
      fill(0, 0, 0);
+     textAlign(CENTER);
+     textFont(font);
      textSize(50);
     String[] scores = loadStrings("scores.txt");
     for(int i=0; i<6;i=i +2){
@@ -137,9 +175,16 @@ public class UserScore{
   // Method for gameScreen printin the name and score to screen
   public void printCurrentPlayerScore(){
      fill(0, 0, 0);
+     textFont(font);
      textSize(40);
      text(playerName + "   Score: " + str(playerScore), width-width/5,height/15);
   }  
-
-
+  
+  public void printFinalScore(){
+     fill(0, 0, 0);
+     textFont(font);
+     textSize(40);
+     text("Your Final Score is: " + str(playerScore), width/2, height/2);
+     updateScoresFile();
+  }
 }
