@@ -7,6 +7,7 @@ void setup (){
   c2 = new Circle(new PVector(width/3,height/3), 1, 1, false, 50);
   r1 = new Rectangle(new PVector(width/2,height/3), 1, 1, false, 50, 50);
   fullScreen();  
+  rectMode(CENTER);
 }
 
 void draw (){

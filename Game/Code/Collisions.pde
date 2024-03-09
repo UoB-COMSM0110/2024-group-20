@@ -13,7 +13,7 @@ public static class Collisions {
     PVector rectPosition = rectangle.getPosition().copy();
     float rectWidth = rectangle.getWidth();
     float rectHeight = rectangle.getHeight();
-    
+    float minDist = Float.MAX_VALUE;
     
     PVector vertex0, vertex1, vertex2;
     vertex0 = rectangle.getVertex(0);
@@ -26,6 +26,7 @@ public static class Collisions {
     normalVector = vertex2.copy().sub(vertex1);
     normalVector = normalVector.normalize();
     
+    // PROJECTION ON Axis
     rectMin = normalVector.copy().dot(rectPosition)-rectHeight/2;
     rectMax = rectMin+rectHeight;
     circleMin = normalVector.copy().dot(circlePosition)-circleRadius;
@@ -46,7 +47,8 @@ public static class Collisions {
     if(rectMin>circleMax || circleMin>rectMax) {
       return false;
     }
-    print("works");
+    
+    
     
     return true;
   }
