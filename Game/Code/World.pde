@@ -14,7 +14,7 @@ public class World {
   public void removeBody(RigidBody body) {
     this.bodyList.remove(body);
   }
-  
+   
   public RigidBody getBody(int index) {
     if(index>=0 && index<this.bodyList.size()) {
       return this.bodyList.get(index);

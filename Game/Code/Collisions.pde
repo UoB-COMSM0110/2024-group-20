@@ -7,20 +7,6 @@ public static class Colllisions {
     return intersectCircleRectangle(circle, rectangle);
   }
   
-  private static boolean intersectCircleCircle(Circle circle1, Circle circle2){
-    PVector circleOnePosition =  circle1.getPosition();
-    PVector circleTwoPosition = circle2.getPosition();
-    float radiusSum = circle1.getRadius() + circle2.getRadius();
-    
-    float distanceX = circleOnePosition.x - circleTwoPosition.y;
-    float distanceY = circleOnePosition.y - circleTwoPosition.y;
-    
-    if(distanceX * distanceX + distanceY * distanceY <= radiusSum * radiusSum){
-      return false;
-    }
-    return true;
-  }
-  
   private static boolean intersectCircleRectangle(Circle circle, Rectangle rectangle) {
     PVector circlePosition = circle.getPosition();
     float circleRadius = circle.getRadius();
@@ -173,5 +159,39 @@ public static class Colllisions {
 
     return new PVector(sumX / vertex.length, sumY / vertex.length);
   }
+  
+  //////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static boolean intersect(Circle circle1, Circle circle2){
+       return intersectCircleCircle(circle1, circle2);
+    }
+  
+  private static boolean intersectCircleCircle(Circle circle1, Circle circle2){
+    PVector circleOnePosition =  circle1.getPosition();
+    PVector circleTwoPosition = circle2.getPosition();
+    float distance = circleOnePosition.dist(circleTwoPosition);
+    float radiusSum = circle1.getRadius() + circle2.getRadius();
+    
+    float distanceX = circleOnePosition.x - circleTwoPosition.y;
+    float distanceY = circleOnePosition.y - circleTwoPosition.y;
+    
+    if(distance >= radiusSum){
+      return false;
+    }
+    return true;
+  }
+  
+  private static PVector forceDirectionCircleCircleCol(Circle circle1, Circle circle2){
+    return circle2.getPosition().sub(circle1.getPosition()).normalize();  
+  }
+  
+  private static float overlapCircleCircleCol(Circle circle1, Circle circle2){
+    PVector circleOnePosition =  circle1.getPosition();
+    PVector circleTwoPosition = circle2.getPosition();
+    float distance = circleOnePosition.dist(circleTwoPosition);
+    float radiusSum = circle1.getRadius() + circle2.getRadius();
+    
+    return radiusSum - distance;  
+  }  
+  
   
 }
