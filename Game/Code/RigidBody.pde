@@ -29,6 +29,10 @@ public abstract class RigidBody extends PShape{
     return position;
   }
   
+  public void setPosition(PVector position) {
+    this.position = position;
+  }
+  
   public boolean areValuesValid() {
     if (area < 0.01f * 0.01f){
       errorMessage = "Area is too small. Min area is 0.01f * 0.01f.";

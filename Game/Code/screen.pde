@@ -1,4 +1,4 @@
-PImage gameLogo;
+/*PImage gameLogo;
 PImage startImage;
 PImage scoreImage;
 PImage exitImage;
@@ -128,3 +128,4 @@ void keyPressed(){
     playerScore.pressedKey(key);
   }
 }
+*/

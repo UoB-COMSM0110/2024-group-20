@@ -1,4 +1,4 @@
-public static class Colllisions {
+public static class Collisions {
   public static boolean intersect(Circle circle, Rectangle rectangle) {
     return intersectCircleRectangle(circle, rectangle);
   }
@@ -8,11 +8,12 @@ public static class Colllisions {
   }
   
   private static boolean intersectCircleRectangle(Circle circle, Rectangle rectangle) {
-    PVector circlePosition = circle.getPosition();
+    PVector circlePosition = circle.getPosition().copy();
     float circleRadius = circle.getRadius();
-    PVector rectPosition = rectangle.getPosition();
+    PVector rectPosition = rectangle.getPosition().copy();
     float rectWidth = rectangle.getWidth();
     float rectHeight = rectangle.getHeight();
+    
     
     PVector vertex0, vertex1, vertex2;
     vertex0 = rectangle.getVertex(0);
@@ -22,29 +23,30 @@ public static class Colllisions {
     PVector normalVector;
     float rectMin, rectMax, circleMin, circleMax;
     
-    normalVector = vertex2.sub(vertex1);
+    normalVector = vertex2.copy().sub(vertex1);
     normalVector = normalVector.normalize();
     
-    rectMin = normalVector.dot(rectPosition)-rectHeight/2;
+    rectMin = normalVector.copy().dot(rectPosition)-rectHeight/2;
     rectMax = rectMin+rectHeight;
-    circleMin = normalVector.dot(circlePosition)-circleRadius;
+    circleMin = normalVector.copy().dot(circlePosition)-circleRadius;
     circleMax = circleMin+circleRadius*2;
     
     if(rectMin>circleMax || circleMin>rectMax) {
       return false;
     }
     
-    normalVector = vertex1.sub(vertex0);
+    normalVector = vertex1.copy().sub(vertex0);
     normalVector = normalVector.normalize();
     
-    rectMin = normalVector.dot(rectPosition)-rectWidth/2;
+    rectMin = normalVector.copy().dot(rectPosition)-rectWidth/2;
     rectMax = rectMin+rectWidth;
-    circleMin = normalVector.dot(circlePosition)-circleRadius;
+    circleMin = normalVector.copy().dot(circlePosition)-circleRadius;
     circleMax = circleMin+circleRadius*2;
     
     if(rectMin>circleMax || circleMin>rectMax) {
       return false;
     }
+    print("works");
     
     return true;
   }
@@ -140,37 +142,31 @@ public static class Colllisions {
 
   
   //////////////////////////////////////////////////////////////////////////////////////////////////////
-    public static boolean intersect(Circle circle1, Circle circle2){
-       return intersectCircleCircle(circle1, circle2);
-    }
+  public static boolean intersect(Circle circle1, Circle circle2){
+     return intersectCircleCircle(circle1, circle2);
+  }
   
   private static boolean intersectCircleCircle(Circle circle1, Circle circle2){
-    PVector circleOnePosition =  circle1.getPosition();
-    PVector circleTwoPosition = circle2.getPosition();
-    float distance = circleOnePosition.dist(circleTwoPosition);
-    float radiusSum = circle1.getRadius() + circle2.getRadius();
+    PVector circleOnePosition =  circle1.getPosition().copy();
+    PVector circleTwoPosition = circle2.getPosition().copy();
     
-    float distanceX = circleOnePosition.x - circleTwoPosition.y;
+    float distanceX = circleOnePosition.x - circleTwoPosition.x;
     float distanceY = circleOnePosition.y - circleTwoPosition.y;
+    
+    float distance = sqrt(distanceX * distanceX + distanceY * distanceY);
+    float radiusSum = circle1.getRadius() + circle2.getRadius();
     
     if(distance >= radiusSum){
       return false;
     }
+    
+    PVector forceDirection = circle2.getPosition().copy();
+    forceDirection = forceDirection.sub(circle1.getPosition()).normalize();
+    float overlap = radiusSum - distance;
+    circle1.setPosition(circleOnePosition.sub(forceDirection.mult(overlap/2)));
+    circle2.setPosition(circleTwoPosition.add(forceDirection.mult(overlap/2)));
+    
     return true;
   }
-  
-  private static PVector forceDirectionCircleCircleCol(Circle circle1, Circle circle2){
-    return circle2.getPosition().sub(circle1.getPosition()).normalize();  
-  }
-  
-  private static float overlapCircleCircleCol(Circle circle1, Circle circle2){
-    PVector circleOnePosition =  circle1.getPosition();
-    PVector circleTwoPosition = circle2.getPosition();
-    float distance = circleOnePosition.dist(circleTwoPosition);
-    float radiusSum = circle1.getRadius() + circle2.getRadius();
-    
-    return radiusSum - distance;  
-  }  
-  
   
 }
