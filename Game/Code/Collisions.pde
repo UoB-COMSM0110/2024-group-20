@@ -20,10 +20,11 @@ public static class Colllisions {
     vertex2 = rectangle.getVertex(2);
     
     PVector normalVector;
+    float rectMin, rectMax, circleMin, circleMax;
+    
     normalVector = vertex2.sub(vertex1);
     normalVector = normalVector.normalize();
     
-    float rectMin, rectMax, circleMin, circleMax;
     rectMin = normalVector.dot(rectPosition)-rectHeight/2;
     rectMax = rectMin+rectHeight;
     circleMin = normalVector.dot(circlePosition)-circleRadius;
@@ -49,115 +50,93 @@ public static class Colllisions {
   }
   
   public static boolean intersect(Rectangle rectangle1, Rectangle rectangle2) {
-    return intersectPolygons(rectangle1, rectangle2);
+    return intersectRectangles(rectangle1, rectangle2);
   }
   
-  private static boolean intersectPolygons(Rectangle rectangle1, Rectangle rectangle2) {
-    PVector[] vertexA;
-    PVector[] vertexB;
-    PVector normal;
-    PVector minAxis;
-    float depth;
+  private static boolean intersectRectangles(Rectangle rectangleA, Rectangle rectangleB) {
+    PVector[] vertexA = new PVector[3];
+    PVector[] vertexB = new PVector[3];
+    PVector rectAPosition = rectangleA.getPosition();
+    float rectAWidth = rectangleA.getWidth();
+    float rectAHeight = rectangleA.getHeight();
+    PVector rectBPosition = rectangleB.getPosition();
+    float rectBWidth = rectangleB.getWidth();
+    float rectBHeight = rectangleB.getHeight();
+    PVector normalVector;
     
-    normal = new PVector(0, 0);
-    depth = Float.MAX_VALUE;
-    boolean intersecting = true;
-    
-    
-    //Check the sides of polygon A
-    for(int i = 0; i < vertexA.length; i++){
-      PVector edge = PVector.sub(vertexA[(i + 1) % vertexA.length], vertexA[i]);
-      PVector axis = new PVector(-edge.y, edge.x);
-      axis.normalize();
-      
-      float[] projA = new float[2];
-      float[] projB = new float[2];
-      projectOnAxis(vertexA, axis, projA);
-      projectOnAxis(vertexB, axis, projB);
-      
-      if (projA[0] > projB[1] || projB[0] > projA[1]){
-        intersecting = false;
-        break;
-      }
-      
-      float axisDepth = Math.min(projA[1], projB[1]) - Math.max(projA[0], projB[0]);
-      
-      if (axisDepth < depth) {
-        depth = axisDepth;
-        minAxis.set(axis);
-      }
-
+    for(int i=0; i<4; i++) {
+      vertexA[i] = rectangleA.getVertex(i);
+      vertexB[i] = rectangleB.getVertex(i);
     }
     
-    //Check the sides of polygon B
-    for (int i = 0; i < vertexB.length; i++){
-      PVector edge = PVector.sub(vertexB[(i + 1) % vertexB.length], vertexB[i]);
-      PVector axis = new PVector(-edge.y, edge.x);
-      axis.normalize();
-      
-      float[] projA = new float[2];
-      float[] projB = new float[2];
-      projectOnAxis(vertexA, axis, projA);
-      projectOnAxis(vertexB, axis, projB);
-      
-      if (projA[0] > projB[1] || projB[0] > projA[1]){
-        intersecting = false;
-        break;
-      }
-      
-      float axisDepth = Math.min(projA[1], projB[1]) - Math.max(projA[0], projB[0]);
-      
-      if (axisDepth < depth) {
-        depth = axisDepth;
-        minAxis.set(axis);
-      }
-
+    float rectAMin, rectAMax, rectBMin, rectBMax;
+    
+    // Check the sides of rectangle A
+    // For the vertical axis of rectangle A
+    normalVector = vertexA[2].sub(vertexA[1]);
+    normalVector = normalVector.normalize();
+    rectAMin = normalVector.dot(rectAPosition)-rectAHeight/2;
+    rectAMax = rectAMin + rectAHeight;
+    rectBMin = Float.MAX_VALUE;
+    rectBMax = Float.MIN_VALUE;
+    for(int i=0; i<vertexB.length; i++){
+      rectBMin = min(rectBMin, normalVector.dot(vertexB[i]));
+      rectBMax = max(rectBMax, normalVector.dot(vertexB[i]));
+    }
+    if(rectAMin>rectBMax || rectBMin>rectAMax) {
+      return false;
     }
     
-    if (intersecting) {
-      PVector centerA =  findArithmeticMean(vertexA);
-      PVector centerB =  findArithmeticMean(vertexB);
-      PVector direction = PVector.sub(centerB, centerA); 
-    
-      if (PVector.dot(direction, normal) < 0) {
-        normal.mult(-1);
-      }
+    // For the horizontal axis of rectangle A
+    normalVector = vertexA[1].sub(vertexA[0]);
+    normalVector = normalVector.normalize();
+    rectAMin = normalVector.dot(rectAPosition)-rectAWidth/2;
+    rectAMax = rectAMin + rectAWidth;
+    rectBMin = Float.MAX_VALUE;
+    rectBMax = Float.MIN_VALUE;
+    for(int i=0; i<vertexB.length; i++){
+      rectBMin = min(rectBMin, normalVector.dot(vertexB[i]));
+      rectBMax = max(rectBMax, normalVector.dot(vertexB[i]));
     }
-
+    if(rectAMin>rectBMax || rectBMin>rectAMax) {
+      return false;
+    }
+    
+    
+    // Check the sides of rectangle B
+    // For the vertical axis of rectangle B
+    normalVector = vertexB[2].sub(vertexB[1]);
+    normalVector = normalVector.normalize();
+    rectBMin = normalVector.dot(rectBPosition)-rectBHeight/2;
+    rectBMax = rectBMin + rectBHeight;
+    rectAMin = Float.MAX_VALUE;
+    rectAMax = Float.MIN_VALUE;
+    for(int i=0; i<vertexA.length; i++){
+      rectAMin = min(rectAMin, normalVector.dot(vertexA[i]));
+      rectAMax = max(rectAMax, normalVector.dot(vertexA[i]));
+    }
+    if(rectAMin>rectBMax || rectBMin>rectAMax) {
+      return false;
+    }
+    
+    // For the horizontal axis of rectangle B
+    normalVector = vertexB[1].sub(vertexB[0]);
+    normalVector = normalVector.normalize();
+    rectBMin = normalVector.dot(rectBPosition)-rectBWidth/2;
+    rectBMax = rectBMin + rectBWidth;
+    rectAMin = Float.MAX_VALUE;
+    rectAMax = Float.MIN_VALUE;
+    for(int i=0; i<vertexA.length; i++){
+      rectAMin = min(rectAMin, normalVector.dot(vertexA[i]));
+      rectAMax = max(rectAMax, normalVector.dot(vertexA[i]));
+    }
+    if(rectAMin>rectBMax || rectBMin>rectAMax) {
+      return false;
+    }
+    
+    
     return true;
 }
 
-  private static void projectOnAxis(PVector[] vertex, PVector axis, float[] result) {
-    float min = Float.MaxValue;
-    float max = -Float.MinValee;
-    
-    for (int i = 0; i < vertex.length; i++) {
-      PVector v = vertex[i];
-      float proj = PVector.dot(v, axis);
-      
-      if (proj < min) {
-        min = proj;
-      }
-      if (proj > max){
-        max = proj;
-      }
-    }
-    
-    result[0] = min;
-    result[1] = max;
-  }
-    
-  private static PVector findArithmeticMean(PVector[] vertex){
-    float sumX = 0f;
-    float sumY = 0f;
-
-    for(int i = 0; i < vertex.length; i++){
-      PVector v = vertex[i];
-      sumX += v.x;
-      sumY += v.y;
-    }
-
-    return new PVector(sumX / vertex.length, sumY / vertex.length);
-  }
   
 }
