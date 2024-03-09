@@ -30,6 +30,7 @@ public class Menu {
   void display() {
    // Draw the menu background
    fill(139,69,19); // White background
+   rectMode(CORNER);
    rect(x, y, width, height);
 
    // Draw buttons (need to add new art materials)

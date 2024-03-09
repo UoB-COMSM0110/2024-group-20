@@ -18,5 +18,10 @@ abstract class Material extends Rectangle {
     pg.rect(0, 0, rectWidth, rectHeight);
     pg.popMatrix();
   }
+  
+  boolean isMouseOver(int mouseX, int mouseY) {
+  return mouseX >= position.x - rectWidth / 2 && mouseX <= position.x + rectWidth / 2 &&
+         mouseY >= position.y - rectHeight / 2 && mouseY <= position.y + rectHeight / 2;
+  }
 
 }

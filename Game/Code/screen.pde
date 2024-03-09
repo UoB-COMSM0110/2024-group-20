@@ -7,6 +7,7 @@ PImage readyImage;
 PImage emptyButtonImage;
 PImage bgImage;
 
+Material draggedMaterial = null;
 UserScore playerScore;
 Tutorial tutorial;
 
@@ -147,21 +148,25 @@ void mousePressed(){
     }
     tutorial.mousePressed();
     //add glass
+  for (Material material : materials) {
+    if (material.isMouseOver(mouseX, mouseY)) {
+      draggedMaterial = material;
+      break;
+    }
+  }
+
     if (mouseX >= 0 && mouseX <= width/10){
+      PVector newPosition = new PVector(mouseX, mouseY);
       if (mouseY <= height/3+height/20 && mouseY >= height/3 ){
-        materials.add(new Glass(new PVector(x, y), 0.5, 0.3, false, 50, 50));
+        materials.add(new Glass(newPosition, 0.5, 0.3, false, 50, 200));
       }
-    }
     //add wood
-    if (mouseX >= 0 && mouseX <= width/10){
       if (mouseY <= 4*height/9+height/20 && mouseY >= 4*height/9){
-        materials.add(new Wood(new PVector(x, y), 0.5, 0.3, false, 50, 50));
+        materials.add(new Wood(newPosition, 0.5, 0.3, false, 50, 200));
       }
-    }
     //add stone
-    if (mouseX >= 0 && mouseX <= width/10){
-      if (mouseY <= 5*height/9+height/20 && mouseY >= 45height/9){
-        materials.add(new Stone(new PVector(x, y), 0.5, 0.3, false, 50, 50));
+      if (mouseY <= 5*height/9+height/20 && mouseY >= 5*height/9){
+        materials.add(new Stone(newPosition, 0.5, 0.3, false, 50, 200));
       }
     }
     //Are you ready?
@@ -171,6 +176,16 @@ void mousePressed(){
       }
     }
   }
+}
+
+void mouseDragged() {
+  if (draggedMaterial != null) {
+    draggedMaterial.position.set(mouseX, mouseY);
+  }
+}
+
+void mouseReleased() {
+  draggedMaterial = null;
 }
 
 void keyPressed(){
