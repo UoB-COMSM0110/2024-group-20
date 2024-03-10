@@ -8,12 +8,12 @@ public static class Collisions {
   }
   
   private static boolean intersectCircleRectangle(Circle circle, Rectangle rectangle) {
-    PVector circlePosition = circle.getPosition().copy();
+    PVector circlePosition = circle.getPosition();
     float circleRadius = circle.getRadius();
-    PVector rectPosition = rectangle.getPosition().copy();
+    PVector rectPosition = rectangle.getPosition();
     float rectWidth = rectangle.getWidth();
     float rectHeight = rectangle.getHeight();
-    float minDist = Float.MAX_VALUE;
+    float minDist;
     
     PVector vertex0, vertex1, vertex2;
     vertex0 = rectangle.getVertex(0);
@@ -23,32 +23,30 @@ public static class Collisions {
     PVector normalVector;
     float rectMin, rectMax, circleMin, circleMax;
     
-    normalVector = vertex2.copy().sub(vertex1);
-    normalVector = normalVector.normalize();
+    normalVector = PVector.sub(vertex2,vertex1).normalize();
     
     // PROJECTION ON Axis
-    rectMin = normalVector.copy().dot(rectPosition)-rectHeight/2;
+    rectMin = PVector.dot(normalVector, rectPosition)-rectHeight/2;
     rectMax = rectMin+rectHeight;
-    circleMin = normalVector.copy().dot(circlePosition)-circleRadius;
+    circleMin = PVector.dot(normalVector,circlePosition)-circleRadius;
     circleMax = circleMin+circleRadius*2;
     
     if(rectMin>circleMax || circleMin>rectMax) {
       return false;
     }
+    minDist = min(rectMax-circleMin, circleMax-rectMin);
     
-    normalVector = vertex1.copy().sub(vertex0);
-    normalVector = normalVector.normalize();
+    normalVector = PVector.sub(vertex1,vertex0).normalize();
     
-    rectMin = normalVector.copy().dot(rectPosition)-rectWidth/2;
+    rectMin = PVector.dot(normalVector,rectPosition)-rectWidth/2;
     rectMax = rectMin+rectWidth;
-    circleMin = normalVector.copy().dot(circlePosition)-circleRadius;
+    circleMin = PVector.dot(normalVector,circlePosition)-circleRadius;
     circleMax = circleMin+circleRadius*2;
     
     if(rectMin>circleMax || circleMin>rectMax) {
       return false;
     }
-    
-    
+    minDist = min(minDist, rectMax-circleMin, circleMax-rectMin);
     
     return true;
   }
@@ -58,8 +56,8 @@ public static class Collisions {
   }
   
   private static boolean intersectRectangles(Rectangle rectangleA, Rectangle rectangleB) {
-    PVector[] vertexA = new PVector[3];
-    PVector[] vertexB = new PVector[3];
+    PVector[] vertexA = new PVector[4];
+    PVector[] vertexB = new PVector[4];
     PVector rectAPosition = rectangleA.getPosition();
     float rectAWidth = rectangleA.getWidth();
     float rectAHeight = rectangleA.getHeight();
@@ -77,30 +75,28 @@ public static class Collisions {
     
     // Check the sides of rectangle A
     // For the vertical axis of rectangle A
-    normalVector = vertexA[2].sub(vertexA[1]);
-    normalVector = normalVector.normalize();
-    rectAMin = normalVector.dot(rectAPosition)-rectAHeight/2;
+    normalVector = PVector.sub(vertexA[2],vertexA[1]).normalize();
+    rectAMin = PVector.dot(normalVector,rectAPosition)-rectAHeight/2;
     rectAMax = rectAMin + rectAHeight;
     rectBMin = Float.MAX_VALUE;
     rectBMax = Float.MIN_VALUE;
     for(int i=0; i<vertexB.length; i++){
-      rectBMin = min(rectBMin, normalVector.dot(vertexB[i]));
-      rectBMax = max(rectBMax, normalVector.dot(vertexB[i]));
+      rectBMin = min(rectBMin, PVector.dot(normalVector,vertexB[i]));
+      rectBMax = max(rectBMax, PVector.dot(normalVector,vertexB[i]));
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
       return false;
     }
     
     // For the horizontal axis of rectangle A
-    normalVector = vertexA[1].sub(vertexA[0]);
-    normalVector = normalVector.normalize();
-    rectAMin = normalVector.dot(rectAPosition)-rectAWidth/2;
+    normalVector = PVector.sub(vertexA[1],vertexA[0]).normalize();
+    rectAMin = PVector.dot(normalVector,rectAPosition)-rectAWidth/2;
     rectAMax = rectAMin + rectAWidth;
     rectBMin = Float.MAX_VALUE;
     rectBMax = Float.MIN_VALUE;
     for(int i=0; i<vertexB.length; i++){
-      rectBMin = min(rectBMin, normalVector.dot(vertexB[i]));
-      rectBMax = max(rectBMax, normalVector.dot(vertexB[i]));
+      rectBMin = min(rectBMin, PVector.dot(normalVector,vertexB[i]));
+      rectBMax = max(rectBMax, PVector.dot(normalVector,vertexB[i]));
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
       return false;
@@ -109,30 +105,28 @@ public static class Collisions {
     
     // Check the sides of rectangle B
     // For the vertical axis of rectangle B
-    normalVector = vertexB[2].sub(vertexB[1]);
-    normalVector = normalVector.normalize();
-    rectBMin = normalVector.dot(rectBPosition)-rectBHeight/2;
+    normalVector = PVector.sub(vertexB[2],vertexB[1]).normalize();
+    rectBMin = PVector.dot(normalVector,rectBPosition)-rectBHeight/2;
     rectBMax = rectBMin + rectBHeight;
     rectAMin = Float.MAX_VALUE;
     rectAMax = Float.MIN_VALUE;
     for(int i=0; i<vertexA.length; i++){
-      rectAMin = min(rectAMin, normalVector.dot(vertexA[i]));
-      rectAMax = max(rectAMax, normalVector.dot(vertexA[i]));
+      rectAMin = min(rectAMin, PVector.dot(normalVector,vertexA[i]));
+      rectAMax = max(rectAMax, PVector.dot(normalVector,vertexA[i]));
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
       return false;
     }
     
     // For the horizontal axis of rectangle B
-    normalVector = vertexB[1].sub(vertexB[0]);
-    normalVector = normalVector.normalize();
-    rectBMin = normalVector.dot(rectBPosition)-rectBWidth/2;
+    normalVector = PVector.sub(vertexB[1],vertexB[0]).normalize();
+    rectBMin = PVector.dot(normalVector,rectBPosition)-rectBWidth/2;
     rectBMax = rectBMin + rectBWidth;
     rectAMin = Float.MAX_VALUE;
     rectAMax = Float.MIN_VALUE;
     for(int i=0; i<vertexA.length; i++){
-      rectAMin = min(rectAMin, normalVector.dot(vertexA[i]));
-      rectAMax = max(rectAMax, normalVector.dot(vertexA[i]));
+      rectAMin = min(rectAMin, PVector.dot(normalVector,vertexA[i]));
+      rectAMax = max(rectAMax, PVector.dot(normalVector,vertexA[i]));
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
       return false;

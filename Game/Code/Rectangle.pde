@@ -44,7 +44,7 @@ public class Rectangle extends RigidBody{
         relativePosition.set(-rectWidth/2, -rectHeight/2);
         break;
     }
-    return position.copy().add(relativePosition.rotate(rotation));
+    return PVector.add(position,relativePosition.rotate(rotation));
   }
 
 }
