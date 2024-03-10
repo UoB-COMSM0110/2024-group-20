@@ -28,4 +28,20 @@ public class World {
       this.bodyList.get(i).step(frameTime);
     }
   }
+  
+  public boolean collisions(){
+    boolean occurs = false;
+    for(int i=0; i<this.bodyList.size()-1; i++){
+      for(int j=i+1; j<this.bodyList.size(); j++){
+        if(Collisions.intersect(bodyList.get(i), bodyList.get(j))) occurs=true;
+      }
+    }
+    return occurs;
+  }
+  
+  public void display(){
+    for(int i=0; i<this.bodyList.size(); i++) {
+      this.bodyList.get(i).display();
+    }
+  }
 }

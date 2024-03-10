@@ -74,4 +74,6 @@ public abstract class RigidBody extends PShape{
     // Reset Forces
     applyForce(new PVector(0,0));
   }
+  
+  public abstract void display();
 }

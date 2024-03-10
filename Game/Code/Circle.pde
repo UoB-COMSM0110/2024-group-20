@@ -17,6 +17,10 @@ public class Circle extends RigidBody {
     area = circleRadius * circleRadius * (float)Math.PI;
   }
   
+  public void display(){
+    circle(position.x, position.y, circleRadius*2);
+  }
+  
   public float getRadius() {
     return circleRadius;
   }

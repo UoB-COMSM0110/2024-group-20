@@ -28,6 +28,10 @@ public class Rectangle extends RigidBody{
     return rectHeight;
   }
   
+  public void display(){
+    rect(position.x, position.y, rectWidth, rectHeight);
+  }
+  
   public PVector getVertex(int index) {
     PVector relativePosition = new PVector(0,0);
     switch(index%4) {

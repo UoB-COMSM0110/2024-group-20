@@ -1,4 +1,20 @@
 public static class Collisions {
+  public static boolean intersect(RigidBody body1, RigidBody body2){
+    if(body1 instanceof Circle && body2 instanceof Circle){
+      return intersectCircleCircle((Circle)body1, (Circle)body2);
+    }
+    else if(body1 instanceof Circle && body2 instanceof Rectangle){
+      return intersectCircleRectangle((Circle)body1, (Rectangle)body2);
+    }
+    else if(body1 instanceof Rectangle && body2 instanceof Circle){
+      return intersectCircleRectangle((Circle)body2, (Rectangle)body1);
+    }
+    else if(body1 instanceof Rectangle && body2 instanceof Rectangle){
+      return intersectRectangles((Rectangle)body1, (Rectangle)body2);
+    }
+    return false;
+  }
+  
   public static boolean intersect(Circle circle, Rectangle rectangle) {
     return intersectCircleRectangle(circle, rectangle);
   }
@@ -15,15 +31,15 @@ public static class Collisions {
     float rectHeight = rectangle.getHeight();
     float minDist;
     
-    PVector vertex0, vertex1, vertex2;
-    vertex0 = rectangle.getVertex(0);
-    vertex1 = rectangle.getVertex(1);
-    vertex2 = rectangle.getVertex(2);
+    PVector[] vertex = new PVector[4];
+    for(int i=0; i<4; i++) {
+      vertex[i] = rectangle.getVertex(i);
+    }
     
     PVector normalVector;
     float rectMin, rectMax, circleMin, circleMax;
     
-    normalVector = PVector.sub(vertex2,vertex1).normalize();
+    normalVector = PVector.sub(vertex[2],vertex[1]).normalize();
     
     // PROJECTION ON Axis
     rectMin = PVector.dot(normalVector, rectPosition)-rectHeight/2;
@@ -36,7 +52,7 @@ public static class Collisions {
     }
     minDist = min(rectMax-circleMin, circleMax-rectMin);
     
-    normalVector = PVector.sub(vertex1,vertex0).normalize();
+    normalVector = PVector.sub(vertex[1],vertex[0]).normalize();
     
     rectMin = PVector.dot(normalVector,rectPosition)-rectWidth/2;
     rectMax = rectMin+rectWidth;
@@ -47,6 +63,14 @@ public static class Collisions {
       return false;
     }
     minDist = min(minDist, rectMax-circleMin, circleMax-rectMin);
+    
+    float minVertexCircleDist = Float.MAX_VALUE;
+    for(int i=0; i<4; i++){
+      minVertexCircleDist = min(minVertexCircleDist, PVector.dist(vertex[i], circlePosition));
+    }
+    if(minVertexCircleDist > circleRadius){
+      return false;
+    }
     
     return true;
   }
@@ -132,35 +156,30 @@ public static class Collisions {
       return false;
     }
     
-    
     return true;
 }
 
   
   //////////////////////////////////////////////////////////////////////////////////////////////////////
   public static boolean intersect(Circle circle1, Circle circle2){
-     return intersectCircleCircle(circle1, circle2);
+     return intersectCircles(circle1, circle2);
   }
   
-  private static boolean intersectCircleCircle(Circle circle1, Circle circle2){
-    PVector circleOnePosition =  circle1.getPosition().copy();
-    PVector circleTwoPosition = circle2.getPosition().copy();
+  private static boolean intersectCircles(Circle circle1, Circle circle2){
+    PVector circle1Position =  circle1.getPosition();
+    PVector circle2Position = circle2.getPosition();
     
-    float distanceX = circleOnePosition.x - circleTwoPosition.x;
-    float distanceY = circleOnePosition.y - circleTwoPosition.y;
-    
-    float distance = sqrt(distanceX * distanceX + distanceY * distanceY);
+    float distance = PVector.dist(circle1Position, circle2Position);
     float radiusSum = circle1.getRadius() + circle2.getRadius();
     
     if(distance >= radiusSum){
       return false;
     }
     
-    PVector forceDirection = circle2.getPosition().copy();
-    forceDirection = forceDirection.sub(circle1.getPosition()).normalize();
+    PVector forceDirection = PVector.sub(circle2Position, circle1Position).normalize();
     float overlap = radiusSum - distance;
-    circle1.setPosition(circleOnePosition.sub(forceDirection.mult(overlap/2)));
-    circle2.setPosition(circleTwoPosition.add(forceDirection.mult(overlap/2)));
+    circle1Position.sub(PVector.mult(forceDirection,overlap/2));
+    circle2Position.add(PVector.mult(forceDirection,overlap/2));
     
     return true;
   }
