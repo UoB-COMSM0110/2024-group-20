@@ -1,7 +1,7 @@
 public static class Collisions {
   public static boolean intersect(RigidBody body1, RigidBody body2){
     if(body1 instanceof Circle && body2 instanceof Circle){
-      return intersectCircleCircle((Circle)body1, (Circle)body2);
+      return intersectCircles((Circle)body1, (Circle)body2);
     }
     else if(body1 instanceof Circle && body2 instanceof Rectangle){
       return intersectCircleRectangle((Circle)body1, (Rectangle)body2);
