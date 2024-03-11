@@ -1,3 +1,4 @@
+/*
 public enum BirdType {
   RED, BLUE, BLACK
 }
@@ -15,3 +16,4 @@ public class Bird extends Circle{
   }
 
 }
+*/

@@ -3,6 +3,7 @@ public class Circle extends RigidBody {
  
   public Circle(PVector position, float density, float restitution, boolean isStatic, float circleRadius) {
     this.position = position;
+    this.force = new PVector(0, 0);
     this.density = density;
     this.restitution = restitution;
     this.isStatic = isStatic;
@@ -14,6 +15,10 @@ public class Circle extends RigidBody {
   
   protected void calculateArea() {
     area = circleRadius * circleRadius * (float)Math.PI;
+  }
+  
+  public void display(){
+    circle(position.x, position.y, circleRadius*2);
   }
   
   public float getRadius() {
