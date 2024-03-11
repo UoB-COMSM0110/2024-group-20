@@ -3,7 +3,6 @@ public class Circle extends RigidBody {
  
   public Circle(PVector position, float density, float restitution, boolean isStatic, float circleRadius) {
     this.position = position;
-    this.force = new PVector(0, 0);
     this.density = density;
     this.restitution = restitution;
     this.isStatic = isStatic;
