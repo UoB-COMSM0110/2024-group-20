@@ -1,8 +1,10 @@
 
   World w;
+  ArrayList<Integer> keysPressed;
 
 void setup (){
   w = new World();
+  keysPressed = new ArrayList();
   w.addBody(new Circle(new PVector(width/2,height/2), 1, 1, false, 50));
   w.addBody(new Circle(new PVector(width/3,height/3), 1, 1, false, 50));
   w.addBody(new Rectangle(new PVector(width/2,height/3), 1, 1, false, 50, 50));
@@ -15,6 +17,39 @@ void setup (){
 }
 
 void draw (){
+  if(keyPressed){
+    RigidBody body = w.getBody(2);
+    RigidBody body2 = w.getBody(0);
+    
+    for(int i=0; i<keysPressed.size(); i++){
+      int currentKey = keysPressed.get(i);
+      if(currentKey == UP) {
+        body.getPosition().add(new PVector(0,-5));
+      }
+      if(currentKey == DOWN) {
+        body.getPosition().add(new PVector(0,5));
+      }
+      if(currentKey == LEFT) {
+        body.getPosition().add(new PVector(-5,0));
+      }
+      if(currentKey == RIGHT) {
+        body.getPosition().add(new PVector(5,0));
+      }
+      if(currentKey == 'W' || currentKey == 'w') {
+        body2.getPosition().add(new PVector(0,-5));
+      }
+      if(currentKey == 'S' || currentKey == 's') {
+        body2.getPosition().add(new PVector(0,5));
+      }
+      if(currentKey == 'a' || currentKey == 'A') {
+        body2.getPosition().add(new PVector(-5,0));
+      }
+      if(currentKey == 'd' || currentKey == 'D') {
+        body2.getPosition().add(new PVector(5,0));
+      }
+    }
+    
+  }
   background(51);
   if(w.collideBodies()){
     fill(255,0,0);
@@ -26,33 +61,11 @@ void draw (){
 }
 
 void keyPressed() {
-  RigidBody body = w.getBody(2);  
-  
-  if(keyCode == UP) {
-    body.getPosition().add(new PVector(0,-5));
+  if(!keysPressed.contains(Integer.valueOf(keyCode))){
+    keysPressed.add(keyCode);
   }
-  if(keyCode == DOWN) {
-    body.getPosition().add(new PVector(0,5));
-  }
-  if(keyCode == LEFT) {
-    body.getPosition().add(new PVector(-5,0));
-  }
-  if(keyCode == RIGHT) {
-    body.getPosition().add(new PVector(5,0));
-  }
-  
-  RigidBody body2 = w.getBody(0);
-  
-  if(key == 'W' || key == 'w') {
-    body2.getPosition().add(new PVector(0,-5));
-  }
-  if(key == 'S' || key == 's') {
-    body2.getPosition().add(new PVector(0,5));
-  }
-  if(key == 'a' || key == 'A') {
-    body2.getPosition().add(new PVector(-5,0));
-  }
-  if(key == 'd' || key == 'D') {
-    body2.getPosition().add(new PVector(5,0));
-  }
+}
+
+void keyReleased(){
+  keysPressed.remove(Integer.valueOf(keyCode));
 }
