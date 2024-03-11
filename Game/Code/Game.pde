@@ -6,7 +6,10 @@ void setup (){
   w.addBody(new Circle(new PVector(width/2,height/2), 1, 1, false, 50));
   w.addBody(new Circle(new PVector(width/3,height/3), 1, 1, false, 50));
   w.addBody(new Rectangle(new PVector(width/2,height/3), 1, 1, false, 50, 50));
-  w.addBody(new Rectangle(new PVector(width/3,height/2), 1, 1, false, 50, 50));
+  w.addBody(new Rectangle(new PVector(width/4,height/2), 1, 1, false, 50, 50));
+  w.addBody(new Rectangle(new PVector(width/3,height/4), 1, 1, false, 50, 50));
+  w.addBody(new Circle(new PVector(width/4,height/4), 1, 1, false, 50));
+
   fullScreen();  
   rectMode(CENTER);
 }
@@ -23,7 +26,7 @@ void draw (){
 }
 
 void keyPressed() {
-  RigidBody body = w.getBody(0);
+  RigidBody body = w.getBody(2);  
   
   if(keyCode == UP) {
     body.getPosition().add(new PVector(0,-10));
@@ -36,5 +39,20 @@ void keyPressed() {
   }
   if(keyCode == RIGHT) {
     body.getPosition().add(new PVector(10,0));
+  }
+  
+  RigidBody body2 = w.getBody(0);
+  
+  if(key == 'W' || key == 'w') {
+    body2.getPosition().add(new PVector(0,-10));
+  }
+  if(key == 'S' || key == 's') {
+    body2.getPosition().add(new PVector(0,10));
+  }
+  if(key == 'a' || key == 'A') {
+    body2.getPosition().add(new PVector(-10,0));
+  }
+  if(key == 'd' || key == 'D') {
+    body2.getPosition().add(new PVector(10,0));
   }
 }
