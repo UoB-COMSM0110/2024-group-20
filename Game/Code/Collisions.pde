@@ -64,11 +64,11 @@ public static class Collisions {
     }
     minDist = min(minDist, rectMax-circleMin, circleMax-rectMin);
     
-    float minVertexCircleDist = Float.MAX_VALUE;
+    float minRectangleVertexCircleCentreDist = Float.MAX_VALUE;
     for(int i=0; i<4; i++){
-      minVertexCircleDist = min(minVertexCircleDist, PVector.dist(vertex[i], circlePosition));
+      minRectangleVertexCircleCentreDist = min(minRectangleVertexCircleCentreDist, PVector.dist(vertex[i], circlePosition));
     }
-    if(minVertexCircleDist > circleRadius){
+    if(minRectangleVertexCircleCentreDist > circleRadius){
       return false;
     }
     

@@ -23,7 +23,7 @@ void draw (){
 }
 
 void keyPressed() {
-  RigidBody body = w.getBody(2);
+  RigidBody body = w.getBody(0);
   
   if(keyCode == UP) {
     body.getPosition().add(new PVector(0,-10));
