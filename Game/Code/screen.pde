@@ -1,3 +1,4 @@
+// This line is to test if deletion of a merged branch will or will not delete its history in github.
 PImage gameLogo;
 PImage startImage;
 PImage scoreImage;
@@ -325,4 +326,3 @@ void imagesLooseScreen(){
   startImage = loadImage("../Images/menuButton.png");
   image(startImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);
 }
-
