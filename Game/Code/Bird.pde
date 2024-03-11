@@ -1,4 +1,3 @@
-
 public enum BirdType {
   RED, BLUE, BLACK
 }
@@ -12,7 +11,7 @@ public class Bird extends Circle{
     this.birdType = birdType;
   }
   
-  public void drawBird(){
+  public void display(){
   }
 
 }

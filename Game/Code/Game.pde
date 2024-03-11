@@ -3,13 +3,18 @@
 
 void setup (){
   w = new World();
-  w.addBody(new Circle(new PVector(width/2,height/2), 1, 1, false, 50));
-  w.addBody(new Circle(new PVector(width/3,height/3), 1, 1, false, 50));
+  w.addBody(new BirdRed(new PVector(width/2,height/2)));
+  w.addBody(new BirdBlue(new PVector(width/3,height/3)));
   w.addBody(new Rectangle(new PVector(width/2,height/3), 1, 1, false, 50, 50));
   w.addBody(new Rectangle(new PVector(width/4,height/2), 1, 1, false, 50, 50));
   w.addBody(new Rectangle(new PVector(width/3,height/4), 1, 1, false, 50, 50));
-  w.addBody(new Circle(new PVector(width/4,height/4), 1, 1, false, 50));
+  w.addBody(new BirdBlack(new PVector(width/4,height/4)));
+  w.addBody(new Pig(new PVector(width/6,height/4)));
+  w.addBody(new Pig(new PVector(width/6,height/6)));
 
+  Pig newPig = (Pig) w.getBody(6);
+  newPig.killPig();
+  
   fullScreen();  
   rectMode(CENTER);
 }
@@ -21,7 +26,7 @@ void draw (){
   } else {
     fill(0, 255, 0);
   }
-  w.display(); 
+  w.display();
 }
 
 void keyPressed() {
@@ -54,4 +59,5 @@ void keyPressed() {
   if(key == 'd' || key == 'D') {
     body2.getPosition().add(new PVector(5,0));
   }
+
 }
