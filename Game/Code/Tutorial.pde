@@ -1,4 +1,3 @@
-/*
 public class Tutorial {
   Menu[] menus;
   int currentStep;
@@ -34,4 +33,3 @@ public class Tutorial {
   }
   
 }
-*/

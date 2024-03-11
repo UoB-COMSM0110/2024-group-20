@@ -1,4 +1,4 @@
-/*
+
 // This line is to test if deletion of a merged branch will or will not delete its history in github. Turns out its history will be added to the merged branch.
 // This line is to extend the above test but with two branches working in parallel instead of one. This is the first line added by one of the branches.
 // This line is added by test branch one.
@@ -328,4 +328,3 @@ void imagesLooseScreen(){
   startImage = loadImage("../Images/menuButton.png");
   image(startImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);
 }
-*/

@@ -1,4 +1,3 @@
-/*
 interface ButtonCallback {
   void onButtonPressed();
 }
@@ -91,4 +90,3 @@ public class Menu {
   }
   
 }
-*/

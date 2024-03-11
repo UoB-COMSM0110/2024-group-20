@@ -1,5 +1,4 @@
-
-  World w;
+/*  World w;
 
 void setup (){
   w = new World();
@@ -60,4 +59,4 @@ void keyPressed() {
     body2.getPosition().add(new PVector(5,0));
   }
 
-}
+}*/
