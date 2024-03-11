@@ -1,5 +1,6 @@
 // This line is to test if deletion of a merged branch will or will not delete its history in github. Turns out its history will be added to the merged branch.
 // This line is to extend the above test but with two branches working in parallel instead of one. This is the first line added by one of the branches.
+// This line is added by test branch one.
 PImage gameLogo;
 PImage startImage;
 PImage scoreImage;
