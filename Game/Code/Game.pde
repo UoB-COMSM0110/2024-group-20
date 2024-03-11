@@ -1,7 +1,4 @@
-  Circle c1;
-  Circle c2;
-  Rectangle r1;
-  Rectangle r2;
+
   World w;
 
 void setup (){
@@ -16,7 +13,7 @@ void setup (){
 
 void draw (){
   background(51);
-  if(w.collisions()){
+  if(w.collideBodies()){
     fill(255,0,0);
   } else {
     fill(0, 255, 0);
@@ -26,7 +23,7 @@ void draw (){
 }
 
 void keyPressed() {
-  RigidBody body = w.getBody(0);
+  RigidBody body = w.getBody(2);
   
   if(keyCode == UP) {
     body.getPosition().add(new PVector(0,-10));

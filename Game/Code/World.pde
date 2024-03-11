@@ -29,7 +29,7 @@ public class World {
     }
   }
   
-  public boolean collisions(){
+  public boolean collideBodies(){
     boolean occurs = false;
     for(int i=0; i<this.bodyList.size()-1; i++){
       for(int j=i+1; j<this.bodyList.size(); j++){
