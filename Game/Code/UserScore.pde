@@ -6,6 +6,8 @@ public class UserScore{
   int indx;
   int playerScore;
   boolean scoreUpdated;
+  boolean nameUpdated;
+
   
   UserScore(){
     playerName = "";
@@ -14,6 +16,11 @@ public class UserScore{
     indx = 0;
     scoreUpdated = false;
   }
+  
+  public boolean isNameUpdated(){
+    return nameUpdated;  
+  }
+  
   
   public void setScore(int score){
     playerScore = score;  
@@ -50,11 +57,10 @@ public class UserScore{
   
   // Function for adding letters and numbers to the name of the user 
   public void addLetter(char letter){
-    tempName = tempName.substring(0, indx) + letter + tempName.substring(indx + 1);
-    indx = indx + 2;
-    noLetters = noLetters + 1;
-    if(noLetters == 10){
-      setToFinalName();
+    if(noLetters < 10){
+      tempName = tempName.substring(0, indx) + letter + tempName.substring(indx + 1);
+      indx = indx + 2;
+      noLetters = noLetters + 1;
     }
   }
   
@@ -69,6 +75,7 @@ public class UserScore{
   
   // Function for signaling that the user entered their name
   public void noMoreLettes(){
+    nameUpdated = true;
     tempName = tempName.replaceAll("_", "");
     noLetters = 10;
     setToFinalName();

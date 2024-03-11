@@ -52,7 +52,7 @@ void draw (){
   if (screen == 2){
     preGameScreen();
     // Player being able to enter his name
-    if(playerScore.getNoLetters() < 10){
+    if(playerScore.isNameUpdated() == false){
       playerScore.enterPlayerName();
     }else{
       gameScreen();
@@ -202,11 +202,10 @@ void mouseReleased() {
 
 void keyPressed(){
   // Key Detection for entering the name of the player
-  if(playerScore.getNoLetters() < 10 && screen == 2){
+  if(playerScore.isNameUpdated() == false && screen == 2){
     playerScore.pressedKey(key);
   }
   if(screen == 2){
-    print("1");
    if(key == '['){
      if(currentLevel < 2){
         //Calculating points
