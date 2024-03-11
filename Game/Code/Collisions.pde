@@ -34,70 +34,94 @@ public static class Collisions {
     PVector rectPosition = rectangle.getPosition();
     float rectWidth = rectangle.getWidth();
     float rectHeight = rectangle.getHeight();
-    // Other
-    float minDist;
-    PVector closestVertice;
+    // Others
+    boolean isSideContact = false;
     
-    // Getting 4 vertexes from the rectangle
-    PVector[] vertex = new PVector[4];
+    // Getting 4 verticeses from the rectangle
+    PVector[] vertices = new PVector[4];
     for(int i=0; i<4; i++) {
-      vertex[i] = rectangle.getVertex(i);
+      vertices[i] = rectangle.getVertex(i);
     }
     
     PVector normalVector;
-    float rectMin, rectMax, circleMin, circleMax;
+    float rectMin, rectMax, circleMin, circleCentre, circleMax;
     
-    // For the vertical axis of rectangle (Vertex 1 and vertex 2)
-    normalVector = PVector.sub(vertex[2],vertex[1]).normalize();
+    // For the vertical axis of rectangle (Vertex 1 and vertices 2)
+    normalVector = PVector.sub(vertices[2],vertices[1]).normalize();
     
     // PROJECTION ON Axis
     rectMin = PVector.dot(normalVector, rectPosition)-rectHeight/2;
     rectMax = rectMin+rectHeight;
-    circleMin = PVector.dot(normalVector,circlePosition)-circleRadius;
+    circleCentre = PVector.dot(normalVector,circlePosition);
+    circleMin = circleCentre-circleRadius;
     circleMax = circleMin+circleRadius*2;
-    
-    //In case circleMin and circleMax are the other way round
-    if(circleMin > circleMax){
-      float temp = circleMin;
-      circleMin = circleMax;
-      circleMax = temp;
-    }
     
     if(rectMin>circleMax || circleMin>rectMax) {
       return false;
     }
+    if(circleCentre > rectMin && circleCentre < rectMax){
+      isSideContact = true;
+    }
     
-    // For the vertical axis of rectangle (Vertex 0 and vertex 1)
-    normalVector = PVector.sub(vertex[1],vertex[0]).normalize();
+    // Getting values for collision resolution
+    float overlap = min(circleMax - rectMin, rectMax - circleMin);
+    PVector forceDirection = normalVector.copy();
+    
+    // For the vertical axis of rectangle (Vertex 0 and vertices 1)
+    normalVector = PVector.sub(vertices[1],vertices[0]).normalize();
     
     rectMin = PVector.dot(normalVector,rectPosition)-rectWidth/2;
     rectMax = rectMin+rectWidth;
-    circleMin = PVector.dot(normalVector,circlePosition)-circleRadius;
+    circleCentre = PVector.dot(normalVector,circlePosition);
+    circleMin = circleCentre-circleRadius;
     circleMax = circleMin+circleRadius*2;
-    
-    //In case circleMin and circleMax are the other way round
-    if(circleMin > circleMax){
-      float temp = circleMin;
-      circleMin = circleMax;
-      circleMax = temp;
-    }
     
     if(rectMin>circleMax || circleMin>rectMax) {
       return false;
     }
+    if(circleCentre > rectMin && circleCentre < rectMax){
+      isSideContact = true;
+    }
     
-    // Finding the point of contact
-    minDist = PVector.dist(circlePosition, rectangle.getVertex(0));
-    closestVertice = rectangle.getVertex(0).copy();
-    for(int i = 1; i < 4; i++){
-     float temp =  PVector.dist(circlePosition, rectangle.getVertex(i));
-     if(temp < minDist){
-      minDist = temp; 
-      closestVertice = rectangle.getVertex(i).copy();
-     }
-    }   
-        
-
+    // Getting values for collision resolution
+    float overlapTemp = min(circleMax - rectMin, rectMax - circleMin);  
+    if( overlapTemp < overlap){
+      overlap = overlapTemp;
+      forceDirection = normalVector.copy();
+    }
+    
+    if(isSideContact){
+      // Making sure the force vector is pointing in the good direction
+    
+      PVector desiredDirection = PVector.sub(rectPosition, circlePosition);
+      if(PVector.dot(desiredDirection, forceDirection) < 0){
+        forceDirection.mult(-1);
+      }
+      
+      // Reaction to overlap
+      circlePosition.sub(PVector.mult(forceDirection,overlap/2));
+      rectPosition.add(PVector.mult(forceDirection,overlap/2));
+    }
+    else{
+      // Finding the point of contact
+      float minCircleVertexDist = Float.MAX_VALUE;
+      float minCircleVertexDistTemp;
+      for(int i=0; i<4; i++){
+        minCircleVertexDistTemp = PVector.dist(vertices[i], circlePosition);
+        if(minCircleVertexDistTemp < minCircleVertexDist){
+          minCircleVertexDist = minCircleVertexDistTemp;
+          forceDirection = PVector.sub(vertices[i], circlePosition).normalize();
+        }
+      }
+      
+      if(minCircleVertexDist > circleRadius){
+        return false;
+      }
+      
+      overlap = circleRadius - minCircleVertexDist;
+      circlePosition.sub(PVector.mult(forceDirection,overlap/2));
+      rectPosition.add(PVector.mult(forceDirection,overlap/2));
+    }
     
     return true;
   }
@@ -109,35 +133,34 @@ public static class Collisions {
   
   private static boolean intersectRectangles(Rectangle rectangleA, Rectangle rectangleB) {
     // Rectangle A
-    PVector[] vertexA = new PVector[4];
+    PVector[] verticesA = new PVector[4];
     PVector rectAPosition = rectangleA.getPosition();
     float rectAWidth = rectangleA.getWidth();
     float rectAHeight = rectangleA.getHeight();
     // Rectangle B
-    PVector[] vertexB = new PVector[4];
+    PVector[] verticesB = new PVector[4];
     PVector rectBPosition = rectangleB.getPosition();
     float rectBWidth = rectangleB.getWidth();
     float rectBHeight = rectangleB.getHeight();
-    // Other variables
-    PVector normalVector;
     
     for(int i=0; i<4; i++) {
-      vertexA[i] = rectangleA.getVertex(i);
-      vertexB[i] = rectangleB.getVertex(i);
+      verticesA[i] = rectangleA.getVertex(i);
+      verticesB[i] = rectangleB.getVertex(i);
     }
     
+    PVector normalVector;
     float rectAMin, rectAMax, rectBMin, rectBMax;
     
     // Check the sides of rectangle A 
-    // For the vertical axis of rectangle A (Vertex 1 and vertex 2)
-    normalVector = PVector.sub(vertexA[2],vertexA[1]).normalize();
+    // For the vertical axis of rectangle A (Vertex 1 and vertices 2)
+    normalVector = PVector.sub(verticesA[2],verticesA[1]).normalize();
     rectAMin = PVector.dot(normalVector,rectAPosition)-rectAHeight/2;
     rectAMax = rectAMin + rectAHeight;
     rectBMin = Float.MAX_VALUE;
     rectBMax = Float.MIN_VALUE;
-    for(int i=0; i<vertexB.length; i++){
-      rectBMin = min(rectBMin, PVector.dot(normalVector,vertexB[i]));
-      rectBMax = max(rectBMax, PVector.dot(normalVector,vertexB[i]));
+    for(int i=0; i<verticesB.length; i++){
+      rectBMin = min(rectBMin, PVector.dot(normalVector,verticesB[i]));
+      rectBMax = max(rectBMax, PVector.dot(normalVector,verticesB[i]));
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
 
@@ -148,15 +171,15 @@ public static class Collisions {
     float overlap = min(rectBMax - rectAMin, rectAMax - rectBMin);
     PVector forceDirection = normalVector.copy();
 
-    // For the horizontal axis of rectangle A (Vertex 0 and vertex 1)
-    normalVector = PVector.sub(vertexA[1],vertexA[0]).normalize();
+    // For the horizontal axis of rectangle A (Vertex 0 and vertices 1)
+    normalVector = PVector.sub(verticesA[1],verticesA[0]).normalize();
     rectAMin = PVector.dot(normalVector,rectAPosition)-rectAWidth/2;
     rectAMax = rectAMin + rectAWidth;
     rectBMin = Float.MAX_VALUE;
     rectBMax = Float.MIN_VALUE;
-    for(int i=0; i<vertexB.length; i++){
-      rectBMin = min(rectBMin, PVector.dot(normalVector,vertexB[i]));
-      rectBMax = max(rectBMax, PVector.dot(normalVector,vertexB[i]));
+    for(int i=0; i<verticesB.length; i++){
+      rectBMin = min(rectBMin, PVector.dot(normalVector,verticesB[i]));
+      rectBMax = max(rectBMax, PVector.dot(normalVector,verticesB[i]));
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
 
@@ -172,14 +195,14 @@ public static class Collisions {
     
     // Check the sides of rectangle B
     // For the vertical axis of rectangle B
-    normalVector = PVector.sub(vertexB[2],vertexB[1]).normalize();
+    normalVector = PVector.sub(verticesB[2],verticesB[1]).normalize();
     rectBMin = PVector.dot(normalVector,rectBPosition)-rectBHeight/2;
     rectBMax = rectBMin + rectBHeight;
     rectAMin = Float.MAX_VALUE;
     rectAMax = Float.MIN_VALUE;
-    for(int i=0; i<vertexA.length; i++){
-      rectAMin = min(rectAMin, PVector.dot(normalVector,vertexA[i]));
-      rectAMax = max(rectAMax, PVector.dot(normalVector,vertexA[i]));
+    for(int i=0; i<verticesA.length; i++){
+      rectAMin = min(rectAMin, PVector.dot(normalVector,verticesA[i]));
+      rectAMax = max(rectAMax, PVector.dot(normalVector,verticesA[i]));
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
 
@@ -194,14 +217,14 @@ public static class Collisions {
     }
     
     // For the horizontal axis of rectangle B
-    normalVector = PVector.sub(vertexB[1],vertexB[0]).normalize();
+    normalVector = PVector.sub(verticesB[1],verticesB[0]).normalize();
     rectBMin = PVector.dot(normalVector,rectBPosition)-rectBWidth/2;
     rectBMax = rectBMin + rectBWidth;
     rectAMin = Float.MAX_VALUE;
     rectAMax = Float.MIN_VALUE;
-    for(int i=0; i<vertexA.length; i++){
-      rectAMin = min(rectAMin, PVector.dot(normalVector,vertexA[i]));
-      rectAMax = max(rectAMax, PVector.dot(normalVector,vertexA[i]));
+    for(int i=0; i<verticesA.length; i++){
+      rectAMin = min(rectAMin, PVector.dot(normalVector,verticesA[i]));
+      rectAMax = max(rectAMax, PVector.dot(normalVector,verticesA[i]));
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
       return false;
@@ -216,9 +239,9 @@ public static class Collisions {
     
     // Making sure the force vector is pointing in the good direction
     
-    PVector desiredDirection = PVector.sub(rectBPosition, rectAPosition).copy();
+    PVector desiredDirection = PVector.sub(rectBPosition, rectAPosition);
     if(PVector.dot(desiredDirection, forceDirection) < 0){
-      forceDirection = PVector.mult(forceDirection, -1);
+      forceDirection.mult(-1);
     }
     
     // Reaction to overlap
@@ -247,6 +270,7 @@ public static class Collisions {
     
     PVector forceDirection = PVector.sub(circle2Position, circle1Position).normalize();
     float overlap = radiusSum - distance;
+    
     circle1Position.sub(PVector.mult(forceDirection,overlap/2));
     circle2Position.add(PVector.mult(forceDirection,overlap/2));
     

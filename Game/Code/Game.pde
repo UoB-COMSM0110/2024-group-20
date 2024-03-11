@@ -1,4 +1,4 @@
-/*
+
   World w;
 
 void setup (){
@@ -29,30 +29,30 @@ void keyPressed() {
   RigidBody body = w.getBody(2);  
   
   if(keyCode == UP) {
-    body.getPosition().add(new PVector(0,-10));
+    body.getPosition().add(new PVector(0,-5));
   }
   if(keyCode == DOWN) {
-    body.getPosition().add(new PVector(0,10));
+    body.getPosition().add(new PVector(0,5));
   }
   if(keyCode == LEFT) {
-    body.getPosition().add(new PVector(-10,0));
+    body.getPosition().add(new PVector(-5,0));
   }
   if(keyCode == RIGHT) {
-    body.getPosition().add(new PVector(10,0));
+    body.getPosition().add(new PVector(5,0));
   }
   
   RigidBody body2 = w.getBody(0);
   
   if(key == 'W' || key == 'w') {
-    body2.getPosition().add(new PVector(0,-10));
+    body2.getPosition().add(new PVector(0,-5));
   }
   if(key == 'S' || key == 's') {
-    body2.getPosition().add(new PVector(0,10));
+    body2.getPosition().add(new PVector(0,5));
   }
   if(key == 'a' || key == 'A') {
-    body2.getPosition().add(new PVector(-10,0));
+    body2.getPosition().add(new PVector(-5,0));
   }
   if(key == 'd' || key == 'D') {
-    body2.getPosition().add(new PVector(10,0));
+    body2.getPosition().add(new PVector(5,0));
   }
-}*/
+}

@@ -6,9 +6,10 @@ public abstract class RigidBody extends PShape{
   
   protected PVector position;
   protected PVector linearVelocity;
+  protected PVector linearAcceleration;
   protected float rotation;
   protected float rotationVelocity;
-  protected PVector force;
+  protected float rotationAcceleration;
   
   protected float density;
   protected float mass;
@@ -60,19 +61,14 @@ public abstract class RigidBody extends PShape{
   
    public float getCoorY(){
     return position.y;
-  }
-  
-  public void applyForce(PVector exertedForce){
-    this.force = exertedForce;
-  }
+   }
   
   public void step(float frameTime) {
-    linearVelocity.add(force.mult(frameTime));
-    position.add(linearVelocity.mult(frameTime));
-    rotation += rotationVelocity * frameTime;
+    position.add(PVector.mult(linearVelocity, frameTime)).add(PVector.mult(linearAcceleration, frameTime*frameTime*0.5));
+    linearVelocity.add(PVector.mult(linearAcceleration, frameTime));
+    rotation += rotationVelocity * frameTime + 0.5 * rotationAcceleration * frameTime * frameTime;
+    rotationVelocity += rotationAcceleration * frameTime;
     
-    // Reset Forces
-    applyForce(new PVector(0,0));
   }
   
   public abstract void display();

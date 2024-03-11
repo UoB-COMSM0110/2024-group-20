@@ -1,4 +1,4 @@
-public class UserScore{
+/*public class UserScore{
   
   String playerName;
   String tempName;
@@ -188,3 +188,4 @@ public class UserScore{
      updateScoresFile();
   }
 }
+*/

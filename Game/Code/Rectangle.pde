@@ -5,7 +5,6 @@ public class Rectangle extends RigidBody{
     
   public Rectangle(PVector position, float density, float restitution, boolean isStatic, float rectWidth, float rectHeight) {
     this.position = position;
-    this.force = new PVector(0, 0);
     this.density = density;
     this.restitution = restitution;
     this.isStatic = isStatic;
