@@ -21,8 +21,7 @@ void draw (){
   } else {
     fill(0, 255, 0);
   }
-  w.display();
-  
+  w.display(); 
 }
 
 void keyPressed() {
