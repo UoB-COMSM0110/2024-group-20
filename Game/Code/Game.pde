@@ -1,4 +1,4 @@
-
+/*
   World w;
 
 void setup (){
@@ -55,4 +55,4 @@ void keyPressed() {
   if(key == 'd' || key == 'D') {
     body2.getPosition().add(new PVector(10,0));
   }
-}
+}*/

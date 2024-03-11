@@ -1,4 +1,4 @@
-/*
+
 class Level{
   
   private boolean levelFailed;
@@ -77,4 +77,3 @@ class Level{
     }
   }
 }
-*/
