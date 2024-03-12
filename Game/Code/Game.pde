@@ -11,6 +11,7 @@ void setup (){
   w.addBody(new Rectangle(new PVector(width/4,height/2), 1, 1, false, 50, 50));
   w.addBody(new Rectangle(new PVector(width/3,height/4), 1, 1, false, 50, 50));
   w.addBody(new Circle(new PVector(width/4,height/4), 1, 1, false, 50));
+  w.addBody(new Rectangle(new PVector(width/3,height/4), 1, 1, false, 50, 50));
 
   fullScreen();  
   rectMode(CENTER);
@@ -51,6 +52,7 @@ void draw (){
     
   }
   background(51);
+  w.step(1/frameRate);
   if(w.collideBodies()){
     fill(255,0,0);
   } else {

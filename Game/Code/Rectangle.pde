@@ -13,10 +13,15 @@ public class Rectangle extends RigidBody{
     this.shapeType = ShapeType.RECTANGLE;
     calculateArea();
     calculateMass();
+    calculateAngularInertia();
   }
   
   protected void calculateArea() {
     area = rectWidth * rectHeight;
+  }
+  
+  protected void calculateAngularInertia(){
+    angularInertia = mass * (rectWidth*rectWidth + rectHeight*rectHeight) / 12;
   }
   
   public float getWidth() {

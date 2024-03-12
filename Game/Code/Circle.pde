@@ -10,10 +10,15 @@ public class Circle extends RigidBody {
     this.shapeType = ShapeType.CIRCLE;
     calculateArea();
     calculateMass();
+    calculateAngularInertia();
   }
   
   protected void calculateArea() {
     area = circleRadius * circleRadius * (float)Math.PI;
+  }
+  
+  protected void calculateAngularInertia(){
+    angularInertia = 0.5 * mass * circleRadius * circleRadius;
   }
   
   public void display(){

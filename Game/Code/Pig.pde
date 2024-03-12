@@ -10,7 +10,7 @@ public class Pig extends Circle{
 
   public void drawPig(){
     fill(0, 255, 0);
-    circle(this.getCoorX(), this.getCoorY(),width/20); 
+    circle(this.getPosition().x, this.getPosition().y,width/20); 
   }
   
   // Add how to kill the pig

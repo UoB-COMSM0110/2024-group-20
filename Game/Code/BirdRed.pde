@@ -8,6 +8,6 @@ public class BirdRed extends Bird{
 
   public void drawBird(){
     fill(255, 0, 0);
-    circle(this.getCoorX(), this.getCoorY(),width/20); 
+    circle(this.getPosition().x, this.getPosition().y,width/20);  
   }
 }
