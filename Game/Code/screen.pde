@@ -10,12 +10,11 @@ PImage menuImage;
 PImage readyImage;
 PImage emptyButtonImage;
 PImage bgImage;
-
-Material draggedMaterial = null;
 PImage woodBoardImage;
 
 PFont font;
-
+World w = new World();
+Material draggedMaterial = null;
 UserScore playerScore;
 Tutorial tutorial;
 ArrayList<Material> materials = new ArrayList<Material>(); // A list to keep track of all materials
@@ -51,6 +50,7 @@ void draw (){
   }
   //gameScreen
   if (screen == 2){
+    w.collideBodies();
     preGameScreen();
     // Player being able to enter his name
     if(playerScore.isNameUpdated() == false){
@@ -142,21 +142,24 @@ void mousePressed(){
       }
     }
     tutorial.mousePressed();
-    //add glass
   for (Material material : materials) {
     if (material.isMouseOver(mouseX, mouseY)) {
       draggedMaterial = material;
       break;
     }
   }
-
+    //add glass
     if (mouseX >= 0 && mouseX <= width/10){
       PVector newPosition = new PVector(random(0,width/3), random(2*height/3,height));
       if (mouseY <= height/3+height/20 && mouseY >= height/3 ){
-        materials.add(new Glass(newPosition, 0.5, 0.3, false, 50, 200));
+        Glass newGlass = new Glass(newPosition, 0.5, 0.3, false, 50, 200);
+         materials.add(newGlass);
+         w.addBody(newGlass);
+
       }
     //add wood
       if (mouseY <= 4*height/9+height/20 && mouseY >= 4*height/9){
+        Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 50, 200);
         materials.add(new Wood(newPosition, 0.5, 0.3, false, 50, 200));
       }
     //add stone
@@ -167,6 +170,7 @@ void mousePressed(){
     //Are you ready?
     if (mouseX >= width/2 - width/10 && mouseX <= width/2+width/10){
       if (mouseY <= height/9+height/10 && mouseY >= height/9){
+        cleanMaterials();
         allLevels[currentLevel].readyWithStructure();
       }
     }
@@ -328,3 +332,11 @@ void imagesLooseScreen(){
   startImage = loadImage("../Images/menuButton.png");
   image(startImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);
 }
+
+//method to clean materials
+ public void cleanMaterials() {
+    for (Material material : materials){
+      w.removeBody(material);
+    }
+    materials.clear();
+  }

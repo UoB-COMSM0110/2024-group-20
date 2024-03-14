@@ -29,15 +29,14 @@ public class Menu {
    // Display the menu
   void display() {
    // Draw the menu background
-   fill(139,0,0); // White background
   woodBoardImage = loadImage("../Images/woodBoard.png");
   image(woodBoardImage, x, y, width, height);
 
-   // Draw buttons (need to add new art materials)
+   // Draw buttons 
    nextImage = loadImage("../Images/nextButton.png");
    skipImage = loadImage("../Images/skipButton.png");
-   image(nextImage,x + width * 0.05, y + height - height * 0.2, width * 0.2, height * 0.15); // Next Button 1
-   image(skipImage,x + width - width * 0.25, y + height - height * 0.2, width * 0.2, height * 0.15); // Skip Button 2
+   image(skipImage,x + width * 0.05, y + height - height * 0.2, width * 0.2, height * 0.15); // skip Button 
+   image(nextImage,x + width - width * 0.25, y + height - height * 0.2, width * 0.2, height * 0.15); // next Button 
         
    fill(0);
    textSize(20);
@@ -56,15 +55,15 @@ public class Menu {
     // Next
       if (mouseX >= x + width * 0.05 && mouseX <= x + width * 0.05 + width * 0.2 &&
         mouseY >= y + height - height * 0.2 && mouseY <= y + height - height * 0.2 + height * 0.15) {
-          if (callbackNext != null) {
-            callbackNext.onButtonPressed();
+          if (callbackSkip != null) {
+            callbackSkip.onButtonPressed();
           }
         }
       // Skip
       else if (mouseX >= x + width - width * 0.25 && mouseX <= x + width - width * 0.25 + width * 0.2 &&
         mouseY >= y + height - height * 0.2 && mouseY <= y + height - height * 0.2 + height * 0.15) {
-        if (callbackSkip != null) {
-                callbackSkip.onButtonPressed();
+        if (callbackNext != null) {
+                callbackNext.onButtonPressed();
         }
       }
   }
