@@ -196,14 +196,12 @@ public class Rectangle extends RigidBody {
     rectAMin = PVector.dot(normalVector,rectAPosition)-rectAHeight/2;
     rectAMax = rectAMin + rectAHeight;
     rectBMin = Float.MAX_VALUE;
-    rectBMax = Float.MIN_VALUE;
+    rectBMax = -Float.MAX_VALUE;
     for(int i=0; i<verticesB.length; i++){
       rectBMin = min(rectBMin, PVector.dot(normalVector,verticesB[i]));
       rectBMax = max(rectBMax, PVector.dot(normalVector,verticesB[i]));
     }
-    //print("A Height: "+rectAMin+",");print(rectAMax+",");print(rectBMin+",");print(rectBMax+"\n");
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
-      //print("RectA Height\n");
       return false;
     }
     
@@ -216,14 +214,12 @@ public class Rectangle extends RigidBody {
     rectAMin = PVector.dot(normalVector,rectAPosition)-rectAWidth/2;
     rectAMax = rectAMin + rectAWidth;
     rectBMin = Float.MAX_VALUE;
-    rectBMax = Float.MIN_VALUE;
+    rectBMax = -Float.MAX_VALUE;
     for(int i=0; i<verticesB.length; i++){
       rectBMin = min(rectBMin, PVector.dot(normalVector,verticesB[i]));
       rectBMax = max(rectBMax, PVector.dot(normalVector,verticesB[i]));
     }
-    //print("A Width: "+rectAMin+",");print(rectAMax+",");print(rectBMin+",");print(rectBMax+"\n");
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
-      //print("RectA Width\n");
       return false;
     }
     
@@ -240,14 +236,12 @@ public class Rectangle extends RigidBody {
     rectBMin = PVector.dot(normalVector,rectBPosition)-rectBHeight/2;
     rectBMax = rectBMin + rectBHeight;
     rectAMin = Float.MAX_VALUE;
-    rectAMax = Float.MIN_VALUE;
+    rectAMax = -Float.MAX_VALUE;
     for(int i=0; i<verticesA.length; i++){
       rectAMin = min(rectAMin, PVector.dot(normalVector,verticesA[i]));
       rectAMax = max(rectAMax, PVector.dot(normalVector,verticesA[i]));
     }
-    //print("B Height: "+rectAMin+",");print(rectAMax+",");print(rectBMin+",");print(rectBMax+"\n");
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
-      //print("RectB Height\n");
       return false;
     }
     
@@ -263,14 +257,12 @@ public class Rectangle extends RigidBody {
     rectBMin = PVector.dot(normalVector,rectBPosition)-rectBWidth/2;
     rectBMax = rectBMin + rectBWidth;
     rectAMin = Float.MAX_VALUE;
-    rectAMax = Float.MIN_VALUE;
+    rectAMax = -Float.MAX_VALUE;
     for(int i=0; i<verticesA.length; i++){
       rectAMin = min(rectAMin, PVector.dot(normalVector,verticesA[i]));
       rectAMax = max(rectAMax, PVector.dot(normalVector,verticesA[i]));
     }
-    //print("B Width: "+rectAMin+",");print(rectAMax+",");print(rectBMin+",");print(rectBMax+"\n");
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
-      //print("RectB width\n");
       return false;
     }
     

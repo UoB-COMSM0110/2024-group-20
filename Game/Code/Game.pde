@@ -5,12 +5,12 @@
 void setup (){
   w = new World();
   keysPressed = new ArrayList();
-  //w.addBody(new Circle(new PVector(width/4,height/3), 1, 1, false, 50, 0));
-  //w.addBody(new Circle(new PVector(width/4*2,height/3), 1, 1, false, 50, 0));
-  //w.addBody(new Circle(new PVector(width/4*3,height/3), 1, 1, false, 50, 2.5));
+  w.addBody(new Circle(new PVector(width/4,height/3), 1, 1, false, 50, 0));
+  w.addBody(new Circle(new PVector(width/4*2,height/3), 1, 1, false, 50, 0));
+  w.addBody(new Circle(new PVector(width/4*3,height/3), 1, 1, false, 50, 2.5));
   w.addBody(new Rectangle(new PVector(width/5*1,height/3*2), 1, 1, false, 50, 100, PI/8*0));
-  //w.addBody(new Rectangle(new PVector(width/5*2,height/3*2), 1, 1, false, 50, 100, PI/8*1));
-  //w.addBody(new Rectangle(new PVector(width/5*3,height/3*2), 1, 1, false, 50, 100, PI/8*3));
+  w.addBody(new Rectangle(new PVector(width/5*2,height/3*2), 1, 1, false, 50, 100, PI/8*1));
+  w.addBody(new Rectangle(new PVector(width/5*3,height/3*2), 1, 1, false, 50, 100, PI/8*3));
   w.addBody(new Rectangle(new PVector(width/5*4,height/3*2), 1, 1, false, 50, 100, PI/8*5));
 
   fullScreen();  
@@ -19,8 +19,8 @@ void setup (){
 
 void draw (){
   if(keyPressed){
-    RigidBody body = w.getBody(1);
-    RigidBody body2 = w.getBody(0);
+    RigidBody body = w.getBody(0);
+    RigidBody body2 = w.getBody(3);
     for(int i=0; i<keysPressed.size(); i++){
       int currentKey = keysPressed.get(i);
       if(currentKey == UP) {
