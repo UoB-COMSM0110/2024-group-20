@@ -29,11 +29,7 @@ void setup (){
   playerScore = new UserScore();
   tutorial = new Tutorial();
   font = createFont("angrybirds-regular.ttf", 128);
-  
   allLevels = new Level[3];
-  allLevels[0] = new Level(200, 1, 3, 0, 0);
-  allLevels[1] = new Level(150, 2, 3, 3, 0);
-  allLevels[2] = new Level(100, 3, 3, 3, 3);
   fullScreen();  
 }
 
@@ -157,13 +153,14 @@ void mousePressed(){
       if (mouseX >= width/4 && mouseX <= width/4 + width/5){
         if (mouseY <= height/2 && mouseY >= height/2  - height/10){
           playerScore.setDifficulty(Difficulty.EASY);
+          setEasyLevels();
         }
       }  
-
       // Hard
       if (mouseX >= 3 * width/4 - width/5 && mouseX <= 3 * width/4){
         if (mouseY <= height/2 && mouseY >= height/2 - height/10){
           playerScore.setDifficulty(Difficulty.HARD);
+          setHardLevels();
         }
       }   
     }
@@ -273,6 +270,7 @@ void imagesScoreScreen(){
   image(menuImage, width - width/5,height - height/10,width/5,height/10);
   
   // printing scores from a text file
+  textAlign(CENTER);
   playerScore.printScoresFile();
 }
 
@@ -349,6 +347,7 @@ void imagesWinScreen(){
   image(bgImage, 0, 0, width, height);
   
   // win text
+  textAlign(CENTER);
   fill(0,0,0);
   textFont(font);
   text("You WON!!!", width/2, height/3);
@@ -365,6 +364,7 @@ void imagesLooseScreen(){
   image(bgImage, 0, 0, width, height);
   
   // win text
+  textAlign(CENTER);
   fill(0,0,0);
   textFont(font);
   text("You LOST!!!", width/2, height/3);
@@ -373,6 +373,19 @@ void imagesLooseScreen(){
   //score button
   startImage = loadImage("../Images/menuButton.png");
   image(startImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);
+}
+
+/////Maintenance Functions////////////
+private void setEasyLevels(){
+    allLevels[0] = new Level(200, 1, 3, 0, 0, Difficulty.EASY);
+    allLevels[1] = new Level(150, 2, 3, 3, 0, Difficulty.EASY);
+    allLevels[2] = new Level(100, 3, 3, 3, 3, Difficulty.EASY);
+}
+
+private void setHardLevels(){
+    allLevels[0] = new Level(200, 1, 3, 3, 0, Difficulty.HARD);
+    allLevels[1] = new Level(150, 2, 3, 3, 3, Difficulty.HARD);
+    allLevels[2] = new Level(100, 3, 0, 6, 6, Difficulty.HARD);
 }
 
 //method to clean materials
