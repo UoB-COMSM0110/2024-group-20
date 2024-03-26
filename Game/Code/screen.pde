@@ -1,4 +1,3 @@
-
 // This line is to test if deletion of a merged branch will or will not delete its history in github. Turns out its history will be added to the merged branch.
 // This line is to extend the above test but with two branches working in parallel instead of one. This is the first line added by one of the branches.
 // This line is added by test branch one.
@@ -40,7 +39,6 @@ void draw (){
   //start screen
   if(screen == 0){
     playerScore.deletePlayer();
-    // HAVE TO RESET LEVEL VALUES
     currentLevel = 0;
     startScreen();
   }
@@ -55,6 +53,8 @@ void draw (){
     // Player being able to enter his name
     if(playerScore.isNameUpdated() == false){
       playerScore.enterPlayerName();
+    }else if(playerScore.getDifficulty() == Difficulty.NOTSET){
+      difficultyScreen();
     }else{
       gameScreen();
       //score Display
@@ -85,6 +85,11 @@ void startScreen(){
 void scoreScreen(){
   imagesScoreScreen();
 }
+
+void difficultyScreen(){
+  imagesDifficultyScreen();
+}
+
 
 void gameScreen() {
   imagesGameScreen();
@@ -128,6 +133,7 @@ void mousePressed(){
   }
   //handle scoreScreen
   if (screen == 1){
+    // Return button
     if (mouseX >= width - width/5 && mouseX <= width){
       if (mouseY <= height && mouseY >= height - height/10){
         screen = 0;
@@ -136,10 +142,28 @@ void mousePressed(){
   }
   // handle gameScreen
   if (screen == 2){
+    // Return button
+    ///// SHOULD IT WORK WHEN ENTERING THE NAME AND CHOOSING THE DIFFICULTY OF THE LEVEL?????
     if (mouseX >= width - width/5 && mouseX <= width){
       if (mouseY <= height && mouseY >= height - height/10){
         screen = 0;
       }
+    }
+    ///////////////////////////////////////////////////////////////////////////////////
+    if(playerScore.getDifficulty() == Difficulty.NOTSET){
+      //Easy
+      if (mouseX >= width/4 && mouseX <= width/4 + width/5){
+        if (mouseY <= height/2 && mouseY >= height/2  - height/10){
+          playerScore.setDifficulty(Difficulty.EASY);
+        }
+      }  
+
+      // Hard
+      if (mouseX >= 3 * width/4 - width/5 && mouseX <= 3 * width/4){
+        if (mouseY <= height/2 && mouseY >= height/2 - height/10){
+          playerScore.setDifficulty(Difficulty.HARD);
+        }
+      }   
     }
     tutorial.mousePressed();
   for (Material material : materials) {
@@ -211,25 +235,26 @@ void keyPressed(){
     playerScore.pressedKey(key);
   }
   if(screen == 2){
-   if(key == '['){
-     if(currentLevel < 2){
-        //Calculating points
-        currentLevel++;
-     }else{
-       screen = 3; 
-     }
-   }
-   if(key == ']'){
+    // JUST A TEST TO SEE IF LEVELS WORK////////////////////////////
+    if(key == '['){
+      if(currentLevel < 2){
+         //Calculating points
+         currentLevel++;
+      }else{
+        screen = 3; 
+      }
+    }
+    if(key == ']'){
        screen = 4;
     }
-    if ((key == 'd' ||key=='D') && draggedMaterial != null) {
-      
-    draggedMaterial.rotate(PI / 36); // Rotate by 10 degrees
+  //////////////////////////////////////////////////////////////////  
+    if ((key == 'd' ||key=='D') && draggedMaterial != null) {   
+      draggedMaterial.rotate(PI / 36); // Rotate by 10 degrees
+    }
+    if ((key == 'a'||key == 'A' ) && draggedMaterial != null) {
+      draggedMaterial.rotate(-PI / 18); 
+    }
   }
-  if ((key == 'a'||key == 'A' ) && draggedMaterial != null) {
-    draggedMaterial.rotate(-PI / 18); 
-  }
-   }
 }
 //////////////////////////////////////////////////////////////////////////
 void imagesScoreScreen(){
@@ -252,6 +277,43 @@ void imagesScoreScreen(){
 void imagesPreGameScreen(){
   bgImage = loadImage("../Images/map.png");
   image(bgImage, 0, 0, width, height);
+}
+
+void imagesStartScreen(){
+  // setting background
+  bgImage = loadImage("../Images/map.png");
+  image(bgImage, 0, 0, width, height);
+  
+  // logo on screen
+  startImage = loadImage("../Images/AnxiousPigsLogo.png");
+  image(startImage, width/2 - width/6,height/2 - height/6 - height/4,width/3,height/3);
+
+  //start button
+  startImage = loadImage("../Images/startButton.png");
+  image(startImage, width/2 - width/10,height/2 - height/20,width/5,height/10);
+
+  //score button
+  scoreImage = loadImage("../Images/scoreButton.png");
+  image(scoreImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);
+
+  //exit
+  exitImage = loadImage("../Images/exitButton.png");
+  image(exitImage, width/2 - width/10,height/2 - height/20 + 2*height/7,width/5,height/10);
+}
+
+void imagesDifficultyScreen(){
+  // setting background
+  bgImage = loadImage("../Images/map.png");
+  image(bgImage, 0, 0, width, height);
+  
+  //Easy
+  emptyButtonImage = loadImage("../Images/emptyButton.png");
+  image(emptyButtonImage, width/4,height/2  - height/10, width/5, height/10);
+  
+  // Hard
+  emptyButtonImage = loadImage("../Images/emptyButton.png");
+  image(emptyButtonImage, 3 * width/4 - width/5, height/2 -height/10 , width/5, height/10);
+  
 }
 
 void imagesGameScreen(){
@@ -277,28 +339,6 @@ void imagesGameScreen(){
   //Ready?
   readyImage = loadImage("../Images/readyButton.png");
   image(readyImage, width/2-width/10,height/9,width/5,height/10);
-}
-
-void imagesStartScreen(){
-  // setting background
-  bgImage = loadImage("../Images/map.png");
-  image(bgImage, 0, 0, width, height);
-  
-  // logo on screen
-  startImage = loadImage("../Images/AnxiousPigsLogo.png");
-  image(startImage, width/2 - width/6,height/2 - height/6 - height/4,width/3,height/3);
-
-  //start button
-  startImage = loadImage("../Images/startButton.png");
-  image(startImage, width/2 - width/10,height/2 - height/20,width/5,height/10);
-
-  //score button
-  scoreImage = loadImage("../Images/scoreButton.png");
-  image(scoreImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);
-
-  //exit
-  exitImage = loadImage("../Images/exitButton.png");
-  image(exitImage, width/2 - width/10,height/2 - height/20 + 2*height/7,width/5,height/10);
 }
 
 void imagesWinScreen(){
