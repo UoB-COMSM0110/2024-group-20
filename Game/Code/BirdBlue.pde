@@ -1,4 +1,5 @@
 PImage blueBird;
+
 public class BirdBlue extends Bird{
   
   public BirdBlue(PVector location){

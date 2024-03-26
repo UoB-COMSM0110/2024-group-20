@@ -1,3 +1,6 @@
+public enum Resource {
+  WOOD, GLASS, STONE
+}
 
 class Level{
   
@@ -43,6 +46,28 @@ class Level{
     for(int i = noBirdsRed + noBirdsBlue; i < this.noBirds; i++){
       birdsOnLevel[i] = new BirdBlack(new PVector(2 * width/5 + (10 * i), 4 * height/5));
     }
+  }
+  
+  public boolean buyResource(Resource material){
+    if(material == Resource.GLASS){
+      if(budget >= 50){
+        budget = budget - 50;
+        return true;
+    }   
+    if(material == Resource.WOOD){
+      if(budget >= 100){
+        budget = budget - 100;
+        return true;
+      }
+    }
+    }
+    if(material == Resource.STONE){
+      if(budget >= 150){
+        budget = budget - 150;
+        return true;
+      }
+    }
+    return false;
   }
   
   public void readyWithStructure(){

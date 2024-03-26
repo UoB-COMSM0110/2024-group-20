@@ -175,19 +175,21 @@ void mousePressed(){
     if (mouseX >= 0 && mouseX <= width/10){
       PVector newPosition = new PVector(random(0,width/3), random(2*height/3,height));
       if (mouseY <= height/3+height/20 && mouseY >= height/3 ){
-        Glass newGlass = new Glass(newPosition, 0.5, 0.3, false, 50, 200);
-         materials.add(newGlass);
-         w.addBody(newGlass);
-
+        if(allLevels[currentLevel].buyResource(Resource.GLASS)){
+          materials.add(new Glass(newPosition, 0.5, 0.3, false, 50, 200));
+        }
       }
     //add wood
       if (mouseY <= 4*height/9+height/20 && mouseY >= 4*height/9){
-        Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 50, 200);
-        materials.add(new Wood(newPosition, 0.5, 0.3, false, 50, 200));
+        if(allLevels[currentLevel].buyResource(Resource.WOOD)){
+          materials.add(new Wood(newPosition, 0.5, 0.3, false, 50, 200));
+        }
       }
     //add stone
       if (mouseY <= 5*height/9+height/20 && mouseY >= 5*height/9){
-        materials.add(new Stone(newPosition, 0.5, 0.3, false, 50, 200));
+        if(allLevels[currentLevel].buyResource(Resource.STONE)){
+          materials.add(new Stone(newPosition, 0.5, 0.3, false, 50, 200));
+        }
       }
     }
     //Are you ready?
@@ -375,7 +377,7 @@ void imagesLooseScreen(){
   image(startImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);
 }
 
-/////Maintenance Functions////////////
+/////Maintenance Functions//////////////////////////////////////////////////////////////////////////
 private void setEasyLevels(){
     allLevels[0] = new Level(200, 1, 3, 0, 0, Difficulty.EASY);
     allLevels[1] = new Level(150, 2, 3, 3, 0, Difficulty.EASY);

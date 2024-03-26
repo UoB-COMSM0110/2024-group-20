@@ -55,6 +55,7 @@ public class UserScore{
     }
   }
   
+  
   ////NAME ENTERING/////////////////////////////////////////////////////////////////////////
   
   // Function detecting which key was pressed and updating players name according to that
