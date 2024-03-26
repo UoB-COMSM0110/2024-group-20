@@ -10,9 +10,7 @@ class Level{
   
   private int noBirds;
   private Bird birdsOnLevel[];
-  
-  // Array of structures(wood, glass, steel)
-  
+    
   public int getBudget(){
     return budget;
   }

@@ -7,6 +7,8 @@ PImage scoreImage;
 PImage exitImage;
 PImage menuImage;
 PImage readyImage;
+PImage easyImage;
+PImage hardImage;
 PImage emptyButtonImage;
 PImage bgImage;
 PImage woodBoardImage;
@@ -307,11 +309,11 @@ void imagesDifficultyScreen(){
   image(bgImage, 0, 0, width, height);
   
   //Easy
-  emptyButtonImage = loadImage("../Images/emptyButton.png");
+  emptyButtonImage = loadImage("../Images/easyButton.png");
   image(emptyButtonImage, width/4,height/2  - height/10, width/5, height/10);
   
   // Hard
-  emptyButtonImage = loadImage("../Images/emptyButton.png");
+  emptyButtonImage = loadImage("../Images/hardButton.png");
   image(emptyButtonImage, 3 * width/4 - width/5, height/2 -height/10 , width/5, height/10);
   
 }

@@ -6,6 +6,7 @@ public class BirdRed extends Bird{
     super(location, 0.5f, 0.4f, false, 53, BirdType.RED);
   }
 
+  @Override
   public void display(){
     redBird = loadImage("../Images/birdRed.png");
     image(redBird, this.getCoorX() - 54, this.getCoorY() - 74); 
