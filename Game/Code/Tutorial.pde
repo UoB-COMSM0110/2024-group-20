@@ -18,6 +18,7 @@ public class Tutorial {
   void display() {
     if (currentStep < menus.length) {
       fill(0,0,0,150);
+      rectMode(CORNER);
       rect(0,0,width,height);
       menus[currentStep].display();
     }

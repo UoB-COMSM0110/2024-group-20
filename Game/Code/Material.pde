@@ -1,8 +1,3 @@
-interface Clickable {
-    boolean isMouseOver(int mouseX, int mouseY); // Check if the mouse is over the clickable object
-    void onClick(); // Handle the click action
-}
-
 abstract class Material extends Rectangle {
   float rotationAngle = 0;
   public Material(PVector position, float density, float restitution, boolean isStatic, float rectWidth, float rectHeight) {

@@ -4,6 +4,7 @@ interface ButtonCallback {
 
 PImage nextImage;
 PImage skipImage;
+PImage woodBoardImage;
 
 public class Menu {
   float x, y; // Position of the menu
