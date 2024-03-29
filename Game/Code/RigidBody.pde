@@ -12,14 +12,26 @@ public abstract class RigidBody{
   protected float rotationAcceleration;
   protected float density;
   protected float mass;
+  protected float massInvers;
   protected float restitution;
   protected float area;
   protected float angularInertia;
   protected ShapeType shapeType;
   protected boolean isStatic;
   
+  
   public void calculateMass() {
     mass = area * density;
+    calculateMassInvers();
+  }
+  
+  public void calculateMassInvers() {
+    if(!this.isStatic){
+      massInvers = 1/mass;
+    }
+    else{
+     massInvers = 0; 
+    }
   }
   
   protected abstract void calculateArea();
@@ -43,8 +55,12 @@ public abstract class RigidBody{
   
   public void step(float frameTime, PVector gravity, float dragCoefficient) {
     //Change velocity to the next step
-    linearVelocity.add(PVector.mult(linearAcceleration, frameTime)).add(PVector.mult(gravity, frameTime)).mult(dragCoefficient); 
-    
+    if(!isStatic){
+      linearVelocity.add(PVector.mult(linearAcceleration, frameTime)).add(PVector.mult(gravity, frameTime)).mult(dragCoefficient); 
+    }
+    else{
+      linearVelocity.add(PVector.mult(linearAcceleration, frameTime)); 
+    }
     //Change position to the next step
     position.add(PVector.mult(linearVelocity, frameTime)); //.add(PVector.mult(linearAcceleration, frameTime*frameTime*0.5));
     
@@ -69,16 +85,17 @@ public abstract class RigidBody{
   public void resolveCollision(RigidBody other, PVector forceDirection, float overlap){
     float e = min(this.restitution, other.restitution);
     PVector relativeVelocity = PVector.sub(other.linearVelocity, this.linearVelocity);
-    float j = -(1 + e) * PVector.dot(relativeVelocity, forceDirection);
-    j = j / (1 / this.mass + (1/other.mass));
-    
-    PVector resolutionA = PVector.mult(forceDirection, (j / this.mass));
-    this.linearVelocity.sub(resolutionA);
+    // If they are moving in opposite dir we don't have to calculate it again
+    if(PVector.dot(relativeVelocity, forceDirection) <= 0){
+      float j = -(1 + e) * PVector.dot(relativeVelocity, forceDirection);
+      j = j / (this.massInvers + other.massInvers);
+      PVector impulse = PVector.mult(forceDirection, j);
+      PVector resolutionA = PVector.mult(forceDirection, (j * this.massInvers));
+      this.linearVelocity.sub(resolutionA);
 
-    
-    PVector resolutionB = PVector.mult(forceDirection, (j / other.mass));
-    other.linearVelocity.add(resolutionB);
-
+      PVector resolutionB = PVector.mult(forceDirection, (j * other.massInvers));
+      other.linearVelocity.add(resolutionB);
+    }
   }
   
 }

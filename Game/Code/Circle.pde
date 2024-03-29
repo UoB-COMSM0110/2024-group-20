@@ -61,6 +61,7 @@ public class Circle extends RigidBody {
     PVector forceDirection = PVector.sub(circle2Position, circle1Position).normalize();
     float overlap = radiusSum - distance;
     
+    // We assume there will be no statis circles
     circle1Position.sub(PVector.mult(forceDirection,overlap/2));
     circle2Position.add(PVector.mult(forceDirection,overlap/2));
     

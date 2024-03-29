@@ -143,8 +143,16 @@ public class Rectangle extends RigidBody {
       }
       
       // Reaction to overlap
-      circlePosition.sub(PVector.mult(forceDirection,overlap/2));
-      rectPosition.add(PVector.mult(forceDirection,overlap/2));
+      if(this.isStatic){
+        circlePosition.sub(PVector.mult(forceDirection,overlap));
+      }
+      else if(other.isStatic){
+        rectPosition.add(PVector.mult(forceDirection,overlap));
+      }
+      else{
+        circlePosition.sub(PVector.mult(forceDirection,overlap/2));
+        rectPosition.add(PVector.mult(forceDirection,overlap/2));
+      }
     }
     else{
       // Finding the point of contact
@@ -161,10 +169,18 @@ public class Rectangle extends RigidBody {
       if(minCircleVertexDist > circleRadius){
         return false;
       }
-      
       overlap = circleRadius - minCircleVertexDist;
+      
+      if(this.isStatic){
+        circlePosition.sub(PVector.mult(forceDirection,overlap));
+      }
+      else if(other.isStatic){
+        rectPosition.add(PVector.mult(forceDirection,overlap));
+      }
+      else{
       circlePosition.sub(PVector.mult(forceDirection,overlap/2));
       rectPosition.add(PVector.mult(forceDirection,overlap/2));
+      }
     }
     
     resolveCollision(other, forceDirection, overlap);
@@ -281,11 +297,18 @@ public class Rectangle extends RigidBody {
       forceDirection.mult(-1);
     }
     
-    // Reaction to overlap
-    rectAPosition.sub(PVector.mult(forceDirection,overlap/2));
-    rectBPosition.add(PVector.mult(forceDirection,overlap/2));
+    // Reaction to overlap inluding possibly static shapes
+    if(this.isStatic){
+      rectBPosition.add(PVector.mult(forceDirection,overlap));
+    }
+    else if(other.isStatic){
+      rectAPosition.sub(PVector.mult(forceDirection,overlap));
+    }
+    else{
+      rectAPosition.sub(PVector.mult(forceDirection,overlap/2));
+      rectBPosition.add(PVector.mult(forceDirection,overlap/2));
+    }
     resolveCollision(other, forceDirection, overlap);
-
 
     return true;
   }

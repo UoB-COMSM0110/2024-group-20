@@ -5,6 +5,11 @@
 void setup (){
   w = new World();
   keysPressed = new ArrayList();
+  // (PVector position, float density, float restitution, boolean isStatic, float rectWidth, float rectHeight, float rotation)
+  w.addBody(new Rectangle(new PVector(width/2,height), 1, 1, true, width, 1, 0));
+  w.addBody(new Rectangle(new PVector(0 - 1,height/2), 1, 1, true, 1, height, 0));
+  w.addBody(new Rectangle(new PVector(width + 1,height/2), 1, 1, true, 1, height, 0));
+  
   w.addBody(new BirdRed(new PVector(width/4,height/3)));
   w.addBody(new BirdBlack(new PVector(width/4*2,height/3)));
   w.addBody(new BirdBlue(new PVector(width/4*3,height/3)));
@@ -20,8 +25,8 @@ void setup (){
 
 void draw (){
   if(keyPressed){
-    RigidBody body = w.getBody(0);
-    RigidBody body2 = w.getBody(3);
+    RigidBody body = w.getBody(3);
+    RigidBody body2 = w.getBody(4);
     for(int i=0; i<keysPressed.size(); i++){
 
       float dx = 0;
