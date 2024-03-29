@@ -62,7 +62,7 @@ public abstract class RigidBody{
       linearVelocity.add(PVector.mult(linearAcceleration, frameTime)); 
     }
     //Change position to the next step
-    position.add(PVector.mult(linearVelocity, frameTime)); //.add(PVector.mult(linearAcceleration, frameTime*frameTime*0.5));
+    position.add(PVector.mult(linearVelocity, frameTime)).add(PVector.mult(linearAcceleration, frameTime*frameTime*0.5));
     
     //Change rotation to the next step
     rotation += rotationVelocity * frameTime + 0.5 * rotationAcceleration * frameTime * frameTime;

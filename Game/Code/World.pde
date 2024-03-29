@@ -5,7 +5,7 @@ public class World {
   
   public World() {
     this.bodyList = new ArrayList<RigidBody>();
-    this.gravity = new PVector(0, 9.81);
+    this.gravity = new PVector(0, 120);
   }
   
   public void addBody(RigidBody body) {
@@ -22,6 +22,10 @@ public class World {
     } else {
       return null;
     }
+  }
+  
+  public int getListSize() {
+    return bodyList.size();
   }
   
   public void step(float frameTime) {

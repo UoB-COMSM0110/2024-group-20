@@ -6,16 +6,13 @@ void setup (){
   w = new World();
   keysPressed = new ArrayList();
   // (PVector position, float density, float restitution, boolean isStatic, float rectWidth, float rectHeight, float rotation)
-  w.addBody(new Rectangle(new PVector(width/2,height), 1, 1, true, width, 1, 0));
-  w.addBody(new Rectangle(new PVector(0 - 1,height/2), 1, 1, true, 1, height, 0));
-  w.addBody(new Rectangle(new PVector(width + 1,height/2), 1, 1, true, 1, height, 0));
-  // Animals
-  w.addBody(new BirdRed(new PVector(width/4,height/3)));
-  w.addBody(new BirdBlack(new PVector(width/4*2,height/3)));
-  w.addBody(new BirdBlue(new PVector(width/4*3,height/3)));
+  w.addBody(new Rectangle(new PVector(width/2,height + 10), 1, 1, true, width, 20, 0));
+  w.addBody(new Rectangle(new PVector(0 - 10, height/2), 1, 1, true, 20, height - 10, 0));
+  w.addBody(new Rectangle(new PVector(width + 10, height/2), 1, 1, true, 20, height - 10, 0));
+  // Shapes
   w.addBody(new Rectangle(new PVector(width/5*1,height/3*2), 1, 1, false, 50, 100, PI/8*0));
   w.addBody(new Rectangle(new PVector(width/5*2,height/3*2), 1, 1, false, 50, 100, PI/8*1));
-  w.addBody(new Rectangle(new PVector(width/5*3,height/3*2), 1, 1, false, 50, 100, PI/8*3));
+  w.addBody(new Rectangle(new PVector(width/5*3,height/3*2), 1, 1, true, 50, 100, PI/8*3));
   w.addBody(new Rectangle(new PVector(width/5*4,height/3*2), 1, 1, false, 50, 100, PI/8*5));
 
 
@@ -25,8 +22,7 @@ void setup (){
 
 void draw (){
   if(keyPressed){
-    RigidBody body = w.getBody(6);
-    RigidBody body2 = w.getBody(4);
+    RigidBody body = w.getBody(3);
     for(int i=0; i<keysPressed.size(); i++){
 
       float dx = 0;
@@ -52,18 +48,18 @@ void draw (){
         PVector force = PVector.mult(direction, forceMagnitude);
         body.applyForce(force);
       }
-      /*if(currentKey == 'W' || currentKey == 'w') {
-        body2.getPosition().add(new PVector(0,-4));
+      
+      if(currentKey == ENTER){
+        float xPosition = random(width);
+        w.addBody(new BirdRed(new PVector(xPosition, 0)));
+        float forceX = random(-80, 80);
+        float forceY = random(0, 80);
+
+        PVector direction = new PVector(forceX, forceY);
+        PVector force = PVector.mult(direction, forceMagnitude);
+        w.getBody(w.getListSize() - 1).applyForce(force);
       }
-      if(currentKey == 'S' || currentKey == 's') {
-        body2.getPosition().add(new PVector(0,4));
-      }
-      if(currentKey == 'a' || currentKey == 'A') {
-        body2.getPosition().add(new PVector(-4,0));
-      }
-      if(currentKey == 'd' || currentKey == 'D') {
-        body2.getPosition().add(new PVector(4,0));
-      }*/
+
     }
   }
   background(51);
