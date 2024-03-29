@@ -13,6 +13,7 @@ void setup (){
   w.addBody(new Rectangle(new PVector(width/5*3,height/3*2), 1, 1, false, 50, 100, PI/8*3));
   w.addBody(new Rectangle(new PVector(width/5*4,height/3*2), 1, 1, false, 50, 100, PI/8*5));
 
+
   fullScreen();  
   rectMode(CENTER);
 }
