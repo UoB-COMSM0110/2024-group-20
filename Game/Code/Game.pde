@@ -1,11 +1,25 @@
-// find out how to implement the controller/model/viewer concept in here
-// look into our Java course code for OXO
+ScreenManager screenManager;
+PFont font;
 
-//void setup(){
-//  size(1600,900);
-//  noStroke();
-//}
+void setup (){
+  font = createFont("angrybirds-regular.ttf", 128);
+  fullScreen();
+  
+  screenManager = new ScreenManager();
+}
 
-//void draw(){
-//  background(51);
-//}
+void draw(){
+  screenManager.display();
+}
+
+void mousePressed(){
+  screenManager.mousePressed();
+}
+
+void keyPressed(){
+  screenManager.keyPressed();
+}
+
+void mouseDragged() {
+  screenManager.mouseDragged();
+}
