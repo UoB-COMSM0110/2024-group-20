@@ -15,7 +15,8 @@ public class Rectangle extends RigidBody {
     calculateArea();
     calculateMass();
     calculateAngularInertia();
-  }
+    
+    }
   
   protected void calculateArea() {
     area = rectWidth * rectHeight;
@@ -274,7 +275,6 @@ public class Rectangle extends RigidBody {
     }
     
     // Making sure the force vector is pointing in the good direction
-    
     PVector desiredDirection = PVector.sub(rectBPosition, rectAPosition);
     if(PVector.dot(desiredDirection, forceDirection) < 0){
       forceDirection.mult(-1);

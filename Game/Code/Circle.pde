@@ -12,6 +12,7 @@ public class Circle extends RigidBody {
     calculateArea();
     calculateMass();
     calculateAngularInertia();
+    
   }
   
   public float getCoorX(){
@@ -41,6 +42,10 @@ public class Circle extends RigidBody {
   public boolean intersect(RigidBody other) {
     return other.intersect(this);
   }
+  
+  public boolean intersect(Rectangle other) {
+    return other.intersect(this);
+  }
 
   public boolean intersect(Circle other) {
     PVector circle1Position =  this.getPosition();
@@ -59,10 +64,23 @@ public class Circle extends RigidBody {
     circle1Position.sub(PVector.mult(forceDirection,overlap/2));
     circle2Position.add(PVector.mult(forceDirection,overlap/2));
     
+    resolveCollision(other, forceDirection, overlap);
     return true;
   }
+  
+  private void resolveCollision(RigidBody other, PVector forceDirection, float overlap){
+    float e = min(this.restitution, other.restitution);
+    PVector relativeVelocity = PVector.sub(other.linearVelocity, this.linearVelocity);
+    float j = -(1 + e) * PVector.dot(relativeVelocity, forceDirection);
+    j = j / (1 / this.mass + (1/other.mass));
+    
+    PVector resolutionA = PVector.mult(forceDirection, (j / this.mass));
+    this.linearVelocity.sub(resolutionA);
 
-  public boolean intersect(Rectangle other) {
-    return other.intersect(this);
+    
+    PVector resolutionB = PVector.mult(forceDirection, (j / other.mass));
+    other.linearVelocity.add(resolutionB);
+
   }
+
 }

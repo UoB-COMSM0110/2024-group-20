@@ -1,10 +1,11 @@
 public class World {
-  private PVector gravity = new PVector(0, 0);
   private ArrayList<RigidBody> bodyList;
   float dragCoefficient = 0.99;
+  private PVector gravity;
   
   public World() {
     this.bodyList = new ArrayList<RigidBody>();
+    this.gravity = new PVector(0, 9.81);
   }
   
   public void addBody(RigidBody body) {
@@ -27,19 +28,21 @@ public class World {
     for(int i=0; i<this.bodyList.size(); i++) {
       this.bodyList.get(i).step(frameTime, gravity, dragCoefficient);
     }
+    ////->
+    
   }
   
   public boolean collideBodies(){
     boolean occurs = false;
     for(int i=0; i<this.bodyList.size()-1; i++){
       for(int j=i+1; j<this.bodyList.size(); j++){
-        //if(Collisions.intersect(bodyList.get(i), bodyList.get(j))) occurs=true;
-        if(bodyList.get(i).intersect(bodyList.get(j))) occurs = true;
+        if(bodyList.get(i).intersect(bodyList.get(j))) 
+          occurs = true;
       }
     }
     return occurs;
   }
-  
+    
   public void display(){
     for(int i=0; i<this.bodyList.size(); i++) {
       this.bodyList.get(i).display();

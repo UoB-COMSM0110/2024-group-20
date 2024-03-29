@@ -10,7 +10,6 @@ public abstract class RigidBody{
   protected float rotation;
   protected float rotationVelocity;
   protected float rotationAcceleration;
-  
   protected float density;
   protected float mass;
   protected float restitution;
@@ -43,11 +42,21 @@ public abstract class RigidBody{
   }
   
   public void step(float frameTime, PVector gravity, float dragCoefficient) {
-    position.add(PVector.mult(linearVelocity, frameTime)).add(PVector.mult(linearAcceleration, frameTime*frameTime*0.5));
-    linearVelocity.add(PVector.mult(linearAcceleration, frameTime)).add(PVector.mult(gravity, frameTime)).mult(dragCoefficient);
+    //Change velocity to the next step
+    linearVelocity.add(PVector.mult(linearAcceleration, frameTime)); //.add(PVector.mult(gravity, frameTime)).mult(dragCoefficient); 
+    print(linearVelocity + "\n");
     
+    //Change position to the next step
+    position.add(PVector.mult(linearVelocity, frameTime)); //.add(PVector.mult(linearAcceleration, frameTime*frameTime*0.5));
+    
+    //Change rotation to the next step
     rotation += rotationVelocity * frameTime + 0.5 * rotationAcceleration * frameTime * frameTime;
     rotationVelocity += rotationAcceleration * frameTime;
+    this.linearAcceleration = new PVector(0,0);
+  }
+  
+  public void applyForce(PVector force){
+    this.linearAcceleration = force;
   }
   
   public abstract void display();

@@ -23,9 +23,11 @@ void draw (){
     RigidBody body = w.getBody(0);
     RigidBody body2 = w.getBody(3);
     for(int i=0; i<keysPressed.size(); i++){
+
       int currentKey = keysPressed.get(i);
       if(currentKey == UP) {
-        body.getPosition().add(new PVector(0,-4));
+        //body.getPosition().add(new PVector(0,-4));
+        body.applyForce(new PVector(10, 0));
       }
       if(currentKey == DOWN) {
         body.getPosition().add(new PVector(0,4));
