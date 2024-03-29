@@ -85,17 +85,15 @@ public abstract class RigidBody{
   public void resolveCollision(RigidBody other, PVector forceDirection, float overlap){
     float e = min(this.restitution, other.restitution);
     PVector relativeVelocity = PVector.sub(other.linearVelocity, this.linearVelocity);
-    // If they are moving in opposite dir we don't have to calculate it again
-    if(PVector.dot(relativeVelocity, forceDirection) <= 0){
-      float j = -(1 + e) * PVector.dot(relativeVelocity, forceDirection);
-      j = j / (this.massInvers + other.massInvers);
-      PVector impulse = PVector.mult(forceDirection, j);
-      PVector resolutionA = PVector.mult(forceDirection, (j * this.massInvers));
-      this.linearVelocity.sub(resolutionA);
 
-      PVector resolutionB = PVector.mult(forceDirection, (j * other.massInvers));
-      other.linearVelocity.add(resolutionB);
-    }
+    float j = -(1 + e) * PVector.dot(relativeVelocity, forceDirection);
+    j = j / (this.massInvers + other.massInvers);
+    PVector impulse = PVector.mult(forceDirection, j);
+    PVector resolutionA = PVector.mult(impulse, this.massInvers);
+    this.linearVelocity.sub(resolutionA);
+
+    PVector resolutionB = PVector.mult(impulse, other.massInvers);
+    other.linearVelocity.add(resolutionB);
   }
   
 }
