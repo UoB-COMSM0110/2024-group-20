@@ -35,7 +35,11 @@ public abstract class RigidBody{
   }
   
   public PVector getLinearVelocity(){
-    return this.linearVelocity;
+    return linearVelocity;
+  }
+  
+  public void setLinearVelocity(PVector linearVelocity) {
+    this.linearVelocity = linearVelocity;
   }
   
   public PVector getLinearAcceleration(){
@@ -55,5 +59,6 @@ public abstract class RigidBody{
   public abstract boolean intersect(RigidBody other);
   public abstract boolean intersect(Circle other);
   public abstract boolean intersect(Rectangle other);
+  
   
 }
