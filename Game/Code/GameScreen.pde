@@ -57,7 +57,6 @@ class GameScreen extends Screen {
     image(bgImage, 0, 0, width, height);
     // Player being able to enter his name
     if(playerScore.isNameUpdated() == false){
-       print("1\n");
        playerScore.enterPlayerName();
      }else{
 
