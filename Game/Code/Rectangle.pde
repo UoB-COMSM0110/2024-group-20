@@ -167,6 +167,7 @@ public class Rectangle extends RigidBody {
       rectPosition.add(PVector.mult(forceDirection,overlap/2));
     }
     
+    resolveCollision(other, forceDirection, overlap);
     return true;
   }
 
@@ -283,6 +284,8 @@ public class Rectangle extends RigidBody {
     // Reaction to overlap
     rectAPosition.sub(PVector.mult(forceDirection,overlap/2));
     rectBPosition.add(PVector.mult(forceDirection,overlap/2));
+    resolveCollision(other, forceDirection, overlap);
+
 
     return true;
   }

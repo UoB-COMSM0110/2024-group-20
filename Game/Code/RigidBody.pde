@@ -43,8 +43,7 @@ public abstract class RigidBody{
   
   public void step(float frameTime, PVector gravity, float dragCoefficient) {
     //Change velocity to the next step
-    linearVelocity.add(PVector.mult(linearAcceleration, frameTime)); //.add(PVector.mult(gravity, frameTime)).mult(dragCoefficient); 
-    print(linearVelocity + "\n");
+    linearVelocity.add(PVector.mult(linearAcceleration, frameTime)).add(PVector.mult(gravity, frameTime)).mult(dragCoefficient); 
     
     //Change position to the next step
     position.add(PVector.mult(linearVelocity, frameTime)); //.add(PVector.mult(linearAcceleration, frameTime*frameTime*0.5));
@@ -56,7 +55,9 @@ public abstract class RigidBody{
   }
   
   public void applyForce(PVector force){
-    this.linearAcceleration = force;
+    calculateMass();
+    this.linearAcceleration = PVector.div(force, this.mass);
+    print(this.mass + "\n");
   }
   
   public abstract void display();
@@ -64,5 +65,20 @@ public abstract class RigidBody{
   public abstract boolean intersect(RigidBody other);
   public abstract boolean intersect(Circle other);
   public abstract boolean intersect(Rectangle other);
+  
+  public void resolveCollision(RigidBody other, PVector forceDirection, float overlap){
+    float e = min(this.restitution, other.restitution);
+    PVector relativeVelocity = PVector.sub(other.linearVelocity, this.linearVelocity);
+    float j = -(1 + e) * PVector.dot(relativeVelocity, forceDirection);
+    j = j / (1 / this.mass + (1/other.mass));
+    
+    PVector resolutionA = PVector.mult(forceDirection, (j / this.mass));
+    this.linearVelocity.sub(resolutionA);
+
+    
+    PVector resolutionB = PVector.mult(forceDirection, (j / other.mass));
+    other.linearVelocity.add(resolutionB);
+
+  }
   
 }

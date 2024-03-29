@@ -28,7 +28,6 @@ public class World {
     for(int i=0; i<this.bodyList.size(); i++) {
       this.bodyList.get(i).step(frameTime, gravity, dragCoefficient);
     }
-    ////->
     
   }
   
@@ -42,9 +41,10 @@ public class World {
     }
     return occurs;
   }
-    
+  
   public void display(){
     for(int i=0; i<this.bodyList.size(); i++) {
+      
       this.bodyList.get(i).display();
     }
   }

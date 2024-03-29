@@ -24,21 +24,30 @@ void draw (){
     RigidBody body2 = w.getBody(3);
     for(int i=0; i<keysPressed.size(); i++){
 
+      float dx = 0;
+      float dy = 0;
+      float forceMagnitude = 1900000;
+      
       int currentKey = keysPressed.get(i);
       if(currentKey == UP) {
-        //body.getPosition().add(new PVector(0,-4));
-        body.applyForce(new PVector(10, 0));
+        dy = dy - 1;
       }
       if(currentKey == DOWN) {
-        body.getPosition().add(new PVector(0,4));
+        dy = dy + 1;
       }
       if(currentKey == LEFT) {
-        body.getPosition().add(new PVector(-4,0));
+        dx = dx - 1;
       }
       if(currentKey == RIGHT) {
-        body.getPosition().add(new PVector(4,0));
+        dx = dx + 1;
       }
-      if(currentKey == 'W' || currentKey == 'w') {
+      
+      if(dx != 0 || dy != 0){
+        PVector direction = new PVector(dx, dy).normalize();
+        PVector force = PVector.mult(direction, forceMagnitude);
+        body.applyForce(force);
+      }
+      /*if(currentKey == 'W' || currentKey == 'w') {
         body2.getPosition().add(new PVector(0,-4));
       }
       if(currentKey == 'S' || currentKey == 's') {
@@ -49,7 +58,7 @@ void draw (){
       }
       if(currentKey == 'd' || currentKey == 'D') {
         body2.getPosition().add(new PVector(4,0));
-      }
+      }*/
     }
   }
   background(51);
