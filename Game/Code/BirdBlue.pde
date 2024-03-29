@@ -9,6 +9,6 @@ public class BirdBlue extends Bird{
 
   public void display(){
     blueBird = loadImage("../Images/birdBlue.png");
-    image(blueBird, this.getCoorX() - 50, this.getCoorY() - 70); 
+    image(blueBird, position.x - 50, position.y - 70); 
   }
 }

@@ -59,7 +59,7 @@ public class Circle extends RigidBody {
     }
     
     // Setting coefficient of restitution
-    float cor = 1;
+    float cor = 0.5;
     
     // Calculate the value of impulse
     float j = -(1 + cor) * velocityNormal / (1 / this.mass + 1 / other.mass);

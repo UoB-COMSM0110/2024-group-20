@@ -1,7 +1,7 @@
 public class World {
   private PVector gravity = new PVector(0, 0);
   private ArrayList<RigidBody> bodyList;
-  float dragCoefficient = 0.99;
+  float dragCoefficient = 0.999;
   
   public World() {
     this.bodyList = new ArrayList<RigidBody>();
