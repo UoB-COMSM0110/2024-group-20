@@ -14,6 +14,14 @@ public class Circle extends RigidBody {
     calculateAngularInertia();
   }
   
+  public float getCoorX(){
+    return position.x;
+  }
+  
+  public float getCoorY(){
+    return position.y;
+  }
+  
   protected void calculateArea() {
     area = circleRadius * circleRadius * (float)Math.PI;
   }

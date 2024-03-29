@@ -1,13 +1,14 @@
+PImage redBird;
 
 public class BirdRed extends Bird{
   
   public BirdRed(PVector location){
     //PVector location,float density, float restitution, boolean isStatic, float radius, BirdType birdType
-    super(location, 0.5f, 0.4f, false, 4, BirdType.RED);
+    super(location, 0.5f, 0.4f, false, 53, BirdType.RED);
   }
 
-  public void drawBird(){
-    fill(255, 0, 0);
-    circle(this.getPosition().x, this.getPosition().y,width/20);  
+  public void display(){
+    redBird = loadImage("../Images/birdRed.png");
+    image(redBird, this.getCoorX() - 54, this.getCoorY() - 74); 
   }
 }
