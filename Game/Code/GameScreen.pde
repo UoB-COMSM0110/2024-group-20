@@ -99,7 +99,7 @@ class GameScreen extends Screen {
      PVector newPosition = new PVector(random(0,width/3), random(2*height/3,height));
     if(woodButton.clicked()){
       if(allLevels[currentLevel].buyResource(Resource.WOOD)){
-        Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 50, 200);
+        Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 50, 200,0);
         materials.add(newWood);
         w.addBody(newWood);
       }
@@ -107,7 +107,7 @@ class GameScreen extends Screen {
     //glass
     if(glassButton.clicked()){
       if(allLevels[currentLevel].buyResource(Resource.GLASS)){
-        Glass newGlass = new Glass(newPosition, 0.5, 0.3, false, 50, 200);
+        Glass newGlass = new Glass(newPosition, 0.5, 0.3, false, 50, 200,0);
         materials.add(newGlass);
         w.addBody(newGlass);
       }
@@ -115,7 +115,7 @@ class GameScreen extends Screen {
     //stone
     if(stoneButton.clicked()){
       if(allLevels[currentLevel].buyResource(Resource.STONE)){
-        Stone newStone = new Stone(newPosition, 0.5, 0.3, false, 50, 200);
+        Stone newStone = new Stone(newPosition, 0.5, 0.3, false, 50, 200,0);
         materials.add(newStone);
         w.addBody(newStone);
       }

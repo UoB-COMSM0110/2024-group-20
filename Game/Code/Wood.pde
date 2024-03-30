@@ -1,6 +1,6 @@
 class Wood extends Material {
-    public Wood(PVector position, float density, float restitution, boolean isStatic, float rectWidth, float rectHeight) {
-        super(position, density, restitution, isStatic, rectWidth, rectHeight);
+    public Wood(PVector position, float density, float restitution, boolean isStatic, float rectWidth, float rectHeight,float rotation) {
+        super(position, density, restitution, isStatic, rectWidth, rectHeight,rotation);
     }
 
     @Override
