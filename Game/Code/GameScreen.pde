@@ -12,20 +12,20 @@ class GameScreen extends Screen {
   int currentLevel = 0;
 
   PImage bgImage,menuImage,emptyButtonImage,readyImage;
-  ImageButton menuButton, woodButton,  glassButton,stoneButton,readyButton;
+  ImageButton menuButton, woodButton, glassButton,stoneButton,readyButton;
   ArrayList<ImageButton> buttons;
   
   //constuctor
-  GameScreen(ScreenManager screenManager,UserScore playerScore){
+  GameScreen(ScreenManager screenManager,UserScore playerScore, Level allLevels[]){
     this.screenManager = screenManager;
     this.playerScore = playerScore;
+    this.allLevels = allLevels;
     bgImage = loadImage("../Images/map.png");
-    menuImage = loadImage("../Images/menuButton.png");
     emptyButtonImage = loadImage("../Images/emptyButton.png");
-    readyImage = loadImage("../Images/readyButton.png");
   
     buttons = new ArrayList<ImageButton>();
     //menu
+    menuImage = loadImage("../Images/menuButton.png");
     menuButton = new ImageButton(menuImage, width - width/5,height - height/10,width/5,height/10);
     buttons.add(menuButton);
     //wood
@@ -38,15 +38,11 @@ class GameScreen extends Screen {
     stoneButton = new ImageButton(emptyButtonImage, 0,5*height/9,width/10,height/20);
     buttons.add(stoneButton);
     //ready
+    readyImage = loadImage("../Images/readyButton.png");
     readyButton = new ImageButton(readyImage, width/2-width/10,height/9,width/5,height/10);
     buttons.add(readyButton);
     
     tutorial = new Tutorial();  
-
-    allLevels = new Level[3];
-    allLevels[0] = new Level(200, 1, 3, 0, 0);
-    allLevels[1] = new Level(150, 2, 3, 3, 0);
-    allLevels[2] = new Level(100, 3, 3, 3, 3);
   }
 
   //load all the image
@@ -94,6 +90,7 @@ class GameScreen extends Screen {
 
     if(menuButton.clicked()){
       screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
+      playerScore.deletePlayer();
       cleanMaterials();
     }
     //if ready
@@ -101,21 +98,27 @@ class GameScreen extends Screen {
     //add wood
      PVector newPosition = new PVector(random(0,width/3), random(2*height/3,height));
     if(woodButton.clicked()){
-      Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 50, 200);
-      materials.add(newWood);
-      w.addBody(newWood);
+      if(allLevels[currentLevel].buyResource(Resource.WOOD)){
+        Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 50, 200);
+        materials.add(newWood);
+        w.addBody(newWood);
+      }
     }
     //glass
     if(glassButton.clicked()){
-      Glass newGlass = new Glass(newPosition, 0.5, 0.3, false, 50, 200);
-      materials.add(newGlass);
-      w.addBody(newGlass);
+      if(allLevels[currentLevel].buyResource(Resource.GLASS)){
+        Glass newGlass = new Glass(newPosition, 0.5, 0.3, false, 50, 200);
+        materials.add(newGlass);
+        w.addBody(newGlass);
+      }
     }
     //stone
     if(stoneButton.clicked()){
-      Stone newStone = new Stone(newPosition, 0.5, 0.3, false, 50, 200);
-      materials.add(newStone);
-      w.addBody(newStone);
+      if(allLevels[currentLevel].buyResource(Resource.STONE)){
+        Stone newStone = new Stone(newPosition, 0.5, 0.3, false, 50, 200);
+        materials.add(newStone);
+        w.addBody(newStone);
+      }
     }
   }
 
@@ -125,6 +128,7 @@ class GameScreen extends Screen {
       playerScore.pressedKey(key);
     }
     
+////////////////////////////////JUST FOR DEMONSTRATION PURPOSES////////////
     if(key == '['){
      if(currentLevel < 2){
         //Calculating points
@@ -136,7 +140,7 @@ class GameScreen extends Screen {
    if(key == ']'){
        screenManager.setCurrentScreen(ScreenType.LOOSESCREEN);
     }
-
+//////////////////////////////////////////////////////////////////////////
       if ((key == 'd' ||key=='D') && draggedMaterial != null) {  
         draggedMaterial.rotate(PI / 36); // Rotate by 10 degrees
       }

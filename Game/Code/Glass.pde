@@ -5,7 +5,7 @@ class Glass extends Material {
 
     @Override
     void draw(PGraphics pg) {
-        pg.fill(100, 255, 127); 
+        pg.fill(100, 255, 127, 128); 
         super.drawBase(pg); 
     }
 }

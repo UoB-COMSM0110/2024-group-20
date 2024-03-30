@@ -31,7 +31,10 @@ class LooseScreen extends Screen {
   }
 
   void mousePressed(){
-    if(menuButton.clicked()){screenManager.setCurrentScreen(ScreenType.STARTSCREEN);}
+    if(menuButton.clicked()){
+      playerScore.deletePlayer();
+      screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
+    }
   }
   
   void keyPressed(){}
