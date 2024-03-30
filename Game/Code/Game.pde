@@ -22,4 +22,9 @@ void keyPressed(){
 
 void mouseDragged() {
   screenManager.mouseDragged();
+
+}
+
+void keyReleased(){
+  keysPressed.remove(Integer.valueOf(keyCode));
 }

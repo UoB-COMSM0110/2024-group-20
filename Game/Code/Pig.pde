@@ -8,6 +8,7 @@ public class Pig extends Circle{
   
   public Pig(PVector location){
     super(location, 0.6f, 0.5f, false, 54);
+    super(location, 0.6f, 0.5f, false, 5.0, 54);
     alive = true;
   }
 
