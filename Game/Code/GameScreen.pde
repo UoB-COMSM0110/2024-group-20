@@ -16,9 +16,10 @@ class GameScreen extends Screen {
   ArrayList<ImageButton> buttons;
   
   //constuctor
-  GameScreen(ScreenManager screenManager,UserScore playerScore){
+  GameScreen(ScreenManager screenManager,UserScore playerScore, Level allLevels[]){
     this.screenManager = screenManager;
     this.playerScore = playerScore;
+    this.allLevels = allLevels;
     bgImage = loadImage("../Images/map.png");
     menuImage = loadImage("../Images/menuButton.png");
     emptyButtonImage = loadImage("../Images/emptyButton.png");
@@ -42,11 +43,6 @@ class GameScreen extends Screen {
     buttons.add(readyButton);
     
     tutorial = new Tutorial();  
-
-    allLevels = new Level[3];
-    allLevels[0] = new Level(200, 1, 3, 0, 0);
-    allLevels[1] = new Level(150, 2, 3, 3, 0);
-    allLevels[2] = new Level(100, 3, 3, 3, 3);
   }
 
   //load all the image
@@ -95,6 +91,7 @@ class GameScreen extends Screen {
 
     if(menuButton.clicked()){
       screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
+      playerScore.deletePlayer();
       cleanMaterials();
     }
     //if ready

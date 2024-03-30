@@ -42,7 +42,9 @@ class StartScreen extends Screen {
   }
 
   void mousePressed(){
-    if(startButton.clicked()){screenManager.setCurrentScreen(ScreenType.GAMESCREEN);}
+    if(startButton.clicked()){
+      screenManager.setCurrentScreen(ScreenType.DIFFICULTYSCREEN);
+    }
     if(scoreButton.clicked()){
       screenManager.setCurrentScreen(ScreenType.SCORESCREEN);
     }
