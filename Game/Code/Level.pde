@@ -53,13 +53,13 @@ class Level{
       if(budget >= 50){
         budget = budget - 50;
         return true;
-    }   
+      }
+    }
     if(material == Resource.WOOD){
       if(budget >= 100){
         budget = budget - 100;
         return true;
       }
-    }
     }
     if(material == Resource.STONE){
       if(budget >= 150){
