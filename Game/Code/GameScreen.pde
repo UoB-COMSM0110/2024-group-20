@@ -16,10 +16,18 @@ class GameScreen extends Screen {
   ArrayList<ImageButton> buttons;
   
   //constuctor
-  GameScreen(ScreenManager screenManager,UserScore playerScore, Level allLevels[]){
+  public GameScreen(ScreenManager screenManager,UserScore playerScore, Level allLevels[]){
     this.screenManager = screenManager;
     this.playerScore = playerScore;
     this.allLevels = allLevels;
+    
+    //Adding boundaries to game screen
+    
+    //Needs to add an image so the ground is drawn
+    w.addBody(new Ground(new PVector(width/2 ,height - 100), 1, 1, width, 200, 0)); // Ground  
+    w.addBody(new Ground(new PVector(0 - 10, height/2 - 200), 1, 1, 20, height - 10, 0)); // Left
+    w.addBody(new Ground(new PVector(width + 10 , height/2 - 200), 1, 1, 20, height - 10, 0)); // Right
+    
     bgImage = loadImage("../Images/map.png");
     emptyButtonImage = loadImage("../Images/emptyButton.png");
   
@@ -41,16 +49,18 @@ class GameScreen extends Screen {
     readyImage = loadImage("../Images/readyButton.png");
     readyButton = new ImageButton(readyImage, width/2-width/10,height/9,width/5,height/10);
     buttons.add(readyButton);
-    
     tutorial = new Tutorial();  
   }
 
   //load all the image
   void display(){
-
-    w.collideBodies();
+// In display we will need to somehow initialise levels.
     // setting background
     image(bgImage, 0, 0, width, height);
+    
+    w.collideBodies();
+    w.display();
+
     // Player being able to enter his name
     if(playerScore.isNameUpdated() == false){
        playerScore.enterPlayerName();
