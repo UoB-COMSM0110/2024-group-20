@@ -1,3 +1,7 @@
+public enum Difficulty {
+  NOTSET, EASY, HARD
+}
+
 public class UserScore{
   
   String playerName;
@@ -7,6 +11,7 @@ public class UserScore{
   int playerScore;
   boolean scoreUpdated;
   boolean nameUpdated;
+  Difficulty difficulty;
 
   
   UserScore(){
@@ -15,6 +20,8 @@ public class UserScore{
     noLetters = 0;
     indx = 0;
     scoreUpdated = false;
+    nameUpdated = false;
+    difficulty = Difficulty.NOTSET;
   }
   
   public boolean isNameUpdated(){
@@ -33,6 +40,21 @@ public class UserScore{
   public int getNoLetters(){
     return noLetters;  
   }
+  
+  public Difficulty getDifficulty(){
+    return difficulty;
+  }
+  
+  ////SETTING GAME DIFFICULTY/////////////////////////////////////////////////////////////////////////
+  public void setDifficulty(Difficulty chosen){
+    if(chosen == Difficulty.EASY){
+      this.difficulty = Difficulty.EASY;
+    }
+    if(chosen == Difficulty.HARD){
+      this.difficulty = Difficulty.HARD;
+    }
+  }
+  
   
   ////NAME ENTERING/////////////////////////////////////////////////////////////////////////
   
@@ -104,6 +126,8 @@ public class UserScore{
     indx = 0;
     playerScore = 0;
     scoreUpdated = false;
+    nameUpdated = false;
+    difficulty = Difficulty.NOTSET;
   }
   
   // Updating name to the final name that player chose
