@@ -70,106 +70,13 @@ public class Rectangle extends RigidBody {
   }
   
 
+//  Intersects circle  ///////////////////////////////////////////////////////////////////////////////////////////////
   public boolean intersect(Circle other) {
-    PVector circlePosition = other.getPosition();
-    float circleRadius = other.getRadius();
-    // Rectangle
-    PVector rectPosition = this.getPosition();
-    float rectWidth = this.getWidth();
-    float rectHeight = this.getHeight();
-    // Others
-    boolean isSideContact = false;
-    
-    // Getting 4 verticeses from the rectangle
-    PVector[] vertices = new PVector[4];
-    for(int i=0; i<4; i++) {
-      vertices[i] = this.getVertex(i);
-    }
-    
-    PVector normalVector;
-    float rectMin, rectMax, circleMin, circleCentre, circleMax;
-    
-    // For the vertical axis of rectangle (Vertex 1 and vertices 2)
-    normalVector = PVector.sub(vertices[2],vertices[1]).normalize();
-    
-    // PROJECTION ON Axis
-    rectMin = PVector.dot(normalVector, rectPosition)-rectHeight/2;
-    rectMax = rectMin+rectHeight;
-    circleCentre = PVector.dot(normalVector,circlePosition);
-    circleMin = circleCentre-circleRadius;
-    circleMax = circleMin+circleRadius*2;
-    
-    if(rectMin>circleMax || circleMin>rectMax) {
-      return false;
-    }
-    if(circleCentre > rectMin && circleCentre < rectMax){
-      isSideContact = true;
-    }
-    
-    // Getting values for collision resolution
-    float overlap = min(circleMax - rectMin, rectMax - circleMin);
-    PVector forceDirection = normalVector.copy();
-    
-    // For the vertical axis of rectangle (Vertex 0 and vertices 1)
-    normalVector = PVector.sub(vertices[1],vertices[0]).normalize();
-    
-    rectMin = PVector.dot(normalVector,rectPosition)-rectWidth/2;
-    rectMax = rectMin+rectWidth;
-    circleCentre = PVector.dot(normalVector,circlePosition);
-    circleMin = circleCentre-circleRadius;
-    circleMax = circleMin+circleRadius*2;
-    
-    if(rectMin>circleMax || circleMin>rectMax) {
-      return false;
-    }
-    if(circleCentre > rectMin && circleCentre < rectMax){
-      isSideContact = true;
-    }
-    
-    // Getting values for collision resolution
-    float overlapTemp = min(circleMax - rectMin, rectMax - circleMin);  
-    if( overlapTemp < overlap){
-      overlap = overlapTemp;
-      forceDirection = normalVector.copy();
-    }
-    
-    if(isSideContact){
-      // Making sure the force vector is pointing in the good direction
-    
-      PVector desiredDirection = PVector.sub(rectPosition, circlePosition);
-      if(PVector.dot(desiredDirection, forceDirection) < 0){
-        forceDirection.mult(-1);
-      }
-      
-      // Reaction to overlap
-      circlePosition.sub(PVector.mult(forceDirection,overlap/2));
-      rectPosition.add(PVector.mult(forceDirection,overlap/2));
-    }
-    else{
-      // Finding the point of contact
-      float minCircleVertexDist = Float.MAX_VALUE;
-      float minCircleVertexDistTemp;
-      for(int i=0; i<4; i++){
-        minCircleVertexDistTemp = PVector.dist(vertices[i], circlePosition);
-        if(minCircleVertexDistTemp < minCircleVertexDist){
-          minCircleVertexDist = minCircleVertexDistTemp;
-          forceDirection = PVector.sub(vertices[i], circlePosition).normalize();
-        }
-      }
-      
-      if(minCircleVertexDist > circleRadius){
-        return false;
-      }
-      
-      overlap = circleRadius - minCircleVertexDist;
-      circlePosition.sub(PVector.mult(forceDirection,overlap/2));
-      rectPosition.add(PVector.mult(forceDirection,overlap/2));
-    }
-    
-    return true;
+    return other.intersect(this);
   }
 
 
+//  Intersects rectangle  ///////////////////////////////////////////////////////////////////////////////////////////////
   public boolean intersect(Rectangle other) {
     // Rectangle A
     PVector[] verticesA = new PVector[4];
