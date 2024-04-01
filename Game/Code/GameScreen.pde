@@ -14,7 +14,8 @@ class GameScreen extends Screen {
   
   int clock = 0;
   int birdCount = 0;
-
+  boolean pflag = false;
+  
   PImage bgImage,menuImage,emptyButtonImage,readyImage;
   ImageButton menuButton, woodButton, glassButton,stoneButton,readyButton;
   ArrayList<ImageButton> buttons;
@@ -66,8 +67,11 @@ class GameScreen extends Screen {
        playerScore.enterPlayerName();
      }else{
       // Physics engine start
+      if (pflag){
       w.step(1/frameRate);
+      }
       w.collideBodies();
+      
       w.display();
       
       if(allLevels[currentLevel].getStage() == 0){
@@ -132,7 +136,7 @@ class GameScreen extends Screen {
   void mousePressed(){
     //check tutorial
     tutorial.mousePressed();
-
+    if(!pflag){
     //drag materials
     for (Material material : materials) {
       if (material.isMouseOver(mouseX, mouseY)) {
@@ -147,16 +151,6 @@ class GameScreen extends Screen {
       //print(material.getIsSelected() + " test\n");
     }
 
-    if(menuButton.clicked()){
-      screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
-      playerScore.deletePlayer();
-      cleanLevel();
-      currentLevel = 0;
-    }
-    //if ready
-    if(readyButton.clicked()){
-      allLevels[currentLevel].stageStructuresReady();
-    }
     //add wood
      PVector newPosition = new PVector(random(0,width/3), random(2*height/3,height));
     if(woodButton.clicked()){
@@ -181,6 +175,20 @@ class GameScreen extends Screen {
         materials.add(newStone);
         w.addBody(newStone);
       }
+    }
+    }
+      //if ready
+    if(readyButton.clicked()){
+      //allLevels[currentLevel].stageStructuresReady();
+      pflag=true;
+    }
+    
+    if(menuButton.clicked()){
+      screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
+      playerScore.deletePlayer();
+      cleanLevel();
+      currentLevel = 0;
+      pflag=false;
     }
   }
 
