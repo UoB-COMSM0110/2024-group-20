@@ -3,7 +3,6 @@ public enum Resource {
 }
 
 class Level{
-  
   private boolean levelFailed;
   private int levelStage; // 0 - not set, 1 - set and building, 2 - structures build, birds attack
   private Difficulty difficulty;
@@ -14,15 +13,8 @@ class Level{
   
   private int noBirds;
   private Bird birdsOnLevel[];
-    
-  public int getBudget(){
-    return budget;
-  }
   
-  public boolean isLevelFailed(){
-    return levelFailed;
-  }
-  
+/////////////////////////////////////////////////////////////////////////////////////////////////
   public Level(int budget, int noPigs, int noBirdsRed, int noBirdsBlue, int noBirdsBlack, Difficulty difficulty){
     this.levelFailed = false;
     this.levelStage = 0;
@@ -46,6 +38,18 @@ class Level{
     for(int i = noBirdsRed + noBirdsBlue; i < this.noBirds; i++){
       birdsOnLevel[i] = new BirdBlack(new PVector(2 * width/5 + (10 * i), 4 * height/5));
     }
+  }
+  
+  public int getBudget(){
+    return budget;
+  }
+  
+  public int getNoBirds(){
+   return noBirds; 
+  }
+  
+  public boolean isLevelFailed(){
+    return levelFailed;
   }
   
   public int getStage(){
@@ -102,14 +106,6 @@ class Level{
        }
     }
     return alivePigs;
-  }
-
-  public void printAllBirds(){
-    if(levelStage == 2){
-      for(int i = 0; i < noBirds; i++){
-        birdsOnLevel[i].display();  
-      }
-    }
   }
   
 }

@@ -11,6 +11,9 @@ class GameScreen extends Screen {
 
   int firstLevel = 0;
   int currentLevel = 0;
+  
+  int clock = 0;
+  int birdCount = 0;
 
   PImage bgImage,menuImage,emptyButtonImage,readyImage;
   ImageButton menuButton, woodButton, glassButton,stoneButton,readyButton;
@@ -69,6 +72,7 @@ class GameScreen extends Screen {
       
       if(allLevels[currentLevel].getStage() == 0){
         allLevels[currentLevel].stagePigsOnLevel(w, animals);
+        //Add birds to new Array(not to w);
       }
       
       if(allLevels[currentLevel].getStage() == 1){
@@ -77,7 +81,30 @@ class GameScreen extends Screen {
       }
       
       if(allLevels[currentLevel].getStage() == 2){
-        // Birds attacking random???
+        //If not all the birds were realised
+        if(birdCount < allLevels[currentLevel].getNoBirds()){
+          if (clock == 0){ 
+            //-> realise a bird
+            birdCount++;
+          }
+          else if(clock == 20000){
+            clock = 0;
+          }
+          else{
+            clock++; 
+          }
+        }
+        if (birdCount == allLevels[currentLevel].getNoBirds()){
+          if(currentLevel < 2){
+            //Calculating points function!!!
+            currentLevel++;
+            cleanLevel();
+          }else{
+            cleanLevel();
+            currentLevel = 0;
+            screenManager.setCurrentScreen(ScreenType.WINSCREEN); 
+          }
+        }
       }
       
       for (ImageButton button : buttons) {
@@ -87,9 +114,7 @@ class GameScreen extends Screen {
       for (Material material : materials) {
         material.draw(g); 
       }
-      
-      allLevels[currentLevel].printAllBirds();
-      
+            
       textDisplay();
 
     }
