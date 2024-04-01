@@ -5,7 +5,7 @@ public enum Resource {
 class Level{
   
   private boolean levelFailed;
-  private boolean structureBuild;
+  private int levelStage; // 0 - not set, 1 - set and building, 2 - structures build, birds attack
   private Difficulty difficulty;
   private int budget;
   
@@ -25,7 +25,7 @@ class Level{
   
   public Level(int budget, int noPigs, int noBirdsRed, int noBirdsBlue, int noBirdsBlack, Difficulty difficulty){
     this.levelFailed = false;
-    this.structureBuild = false;
+    this.levelStage = 0;
     this.difficulty = difficulty;
     
     this.budget = budget;
@@ -48,6 +48,24 @@ class Level{
     }
   }
   
+  public int getStage(){
+   return levelStage; 
+  }
+  
+  // Adding all Pigs to the level
+  public void stagePigsOnLevel(World w, ArrayList<Circle> animals){
+    for(Pig currentPig:pigsOnLevel){
+      w.addBody(currentPig);
+      animals.add(currentPig);
+    }
+    levelStage = 1;
+  }
+  
+  public void stageStructuresReady(){
+    levelStage = 2; 
+  }
+  
+  
   public boolean buyResource(Resource material){
     if(material == Resource.GLASS){
       if(budget >= 50){
@@ -69,10 +87,6 @@ class Level{
     }
     return false;
   }
-  
-  public void readyWithStructure(){
-    structureBuild = true;
-  }
 
   public void printLevelBudget(){
      fill(0, 0, 0);
@@ -89,15 +103,9 @@ class Level{
     }
     return alivePigs;
   }
-  
-  public void printAllPigs(){
-    for(int i = 0; i < noPigs; i++){
-      pigsOnLevel[i].display();  
-    }
-  }
 
   public void printAllBirds(){
-    if(structureBuild){
+    if(levelStage == 2){
       for(int i = 0; i < noBirds; i++){
         birdsOnLevel[i].display();  
       }

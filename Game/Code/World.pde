@@ -8,8 +8,16 @@ public class World {
     this.gravity = new PVector(0, 120);
   }
   
+  public int size(){
+    return bodyList.size();
+  }
+  
   public void addBody(RigidBody body) {
     this.bodyList.add(body);
+  }
+  
+  public void removeBodyIndx(int indx) {
+    this.bodyList.remove(indx);
   }
   
   public void removeBody(RigidBody body) {

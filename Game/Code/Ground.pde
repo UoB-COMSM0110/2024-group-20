@@ -6,7 +6,7 @@ public class Ground extends Rectangle{
   }
   
   public void display(){
-    fill(200, 200, 0);
+    fill(88, 57, 39);
     rect(position.x, position.y, rectWidth, rectHeight);
   }
 }

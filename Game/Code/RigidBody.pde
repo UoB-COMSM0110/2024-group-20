@@ -18,7 +18,11 @@ public abstract class RigidBody{
   protected float angularInertia;
   protected ShapeType shapeType;
   protected boolean isStatic;
+  protected boolean isSelected = false;
   
+  public boolean getIsSelected(){
+   return isSelected; 
+  }
   
   public void calculateMass() {
     mass = area * density;
@@ -53,9 +57,20 @@ public abstract class RigidBody{
     return this.linearAcceleration;
   }
   
+  public void noForces(){
+    isSelected = true; 
+  }
+  
+  public void allowForces(){
+    isSelected = false; 
+  }
+  
   public void step(float frameTime, PVector gravity, float dragCoefficient) {
     //Change velocity to the next step
-    if(!isStatic){
+    if(isSelected){
+      linearVelocity = new PVector(0 ,0); 
+    }
+    else if(!isStatic){
       linearVelocity.add(PVector.mult(linearAcceleration, frameTime)).add(PVector.mult(gravity, frameTime)).mult(dragCoefficient); 
     }
     else{

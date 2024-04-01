@@ -6,6 +6,7 @@ class GameScreen extends Screen {
   World w = new World();
   Material draggedMaterial = null;
 
+  ArrayList<Circle> animals = new ArrayList<Circle>(); // A list to keep track of all materials
   ArrayList<Material> materials = new ArrayList<Material>(); // A list to keep track of all materials
 
   int firstLevel = 0;
@@ -25,8 +26,8 @@ class GameScreen extends Screen {
     
     //Needs to add an image so the ground is drawn
     w.addBody(new Ground(new PVector(width/2 ,height - 100), 1, 1, width, 200, 0)); // Ground  
-    w.addBody(new Ground(new PVector(0 - 10, height/2 - 200), 1, 1, 20, height - 10, 0)); // Left
-    w.addBody(new Ground(new PVector(width + 10 , height/2 - 200), 1, 1, 20, height - 10, 0)); // Right
+    w.addBody(new Ground(new PVector(0 /*- 10*/, height/2 - 200), 1, 1, 20, height - 10, 0)); // Left
+    w.addBody(new Ground(new PVector(width /*+ 10*/ , height/2 - 200), 1, 1, 20, height - 10, 0)); // Right
     
     bgImage = loadImage("../Images/map.png");
     emptyButtonImage = loadImage("../Images/emptyButton.png");
@@ -54,38 +55,55 @@ class GameScreen extends Screen {
 
   //load all the image
   void display(){
-// In display we will need to somehow initialise levels.
     // setting background
     image(bgImage, 0, 0, width, height);
     
-    w.collideBodies();
-    w.display();
-
     // Player being able to enter his name
     if(playerScore.isNameUpdated() == false){
        playerScore.enterPlayerName();
      }else{
-
+      // Physics engine start
+      w.step(1/frameRate);
+      w.collideBodies();
+      w.display();
+      
+      if(allLevels[currentLevel].getStage() == 0){
+        allLevels[currentLevel].stagePigsOnLevel(w, animals);
+      }
+      
+      if(allLevels[currentLevel].getStage() == 1){
+        // Can Modify the structure 
+        //draw all the materials 
+      }
+      
+      if(allLevels[currentLevel].getStage() == 2){
+        // Birds attacking random???
+      }
+      
       for (ImageButton button : buttons) {
         button.update(); 
         button.display(); 
+      }      
+      for (Material material : materials) {
+        material.draw(g); 
       }
-      allLevels[currentLevel].printAllPigs();
+      
       allLevels[currentLevel].printAllBirds();
-      //score Display
-      playerScore.printCurrentPlayerScore();
-      //budget
-      allLevels[currentLevel].printLevelBudget();
-      textAlign(LEFT);
-      tutorial.display();
-    }
-    //draw all the materials 
-    for (Material material : materials) {
-      material.draw(g); 
+      
+      textDisplay();
+
     }
 
   }
 
+  void textDisplay(){
+    //score Display
+    playerScore.printCurrentPlayerScore();
+    //budget
+    allLevels[currentLevel].printLevelBudget();
+    textAlign(LEFT);
+    tutorial.display(); 
+  }
   void mousePressed(){
     //check tutorial
     tutorial.mousePressed();
@@ -93,18 +111,27 @@ class GameScreen extends Screen {
     //drag materials
     for (Material material : materials) {
       if (material.isMouseOver(mouseX, mouseY)) {
+        ///////////////////////////////////////
+        //material.noForces();
         draggedMaterial = material;
         break;
       }
+      
+      ////////////////////////////////////////
+      //material.allowForces();
+      //print(material.getIsSelected() + " test\n");
     }
 
     if(menuButton.clicked()){
       screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
       playerScore.deletePlayer();
-      cleanMaterials();
+      cleanLevel();
+      currentLevel = 0;
     }
     //if ready
-    if(readyButton.clicked()){allLevels[currentLevel].readyWithStructure();}
+    if(readyButton.clicked()){
+      allLevels[currentLevel].stageStructuresReady();
+    }
     //add wood
      PVector newPosition = new PVector(random(0,width/3), random(2*height/3,height));
     if(woodButton.clicked()){
@@ -143,11 +170,16 @@ class GameScreen extends Screen {
      if(currentLevel < 2){
         //Calculating points
         currentLevel++;
+        cleanLevel();
      }else{
+       cleanLevel();
+       currentLevel = 0;
        screenManager.setCurrentScreen(ScreenType.WINSCREEN); 
      }
    }
    if(key == ']'){
+       cleanLevel();
+       currentLevel = 0;
        screenManager.setCurrentScreen(ScreenType.LOOSESCREEN);
     }
 //////////////////////////////////////////////////////////////////////////
@@ -169,12 +201,16 @@ class GameScreen extends Screen {
     draggedMaterial = null;
   }
 
-//method to clean materials
- public void cleanMaterials() {
+//method to clean the level
+ public void cleanLevel() {
     for (Material material : materials){
       w.removeBody(material);
     }
     materials.clear();
- 
+    for (Circle animal : animals){
+      w.removeBody(animal);
+    }
+    animals.clear();
  }
+ 
 }
