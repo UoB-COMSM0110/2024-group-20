@@ -6,13 +6,17 @@ class GameScreen extends Screen {
   World w = new World();
   Material draggedMaterial = null;
 
-  ArrayList<Circle> animals = new ArrayList<Circle>(); // A list to keep track of all materials
-  ArrayList<Material> materials = new ArrayList<Material>(); // A list to keep track of all materials
+  ArrayList<Circle> animals = new ArrayList<>(); // A list to keep track of all materials
+  ArrayList<Material> materials = new ArrayList<>(); // A list to keep track of all materials
+  ArrayList<PVector> BirdAttackVectors = new ArrayList<>();
+  
+  int birdsIndx;
 
   int firstLevel = 0;
   int currentLevel = 0;
   
-  int clock = 0;
+  Timer timer;
+  boolean clockRestart = true;
   int birdCount = 0;
   boolean pflag = false;
   
@@ -25,39 +29,16 @@ class GameScreen extends Screen {
     this.screenManager = screenManager;
     this.playerScore = playerScore;
     this.allLevels = allLevels;
-    
-    //Adding boundaries to game screen
-    
-    //Needs to add an image so the ground is drawn
-    w.addBody(new Ground(new PVector(width/2 ,height - 100), 1, 1, width, 200, 0)); // Ground  
-    w.addBody(new Ground(new PVector(0 /*- 10*/, height/2 - 200), 1, 1, 20, height - 10, 0)); // Left
-    w.addBody(new Ground(new PVector(width /*+ 10*/ , height/2 - 200), 1, 1, 20, height - 10, 0)); // Right
-    
+    timer = new Timer(5000);
+        
     bgImage = loadImage("../Images/map.png");
     emptyButtonImage = loadImage("../Images/emptyButton.png");
   
-    buttons = new ArrayList<ImageButton>();
-    //menu
-    menuImage = loadImage("../Images/menuButton.png");
-    menuButton = new ImageButton(menuImage, width - width/5,height - height/10,width/5,height/10);
-    buttons.add(menuButton);
-    //wood
-    woodButton = new ImageButton(emptyButtonImage, 0,height/3,width/10,height/20);
-    buttons.add(woodButton);
-    //glass
-    glassButton = new ImageButton(emptyButtonImage, 0,4*height/9,width/10,height/20);
-    buttons.add(glassButton);
-    //stone
-    stoneButton = new ImageButton(emptyButtonImage, 0,5*height/9,width/10,height/20);
-    buttons.add(stoneButton);
-    //ready
-    readyImage = loadImage("../Images/readyButton.png");
-    readyButton = new ImageButton(readyImage, width/2-width/10,height/9,width/5,height/10);
-    buttons.add(readyButton);
+    setBoundariesAndForces();
+    setButtons();
     tutorial = new Tutorial();  
   }
 
-  //load all the image
   void display(){
     // setting background
     image(bgImage, 0, 0, width, height);
@@ -71,34 +52,32 @@ class GameScreen extends Screen {
       w.step(1/frameRate);
       }
       w.collideBodies();
-      
       w.display();
       
       if(allLevels[currentLevel].getStage() == 0){
         allLevels[currentLevel].stagePigsOnLevel(w, animals);
-        //Add birds to new Array(not to w);
+        birdsIndx = animals.size();
+        allLevels[currentLevel].stageBirdsOnLevel(animals);
       }
-      
       if(allLevels[currentLevel].getStage() == 1){
         // Can Modify the structure 
         //draw all the materials 
-      }
-      
+      }     
       if(allLevels[currentLevel].getStage() == 2){
         //If not all the birds were realised
-        if(birdCount < allLevels[currentLevel].getNoBirds()){
-          if (clock == 0){ 
-            //-> realise a bird
-            birdCount++;
+        if(birdsIndx < animals.size()){
+          if (clockRestart){ 
+            timer.startTimer();
+            releaseBird();
+            clockRestart = false;
+            birdsIndx ++;
           }
-          else if(clock == 20000){
-            clock = 0;
-          }
-          else{
-            clock++; 
+          else if(timer.intervalFinished()){
+            clockRestart = true;
           }
         }
-        if (birdCount == allLevels[currentLevel].getNoBirds()){
+        // If we released all the birds
+        else if (timer.intervalFinished()){
           if(currentLevel < 2){
             //Calculating points function!!!
             currentLevel++;
@@ -124,6 +103,19 @@ class GameScreen extends Screen {
     }
 
   }
+    
+  private void releaseBird(){
+    //Choosing a force direction and initial position from list of possibilities
+    int indx = (int) random(BirdAttackVectors.size()); 
+    PVector chosenDirection = BirdAttackVectors.get(indx);
+    float forceMag = random(250000, 300000);
+    PVector force = PVector.mult(new PVector(chosenDirection.x, chosenDirection.y), forceMag);
+    RigidBody bird = animals.get(birdsIndx);
+    bird.setPosition(new PVector(chosenDirection.z, 0)); 
+    w.addBody(bird);
+    print(force);
+    w.getBody(w.getListSize() - 1).applyForce(force);
+  }
 
   void textDisplay(){
     //score Display
@@ -133,6 +125,7 @@ class GameScreen extends Screen {
     textAlign(LEFT);
     tutorial.display(); 
   }
+  
   void mousePressed(){
     //check tutorial
     tutorial.mousePressed();
@@ -140,15 +133,9 @@ class GameScreen extends Screen {
     //drag materials
     for (Material material : materials) {
       if (material.isMouseOver(mouseX, mouseY)) {
-        ///////////////////////////////////////
-        //material.noForces();
         draggedMaterial = material;
         break;
       }
-      
-      ////////////////////////////////////////
-      //material.allowForces();
-      //print(material.getIsSelected() + " test\n");
     }
 
     //add wood
@@ -160,7 +147,7 @@ class GameScreen extends Screen {
         w.addBody(newWood);
       }
     }
-    //glass
+    //add glass
     if(glassButton.clicked()){
       if(allLevels[currentLevel].buyResource(Resource.GLASS)){
         Glass newGlass = new Glass(newPosition, 0.5, 0.3, false, 50, 200,0);
@@ -168,7 +155,7 @@ class GameScreen extends Screen {
         w.addBody(newGlass);
       }
     }
-    //stone
+    //add stone
     if(stoneButton.clicked()){
       if(allLevels[currentLevel].buyResource(Resource.STONE)){
         Stone newStone = new Stone(newPosition, 0.5, 0.3, false, 50, 200,0);
@@ -177,9 +164,8 @@ class GameScreen extends Screen {
       }
     }
     }
-      //if ready
     if(readyButton.clicked()){
-      //allLevels[currentLevel].stageStructuresReady();
+      allLevels[currentLevel].stageStructuresReady();
       pflag=true;
     }
     
@@ -244,6 +230,38 @@ class GameScreen extends Screen {
       w.removeBody(animal);
     }
     animals.clear();
- }
- 
+  }
+  
+    public void setBoundariesAndForces(){
+    //Adding boundaries to game screen
+    w.addBody(new Ground(new PVector(width/2 ,height - 100), 1, 1, width, 200, 0)); // Ground  
+    w.addBody(new Ground(new PVector(0 /*- 10*/, height/2 - 200), 1, 1, 20, height - 10, 0)); // Left
+    w.addBody(new Ground(new PVector(width /*+ 10*/ , height/2 - 200), 1, 1, 20, height - 10, 0)); // Right
+    
+    //Bird Attack Vectors (xCoorForce, yCoorForce, xPositionOfBird)
+    BirdAttackVectors.add(new PVector(90, 90, width/6));
+    BirdAttackVectors.add(new PVector(0, 180, width/2));
+    BirdAttackVectors.add(new PVector(-90, 270, 5 * width/6));
+  }
+  
+  public void setButtons(){
+    buttons = new ArrayList<ImageButton>();
+    //menu
+    menuImage = loadImage("../Images/menuButton.png");
+    menuButton = new ImageButton(menuImage, width - width/5,height - height/10,width/5,height/10);
+    buttons.add(menuButton);
+    //wood
+    woodButton = new ImageButton(emptyButtonImage, 0,height/3,width/10,height/20);
+    buttons.add(woodButton);
+    //glass
+    glassButton = new ImageButton(emptyButtonImage, 0,4*height/9,width/10,height/20);
+    buttons.add(glassButton);
+    //stone
+    stoneButton = new ImageButton(emptyButtonImage, 0,5*height/9,width/10,height/20);
+    buttons.add(stoneButton);
+    //ready
+    readyImage = loadImage("../Images/readyButton.png");
+    readyButton = new ImageButton(readyImage, width/2-width/10,height/9,width/5,height/10);
+    buttons.add(readyButton);
+  }
 }

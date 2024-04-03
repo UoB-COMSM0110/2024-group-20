@@ -34,7 +34,6 @@ class DifficultyScreen extends Screen {
         button.update(); 
         button.display(); 
     }
-  
   }
   
   void mousePressed(){

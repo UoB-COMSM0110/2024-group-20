@@ -12,7 +12,6 @@ public class Bird extends Circle{
     this.birdType = birdType;
   }
   
-  public void display(){
+  public void display(){}
   
-  }
 }

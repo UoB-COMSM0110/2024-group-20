@@ -65,6 +65,12 @@ class Level{
     levelStage = 1;
   }
   
+  public void stageBirdsOnLevel(ArrayList<Circle> animals){
+    for(Bird currentBird:birdsOnLevel){
+      animals.add(currentBird);
+    } 
+  }
+  
   public void stageStructuresReady(){
     levelStage = 2; 
   }
