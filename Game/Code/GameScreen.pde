@@ -5,9 +5,9 @@ class GameScreen extends Screen {
   Tutorial tutorial;
   World w = new World();
   Material draggedMaterial = null;
-
-  ArrayList<Circle> animals = new ArrayList<>(); // A list to keep track of all materials
-  ArrayList<Material> materials = new ArrayList<>(); // A list to keep track of all materials
+    
+  ArrayList<Circle> animals =  new ArrayList<>(); // A list to keep track of all materials
+  ArrayList<Material> materials =  new ArrayList<>(); // A list to keep track of all materials
   ArrayList<PVector> BirdAttackVectors = new ArrayList<>();
   
   int birdsIndx;
@@ -108,7 +108,7 @@ class GameScreen extends Screen {
     //Choosing a force direction and initial position from list of possibilities
     int indx = (int) random(BirdAttackVectors.size()); 
     PVector chosenDirection = BirdAttackVectors.get(indx);
-    float forceMag = random(250000, 300000);
+    float forceMag = 250000/*random(250000, 290000)*/;
     PVector force = PVector.mult(new PVector(chosenDirection.x, chosenDirection.y), forceMag);
     RigidBody bird = animals.get(birdsIndx);
     bird.setPosition(new PVector(chosenDirection.z, 0)); 

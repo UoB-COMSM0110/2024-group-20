@@ -51,14 +51,14 @@ class DifficultyScreen extends Screen {
   void mouseDragged(){}
   
   private void setEasyLevels(){
-    allLevels[0] = new Level(200, 1, 3, 0, 0, Difficulty.EASY);
-    allLevels[1] = new Level(150, 2, 3, 3, 0, Difficulty.EASY);
-    allLevels[2] = new Level(100, 3, 3, 3, 3, Difficulty.EASY);
+    allLevels[0] = new Level(200, 1, 3, 0, 0, Difficulty.EASY, 0);
+    allLevels[1] = new Level(150, 2, 3, 3, 0, Difficulty.EASY, 1);
+    allLevels[2] = new Level(100, 3, 3, 3, 3, Difficulty.EASY, 2);
   }
 
   private void setHardLevels(){
-    allLevels[0] = new Level(200, 1, 3, 3, 0, Difficulty.HARD);
-    allLevels[1] = new Level(150, 2, 3, 3, 3, Difficulty.HARD);
-    allLevels[2] = new Level(100, 3, 0, 6, 6, Difficulty.HARD);
+    allLevels[0] = new Level(200, 1, 3, 3, 0, Difficulty.HARD, 0);
+    allLevels[1] = new Level(150, 2, 3, 3, 3, Difficulty.HARD, 1);
+    allLevels[2] = new Level(100, 3, 0, 6, 6, Difficulty.HARD, 2);
   }
 }
