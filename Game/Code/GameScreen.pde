@@ -139,7 +139,7 @@ class GameScreen extends Screen {
     }
 
     //add wood
-     PVector newPosition = new PVector(random(0,width/3), random(2*height/3,height));
+     PVector newPosition = new PVector(random(0,width/3), random(height/3,2*height/3));
     if(woodButton.clicked()){
       if(allLevels[currentLevel].buyResource(Resource.WOOD)){
         Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 50, 200,0);
@@ -230,6 +230,7 @@ class GameScreen extends Screen {
       w.removeBody(animal);
     }
     animals.clear();
+    pflag = false;
   }
   
     public void setBoundariesAndForces(){
