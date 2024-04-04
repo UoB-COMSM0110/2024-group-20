@@ -164,10 +164,9 @@ public class Circle extends RigidBody {
       PVector tangentDirection = forceDirection.copy().rotate(HALF_PI);
       
       // velocities at contact point
-      float momentLength = PVector.dot(relativePosition, tangentDirection);
-      float absMomentLength = abs(momentLength);
-      PVector rectRelativeMomentPosition = PVector.add(rectPosition, PVector.mult(tangentDirection, momentLength));
-      PVector rectContactLinAngVelocity = new PVector(-rectAngVelocity * rectRelativeMomentPosition.y, rectAngVelocity * rectRelativeMomentPosition.x);
+      PVector contactPosition = PVector.add(circlePosition, PVector.mult(forceDirection, circleRadius));
+      PVector rectRelativeContactPosition = PVector.sub(contactPosition, rectPosition);
+      PVector rectContactLinAngVelocity = new PVector(-rectAngVelocity * rectRelativeContactPosition.y, rectAngVelocity * rectRelativeContactPosition.x);
       PVector rectContactLinVelocity = PVector.add(rectLinVelocity, rectContactLinAngVelocity);
       
       PVector diffLinVelocity = PVector.sub(rectContactLinVelocity, circleLinVelocity);
@@ -175,9 +174,11 @@ public class Circle extends RigidBody {
     
       // If two circles are away from each other, do not proceed
       if (normDiffLinVelocity >= 0) {
-        return false;
+        return true;
       }
       
+      float momentLength = PVector.dot(relativePosition, tangentDirection);
+      float absMomentLength = abs(momentLength);
       float rectLinAngMass = rectAngInertia / absMomentLength / absMomentLength;
       
       // Calculate the value of impulse
@@ -203,7 +204,6 @@ public class Circle extends RigidBody {
       print(forceDirection + "\n");
       print(tangentDirection + "\n");
       print(momentLength + "\n");
-      print((forceDirection.heading()+HALF_PI)/PI*180);
       
     }
     else{
