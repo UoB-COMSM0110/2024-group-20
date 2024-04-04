@@ -8,8 +8,8 @@ public abstract class RigidBody{
   protected PVector linearVelocity = new PVector(0,0);
   protected PVector linearAcceleration = new PVector(0,0);
   protected float rotation;
-  protected float rotationVelocity;
-  protected float rotationAcceleration;
+  protected float angularVelocity;
+  protected float angularAcceleration;
   
   protected float density;
   protected float mass;
@@ -26,12 +26,20 @@ public abstract class RigidBody{
   protected abstract void calculateArea();
   protected abstract void calculateAngularInertia();
   
+  public float getMass() {
+    return mass;
+  }
+  
   public PVector getPosition() {
     return position;
   }
   
   public void setPosition(PVector position) {
     this.position = position;
+  }
+  
+  public float getRestitution() {
+    return restitution;
   }
   
   public PVector getLinearVelocity(){
@@ -46,12 +54,24 @@ public abstract class RigidBody{
     return this.linearAcceleration;
   }
   
+  public float getAngularVelocity(){
+    return angularVelocity;
+  }
+  
+  public void setAngularVelocity(float angularVelocity){
+    this.angularVelocity = angularVelocity;
+  }
+  
+  public float getAngularInertia() {
+    return angularInertia;
+  }
+  
   public void step(float frameTime, PVector gravity, float dragCoefficient) {
     position.add(PVector.mult(linearVelocity, frameTime)).add(PVector.mult(linearAcceleration, frameTime*frameTime*0.5));
     linearVelocity.add(PVector.mult(linearAcceleration, frameTime)).add(PVector.mult(gravity, frameTime)).mult(dragCoefficient);
     
-    rotation += rotationVelocity * frameTime + 0.5 * rotationAcceleration * frameTime * frameTime;
-    rotationVelocity += rotationAcceleration * frameTime;
+    rotation += angularVelocity * frameTime + 0.5 * angularAcceleration * frameTime * frameTime;
+    angularVelocity +=  angularAcceleration * frameTime;
   }
   
   public abstract void display();

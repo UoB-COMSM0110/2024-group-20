@@ -6,13 +6,13 @@ void setup (){
   w = new World();
   keysPressed = new ArrayList();
   w.addBody(new Circle(new PVector(width/4,height/3), 1, 1, false, 50, 0));
-  w.addBody(new Circle(new PVector(width/4*2,height/3), 2, 0, false, 50, 0));
+  w.addBody(new Circle(new PVector(width/4*2,height/3), 1, 0, false, 50, 0));
   w.addBody(new Circle(new PVector(width/4*3,height/3), 1, 1, false, 50, 2.5));
-  w.addBody(new Rectangle(new PVector(width/5*1,height/3*2), 1, 1, false, 50, 100, PI/8*0));
-  w.addBody(new Rectangle(new PVector(width/5*2,height/3*2), 1, 1, false, 50, 100, PI/8*1));
-  w.addBody(new Rectangle(new PVector(width/5*3,height/3*2), 1, 1, false, 50, 100, PI/8*3));
-  w.addBody(new Rectangle(new PVector(width/5*4,height/3*2), 1, 1, false, 50, 100, PI/8*5));
-  //w.addBody(new Rectangle(new PVector(0,height/2), Float.MAX_VALUE/100000, 1, true, 2, height, 0));
+  w.addBody(new Rectangle(new PVector(width/5*1,height/3*2), 1, 1, false, 50, 200, PI/8*0));
+  w.addBody(new Rectangle(new PVector(width/5*2,height/3*2), 1, 1, false, 50, 200, PI/8*1));
+  w.addBody(new Rectangle(new PVector(width/5*3,height/3*2), 1, 1, false, 50, 200, PI/8*3));
+  w.addBody(new Rectangle(new PVector(width/5*4,height/3*2), 1, 1, false, 50, 200, PI/8*5));
+  w.addBody(new Rectangle(new PVector(0,height/2), 100000000, 1, true, 2, height, 0));
 
   fullScreen();  
   rectMode(CENTER);
