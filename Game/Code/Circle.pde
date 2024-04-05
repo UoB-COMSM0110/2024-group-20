@@ -41,6 +41,7 @@ public class Circle extends RigidBody {
     float circle1Restitution = this.getRestitution();
     PVector circle1Position =  this.getPosition();
     PVector circle1LinVelocity =  this.getLinearVelocity();
+    
     float circle2Radius = other.getRadius();
     float circle2Mass = other.getMass();
     float circle2Restitution = other.getRestitution();
@@ -76,9 +77,20 @@ public class Circle extends RigidBody {
     this.setLinearVelocity(circle1NewLinVelocity);
     other.setLinearVelocity(circle2NewLinVelocity);
     
-    PVector pushedPosition = PVector.mult(forceDirection,overlap/2);
-    circle1Position.sub(pushedPosition);
-    circle2Position.add(pushedPosition);
+    PVector pushedPosition;
+    if(this.isStatic()) {
+      pushedPosition = PVector.mult(forceDirection,overlap);
+      other.getPosition().add(pushedPosition);
+    }
+    else if(other.isStatic()) {
+      pushedPosition = PVector.mult(forceDirection,overlap);
+      this.getPosition().sub(pushedPosition);
+    }
+    else {
+      pushedPosition = PVector.mult(forceDirection,overlap/2);
+      this.getPosition().sub(pushedPosition);
+      other.getPosition().add(pushedPosition);
+    }
     return true;
   }
 
@@ -86,19 +98,11 @@ public class Circle extends RigidBody {
 //  Intersects rectangle  ///////////////////////////////////////////////////////////////////////////////////////////////
   public boolean intersect(Rectangle other) {
     float circleRadius = this.getRadius();
-    float circleMass = this.getMass();
-    float circleRestitution = this.getRestitution();
     PVector circlePosition = this.getPosition();
-    PVector circleLinVelocity = this.getLinearVelocity();
     // Rectangle
     float rectWidth = other.getWidth();
     float rectHeight = other.getHeight();
-    float rectMass = other.getMass();
-    float rectAngInertia = other.getAngularInertia();
-    float rectRestitution = other.getRestitution();
     PVector rectPosition = other.getPosition();
-    PVector rectLinVelocity = other.getLinearVelocity();
-    float rectAngVelocity = other.getAngularVelocity();
     // Others
     boolean isSideContact = false;
     
@@ -110,9 +114,11 @@ public class Circle extends RigidBody {
     
     PVector normalVector;
     float rectMin, rectMax, circleMin, circleCentre, circleMax;
+    PVector forceDirection;
+    float positiveOverlap, negativeOverlap, overlap;
     
     // For the vertical axis of rectangle (using Vertex 1 and vertices 2)
-    normalVector = PVector.sub(vertices[2],vertices[1]).normalize();
+    normalVector = PVector.sub(vertices[1],vertices[2]).normalize();
     
     // PROJECTION ON Axis
     rectMin = PVector.dot(normalVector, rectPosition)-rectHeight/2;
@@ -129,8 +135,16 @@ public class Circle extends RigidBody {
     }
     
     // Getting values for collision resolution
-    float overlap = min(circleMax - rectMin, rectMax - circleMin);
-    PVector forceDirection = normalVector.copy();
+    positiveOverlap = rectMax - circleMin;
+    negativeOverlap = circleMax - rectMin;
+    if(positiveOverlap < negativeOverlap) {
+      overlap = positiveOverlap;
+      forceDirection = normalVector.copy().mult(-1);
+    }
+    else {
+      overlap = negativeOverlap;
+      forceDirection = normalVector.copy();
+    }
     
     // For the vertical axis of rectangle (using Vertex 0 and vertices 1)
     normalVector = PVector.sub(vertices[1],vertices[0]).normalize();
@@ -149,72 +163,27 @@ public class Circle extends RigidBody {
     }
     
     // Getting values for collision resolution
-    float overlapTemp = min(circleMax - rectMin, rectMax - circleMin);  
-    if( overlapTemp < overlap){
-      overlap = overlapTemp;
+    positiveOverlap = rectMax - circleMin;
+    negativeOverlap = circleMax - rectMin;
+    if(positiveOverlap < negativeOverlap && positiveOverlap < overlap) {
+      overlap = positiveOverlap;
+      forceDirection = normalVector.copy().mult(-1);
+    }
+    else if(negativeOverlap < overlap) {
+      overlap = negativeOverlap;
       forceDirection = normalVector.copy();
     }
     
-    if(isSideContact){
-      // Making sure the force vector is pointing in the good direction
-      PVector relativePosition = PVector.sub(rectPosition, circlePosition);
-      if(PVector.dot(relativePosition, forceDirection) < 0) {
-        forceDirection.mult(-1);
-      }
-      PVector tangentDirection = forceDirection.copy().rotate(HALF_PI);
-      
-      // velocities at contact point
-      PVector contactPosition = PVector.add(circlePosition, PVector.mult(forceDirection, circleRadius));
-      PVector rectRelativeContactPosition = PVector.sub(contactPosition, rectPosition);
-      PVector rectContactLinAngVelocity = new PVector(-rectAngVelocity * rectRelativeContactPosition.y, rectAngVelocity * rectRelativeContactPosition.x);
-      PVector rectContactLinVelocity = PVector.add(rectLinVelocity, rectContactLinAngVelocity);
-      
-      PVector diffLinVelocity = PVector.sub(rectContactLinVelocity, circleLinVelocity);
-      float normDiffLinVelocity = PVector.dot(diffLinVelocity, forceDirection);
-    
-      // If two circles are away from each other, do not proceed
-      if (normDiffLinVelocity >= 0) {
-        return true;
-      }
-      
-      float momentLength = PVector.dot(relativePosition, tangentDirection);
-      float absMomentLength = abs(momentLength);
-      float rectLinAngMass = rectAngInertia / absMomentLength / absMomentLength;
-      
-      // Calculate the value of impulse
-      float cor = circleRestitution * rectRestitution;
-      float impulse = -(1 + cor) * normDiffLinVelocity / (1 / circleMass + 1 / rectLinAngMass);
-      
-      // Reaction to circle and angular velocity of rectangle
-      PVector circleNewLinVelocity = PVector.sub(circleLinVelocity, PVector.mult(forceDirection, impulse / circleMass));
-      this.setLinearVelocity(circleNewLinVelocity);
-      float diffAngVelocity = impulse / rectLinAngMass / momentLength;
-      float rectNewAngVelocity = rectAngVelocity + diffAngVelocity;
-      other.setAngularVelocity(rectNewAngVelocity);
-      
-      // Reaction to linear velocity of rectangle
-      float angularImpulse = diffAngVelocity * rectAngInertia;
-      PVector rectNewLinVelocity = PVector.add(rectLinVelocity, PVector.mult(forceDirection, angularImpulse / momentLength / rectMass));
-      other.setLinearVelocity(rectNewLinVelocity);
-      
-      // Reaction to overlap
-      PVector pushedPosition = PVector.mult(forceDirection,overlap/2);
-      circlePosition.sub(pushedPosition);
-      rectPosition.add(pushedPosition);
-      print(forceDirection + "\n");
-      print(tangentDirection + "\n");
-      print(momentLength + "\n");
-      
-    }
-    else{
+    if(!isSideContact){
       // Finding the point of contact
       float minCircleVertexDist = Float.MAX_VALUE;
       float minCircleVertexDistTemp;
+      PVector closestVertex = vertices[0];
       for(int i=0; i<4; i++){
         minCircleVertexDistTemp = PVector.dist(vertices[i], circlePosition);
         if(minCircleVertexDistTemp < minCircleVertexDist){
           minCircleVertexDist = minCircleVertexDistTemp;
-          forceDirection = PVector.sub(vertices[i], circlePosition).normalize();
+          closestVertex = vertices[i];
         }
       }
       
@@ -222,11 +191,14 @@ public class Circle extends RigidBody {
         return false;
       }
       
+      forceDirection = PVector.sub(closestVertex, circlePosition).normalize();
       overlap = circleRadius - minCircleVertexDist;
-      circlePosition.sub(PVector.mult(forceDirection,overlap/2));
-      rectPosition.add(PVector.mult(forceDirection,overlap/2));
     }
     
+    PVector circleContactPosition = PVector.mult(forceDirection, circleRadius);
+    PVector rectContactPosition = PVector.add(circlePosition, PVector.mult(forceDirection, circleRadius-overlap)).sub(rectPosition);
+    
+    resolveCollision(this, other, circleContactPosition, rectContactPosition, forceDirection, overlap);
     return true;
   }
   

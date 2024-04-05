@@ -9,6 +9,10 @@ public class BirdBlack extends Bird{
 
   public void display(){
     blackBird = loadImage("../Images/birdBlack.png");
-    image(blackBird, position.x - 60, position.y - 72); 
+    pushMatrix();
+    translate(position.x,position.y);
+    rotate(rotation);
+    image(blackBird, -60, -72); 
+    popMatrix();
   }
 }

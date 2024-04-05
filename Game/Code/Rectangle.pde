@@ -64,7 +64,6 @@ public class Rectangle extends RigidBody {
     return PVector.add(position,relativePosition.rotate(rotation));
   }
   
-  
   public boolean intersect(RigidBody other) {
     return other.intersect(this);
   }
@@ -80,41 +79,63 @@ public class Rectangle extends RigidBody {
   public boolean intersect(Rectangle other) {
     // Rectangle A
     PVector[] verticesA = new PVector[4];
-    PVector rectAPosition = this.getPosition();
     float rectAWidth = this.getWidth();
     float rectAHeight = this.getHeight();
+    PVector rectAPosition = this.getPosition();
     // Rectangle B
     PVector[] verticesB = new PVector[4];
-    PVector rectBPosition = other.getPosition();
     float rectBWidth = other.getWidth();
     float rectBHeight = other.getHeight();
+    PVector rectBPosition = other.getPosition();
+    // others
+    boolean rectANormalVectorCollision = true;
     
     for(int i=0; i<4; i++) {
       verticesA[i] = this.getVertex(i);
       verticesB[i] = other.getVertex(i);
     }
     
-    PVector normalVector;
-    float rectAMin, rectAMax, rectBMin, rectBMax;
+    PVector normalVector, contactPosition, rectAContactPosition, rectBContactPosition;
+    PVector minPosition = new PVector(0,0), maxPosition = new PVector(0,0);
+    float rectAMin, rectAMax, rectBMin, rectBMax, vectorizedPosition;
     
     // Check the sides of rectangle A 
     // For the vertical axis of rectangle A (Vertex 1 and vertices 2)
-    normalVector = PVector.sub(verticesA[2],verticesA[1]).normalize();
+    normalVector = PVector.sub(verticesA[1],verticesA[2]).normalize();
     rectAMin = PVector.dot(normalVector,rectAPosition)-rectAHeight/2;
     rectAMax = rectAMin + rectAHeight;
     rectBMin = Float.MAX_VALUE;
     rectBMax = -Float.MAX_VALUE;
     for(int i=0; i<verticesB.length; i++){
-      rectBMin = min(rectBMin, PVector.dot(normalVector,verticesB[i]));
-      rectBMax = max(rectBMax, PVector.dot(normalVector,verticesB[i]));
+      vectorizedPosition = PVector.dot(normalVector,verticesB[i]);
+      if(vectorizedPosition < rectBMin) {
+        rectBMin = vectorizedPosition;
+        minPosition = verticesB[i];
+      }
+      if(vectorizedPosition > rectBMax) {
+        rectBMax = vectorizedPosition;
+        maxPosition = verticesB[i];
+      }
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
       return false;
     }
     
     // Getting values for collision resolution
-    float overlap = min(rectBMax - rectAMin, rectAMax - rectBMin);
-    PVector forceDirection = normalVector.copy();
+    float positiveOverlap, negativeOverlap, overlap;
+    PVector forceDirection;
+    positiveOverlap = rectAMax - rectBMin;
+    negativeOverlap = rectBMax - rectAMin;
+    if(positiveOverlap < negativeOverlap) {
+      overlap = positiveOverlap;
+      forceDirection = normalVector.copy();
+      contactPosition = minPosition.copy();
+    }
+    else {
+      overlap = negativeOverlap;
+      forceDirection = normalVector.copy().mult(-1);
+      contactPosition = maxPosition.copy();
+    }
 
     // For the horizontal axis of rectangle A (Vertex 0 and vertices 1)
     normalVector = PVector.sub(verticesA[1],verticesA[0]).normalize();
@@ -123,18 +144,32 @@ public class Rectangle extends RigidBody {
     rectBMin = Float.MAX_VALUE;
     rectBMax = -Float.MAX_VALUE;
     for(int i=0; i<verticesB.length; i++){
-      rectBMin = min(rectBMin, PVector.dot(normalVector,verticesB[i]));
-      rectBMax = max(rectBMax, PVector.dot(normalVector,verticesB[i]));
+      vectorizedPosition = PVector.dot(normalVector,verticesB[i]);
+      if(vectorizedPosition < rectBMin) {
+        rectBMin = vectorizedPosition;
+        minPosition = verticesB[i];
+      }
+      if(vectorizedPosition > rectBMax) {
+        rectBMax = vectorizedPosition;
+        maxPosition = verticesB[i];
+      }
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
       return false;
     }
     
     // Getting values for collision resolution
-    float overlapTemp = min(rectBMax - rectAMin, rectAMax - rectBMin);    
-    if( overlapTemp < overlap){
-      overlap = overlapTemp;
+    positiveOverlap = rectAMax - rectBMin;
+    negativeOverlap = rectBMax - rectAMin;
+    if(positiveOverlap < negativeOverlap && positiveOverlap < overlap) {
+      overlap = positiveOverlap;
       forceDirection = normalVector.copy();
+      contactPosition = minPosition.copy();
+    }
+    else if(negativeOverlap < overlap) {
+      overlap = negativeOverlap;
+      forceDirection = normalVector.copy().mult(-1);
+      contactPosition = maxPosition.copy();
     }
     
     // Check the sides of rectangle B
@@ -145,18 +180,34 @@ public class Rectangle extends RigidBody {
     rectAMin = Float.MAX_VALUE;
     rectAMax = -Float.MAX_VALUE;
     for(int i=0; i<verticesA.length; i++){
-      rectAMin = min(rectAMin, PVector.dot(normalVector,verticesA[i]));
-      rectAMax = max(rectAMax, PVector.dot(normalVector,verticesA[i]));
+      vectorizedPosition = PVector.dot(normalVector,verticesA[i]);
+      if(vectorizedPosition < rectAMin) {
+        rectAMin = vectorizedPosition;
+        minPosition = verticesA[i];
+      }
+      if(vectorizedPosition > rectAMax) {
+        rectAMax = vectorizedPosition;
+        maxPosition = verticesA[i];
+      }
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
       return false;
     }
     
     // Getting values for collision resolution
-    overlapTemp = min(rectBMax - rectAMin, rectAMax - rectBMin);
-    if( overlapTemp < overlap){
-      overlap = overlapTemp;
+    positiveOverlap = rectBMax - rectAMin;
+    negativeOverlap = rectAMax - rectBMin;
+    if(positiveOverlap < negativeOverlap && positiveOverlap < overlap) {
+      rectANormalVectorCollision = false;
+      overlap = positiveOverlap;
+      forceDirection = normalVector.copy().mult(-1);
+      contactPosition = minPosition.copy();
+    }
+    else if(negativeOverlap < overlap) {
+      rectANormalVectorCollision = false;
+      overlap = negativeOverlap;
       forceDirection = normalVector.copy();
+      contactPosition = maxPosition.copy();
     }
     
     // For the horizontal axis of rectangle B
@@ -166,31 +217,45 @@ public class Rectangle extends RigidBody {
     rectAMin = Float.MAX_VALUE;
     rectAMax = -Float.MAX_VALUE;
     for(int i=0; i<verticesA.length; i++){
-      rectAMin = min(rectAMin, PVector.dot(normalVector,verticesA[i]));
-      rectAMax = max(rectAMax, PVector.dot(normalVector,verticesA[i]));
+      vectorizedPosition = PVector.dot(normalVector,verticesA[i]);
+      if(vectorizedPosition < rectAMin) {
+        rectAMin = vectorizedPosition;
+        minPosition = verticesA[i];
+      }
+      if(vectorizedPosition > rectAMax) {
+        rectAMax = vectorizedPosition;
+        maxPosition = verticesA[i];
+      }
     }
     if(rectAMin>rectBMax || rectBMin>rectAMax) {
       return false;
     }
     
     // Getting values for collision resolution
-    overlapTemp = min(rectBMax - rectAMin, rectAMax - rectBMin);    
-    if( overlapTemp < overlap){
-      overlap = overlapTemp;
+    positiveOverlap = rectBMax - rectAMin;
+    negativeOverlap = rectAMax - rectBMin;
+    if(positiveOverlap < negativeOverlap && positiveOverlap < overlap) {
+      rectANormalVectorCollision = false;
+      overlap = positiveOverlap;
+      forceDirection = normalVector.copy().mult(-1);
+      contactPosition = minPosition.copy();
+    }
+    else if(negativeOverlap < overlap) {
+      rectANormalVectorCollision = false;
+      overlap = negativeOverlap;
       forceDirection = normalVector.copy();
+      contactPosition = maxPosition.copy();
     }
     
-    // Making sure the force vector is pointing in the good direction
-    
-    PVector desiredDirection = PVector.sub(rectBPosition, rectAPosition);
-    if(PVector.dot(desiredDirection, forceDirection) < 0){
-      forceDirection.mult(-1);
+    if(rectANormalVectorCollision) {
+      rectAContactPosition = PVector.add(contactPosition, PVector.mult(forceDirection, overlap)).sub(rectAPosition);
+      rectBContactPosition = PVector.sub(contactPosition, rectBPosition);
     }
-    
-    // Reaction to overlap
-    rectAPosition.sub(PVector.mult(forceDirection,overlap/2));
-    rectBPosition.add(PVector.mult(forceDirection,overlap/2));
-
+    else {
+      rectAContactPosition = PVector.sub(contactPosition, rectAPosition);
+      rectBContactPosition = PVector.add(contactPosition, PVector.mult(forceDirection, overlap)).sub(rectBPosition);
+    }
+    resolveCollision(this, other, rectAContactPosition, rectBContactPosition, forceDirection, overlap);
     return true;
   }
 }

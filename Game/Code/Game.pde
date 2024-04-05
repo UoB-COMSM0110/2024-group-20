@@ -3,60 +3,83 @@
   ArrayList<Integer> keysPressed;
 
 void setup (){
+  rectMode(CENTER);
   w = new World();
   keysPressed = new ArrayList();
-  w.addBody(new Circle(new PVector(width/4,height/3), 1, 1, false, 50, 0));
-  w.addBody(new Circle(new PVector(width/4*2,height/3), 1, 0, false, 50, 0));
-  w.addBody(new Circle(new PVector(width/4*3,height/3), 1, 1, false, 50, 2.5));
-  w.addBody(new Rectangle(new PVector(width/5*1,height/3*2), 1, 1, false, 100, 200, PI/8*0));
+  float frictionRes = 0.8;
+  float restitution = 0.8;
+  //w.addBody(new Circle(new PVector(width/4,height/3), 1, 1, false, 50, 0));
+  w.addBody(new BirdBlack(new PVector(width/4,height/3)));
+  w.addBody(new Circle(new PVector(width/4*2,height/3), 1, 1, false, 50, 0));
+  w.addBody(new Circle(new PVector(width/4*3,height/3), 1, 1, true, 50, 2.5));
+  w.addBody(new Rectangle(new PVector(width/5*1,height/3*2), 1, 1, false, 100, 400, PI/8*0));
+  //w.getBody(3).mass = Float.MAX_VALUE/1E10;
   w.addBody(new Rectangle(new PVector(width/5*2,height/3*2), 1, 1, false, 50, 200, PI/8*1));
   w.addBody(new Rectangle(new PVector(width/5*3,height/3*2), 1, 1, false, 50, 200, PI/8*3));
   w.addBody(new Rectangle(new PVector(width/5*4,height/3*2), 1, 1, false, 50, 200, PI/8*5));
-  w.addBody(new Rectangle(new PVector(0,height/2), 1E10, 1, true, 2, height, 0));
+  w.addBody(new Rectangle(new PVector(50,height/2), 1, 1, true, 50, height, 0));
+  w.addBody(new Rectangle(new PVector(width-50,height/2), 1, 1, true, 50, height, 0));
+  w.addBody(new Rectangle(new PVector(width/2,50), 1, 1, true, width, 50, 0));
+  w.addBody(new Rectangle(new PVector(width/2,height-50), 1, 1, true, width, 50, 0));
+  for(int i=0; i<w.getBodyListSize(); i++) {
+    w.getBody(i).frictionRestitution = frictionRes;
+    w.getBody(i).restitution = restitution;
+  }
 
   fullScreen();  
-  rectMode(CENTER);
 }
 
 void draw (){
   if(keyPressed){
-    RigidBody body = w.getBody(0);
+    RigidBody body1 = w.getBody(0);
     RigidBody body2 = w.getBody(3);
     for(int i=0; i<keysPressed.size(); i++){
       int currentKey = keysPressed.get(i);
       if(currentKey == UP) {
-        body.getLinearVelocity().add(new PVector(0,-4));
+        body1.getLinearVelocity().add(new PVector(0,-40));
       }
       if(currentKey == DOWN) {
-        body.getLinearVelocity().add(new PVector(0,4));
+        body1.getLinearVelocity().add(new PVector(0,40));
       }
       if(currentKey == LEFT) {
-        body.getLinearVelocity().add(new PVector(-4,0));
+        body1.getLinearVelocity().add(new PVector(-40,0));
       }
       if(currentKey == RIGHT) {
-        body.getLinearVelocity().add(new PVector(4,0));
+        body1.getLinearVelocity().add(new PVector(40,0));
       }
-      if(currentKey == 'W' || currentKey == 'w') {
-        body2.getLinearVelocity().add(new PVector(0,-4));
+      if(currentKey == 'W') {
+        body2.getLinearVelocity().add(new PVector(0,-20));
       }
-      if(currentKey == 'S' || currentKey == 's') {
-        body2.getLinearVelocity().add(new PVector(0,4));
+      if(currentKey == 'S') {
+        body2.getLinearVelocity().add(new PVector(0,20));
       }
-      if(currentKey == 'a' || currentKey == 'A') {
-        body2.getLinearVelocity().add(new PVector(-4,0));
+      if(currentKey == 'A') {
+        body2.getLinearVelocity().add(new PVector(-20,0));
       }
-      if(currentKey == 'd' || currentKey == 'D') {
-        body2.getLinearVelocity().add(new PVector(4,0));
+      if(currentKey == 'D') {
+        body2.getLinearVelocity().add(new PVector(20,0));
+      }
+      if(currentKey == 'J') {
+        body1.setAngularVelocity(body1.getAngularVelocity() + 0.5);
+      }
+      if(currentKey == 'K') {
+        body2.setAngularVelocity(body2.getAngularVelocity() + 0.5);
       }
     }
   }
   background(51);
   
-  w.step(1/frameRate);
-  if(w.collideBodies()){
-    fill(255,0,0);
-  } else {
-    fill(0, 255, 0);
+  for(int i=0; i<10; i++) {
+    w.step(1/frameRate/10);
+    if(w.collideBodies()){
+      fill(255,0,0);
+    } else {
+      fill(0, 255, 0);
+    }
+  }
+  
+  if(w.getBody(0).largestImpulse > 2.3E7) {
+    w.removeBody(w.getBody(0));
   }
   w.display();
 }
@@ -67,6 +90,12 @@ void keyPressed() {
   }
 }
 
-void keyReleased(){
+void keyReleased() {
   keysPressed.remove(Integer.valueOf(keyCode));
+}
+
+void mouseClicked() {
+  for(int i=0; i<w.getBodyListSize(); i++) {
+    print(w.getBody(i).largestImpulse + "\n");
+  }
 }
