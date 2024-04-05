@@ -37,16 +37,10 @@ public class Circle extends RigidBody {
 //  Intersects circle  ///////////////////////////////////////////////////////////////////////////////////////////////
   public boolean intersect(Circle other) {
     float circle1Radius = this.getRadius();
-    float circle1Mass = this.getMass();
-    float circle1Restitution = this.getRestitution();
     PVector circle1Position =  this.getPosition();
-    PVector circle1LinVelocity =  this.getLinearVelocity();
     
     float circle2Radius = other.getRadius();
-    float circle2Mass = other.getMass();
-    float circle2Restitution = other.getRestitution();
     PVector circle2Position = other.getPosition();
-    PVector circle2LinVelocity = other.getLinearVelocity();
     
     float distance = PVector.dist(circle2Position, circle1Position);
     float radiusSum = circle1Radius + circle2Radius;
@@ -57,40 +51,11 @@ public class Circle extends RigidBody {
     }
     
     PVector forceDirection = PVector.sub(circle2Position, circle1Position).normalize();
-    PVector relativeLinVelocity = PVector.sub(circle2LinVelocity, circle1LinVelocity);
-    float velocityNormal = PVector.dot(relativeLinVelocity, forceDirection);
+    PVector circle1ContactPosition = PVector.mult(forceDirection, circle1Radius);
+    PVector circle2ContactPosition = PVector.mult(forceDirection, -circle2Radius);
     
-    // If two circles are away from each other, do not proceed
-    if (velocityNormal > 0) {
-      return false;
-    }
+    resolveCollision(this, other, circle1ContactPosition, circle2ContactPosition, forceDirection, overlap);
     
-    float cor = circle1Restitution * circle2Restitution;
-    
-    // Calculate the value of impulse
-    float impulse = -(1 + cor) * velocityNormal / (1 / circle1Mass + 1 / circle2Mass);
-    
-    // Calculate the new linear velocity of two circles after collision
-    PVector circle1NewLinVelocity = PVector.sub(circle1LinVelocity, PVector.mult(forceDirection, impulse / circle1Mass));
-    PVector circle2NewLinVelocity = PVector.add(circle2LinVelocity, PVector.mult(forceDirection, impulse / circle2Mass));
-    
-    this.setLinearVelocity(circle1NewLinVelocity);
-    other.setLinearVelocity(circle2NewLinVelocity);
-    
-    PVector pushedPosition;
-    if(this.isStatic()) {
-      pushedPosition = PVector.mult(forceDirection,overlap);
-      other.getPosition().add(pushedPosition);
-    }
-    else if(other.isStatic()) {
-      pushedPosition = PVector.mult(forceDirection,overlap);
-      this.getPosition().sub(pushedPosition);
-    }
-    else {
-      pushedPosition = PVector.mult(forceDirection,overlap/2);
-      this.getPosition().sub(pushedPosition);
-      other.getPosition().add(pushedPosition);
-    }
     return true;
   }
 
