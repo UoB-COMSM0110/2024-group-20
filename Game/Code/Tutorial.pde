@@ -12,7 +12,7 @@ public class Tutorial {
     menus[1] = new Menu(width/10, height/3, width/5, height/3, "Buy materails to add structures.", 2, totalSteps, this::nextStep, this::skipTutorial);
     menus[2] = new Menu(width/2, height/2, width/3, height/3, "Use materials to shield pigs.", 3, totalSteps, this::nextStep, this::skipTutorial);
     menus[3] = new Menu(width/2, height/3, width/3, height/6, "Once ready click start.", 4, totalSteps, this::nextStep, this::skipTutorial);
-    menus[4] = new Menu(width,height/20, width/10, height/7, "Use less material and survive more to gain higher score.", 5, totalSteps, this::nextStep, this::skipTutorial);
+    menus[4] = new Menu(width-width/10,height/20+height/7, width/10, height/7, "Use less material and survive more to gain higher score.", 5, totalSteps, this::nextStep, this::skipTutorial);
   }
 
   void display() {

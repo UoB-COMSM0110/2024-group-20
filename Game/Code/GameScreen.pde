@@ -124,7 +124,6 @@ class GameScreen extends Screen {
     playerScore.printCurrentPlayerScore();
     //budget
     allLevels[currentLevel].printLevelBudget();
-    textAlign(LEFT);
     tutorial.display(); 
   }
   
