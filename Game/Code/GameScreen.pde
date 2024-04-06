@@ -18,7 +18,7 @@ class GameScreen extends Screen {
   Timer timer;
   boolean clockRestart = true;
   int birdCount = 0;
-  boolean pflag = false;
+  boolean pflag = false;//If is true,enable physics to materials and turn off drags
   
   PImage bgImage,menuImage,emptyButtonImage,readyImage;
   ImageButton menuButton, woodButton, glassButton,stoneButton,readyButton;
@@ -61,10 +61,12 @@ class GameScreen extends Screen {
       }
       if(allLevels[currentLevel].getStage() == 1){
         // Can Modify the structure 
+        pflag = false;
         //draw all the materials 
       }     
       if(allLevels[currentLevel].getStage() == 2){
         //If not all the birds were realised
+        pflag = true;
         if(birdsIndx < animals.size()){
           if (clockRestart){ 
             timer.startTimer();
