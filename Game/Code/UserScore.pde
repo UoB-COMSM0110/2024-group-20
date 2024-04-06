@@ -105,9 +105,7 @@ public class UserScore{
   
   // Displaying to the player what name they entered so far
   public void printTempName(){
-   textFont(font);
    text(tempName, width/2, height/2); 
-   textAlign(CENTER);
   }
   
   // Function allowing player to enter their name
@@ -115,7 +113,6 @@ public class UserScore{
       fill(0 ,0, 0);
       textSize(50);
       text("Enter your name:", width/2, height/3);
-      textAlign(CENTER);
       printTempName();    
   }
   
@@ -187,8 +184,6 @@ public class UserScore{
   // Method for scoreScreen printin the score.txt file to screen
   public void printScoresFile(){
      fill(0, 0, 0);
-     textAlign(CENTER);
-     textFont(font);
      textSize(50);
     String[] scores = loadStrings("scores.txt");
     for(int i=0; i<6;i=i +2){
@@ -206,14 +201,12 @@ public class UserScore{
   // Method for gameScreen printin the name and score to screen
   public void printCurrentPlayerScore(){
      fill(0, 0, 0);
-     textFont(font);
      textSize(40);
      text(playerName + "   Score: " + str(playerScore), width-width/5,height/15);
   }  
   
   public void printFinalScore(){
      fill(0, 0, 0);
-     textFont(font);
      textSize(40);
      text("Your Final Score is: " + str(playerScore), width/2, height/2);
      updateScoresFile();

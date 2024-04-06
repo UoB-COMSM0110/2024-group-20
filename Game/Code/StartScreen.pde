@@ -17,13 +17,13 @@ class StartScreen extends Screen {
     
     buttons = new ArrayList<ImageButton>();
     
-    startButton = new ImageButton(startImage, width/2 - width/10,height/2 - height/20,width/5,height/10);
+    startButton = new ImageButton(startImage, width/2,height/2 - height/20+height/10,width/5,height/10);
     buttons.add(startButton);
     //score button
-    scoreButton = new ImageButton(scoreImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);
+    scoreButton = new ImageButton(scoreImage, width/2,height/2 - height/20 + height/7+height/10,width/5,height/10);
     buttons.add(scoreButton);
     //exit
-    exitButton = new ImageButton(exitImage, width/2 - width/10,height/2 - height/20 + 2*height/7,width/5,height/10);
+    exitButton = new ImageButton(exitImage, width/2,height/2 - height/20 + 2*height/7+height/10,width/5,height/10);
     buttons.add(exitButton);
     
   }
@@ -31,9 +31,9 @@ class StartScreen extends Screen {
   //load all the image
   void display(){
     // setting background
-    image(bgImage, 0, 0, width, height);
+    image(bgImage, width/2, height/2, width, height);
     //setting logo
-    image(logoImage, width/2 - width/6,height/2 - height/6 - height/4,width/3,height/3);
+    image(logoImage, width/2,height/2 - height/4,width/3,height/3);
     
     for (ImageButton button : buttons) {
         button.update(); 

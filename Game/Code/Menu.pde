@@ -25,27 +25,25 @@ public class Menu {
     this.totalSteps = totalSteps;
     this.callbackNext = callbackNext;
     this.callbackSkip = callbackSkip;
+    woodBoardImage = loadImage("../Images/woodBoard.png");
+    nextImage = loadImage("../Images/nextButton.png");
+    skipImage = loadImage("../Images/skipButton.png");
   }
 
    // Display the menu
   void display() {
-   // Draw the menu background
-  woodBoardImage = loadImage("../Images/woodBoard.png");
-  image(woodBoardImage, x, y, width, height);
-
-   // Draw buttons 
-   nextImage = loadImage("../Images/nextButton.png");
-   skipImage = loadImage("../Images/skipButton.png");
-   image(skipImage,x + width * 0.05, y + height - height * 0.2, width * 0.2, height * 0.15); // skip Button 
-   image(nextImage,x + width - width * 0.25, y + height - height * 0.2, width * 0.2, height * 0.15); // next Button 
-        
-   fill(0);
-   textSize(20);
-   String footerText = stepNumber + "/" + totalSteps;
-   text(footerText, x + width/2, y + height - height * 0.02); // Centered at the bottom
-        
-   displayWrappedText(menuText, x + width * 0.05, y + height * 0.1, width * 0.9);
-        
+    // Draw the menu background
+    image(woodBoardImage, x, y, width, height);
+    
+    // Draw buttons 
+    image(skipImage,x + width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // skip Button 
+    image(nextImage,x - width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button 
+    fill(0);
+    textSize(20);
+    String footerText = stepNumber + "/" + totalSteps;
+    text(footerText, x, y + height/2 - height * 0.02); // Centered at the bottom
+    
+    displayWrappedText(menuText, x, y + height * 0.1, width * 0.9);
   }
 
  

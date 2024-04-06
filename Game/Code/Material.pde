@@ -13,7 +13,6 @@ abstract class Material extends Rectangle {
     pg.pushMatrix();
     pg.translate(position.x, position.y);
     pg.rotate(rotation);
-    pg.rectMode(CENTER);
     pg.rect(0, 0, rectWidth, rectHeight);
     pg.popMatrix();
   }

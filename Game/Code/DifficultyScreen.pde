@@ -17,18 +17,18 @@ class DifficultyScreen extends Screen {
     buttons = new ArrayList<ImageButton>();
 
     easyImage = loadImage("../Images/easyButton.png");
-    easyButton = new ImageButton(easyImage, width/4,height/2  - height/10, width/5, height/10); 
+    easyButton = new ImageButton(easyImage, width/3,height/2, width/5, height/10); 
     buttons.add(easyButton);
     
     hardImage = loadImage("../Images/hardButton.png");    
-    hardButton = new ImageButton(hardImage, 3 * width/4 - width/5, height/2 -height/10 , width/5, height/10);  
+    hardButton = new ImageButton(hardImage, 2 * width/3, height/2 , width/5, height/10);  
     buttons.add(hardButton);
   }
   
   //load all the image
   void display(){
     // setting background
-    image(bgImage, 0, 0, width, height);
+    image(bgImage, width/2, height/2, width, height);
 
     for (ImageButton button : buttons) {
         button.update(); 

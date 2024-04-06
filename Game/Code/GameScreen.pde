@@ -41,7 +41,7 @@ class GameScreen extends Screen {
 
   void display(){
     // setting background
-    image(bgImage, 0, 0, width, height);
+    image(bgImage, width/2, height/2, width, height);
     
     // Player being able to enter his name
     if(playerScore.isNameUpdated() == false){

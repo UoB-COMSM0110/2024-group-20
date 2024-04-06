@@ -21,7 +21,6 @@ class LooseScreen extends Screen {
     // lose text
     fill(0,0,0);
     textFont(font);
-    textAlign(CENTER);
     text("You LOST!!!", width/2, height/3);
     playerScore.printFinalScore();
     

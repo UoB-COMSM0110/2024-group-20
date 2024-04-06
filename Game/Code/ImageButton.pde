@@ -19,16 +19,13 @@ class ImageButton {
         image(image, x, y, width, height);
         
         if (isOver) { 
-          rectMode(CORNER);
           fill(255, 255, 255, 100);
           rect(x, y, width, height);
-          rectMode(CENTER);
         }
     }
 
     void update() {
-        imageMode(CORNER);
-        if (mouseX >= x && mouseX <= x +width&& mouseY >= y && mouseY <= y + height) {
+        if (mouseX >= x-width/2 && mouseX <= x +width/2&& mouseY >= y - height/2 && mouseY <= y + height/2) {
             isOver = true;
         } else {
             isOver = false;

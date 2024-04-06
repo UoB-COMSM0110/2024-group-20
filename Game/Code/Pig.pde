@@ -10,11 +10,11 @@ public class Pig extends Circle{
     //PVector position, float density, float restitution, boolean isStatic, float circleRadius, float rotation
     super(location, 0.6f, 0.5f, false, 55, 54);
     alive = true;
+    pigAlive = loadImage("../Images/pigAlive.png");
+    pigDead = loadImage("../Images/pigDead.png");
   }
 
   public void display(){
-    pigAlive = loadImage("../Images/pigAlive.png");
-    pigDead = loadImage("../Images/pigDead.png");
     if(alive == true){
       image(pigAlive, this.getCoorX() - 54, this.getCoorY() - 56); 
     }else{

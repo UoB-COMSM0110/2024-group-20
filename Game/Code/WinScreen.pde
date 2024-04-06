@@ -21,7 +21,6 @@ class WinScreen extends Screen {
     // win text
     fill(0,0,0);
     textFont(font);
-    textAlign(CENTER);
     text("You WON!!!", width/2, height/3);
     playerScore.printFinalScore();
     
