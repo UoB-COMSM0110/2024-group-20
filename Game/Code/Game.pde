@@ -1,16 +1,19 @@
+import processing.javafx.*;
+
 
   World w;
   ArrayList<Integer> keysPressed;
+  float frictionRes = 0.8;
+  float restitution = 0.8;
 
 void setup (){
   rectMode(CENTER);
   w = new World();
   keysPressed = new ArrayList();
-  float frictionRes = 0.8;
-  float restitution = 0.8;
   //w.addBody(new Circle(new PVector(width/4,height/3), 1, 1, false, 50, 0));
   w.addBody(new BirdBlack(new PVector(width/4,height/3)));
-  w.addBody(new Circle(new PVector(width/4*2,height/3), 1, 1, false, 50, 0));
+  //w.addBody(new Circle(new PVector(width/4*2,height/3), 1, 1, false, 50, 0));
+  w.addBody(new BirdBlack(new PVector(width/4*2,height/3)));
   w.addBody(new Circle(new PVector(width/4*3,height/3), 1, 1, true, 50, 2.5));
   w.addBody(new Rectangle(new PVector(width/5*1,height/3*2), 1, 1, false, 100, 400, PI/8*0));
   //w.getBody(3).mass = Float.MAX_VALUE/1E10;
@@ -26,7 +29,8 @@ void setup (){
     w.getBody(i).restitution = restitution;
   }
 
-  fullScreen();  
+  fullScreen(FX2D);  
+  //fullScreen(P2D);  
 }
 
 void draw (){
@@ -69,24 +73,30 @@ void draw (){
   }
   background(51);
   
-  for(int i=0; i<10; i++) {
-    w.step(1/frameRate/10);
-    if(w.collideBodies()){
-      fill(255,0,0);
-    } else {
-      fill(0, 255, 0);
-    }
+  for(int i=0; i<20; i++) {
+    w.step(1/frameRate/20);
+    //if(w.collideBodies()){
+    //  fill(255,0,0);
+    //} else {
+    //  fill(0, 255, 0);
+    //}
+    w.collideBodies();
   }
   
-  if(w.getBody(0).largestImpulse > 2.3E7) {
-    w.removeBody(w.getBody(0));
-  }
+  //if(w.getBody(0).largestImpulse > 2.3E7) {
+  //  w.removeBody(w.getBody(0));
+  //}
   w.display();
 }
 
 void keyPressed() {
   if(!keysPressed.contains(Integer.valueOf(keyCode))){
     keysPressed.add(keyCode);
+  }
+  if(key=='=') {
+    w.addBody(new BirdBlack(new PVector(width/4*2,height/3)));
+    w.getBody(w.getBodyListSize()-1).frictionRestitution = frictionRes;
+    w.getBody(w.getBodyListSize()-1).restitution = restitution;
   }
 }
 
