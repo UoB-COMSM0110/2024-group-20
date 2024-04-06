@@ -5,6 +5,7 @@ interface ButtonCallback {
 PImage nextImage;
 PImage skipImage;
 PImage woodBoardImage;
+ImageButton nextButton,skipButton;
 
 public class Menu {
   float x, y; // Position of the menu
@@ -26,18 +27,23 @@ public class Menu {
     this.callbackNext = callbackNext;
     this.callbackSkip = callbackSkip;
     woodBoardImage = loadImage("../Images/woodBoard.png");
-    nextImage = loadImage("../Images/nextButton.png");
-    skipImage = loadImage("../Images/skipButton.png");
+    skipImage = loadImage("../Images/nextButton.png");
+    nextImage = loadImage("../Images/skipButton.png");
   }
 
    // Display the menu
   void display() {
     // Draw the menu background
     image(woodBoardImage, x, y, width, height);
+        
+    skipButton = new ImageButton(skipImage,x + width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // skip Button 
+    nextButton = new ImageButton(nextImage,x - width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button 
     
     // Draw buttons 
-    image(skipImage,x + width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // skip Button 
-    image(nextImage,x - width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button 
+    skipButton.update();
+    skipButton.display();
+    nextButton.update();
+    nextButton.display();
     fill(0);
     textSize(20);
     String footerText = stepNumber + "/" + totalSteps;
@@ -52,15 +58,13 @@ public class Menu {
   void mousePressed() {
     // Check if a button is pressed
     // Next
-      if (mouseX >= x + width * 0.05 && mouseX <= x + width * 0.05 + width * 0.2 &&
-        mouseY >= y + height - height * 0.2 && mouseY <= y + height - height * 0.2 + height * 0.15) {
+      if (nextButton.clicked()) {
           if (callbackSkip != null) {
             callbackSkip.onButtonPressed();
           }
         }
       // Skip
-      else if (mouseX >= x + width - width * 0.25 && mouseX <= x + width - width * 0.25 + width * 0.2 &&
-        mouseY >= y + height - height * 0.2 && mouseY <= y + height - height * 0.2 + height * 0.15) {
+      else if (skipButton.clicked()) {
         if (callbackNext != null) {
                 callbackNext.onButtonPressed();
         }
