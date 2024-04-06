@@ -49,7 +49,7 @@ class GameScreen extends Screen {
      }else{
       // Physics engine start
       if (pflag){
-      w.step(1/frameRate);
+        w.step(1/frameRate);
       }
       w.collideBodies();
       w.display();
@@ -124,7 +124,6 @@ class GameScreen extends Screen {
     playerScore.printCurrentPlayerScore();
     //budget
     allLevels[currentLevel].printLevelBudget();
-    textAlign(LEFT);
     tutorial.display(); 
   }
   
@@ -251,20 +250,20 @@ class GameScreen extends Screen {
     buttons = new ArrayList<ImageButton>();
     //menu
     menuImage = loadImage("../Images/menuButton.png");
-    menuButton = new ImageButton(menuImage, width - width/5,height - height/10,width/5,height/10);
+    menuButton = new ImageButton(menuImage, width - width/10,height - height/10,width/5,height/10);
     buttons.add(menuButton);
     //wood
-    woodButton = new ImageButton(emptyButtonImage, 0,height/3,width/10,height/20);
+    woodButton = new ImageButton(emptyButtonImage, width/20,height*(1/2f+1/10f),width/10,height/20);
     buttons.add(woodButton);
     //glass
-    glassButton = new ImageButton(emptyButtonImage, 0,4*height/9,width/10,height/20);
+    glassButton = new ImageButton(emptyButtonImage, width/20,height*(1/2f),width/10,height/20);
     buttons.add(glassButton);
     //stone
-    stoneButton = new ImageButton(emptyButtonImage, 0,5*height/9,width/10,height/20);
+    stoneButton = new ImageButton(emptyButtonImage, width/20,height*(1/2f-1/10f),width/10,height/20);
     buttons.add(stoneButton);
     //ready
     readyImage = loadImage("../Images/readyButton.png");
-    readyButton = new ImageButton(readyImage, width/2-width/10,height/9,width/5,height/10);
+    readyButton = new ImageButton(readyImage, width/2, height/10,width/5,height/10);
     buttons.add(readyButton);
   }
 }

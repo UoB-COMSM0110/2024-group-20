@@ -43,7 +43,7 @@ public class Menu {
     String footerText = stepNumber + "/" + totalSteps;
     text(footerText, x, y + height/2 - height * 0.02); // Centered at the bottom
     
-    displayWrappedText(menuText, x, y + height * 0.1, width * 0.9);
+    displayWrappedText(menuText, x, y - height * 0.4, width * 0.9);
   }
 
  
