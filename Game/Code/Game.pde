@@ -30,3 +30,7 @@ void mouseDragged() {
   screenManager.mouseDragged();
 
 }
+
+void mouseReleased() {
+  screenManager.mouseReleased();
+}

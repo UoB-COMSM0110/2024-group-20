@@ -53,5 +53,6 @@ class StartScreen extends Screen {
   
   void keyPressed(){}
   void mouseDragged(){}
+  void mouseReleased(){}
   
 }

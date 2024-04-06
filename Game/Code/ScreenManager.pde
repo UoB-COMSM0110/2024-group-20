@@ -50,4 +50,9 @@ class ScreenManager {
       currentScreen.mouseDragged(); 
     }
   }
+  void mouseReleased() {
+    if (currentScreen != null) {
+      currentScreen.mouseReleased();
+    }
+  }
 }

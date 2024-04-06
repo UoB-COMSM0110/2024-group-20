@@ -34,5 +34,6 @@ class ScoreScreen extends Screen {
   
   void keyPressed(){}
   void mouseDragged(){}
+  void mouseReleased(){}
   
 }

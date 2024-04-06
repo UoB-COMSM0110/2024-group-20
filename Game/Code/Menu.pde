@@ -27,10 +27,10 @@ public class Menu {
     this.callbackNext = callbackNext;
     this.callbackSkip = callbackSkip;
     woodBoardImage = loadImage("../Images/woodBoard.png");
-    skipImage = loadImage("../Images/nextButton.png");
-    nextImage = loadImage("../Images/skipButton.png");
-    skipButton = new ImageButton(skipImage,x + width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // skip Button 
-    nextButton = new ImageButton(nextImage,x - width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button 
+    nextImage = loadImage("../Images/nextButton.png");
+    skipImage = loadImage("../Images/skipButton.png");
+    skipButton = new ImageButton(skipImage,x - width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // skip Button 
+    nextButton = new ImageButton(nextImage,x + width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button 
   }
 
    // Display the menu

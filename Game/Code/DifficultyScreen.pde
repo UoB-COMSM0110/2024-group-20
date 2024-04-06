@@ -49,6 +49,7 @@ class DifficultyScreen extends Screen {
   
   void keyPressed(){}
   void mouseDragged(){}
+  void mouseReleased(){}
   
   private void setEasyLevels(){
     allLevels[0] = new Level(200, 1, 3, 0, 0, Difficulty.EASY, 0);
