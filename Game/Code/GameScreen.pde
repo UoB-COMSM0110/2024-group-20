@@ -66,7 +66,6 @@ class GameScreen extends Screen {
       }     
       if(allLevels[currentLevel].getStage() == 2){
         //If not all the birds were realised
-        pflag = true;
         if(birdsIndx < animals.size()){
           if (clockRestart){ 
             timer.startTimer();
@@ -84,6 +83,7 @@ class GameScreen extends Screen {
             //Calculating points function!!!
             currentLevel++;
             cleanLevel();
+            pflag = true;
           }else{
             cleanLevel();
             currentLevel = 0;
@@ -231,7 +231,6 @@ class GameScreen extends Screen {
       w.removeBody(animal);
     }
     animals.clear();
-    pflag = false;
   }
   
     public void setBoundariesAndForces(){
