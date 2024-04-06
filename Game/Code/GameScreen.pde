@@ -140,7 +140,7 @@ class GameScreen extends Screen {
     }
 
     //add wood
-     PVector newPosition = new PVector(random(0,width/3), random(height/3,2*height/3));
+     PVector newPosition = new PVector(random(width/10,width/3), random(height/3,5*height/9));
     if(woodButton.clicked()){
       if(allLevels[currentLevel].buyResource(Resource.WOOD)){
         Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 50, 200,0);
@@ -250,7 +250,7 @@ class GameScreen extends Screen {
     buttons = new ArrayList<ImageButton>();
     //menu
     menuImage = loadImage("../Images/menuButton.png");
-    menuButton = new ImageButton(menuImage, width - width/10,height - height/10,width/5,height/10);
+    menuButton = new ImageButton(menuImage, width - width/10,height - height/20,width/5,height/10);
     buttons.add(menuButton);
     //wood
     woodButton = new ImageButton(emptyButtonImage, width/20,height*(1/2f+1/10f),width/10,height/20);

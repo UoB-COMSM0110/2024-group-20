@@ -10,6 +10,6 @@ public class BirdBlue extends Bird{
 
   @Override
   public void display(){
-    image(blueBird, this.getCoorX() - 50, this.getCoorY() - 70); 
+    image(blueBird, this.getCoorX(), this.getCoorY() - 20); 
   }
 }

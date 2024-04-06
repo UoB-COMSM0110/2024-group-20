@@ -16,9 +16,9 @@ public class Pig extends Circle{
 
   public void display(){
     if(alive == true){
-      image(pigAlive, this.getCoorX() - 54, this.getCoorY() - 56); 
+      image(pigAlive, this.getCoorX(), this.getCoorY() - 2); 
     }else{
-      image(pigDead, this.getCoorX() - 54, this.getCoorY() - 56);       
+      image(pigDead, this.getCoorX(), this.getCoorY() - 2);       
     }
   }
   

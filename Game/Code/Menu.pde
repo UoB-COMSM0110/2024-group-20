@@ -5,7 +5,6 @@ interface ButtonCallback {
 PImage nextImage;
 PImage skipImage;
 PImage woodBoardImage;
-ImageButton nextButton,skipButton;
 
 public class Menu {
   float x, y; // Position of the menu
@@ -14,6 +13,8 @@ public class Menu {
   int stepNumber, totalSteps; // For page footer (e.g., "1/4")
   ButtonCallback callbackNext; // Callback for Next button
   ButtonCallback callbackSkip; // Callback for Skip button
+  ImageButton skipButton, nextButton;
+  
 
   // Constructor
   Menu(float x, float y, float width, float height,String menuText,int stepNumber, int totalSteps, ButtonCallback callbackNext, ButtonCallback callbackSkip) {
@@ -27,8 +28,10 @@ public class Menu {
     this.callbackNext = callbackNext;
     this.callbackSkip = callbackSkip;
     woodBoardImage = loadImage("../Images/woodBoard.png");
-    skipImage = loadImage("../Images/nextButton.png");
-    nextImage = loadImage("../Images/skipButton.png");
+    nextImage = loadImage("../Images/nextButton.png");
+    skipImage = loadImage("../Images/skipButton.png");
+    skipButton = new ImageButton(skipImage,x - width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // skip Button 
+    nextButton = new ImageButton(nextImage,x + width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button 
   }
 
    // Display the menu
@@ -36,8 +39,6 @@ public class Menu {
     // Draw the menu background
     image(woodBoardImage, x, y, width, height);
         
-    skipButton = new ImageButton(skipImage,x + width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // skip Button 
-    nextButton = new ImageButton(nextImage,x - width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button 
     
     // Draw buttons 
     skipButton.update();
@@ -58,13 +59,13 @@ public class Menu {
   void mousePressed() {
     // Check if a button is pressed
     // Next
-      if (nextButton.clicked()) {
+      if (skipButton.clicked()) {
           if (callbackSkip != null) {
             callbackSkip.onButtonPressed();
           }
         }
       // Skip
-      else if (skipButton.clicked()) {
+      else if (nextButton.clicked()) {
         if (callbackNext != null) {
                 callbackNext.onButtonPressed();
         }

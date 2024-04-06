@@ -12,15 +12,15 @@ class ScoreScreen extends Screen {
     bgImage = loadImage("../Images/map.png");
     woodBoardImage = loadImage("../Images/woodBoard.png");
     menuImage = loadImage("../Images/menuButton.png");
-    menuButton = new ImageButton(menuImage, width - width/5,height - height/10,width/5,height/10);  
+    menuButton = new ImageButton(menuImage, width - width/10,height - height/20,width/5,height/10);  
   }
 
   //load all the image
   void display(){
     // setting background
-    image(bgImage, 0, 0, width, height);
+    image(bgImage, width/2, height/2, width, height);
     // Board to display scores on
-    image(woodBoardImage, width/5, height/10, width - 2 * width/5, height - height/5);
+    image(woodBoardImage, width/2, height/2, width - 2 * width/5, height - height/5);
     // printing scores from a text file
     playerScore.printScoresFile();
     

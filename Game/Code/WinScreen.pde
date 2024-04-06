@@ -11,16 +11,15 @@ class WinScreen extends Screen {
     this.playerScore = playerScore;
     bgImage = loadImage("../Images/map.png");
     menuImage = loadImage("../Images/menuButton.png");
-    menuButton = new ImageButton(menuImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);  
+    menuButton = new ImageButton(menuImage, width - width/10,height - height/20, width/5,height/10);  
   }
 
   //load all the image
   void display(){
     // setting background
-    image(bgImage, 0, 0, width, height);
+    image(bgImage, width/2, height/2, width, height);
     // win text
     fill(0,0,0);
-    textFont(font);
     text("You WON!!!", width/2, height/3);
     playerScore.printFinalScore();
     
