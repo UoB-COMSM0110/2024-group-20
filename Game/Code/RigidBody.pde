@@ -112,7 +112,11 @@ public abstract class RigidBody{
     float body2Mass = body2.getMass();
     float body2AngInertia = body2.getAngularInertia();
     
-    PVector tangentDirection = forceDirection.copy().rotate(HALF_PI);
+    // Push objects away from each other
+    float massSum = body1Mass + body2Mass;
+    body1.getPosition().sub(PVector.mult(forceDirection,overlap*body2Mass/massSum));
+    body2.getPosition().add(PVector.mult(forceDirection,overlap*body1Mass/massSum));
+    
     
     // velocities at contact point
     PVector body1ContactLinAngVelocity = new PVector(-body1AngVelocity * body1ContactPosition.y, body1AngVelocity * body1ContactPosition.x);
@@ -128,6 +132,7 @@ public abstract class RigidBody{
       return;
     }
     
+    PVector tangentDirection = forceDirection.copy().rotate(HALF_PI);
     float body1MomentLength = PVector.dot(body1ContactPosition, tangentDirection);
     float body2MomentLength = PVector.dot(body2ContactPosition, tangentDirection);
     
@@ -153,12 +158,6 @@ public abstract class RigidBody{
     
     body1.largestImpulse = max(body1.largestImpulse, abs(impulse));
     body2.largestImpulse = max(body2.largestImpulse, abs(impulse));
-    
-    // Push objects away from each other
-    float massSum = body1Mass + body2Mass;
-    body1.getPosition().sub(PVector.mult(forceDirection,overlap*body2Mass/massSum));
-    body2.getPosition().add(PVector.mult(forceDirection,overlap*body1Mass/massSum));
-    
     
     // for friction  //////////////////////////////////////////////////////////
     float tangDiffLinVelocity = PVector.dot(diffLinVelocity, tangentDirection);

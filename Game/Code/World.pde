@@ -56,11 +56,6 @@ public class World {
 void wSteps() {
   for(int i=0; i<20; i++) {
     w.step(1/frameRate/20);
-    //if(w.collideBodies()){
-    //  fill(255,0,0);
-    //} else {
-    //  fill(0, 255, 0);
-    //}
     w.collideBodies();
   }
   //if(w.getBody(0).largestImpulse > 2.3E7) {
