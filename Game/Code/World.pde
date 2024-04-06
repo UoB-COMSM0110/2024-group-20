@@ -2,7 +2,7 @@
 public class World {
   private PVector gravity = new PVector(0, 1000);
   private ArrayList<RigidBody> bodyList;
-  float dragCoefficient = 0.9999;
+  float linearVelocityFactor = 0.9999;
   
   public World() {
     this.bodyList = new ArrayList<RigidBody>();
@@ -30,7 +30,7 @@ public class World {
   
   public void step(float frameTime) {
     for(int i=0; i<this.bodyList.size(); i++) {
-      this.bodyList.get(i).step(frameTime, gravity, dragCoefficient);
+      this.bodyList.get(i).step(frameTime, gravity, linearVelocityFactor);
     }
   }
   

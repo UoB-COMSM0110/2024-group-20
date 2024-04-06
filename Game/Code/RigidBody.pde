@@ -81,12 +81,12 @@ public abstract class RigidBody{
     return frictionRestitution;
   }
   
-  public void step(float frameTime, PVector gravity, float dragCoefficient) {
+  public void step(float frameTime, PVector gravity, float linearVelocityFactor) {
     if(this.isStatic) {
       return;
     }
     position.add(PVector.mult(linearVelocity, frameTime)).add(PVector.mult(linearAcceleration, frameTime*frameTime*0.5));
-    linearVelocity.add(PVector.mult(linearAcceleration, frameTime)).add(PVector.mult(gravity, frameTime)).mult(dragCoefficient);
+    linearVelocity.add(PVector.mult(linearAcceleration, frameTime)).add(PVector.mult(gravity, frameTime)).mult(linearVelocityFactor);
     
     rotation += angularVelocity * frameTime + 0.5 * angularAcceleration * frameTime * frameTime;
     angularVelocity +=  angularAcceleration * frameTime;
