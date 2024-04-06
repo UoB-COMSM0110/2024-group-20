@@ -1,13 +1,30 @@
 import processing.javafx.*;
+import java.io.*;
 
-
-  World w;
-  ArrayList<Integer> keysPressed;
-  float frictionRes = 0.8;
-  float restitution = 0.8;
+World w;
+ArrayList<Integer> keysPressed;
+float frictionRes = 0.8;
+float restitution = 0.8;
+HashMap<String, PImage> imageMap;
+  
+void loadImages() {
+  imageMap = new HashMap();
+  File directoryPath = new File(sketchPath("../Images"));
+  File filesList[] = directoryPath.listFiles();
+  for(int i=0; i<filesList.length; i++) {
+    File file = filesList[i];
+    String fileName = file.getName();
+    String imageName = fileName.replaceFirst("[.][^.]+$", "");
+    String imagePath = "../Images/" + fileName;
+    PImage image = loadImage(imagePath);
+    imageMap.put(imageName, image);
+  }
+}
 
 void setup (){
+  imageMode(CENTER);
   rectMode(CENTER);
+  loadImages();
   w = new World();
   keysPressed = new ArrayList();
   //w.addBody(new Circle(new PVector(width/4,height/3), 1, 1, false, 50, 0));
@@ -34,6 +51,13 @@ void setup (){
 }
 
 void draw (){
+  thread("keysPressed");
+  thread("wSteps");
+  background(51);
+  w.display();
+}
+
+void keysPressed() {
   if(keyPressed){
     RigidBody body1 = w.getBody(0);
     RigidBody body2 = w.getBody(3);
@@ -71,30 +95,16 @@ void draw (){
       }
     }
   }
-  background(51);
-  
-  for(int i=0; i<20; i++) {
-    w.step(1/frameRate/20);
-    //if(w.collideBodies()){
-    //  fill(255,0,0);
-    //} else {
-    //  fill(0, 255, 0);
-    //}
-    w.collideBodies();
-  }
-  
-  //if(w.getBody(0).largestImpulse > 2.3E7) {
-  //  w.removeBody(w.getBody(0));
-  //}
-  w.display();
 }
+
 
 void keyPressed() {
   if(!keysPressed.contains(Integer.valueOf(keyCode))){
     keysPressed.add(keyCode);
   }
   if(key=='=') {
-    w.addBody(new BirdBlack(new PVector(width/4*2,height/3)));
+    //w.addBody(new Circle(new PVector(width/4*2,height/3), 1, 1, false, 50, 2.5));
+    w.addBody(new BirdBlack(new PVector(width/4,height/3)));
     w.getBody(w.getBodyListSize()-1).frictionRestitution = frictionRes;
     w.getBody(w.getBodyListSize()-1).restitution = restitution;
   }

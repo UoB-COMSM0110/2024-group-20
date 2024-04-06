@@ -1,7 +1,8 @@
+
 public class World {
   private PVector gravity = new PVector(0, 1000);
   private ArrayList<RigidBody> bodyList;
-  float dragCoefficient = 1;
+  float dragCoefficient = 0.9999;
   
   public World() {
     this.bodyList = new ArrayList<RigidBody>();
@@ -50,4 +51,19 @@ public class World {
       this.bodyList.get(i).display();
     }
   }
+}
+
+void wSteps() {
+  for(int i=0; i<20; i++) {
+    w.step(1/frameRate/20);
+    //if(w.collideBodies()){
+    //  fill(255,0,0);
+    //} else {
+    //  fill(0, 255, 0);
+    //}
+    w.collideBodies();
+  }
+  //if(w.getBody(0).largestImpulse > 2.3E7) {
+  //  w.removeBody(w.getBody(0));
+  //}
 }
