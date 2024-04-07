@@ -6,9 +6,9 @@ class WinScreen extends Screen {
   ArrayList<ImageButton> buttons;
   
   //constuctor
-  WinScreen(ScreenManager screenManager,UserScore playerScore) {
+  WinScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
-    this.playerScore = playerScore;
+    this.playerScore = screenManager.playerScore;
     bgImage = loadImage("../Images/map.png");
     menuImage = loadImage("../Images/menuButton.png");
     menuButton = new ImageButton(menuImage, width - width/10,height - height/20, width/5,height/10);  

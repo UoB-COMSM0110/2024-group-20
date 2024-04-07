@@ -16,12 +16,12 @@ class ScreenManager {
   }
   
   private void setupScreens() {
-    screens.put(ScreenType.STARTSCREEN, new StartScreen(this,playerScore));
-    screens.put(ScreenType.DIFFICULTYSCREEN, new DifficultyScreen(this,playerScore, allLevels));
-    screens.put(ScreenType.GAMESCREEN, new GameScreen(this,playerScore, allLevels));
-    screens.put(ScreenType.SCORESCREEN, new ScoreScreen(this,playerScore));
-    screens.put(ScreenType.WINSCREEN, new WinScreen(this,playerScore));
-    screens.put(ScreenType.LOOSESCREEN, new LooseScreen(this,playerScore));
+    screens.put(ScreenType.STARTSCREEN, new StartScreen(this));
+    screens.put(ScreenType.DIFFICULTYSCREEN, new DifficultyScreen(this));
+    screens.put(ScreenType.GAMESCREEN, new GameScreen(this));
+    screens.put(ScreenType.SCORESCREEN, new ScoreScreen(this));
+    screens.put(ScreenType.WINSCREEN, new WinScreen(this));
+    screens.put(ScreenType.LOOSESCREEN, new LooseScreen(this));
   }
   
   void setCurrentScreen(ScreenType screenType) {

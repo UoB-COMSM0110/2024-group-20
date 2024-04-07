@@ -6,9 +6,9 @@ class StartScreen extends Screen {
   ArrayList<ImageButton> buttons;
   
   //constuctor
-  StartScreen(ScreenManager screenManager,UserScore playerScore) {
+  StartScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
-    this.playerScore = playerScore;
+    this.playerScore = screenManager.playerScore;
     bgImage = loadImage("../Images/map.png");
     logoImage = loadImage("../Images/AnxiousPigsLogo.png");
     startImage = loadImage("../Images/startButton.png");

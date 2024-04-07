@@ -25,10 +25,10 @@ class GameScreen extends Screen {
   ArrayList<ImageButton> buttons;
   
   //constuctor
-  public GameScreen(ScreenManager screenManager,UserScore playerScore, Level allLevels[]){
+  public GameScreen(ScreenManager screenManager){
     this.screenManager = screenManager;
-    this.playerScore = playerScore;
-    this.allLevels = allLevels;
+    this.playerScore = screenManager.playerScore;
+    this.allLevels = screenManager.allLevels;
     timer = new Timer(5000);
         
     bgImage = loadImage("../Images/map.png");

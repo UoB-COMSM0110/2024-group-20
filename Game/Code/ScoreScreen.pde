@@ -6,9 +6,9 @@ class ScoreScreen extends Screen {
   //ArrayList<ImageButton> buttons;
   
     //constuctor
-    ScoreScreen(ScreenManager screenManager,UserScore playerScore) {
+    ScoreScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
-    this.playerScore = playerScore;
+    this.playerScore = screenManager.playerScore;
     bgImage = loadImage("../Images/map.png");
     woodBoardImage = loadImage("../Images/woodBoard.png");
     menuImage = loadImage("../Images/menuButton.png");
