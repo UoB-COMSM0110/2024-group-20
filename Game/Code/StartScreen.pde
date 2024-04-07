@@ -9,11 +9,11 @@ class StartScreen extends Screen {
   StartScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
     this.playerScore = screenManager.playerScore;
-    bgImage = loadImage("../Images/map.png");
-    logoImage = loadImage("../Images/AnxiousPigsLogo.png");
-    startImage = loadImage("../Images/startButton.png");
-    scoreImage = loadImage("../Images/scoreButton.png");
-    exitImage = loadImage("../Images/exitButton.png");
+    bgImage = gameImages.get("map");
+    logoImage = gameImages.get("AnxiousPigsLogo");
+    startImage = gameImages.get("startButton");
+    scoreImage = gameImages.get("scoreButton");
+    exitImage = gameImages.get("exitButton");
     
     buttons = new ArrayList<ImageButton>();
     

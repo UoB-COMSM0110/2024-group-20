@@ -26,9 +26,9 @@ public class Menu {
     this.totalSteps = totalSteps;
     this.callbackNext = callbackNext;
     this.callbackSkip = callbackSkip;
-    woodBoardImage = loadImage("../Images/woodBoard.png");
-    nextImage = loadImage("../Images/nextButton.png");
-    skipImage = loadImage("../Images/skipButton.png");
+    woodBoardImage = gameImages.get("woodBoard");
+    nextImage = gameImages.get("nextButton");
+    skipImage = gameImages.get("skipButton");
     skipButton = new ImageButton(skipImage,x - width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // skip Button 
     nextButton = new ImageButton(nextImage,x + width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button 
   }

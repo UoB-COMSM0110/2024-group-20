@@ -13,14 +13,14 @@ class DifficultyScreen extends Screen {
     this.playerScore = screenManager.playerScore;
     this.allLevels = screenManager.allLevels;
     
-    bgImage = loadImage("../Images/map.png");
+    bgImage = gameImages.get("map");
     buttons = new ArrayList<ImageButton>();
 
-    easyImage = loadImage("../Images/easyButton.png");
+    easyImage = gameImages.get("easyButton");
     easyButton = new ImageButton(easyImage, width/3,height/2, width/5, height/10); 
     buttons.add(easyButton);
     
-    hardImage = loadImage("../Images/hardButton.png");    
+    hardImage = gameImages.get("hardButton");  
     hardButton = new ImageButton(hardImage, 2 * width/3, height/2 , width/5, height/10);  
     buttons.add(hardButton);
   }

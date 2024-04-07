@@ -9,9 +9,9 @@ class ScoreScreen extends Screen {
     ScoreScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
     this.playerScore = screenManager.playerScore;
-    bgImage = loadImage("../Images/map.png");
-    woodBoardImage = loadImage("../Images/woodBoard.png");
-    menuImage = loadImage("../Images/menuButton.png");
+    bgImage = gameImages.get("map");
+    woodBoardImage = gameImages.get("woodBoard");
+    menuImage = gameImages.get("menuButton");
     menuButton = new ImageButton(menuImage, width - width/10,height - height/20,width/5,height/10);  
   }
 

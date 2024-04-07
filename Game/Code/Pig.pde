@@ -15,9 +15,9 @@ public class Pig extends Circle{
     translate(position.x,position.y);
     rotate(rotation);
     if(alive == true){
-      image(imageMap.get("pigAlive"), 2, 0); 
+      image(gameImages.get("pigAlive"), 2, 0); 
     }else{
-      image(imageMap.get("pigDead"), 2, 0);       
+      image(gameImages.get("pigDead"), 2, 0);       
     }
     popMatrix();
   }

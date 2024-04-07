@@ -10,7 +10,7 @@ public class BirdBlack extends Bird{
     pushMatrix();
     translate(position.x,position.y);
     rotate(rotation);
-    image(imageMap.get("birdBlack"), 0, -6); 
+    image(gameImages.get("birdBlack"), 0, -6); 
     popMatrix();
   }
 }

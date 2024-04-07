@@ -31,8 +31,8 @@ class GameScreen extends Screen {
     this.allLevels = screenManager.allLevels;
     timer = new Timer(5000);
         
-    bgImage = loadImage("../Images/map.png");
-    emptyButtonImage = loadImage("../Images/emptyButton.png");
+    bgImage = gameImages.get("map");
+    emptyButtonImage = gameImages.get("emptyButton");
   
     setBoundariesAndForces();
     setButtons();
@@ -49,7 +49,10 @@ class GameScreen extends Screen {
      }else{
       // Physics engine start
       if (pflag){
-        w.step(1/frameRate);
+        for(int i=0; i<10; i++) {
+          w.step(1/frameRate/10);
+          w.collideBodies();
+        }
       }
       w.collideBodies();
       w.display();
@@ -110,13 +113,12 @@ class GameScreen extends Screen {
     //Choosing a force direction and initial position from list of possibilities
     int indx = (int) random(BirdAttackVectors.size()); 
     PVector chosenDirection = BirdAttackVectors.get(indx);
-    float forceMag = 250000/*random(250000, 290000)*/;
-    PVector force = PVector.mult(new PVector(chosenDirection.x, chosenDirection.y), forceMag);
+    float speed = 1000;
+    PVector linearVelocity = PVector.mult(new PVector(chosenDirection.x, chosenDirection.y).normalize(), speed);
     RigidBody bird = animals.get(birdsIndx);
     bird.setPosition(new PVector(chosenDirection.z, 0)); 
+    bird.setLinearVelocity(linearVelocity);
     w.addBody(bird);
-    print(force);
-    w.getBody(w.getListSize() - 1).applyForce(force);
   }
 
   void textDisplay(){
@@ -248,7 +250,7 @@ class GameScreen extends Screen {
   public void setButtons(){
     buttons = new ArrayList<ImageButton>();
     //menu
-    menuImage = loadImage("../Images/menuButton.png");
+    menuImage = gameImages.get("menuButton");
     menuButton = new ImageButton(menuImage, width - width/10,height - height/20,width/5,height/10);
     buttons.add(menuButton);
     //wood
@@ -261,7 +263,7 @@ class GameScreen extends Screen {
     stoneButton = new ImageButton(emptyButtonImage, width/20,height*(1/2f-1/10f),width/10,height/20);
     buttons.add(stoneButton);
     //ready
-    readyImage = loadImage("../Images/readyButton.png");
+    readyImage = gameImages.get("readyButton");
     readyButton = new ImageButton(readyImage, width/2, height/10,width/5,height/10);
     buttons.add(readyButton);
   }

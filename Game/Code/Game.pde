@@ -1,7 +1,7 @@
 import processing.javafx.*;
 import java.io.*;
 
-HashMap<String, PImage> imageMap;
+HashMap<String, PImage> gameImages;
 ScreenManager screenManager;
 PFont font;
 
@@ -40,7 +40,7 @@ void mouseReleased() {
 
 
 void loadImages() {
-  imageMap = new HashMap();
+  gameImages = new HashMap();
   File directoryPath = new File(sketchPath("../Images"));
   File filesList[] = directoryPath.listFiles();
   for(int i=0; i<filesList.length; i++) {
@@ -49,7 +49,7 @@ void loadImages() {
     String imageName = fileName.replaceFirst("[.][^.]+$", "");
     String imagePath = "../Images/" + fileName;
     PImage image = loadImage(imagePath);
-    imageMap.put(imageName, image);
+    gameImages.put(imageName, image);
   }
 }
 
