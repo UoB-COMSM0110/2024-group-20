@@ -1,11 +1,12 @@
 public class World {
   private ArrayList<RigidBody> bodyList;
-  float dragCoefficient = 0.99;
   private PVector gravity;
+  private float linearVelocityFactor;
   
   public World() {
     this.bodyList = new ArrayList<RigidBody>();
-    this.gravity = new PVector(0, 120);
+    this.gravity = new PVector(0, 1000);
+    this.linearVelocityFactor = 0.9999;
   }
   
   public int size(){
@@ -32,13 +33,13 @@ public class World {
     }
   }
   
-  public int getListSize() {
+  public int getBodyListSize() {
     return bodyList.size();
   }
   
   public void step(float frameTime) {
     for(int i=0; i<this.bodyList.size(); i++) {
-      this.bodyList.get(i).step(frameTime, gravity, dragCoefficient);
+      this.bodyList.get(i).step(frameTime, gravity, linearVelocityFactor);
     }
     
   }
@@ -47,8 +48,9 @@ public class World {
     boolean occurs = false;
     for(int i=0; i<this.bodyList.size()-1; i++){
       for(int j=i+1; j<this.bodyList.size(); j++){
-        if(bodyList.get(i).intersect(bodyList.get(j))) 
-          occurs = true;
+        if(!bodyList.get(i).isStatic() || !bodyList.get(j).isStatic()) {
+          if(bodyList.get(i).intersect(bodyList.get(j))) occurs = true;
+        }
       }
     }
     return occurs;
@@ -56,7 +58,6 @@ public class World {
   
   public void display(){
     for(int i=0; i<this.bodyList.size(); i++) {
-      
       this.bodyList.get(i).display();
     }
   }
