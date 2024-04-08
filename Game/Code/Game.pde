@@ -7,8 +7,8 @@ PFont font;
 
 void setup (){
   font = createFont("angrybirds-regular.ttf", 128);
-  fullScreen(FX2D);
-  //fullScreen();
+  //fullScreen(FX2D);
+  fullScreen();
   rectMode(CENTER);
   imageMode(CENTER);
   textAlign(CENTER);

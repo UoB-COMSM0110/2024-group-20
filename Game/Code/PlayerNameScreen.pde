@@ -17,6 +17,7 @@ public class PlayerNameScreen extends Screen {
     fill(0 ,0, 0);
     textSize(50);
     text("Enter your name:", width/2, height/3);
+    updateDisplayName();
     text(displayName, width/2, height/2); 
   }
   
@@ -48,7 +49,7 @@ public class PlayerNameScreen extends Screen {
   public void deleteLetter(){
     String playerName = player.getPlayerName();
     if(playerName.length() > 0){
-      String newName = playerName.substring(0,playerName.length());
+      String newName = playerName.substring(0,playerName.length()-1);
       player.setPlayerName(newName);
       updateDisplayName();
     }

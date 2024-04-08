@@ -31,7 +31,6 @@ public class Player{
     return nameSet;  
   }
   
-  
   public void setScore(int score){
     playerScore = score;  
   }
