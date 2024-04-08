@@ -42,6 +42,10 @@ public abstract class RigidBody{
     return largestImpulse;  
   }
   
+  public void setImpuls(int number){
+    largestImpulse = number;  
+  }
+  
   public float getMass() {
     return mass;
   }

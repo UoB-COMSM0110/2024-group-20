@@ -72,13 +72,11 @@ class GameScreen extends Screen {
         for (Material material : materials) {
           material.draw(g); 
         }
-      
       }     
       if(allLevels[currentLevel].getStage() == 2){
         buttons.get(0).update();
         buttons.get(0).display();
         
-        //If not all the birds were realised an there are still Pigs alive
         if(!continueBirdAttack()){
           endLevel(); 
         }
@@ -93,7 +91,7 @@ class GameScreen extends Screen {
       timer.startTimer();
     }
     if(timer.intervalFinished()){
-      //Calculate Points
+      playerScore.updateScore(allLevels[currentLevel], currentLevel);
       if(allLevels[currentLevel].numberPigsAlive() == 0){
         cleanLevel();
         currentLevel = 0;
@@ -189,6 +187,7 @@ class GameScreen extends Screen {
     }
     }
     if(readyButton.clicked()){
+      materialsImpuls();
       allLevels[currentLevel].stageStructuresReady();
       pflag=true;
     }
@@ -199,6 +198,13 @@ class GameScreen extends Screen {
       cleanLevel();
       currentLevel = 0;
       pflag=false;
+    }
+  }
+  
+  private void materialsImpuls(){
+    for(Material material : materials){
+      RigidBody body = material;
+      body.setImpuls(0);
     }
   }
 

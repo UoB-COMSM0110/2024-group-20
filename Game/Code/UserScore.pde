@@ -54,8 +54,6 @@ public class UserScore{
       this.difficulty = Difficulty.HARD;
     }
   }
-  
-  
   ////NAME ENTERING/////////////////////////////////////////////////////////////////////////
   
   // Function detecting which key was pressed and updating players name according to that
@@ -136,13 +134,16 @@ public class UserScore{
   
   // Method for updating the user's score
   public void updateScore(Level currentLevel, int levelNo){
-    // Budget    
+    // Budget left  
     int newPoints = currentLevel.getBudget();
     // Pigs Alive
     newPoints = newPoints + currentLevel.numberPigsAlive() * 100;
     // Level
     newPoints = newPoints + levelNo * 100;
     playerScore = playerScore + newPoints;
+    // Difficulty Bonus (extra 100 points for HARD)
+    newPoints = newPoints + 100;
+    playerScore = playerScore + newPoints;    
   }
   
   // Method writting current player's score to the text file
