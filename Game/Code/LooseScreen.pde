@@ -22,7 +22,9 @@ class LooseScreen extends Screen {
     fill(0,0,0);
     textFont(font);
     text("You LOST!!!", width/2, height/3);
-    player.printFinalScore();
+    textSize(40);
+    text("Your Final Score is: " + str(player.getPlayerScore()), width/2, height/2);
+    player.updateScoresFile();
     
     menuButton.update();
     menuButton.display();

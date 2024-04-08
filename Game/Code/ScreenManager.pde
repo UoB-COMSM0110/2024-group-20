@@ -16,6 +16,7 @@ class ScreenManager {
   
   private void setupScreens() {
     screens.put(ScreenType.STARTSCREEN, new StartScreen(this));
+    screens.put(ScreenType.PLAYERNAMESCREEN, new PlayerNameScreen(this));
     screens.put(ScreenType.DIFFICULTYSCREEN, new DifficultyScreen(this));
     screens.put(ScreenType.GAMESCREEN, new GameScreen(this));
     screens.put(ScreenType.SCORESCREEN, new ScoreScreen(this));

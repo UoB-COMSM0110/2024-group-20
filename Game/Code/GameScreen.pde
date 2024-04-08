@@ -6,7 +6,7 @@ class GameScreen extends Screen {
   World w = new World();
   Material draggedMaterial = null;
     
-  ArrayList<Circle> animals =  new ArrayList<>(); // A list to keep track of all materials
+  ArrayList<Circle> animals =  new ArrayList<>(); // A list to keep track of all animals
   ArrayList<Material> materials =  new ArrayList<>(); // A list to keep track of all materials
   ArrayList<PVector> BirdAttackVectors = new ArrayList<>();
   
@@ -42,46 +42,52 @@ class GameScreen extends Screen {
     // setting background
     image(bgImage, width/2, height/2, width, height);
     
-    // Player being able to enter his name
-    if(player.isNameUpdated() == false){
-       player.enterPlayerName();
-     }else{
-      // Physics engine start
-      if (pflag){
-        for(int i=0; i<10; i++) {
-          w.step(1/frameRate/10);
-          w.collideBodies();
-        }
+    // Physics engine start
+    if (pflag){
+      for(int i=0; i<10; i++) {
+        w.step(1/frameRate/10);
+        w.collideBodies();
       }
-      w.collideBodies();
-      w.display();
+      checkAnimalsKilled();
+    }
+    w.collideBodies();
+    w.display();
+    
+    if(allLevels[currentLevel].getStage() == 0){
+      allLevels[currentLevel].stagePigsOnLevel(w, animals);
+      birdsIndx = animals.size();
+      allLevels[currentLevel].stageBirdsOnLevel(animals);
+    }
+    if(allLevels[currentLevel].getStage() == 1){
+      // Can Modify the structure 
+      pflag = false;
       
-      if(allLevels[currentLevel].getStage() == 0){
-        allLevels[currentLevel].stagePigsOnLevel(w, animals);
-        birdsIndx = animals.size();
-        allLevels[currentLevel].stageBirdsOnLevel(animals);
+      for (ImageButton button : buttons) {
+        button.update(); 
+        button.display(); 
+      }      
+      for (Material material : materials) {
+        material.draw(g); 
       }
-      if(allLevels[currentLevel].getStage() == 1){
-        // Can Modify the structure 
-        pflag = false;
-        
-        for (ImageButton button : buttons) {
-          button.update(); 
-          button.display(); 
-        }      
-        for (Material material : materials) {
-          material.draw(g); 
-        }
-      }     
-      if(allLevels[currentLevel].getStage() == 2){
-        buttons.get(0).update();
-        buttons.get(0).display();
-        
-        if(!continueBirdAttack()){
-          endLevel(); 
-        }
-      }       
-      textDisplay();
+    }     
+    if(allLevels[currentLevel].getStage() == 2){
+      buttons.get(0).update();
+      buttons.get(0).display();
+      
+      if(!continueBirdAttack()){
+        endLevel(); 
+      }
+    }       
+    textDisplay();
+  }
+  
+  private void checkAnimalsKilled() {
+    for(Circle animal : animals) {
+      if(animal instanceof Pig && animal.getLargestImpulse() > 5E6) {
+        //print(animal.getLargestImpulse()+"\n");
+        Pig pig = (Pig) animal;
+        pig.killPig();
+      }
     }
   }
   
@@ -204,19 +210,15 @@ class GameScreen extends Screen {
   private void zeroImpulses(){
     for(Material material : materials){
       RigidBody body = material;
-      body.setImpuls(0);
+      body.setLargestImpulse(0);
     }
     for (Circle animal : animals){
       RigidBody body = animal;
-      body.setImpuls(0);
+      body.setLargestImpulse(0);
     }
   }
 
   void keyPressed(){
-    // Key Detection for entering the name of the player
-    if(player.isNameUpdated() == false){
-      player.pressedKey(key);
-    }
     
 ////////////////////////////////JUST FOR DEMONSTRATION PURPOSES////////////
     if(key == '['){
@@ -266,7 +268,7 @@ class GameScreen extends Screen {
     animals.clear();
   }
   
-    public void setBoundariesAndForces(){
+  public void setBoundariesAndForces(){
     //Adding boundaries to game screen
     w.addBody(new Ground(new PVector(width/2 ,height - 100), 1, 1, width, 200, 0)); // Ground  
     w.addBody(new Ground(new PVector(0 /*- 10*/, height/2 - 200), 1, 1, 20, height - 10, 0)); // Left

@@ -22,7 +22,7 @@ class ScoreScreen extends Screen {
     // Board to display scores on
     image(woodBoardImage, width/2, height/2, width - 2 * width/5, height - height/5);
     // printing scores from a text file
-    player.printScoresFile();
+    printScoresFile();
     
     menuButton.update();
     menuButton.display();
@@ -35,5 +35,22 @@ class ScoreScreen extends Screen {
   void keyPressed(){}
   void mouseDragged(){}
   void mouseReleased(){}
+  
+  // Method for scoreScreen printin the score.txt file to screen
+  public void printScoresFile(){
+    fill(0, 0, 0);
+    textSize(50);
+    String[] scores = loadStrings("scores.txt");
+    for(int i=0; i<6;i=i +2){
+      int noDots = 40 - 2*scores[i].length()- 2*scores[i + 1].length();
+      fill(0,0,0);
+      String toPrint = scores[i];
+      for(int j = 0; j < noDots; j++){
+        toPrint = toPrint + ".";
+      }
+      toPrint = toPrint + scores[i+1];
+      text(toPrint,width/2 - width/7.5,height/3+i*height/10);
+    }
+  }
   
 }

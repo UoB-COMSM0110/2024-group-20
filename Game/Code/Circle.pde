@@ -1,13 +1,7 @@
-public enum AnimalType {
-  BIRD, PIG
-}
-
 public class Circle extends RigidBody {
   protected float circleRadius;
-  protected AnimalType animal;
  
-  public Circle(PVector position, float density, float restitution, boolean isStatic, float circleRadius, float rotation, AnimalType animal) {
-    this.animal = animal;
+  public Circle(PVector position, float density, float restitution, boolean isStatic, float circleRadius, float rotation) {
     this.position = position;
     this.density = density;
     this.restitution = restitution;
@@ -31,10 +25,6 @@ public class Circle extends RigidBody {
   
   public void display(){
     circle(position.x, position.y, circleRadius*2);
-  }
-  
-  public AnimalType getAnimalType() {
-    return animal;
   }
   
   public float getRadius() {

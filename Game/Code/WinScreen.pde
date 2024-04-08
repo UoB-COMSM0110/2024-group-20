@@ -21,7 +21,9 @@ class WinScreen extends Screen {
     // win text
     fill(0,0,0);
     text("You WON!!!", width/2, height/3);
-    player.printFinalScore();
+    textSize(40);
+    text("Your Final Score is: " + str(player.getPlayerScore()), width/2, height/2);
+    player.updateScoresFile();
     
     menuButton.update();
     menuButton.display();
@@ -38,5 +40,4 @@ class WinScreen extends Screen {
   void keyPressed(){}
   void mouseDragged(){}
   void mouseReleased(){}
-  
 }

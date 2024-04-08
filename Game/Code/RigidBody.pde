@@ -38,12 +38,12 @@ public abstract class RigidBody{
     return shapeType;  
   }
   
-  public float getImpulse(){
+  public float getLargestImpulse(){
     return largestImpulse;  
   }
   
-  public void setImpuls(int number){
-    largestImpulse = number;  
+  public void setLargestImpulse(int impulse){
+    largestImpulse = impulse;  
   }
   
   public float getMass() {
