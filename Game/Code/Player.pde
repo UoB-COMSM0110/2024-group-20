@@ -2,7 +2,7 @@ public enum Difficulty {
   NOTSET, EASY, HARD
 }
 
-public class UserScore{
+public class Player{
   
   String playerName;
   String tempName;
@@ -14,7 +14,7 @@ public class UserScore{
   Difficulty difficulty;
 
   
-  UserScore(){
+  Player(){
     playerName = "";
     tempName = "_ _ _ _ _ _ _ _ _ _";  
     noLetters = 0;

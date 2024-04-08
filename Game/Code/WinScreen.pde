@@ -1,6 +1,6 @@
 class WinScreen extends Screen {
   ScreenManager screenManager;
-  UserScore playerScore;
+  Player player;
   PImage bgImage, menuImage;
   ImageButton menuButton;
   ArrayList<ImageButton> buttons;
@@ -8,7 +8,7 @@ class WinScreen extends Screen {
   //constuctor
   WinScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
-    this.playerScore = screenManager.playerScore;
+    this.player = screenManager.player;
     bgImage = gameImages.get("map");
     menuImage = gameImages.get("menuButton");
     menuButton = new ImageButton(menuImage, width - width/10,height - height/20, width/5,height/10);  
@@ -21,7 +21,7 @@ class WinScreen extends Screen {
     // win text
     fill(0,0,0);
     text("You WON!!!", width/2, height/3);
-    playerScore.printFinalScore();
+    player.printFinalScore();
     
     menuButton.update();
     menuButton.display();
@@ -30,7 +30,7 @@ class WinScreen extends Screen {
 
   void mousePressed(){
     if(menuButton.clicked()){
-    playerScore.deletePlayer();
+    player.deletePlayer();
     screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
     }
   }

@@ -1,6 +1,6 @@
 class GameScreen extends Screen {
   ScreenManager screenManager;
-  UserScore playerScore;
+  Player player;
   Level allLevels[];
   Tutorial tutorial;
   World w = new World();
@@ -26,7 +26,7 @@ class GameScreen extends Screen {
   //constuctor
   public GameScreen(ScreenManager screenManager){
     this.screenManager = screenManager;
-    this.playerScore = screenManager.playerScore;
+    this.player = screenManager.player;
     this.allLevels = screenManager.allLevels;
     timer = new Timer(3000); // 3s
         
@@ -43,8 +43,8 @@ class GameScreen extends Screen {
     image(bgImage, width/2, height/2, width, height);
     
     // Player being able to enter his name
-    if(playerScore.isNameUpdated() == false){
-       playerScore.enterPlayerName();
+    if(player.isNameUpdated() == false){
+       player.enterPlayerName();
      }else{
       // Physics engine start
       if (pflag){
@@ -91,7 +91,7 @@ class GameScreen extends Screen {
       timer.startTimer();
     }
     if(timer.intervalFinished()){
-      playerScore.updateScore(allLevels[currentLevel], currentLevel);
+      player.updateScore(allLevels[currentLevel], currentLevel);
       if(allLevels[currentLevel].numberPigsAlive() == 0){
         cleanLevel();
         currentLevel = 0;
@@ -142,7 +142,7 @@ class GameScreen extends Screen {
 
   void textDisplay(){
     //score Display
-    playerScore.printCurrentPlayerScore();
+    player.printCurrentPlayerScore();
     //budget
     allLevels[currentLevel].printLevelBudget();
     tutorial.display(); 
@@ -187,31 +187,35 @@ class GameScreen extends Screen {
     }
     }
     if(readyButton.clicked()){
-      materialsImpuls();
+      zeroImpulses();
       allLevels[currentLevel].stageStructuresReady();
       pflag=true;
     }
     
     if(menuButton.clicked()){
       screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
-      playerScore.deletePlayer();
+      player.deletePlayer();
       cleanLevel();
       currentLevel = 0;
       pflag=false;
     }
   }
   
-  private void materialsImpuls(){
+  private void zeroImpulses(){
     for(Material material : materials){
       RigidBody body = material;
+      body.setImpuls(0);
+    }
+    for (Circle animal : animals){
+      RigidBody body = animal;
       body.setImpuls(0);
     }
   }
 
   void keyPressed(){
     // Key Detection for entering the name of the player
-    if(playerScore.isNameUpdated() == false){
-      playerScore.pressedKey(key);
+    if(player.isNameUpdated() == false){
+      player.pressedKey(key);
     }
     
 ////////////////////////////////JUST FOR DEMONSTRATION PURPOSES////////////
@@ -278,16 +282,16 @@ class GameScreen extends Screen {
     buttons = new ArrayList<ImageButton>();
     //menu
     menuImage = gameImages.get("menuButton");
-    menuButton = new ImageButton(menuImage, width - width/10,height - height/20,width/5,height/10);
+    menuButton = new ImageButton(menuImage, width - width/10 - 10,height - height/20 - 10,width/5,height/10);
     buttons.add(menuButton);
     //wood
-    woodButton = new ImageButton(emptyButtonImage, width/20,height*(1/2f+1/10f),width/10,height/20);
+    woodButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f+1/10f),width/10,height/20);
     buttons.add(woodButton);
     //glass
-    glassButton = new ImageButton(emptyButtonImage, width/20,height*(1/2f),width/10,height/20);
+    glassButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f),width/10,height/20);
     buttons.add(glassButton);
     //stone
-    stoneButton = new ImageButton(emptyButtonImage, width/20,height*(1/2f-1/10f),width/10,height/20);
+    stoneButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f-1/10f),width/10,height/20);
     buttons.add(stoneButton);
     //ready
     readyImage = gameImages.get("readyButton");

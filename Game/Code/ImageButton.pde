@@ -1,4 +1,3 @@
-
 class ImageButton {
     float x, y; // Position of the button
     float width, height; // Size of the button

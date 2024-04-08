@@ -1,6 +1,6 @@
 class StartScreen extends Screen {
   ScreenManager screenManager;
-  UserScore playerScore;
+  Player player;
   PImage bgImage, logoImage, startImage, scoreImage, exitImage;
   ImageButton startButton, scoreButton, exitButton;
   ArrayList<ImageButton> buttons;
@@ -8,7 +8,7 @@ class StartScreen extends Screen {
   //constuctor
   StartScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
-    this.playerScore = screenManager.playerScore;
+    this.player = screenManager.player;
     bgImage = gameImages.get("map");
     logoImage = gameImages.get("AnxiousPigsLogo");
     startImage = gameImages.get("startButton");

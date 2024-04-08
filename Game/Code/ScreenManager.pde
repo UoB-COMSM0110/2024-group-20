@@ -1,15 +1,14 @@
 class ScreenManager {
   private HashMap<ScreenType, Screen> screens;
   private Screen currentScreen;
-  UserScore playerScore;
+  Player player;
   Level allLevels[];
 
 
   ScreenManager() {
     screens = new HashMap<ScreenType, Screen>();
-    playerScore = new UserScore();
+    player = new Player();
     allLevels = new Level[3];   
-
 
     setupScreens();
     setCurrentScreen(ScreenType.STARTSCREEN);

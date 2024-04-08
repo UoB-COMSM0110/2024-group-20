@@ -78,7 +78,7 @@ public class World {
     }
   }
   
-  //The Impulse doesn't work as expected!!!
+  //The Impulse doesn't work as expected!!!player
   private void isPigDead(Pig pig){
     if(pig.getImpulse() > 0){
       pig.killPig();

@@ -1,6 +1,6 @@
 class DifficultyScreen extends Screen {
   ScreenManager screenManager;
-  UserScore playerScore;
+  Player player;
   Level allLevels[];
   PImage bgImage, easyImage, hardImage;
   ImageButton easyButton, hardButton;
@@ -10,7 +10,7 @@ class DifficultyScreen extends Screen {
   //constuctor
   DifficultyScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
-    this.playerScore = screenManager.playerScore;
+    this.player = screenManager.player;
     this.allLevels = screenManager.allLevels;
     
     bgImage = gameImages.get("map");

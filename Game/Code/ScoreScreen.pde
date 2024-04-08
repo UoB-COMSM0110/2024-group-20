@@ -1,6 +1,6 @@
 class ScoreScreen extends Screen {
   ScreenManager screenManager;
-  UserScore playerScore;
+  Player player;
   PImage bgImage, woodBoardImage, menuImage;
   ImageButton menuButton;
   //ArrayList<ImageButton> buttons;
@@ -8,11 +8,11 @@ class ScoreScreen extends Screen {
     //constuctor
     ScoreScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
-    this.playerScore = screenManager.playerScore;
+    this.player = screenManager.player;
     bgImage = gameImages.get("map");
     woodBoardImage = gameImages.get("woodBoard");
     menuImage = gameImages.get("menuButton");
-    menuButton = new ImageButton(menuImage, width - width/10,height - height/20,width/5,height/10);  
+    menuButton = new ImageButton(menuImage, width - width/10 - 10,height - height/20 - 10,width/5,height/10);  
   }
 
   //load all the image
@@ -22,7 +22,7 @@ class ScoreScreen extends Screen {
     // Board to display scores on
     image(woodBoardImage, width/2, height/2, width - 2 * width/5, height - height/5);
     // printing scores from a text file
-    playerScore.printScoresFile();
+    player.printScoresFile();
     
     menuButton.update();
     menuButton.display();
