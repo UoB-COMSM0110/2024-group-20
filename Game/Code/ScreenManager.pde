@@ -1,25 +1,27 @@
 class ScreenManager {
   private HashMap<ScreenType, Screen> screens;
   private Screen currentScreen;
-  UserScore playerScore;
+  Player player;
   Level allLevels[];
+
 
   ScreenManager() {
     screens = new HashMap<ScreenType, Screen>();
-    playerScore = new UserScore();
-    allLevels = new Level[3];      
+    player = new Player();
+    allLevels = new Level[3];   
 
     setupScreens();
     setCurrentScreen(ScreenType.STARTSCREEN);
   }
   
   private void setupScreens() {
-    screens.put(ScreenType.STARTSCREEN, new StartScreen(this,playerScore));
-    screens.put(ScreenType.DIFFICULTYSCREEN, new DifficultyScreen(this,playerScore, allLevels));
-    screens.put(ScreenType.GAMESCREEN, new GameScreen(this,playerScore, allLevels));
-    screens.put(ScreenType.SCORESCREEN, new ScoreScreen(this,playerScore));
-    screens.put(ScreenType.WINSCREEN, new WinScreen(this,playerScore));
-    screens.put(ScreenType.LOOSESCREEN, new LooseScreen(this,playerScore));
+    screens.put(ScreenType.STARTSCREEN, new StartScreen(this));
+    screens.put(ScreenType.PLAYERNAMESCREEN, new PlayerNameScreen(this));
+    screens.put(ScreenType.DIFFICULTYSCREEN, new DifficultyScreen(this));
+    screens.put(ScreenType.GAMESCREEN, new GameScreen(this));
+    screens.put(ScreenType.SCORESCREEN, new ScoreScreen(this));
+    screens.put(ScreenType.WINSCREEN, new WinScreen(this));
+    screens.put(ScreenType.LOOSESCREEN, new LooseScreen(this));
   }
   
   void setCurrentScreen(ScreenType screenType) {
@@ -46,6 +48,11 @@ class ScreenManager {
    void mouseDragged() {
     if (currentScreen != null) {
       currentScreen.mouseDragged(); 
+    }
+  }
+  void mouseReleased() {
+    if (currentScreen != null) {
+      currentScreen.mouseReleased();
     }
   }
 }

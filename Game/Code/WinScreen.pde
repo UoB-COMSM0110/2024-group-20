@@ -1,29 +1,29 @@
 class WinScreen extends Screen {
   ScreenManager screenManager;
-  UserScore playerScore;
+  Player player;
   PImage bgImage, menuImage;
   ImageButton menuButton;
   ArrayList<ImageButton> buttons;
   
   //constuctor
-  WinScreen(ScreenManager screenManager,UserScore playerScore) {
+  WinScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
-    this.playerScore = playerScore;
-    bgImage = loadImage("../Images/map.png");
-    menuImage = loadImage("../Images/menuButton.png");
-    menuButton = new ImageButton(menuImage, width/2 - width/10,height/2 - height/20 + height/7,width/5,height/10);  
+    this.player = screenManager.player;
+    bgImage = gameImages.get("map");
+    menuImage = gameImages.get("menuButton");
+    menuButton = new ImageButton(menuImage, width - width/10,height - height/20, width/5,height/10);  
   }
 
   //load all the image
   void display(){
     // setting background
-    image(bgImage, 0, 0, width, height);
+    image(bgImage, width/2, height/2, width, height);
     // win text
     fill(0,0,0);
-    textFont(font);
-    textAlign(CENTER);
     text("You WON!!!", width/2, height/3);
-    playerScore.printFinalScore();
+    textSize(40);
+    text("Your Final Score is: " + str(player.getPlayerScore()), width/2, height/2);
+    player.updateScoresFile();
     
     menuButton.update();
     menuButton.display();
@@ -32,12 +32,12 @@ class WinScreen extends Screen {
 
   void mousePressed(){
     if(menuButton.clicked()){
-    playerScore.deletePlayer();
+    player.deletePlayer();
     screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
     }
   }
   
   void keyPressed(){}
   void mouseDragged(){}
-  
+  void mouseReleased(){}
 }

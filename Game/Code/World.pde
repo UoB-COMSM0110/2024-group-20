@@ -1,14 +1,24 @@
 public class World {
-  private PVector gravity;
   private ArrayList<RigidBody> bodyList;
+  private PVector gravity;
+  private float linearVelocityFactor;
   
   public World() {
-    this.gravity = new PVector(0, -9.81);
     this.bodyList = new ArrayList<RigidBody>();
+    this.gravity = new PVector(0, 1000);
+    this.linearVelocityFactor = 0.9999;
+  }
+  
+  public int size(){
+    return bodyList.size();
   }
   
   public void addBody(RigidBody body) {
     this.bodyList.add(body);
+  }
+  
+  public void removeBodyIndx(int indx) {
+    this.bodyList.remove(indx);
   }
   
   public void removeBody(RigidBody body) {
@@ -23,17 +33,24 @@ public class World {
     }
   }
   
+  public int getBodyListSize() {
+    return bodyList.size();
+  }
+  
   public void step(float frameTime) {
     for(int i=0; i<this.bodyList.size(); i++) {
-      this.bodyList.get(i).step(frameTime);
+      this.bodyList.get(i).step(frameTime, gravity, linearVelocityFactor);
     }
+    
   }
   
   public boolean collideBodies(){
     boolean occurs = false;
     for(int i=0; i<this.bodyList.size()-1; i++){
       for(int j=i+1; j<this.bodyList.size(); j++){
-        if(Collisions.intersect(bodyList.get(i), bodyList.get(j))) occurs=true;
+        if(!bodyList.get(i).isStatic() || !bodyList.get(j).isStatic()) {
+          if(bodyList.get(i).intersect(bodyList.get(j))) occurs = true;
+        }
       }
     }
     return occurs;

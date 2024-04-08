@@ -1,5 +1,3 @@
-PImage redBird;
-
 public class BirdRed extends Bird{
   
   public BirdRed(PVector location){
@@ -9,7 +7,10 @@ public class BirdRed extends Bird{
 
   @Override
   public void display(){
-    redBird = loadImage("../Images/birdRed.png");
-    image(redBird, this.getCoorX() - 54, this.getCoorY() - 74); 
+    pushMatrix();
+    translate(position.x,position.y);
+    rotate(rotation);
+    image(gameImages.get("birdRed"), 0, -10); 
+    popMatrix();
   }
 }
