@@ -29,7 +29,7 @@ class GameScreen extends Screen {
     this.screenManager = screenManager;
     this.playerScore = screenManager.playerScore;
     this.allLevels = screenManager.allLevels;
-    timer = new Timer(5000);
+    timer = new Timer(3000); // 3s
         
     bgImage = gameImages.get("map");
     emptyButtonImage = gameImages.get("emptyButton");
@@ -65,9 +65,19 @@ class GameScreen extends Screen {
       if(allLevels[currentLevel].getStage() == 1){
         // Can Modify the structure 
         pflag = false;
-        //draw all the materials 
+        
+        for (ImageButton button : buttons) {
+          button.update(); 
+          button.display(); 
+        }      
+        for (Material material : materials) {
+          material.draw(g); 
+        }
+      
       }     
       if(allLevels[currentLevel].getStage() == 2){
+        buttons.get(0).update();
+        buttons.get(0).display();
         //If not all the birds were realised
         if(birdsIndx < animals.size()){
           if (clockRestart){ 
@@ -93,18 +103,8 @@ class GameScreen extends Screen {
             screenManager.setCurrentScreen(ScreenType.WINSCREEN); 
           }
         }
-      }
-      
-      for (ImageButton button : buttons) {
-        button.update(); 
-        button.display(); 
-      }      
-      for (Material material : materials) {
-        material.draw(g); 
-      }
-            
+      }       
       textDisplay();
-
     }
 
   }
