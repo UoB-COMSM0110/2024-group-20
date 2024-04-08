@@ -2,6 +2,7 @@ class GameScreen extends Screen {
   ScreenManager screenManager;
   Player player;
   Level allLevels[];
+  Menu levelMenu;
   Tutorial tutorial;
   World w = new World();
   Material draggedMaterial = null;
@@ -36,6 +37,7 @@ class GameScreen extends Screen {
     setBoundariesAndForces();
     setButtons();
     tutorial = new Tutorial();  
+    levelMenu = new Menu(width/2, height/2, width/2, height/2);
   }
 
   void display(){
@@ -59,6 +61,10 @@ class GameScreen extends Screen {
       allLevels[currentLevel].stageBirdsOnLevel(animals);
     }
     if(allLevels[currentLevel].getStage() == 1){
+      if(currentLevel<3 && currentLevel>0){
+        levelMenu.displayMenu();
+        levelMenu.clicked();
+      }
       // Can Modify the structure 
       pflag = false;
       
@@ -106,6 +112,7 @@ class GameScreen extends Screen {
       else if(currentLevel < 2){
         currentLevel++;
         cleanLevel();
+        levelMenu.resetMenu();
         pflag = true;
       }else{
         cleanLevel();
