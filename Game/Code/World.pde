@@ -49,11 +49,40 @@ public class World {
     for(int i=0; i<this.bodyList.size()-1; i++){
       for(int j=i+1; j<this.bodyList.size(); j++){
         if(!bodyList.get(i).isStatic() || !bodyList.get(j).isStatic()) {
-          if(bodyList.get(i).intersect(bodyList.get(j))) occurs = true;
+          if(bodyList.get(i).intersect(bodyList.get(j))){
+            occurs = true;
+            isPigCollision(bodyList.get(i), bodyList.get(j));
+          }
         }
       }
     }
     return occurs;
+  }
+  
+  private void isPigCollision(RigidBody bodyA, RigidBody bodyB){
+    // Excluding Rigid Bodies
+    if(!bodyA.isStatic() && !bodyB.isStatic()){
+      //Is one of the coliding bodies is a pig?
+      if(bodyA.getShapeType() == ShapeType.CIRCLE){
+        Circle possiblePig = (Circle) bodyA;
+        if( possiblePig.getAnimalType() == AnimalType.PIG){
+          isPigDead((Pig) possiblePig);
+        }  
+      }
+      if(bodyB.getShapeType() == ShapeType.CIRCLE){
+        Circle possiblePig = (Circle) bodyB;
+        if(possiblePig.getAnimalType() == AnimalType.PIG){
+          isPigDead((Pig) possiblePig); 
+        }
+      }
+    }
+  }
+  
+  //The Impulse doesn't work as expected!!!
+  private void isPigDead(Pig pig){
+    if(pig.getImpulse() > 0){
+      pig.killPig();
+    }
   }
   
   public void display(){

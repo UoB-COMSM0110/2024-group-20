@@ -12,11 +12,10 @@ class GameScreen extends Screen {
   
   int birdsIndx;
 
-  int firstLevel = 0;
   int currentLevel = 0;
   
   Timer timer;
-  boolean clockRestart = true;
+  int clockRestart = 0; // 0->True, 1-> False, 2-> Level Ended and we need to start final clock
   int birdCount = 0;
   boolean pflag = false;//If is true,enable physics to materials and turn off drags
   
@@ -78,35 +77,57 @@ class GameScreen extends Screen {
       if(allLevels[currentLevel].getStage() == 2){
         buttons.get(0).update();
         buttons.get(0).display();
-        //If not all the birds were realised
-        if(birdsIndx < animals.size()){
-          if (clockRestart){ 
-            timer.startTimer();
-            releaseBird();
-            clockRestart = false;
-            birdsIndx ++;
-          }
-          else if(timer.intervalFinished()){
-            clockRestart = true;
-          }
-        }
-        // If we released all the birds
-        else if (timer.intervalFinished()){
-          if(currentLevel < 2){
-            //Calculating points function!!!
-            currentLevel++;
-            cleanLevel();
-            pflag = true;
-          }else{
-            cleanLevel();
-            currentLevel = 0;
-            screenManager.setCurrentScreen(ScreenType.WINSCREEN); 
-          }
+        
+        //If not all the birds were realised an there are still Pigs alive
+        if(!continueBirdAttack()){
+          endLevel(); 
         }
       }       
       textDisplay();
     }
-
+  }
+  
+  private void endLevel(){
+    if(clockRestart == 2){
+      clockRestart = 0;
+      timer.startTimer();
+    }
+    if(timer.intervalFinished()){
+      //Calculate Points
+      if(allLevels[currentLevel].numberPigsAlive() == 0){
+        cleanLevel();
+        currentLevel = 0;
+        screenManager.setCurrentScreen(ScreenType.LOOSESCREEN); 
+      }
+      else if(currentLevel < 2){
+        currentLevel++;
+        cleanLevel();
+        pflag = true;
+      }else{
+        cleanLevel();
+        currentLevel = 0;
+        screenManager.setCurrentScreen(ScreenType.WINSCREEN); 
+      }
+    }
+  }
+  
+  private boolean continueBirdAttack(){
+    if(birdsIndx >= animals.size() || allLevels[currentLevel].numberPigsAlive() == 0){
+      if(clockRestart == 1){
+        clockRestart = 2;
+      }
+      return false; 
+    }
+    if(clockRestart == 0){ 
+      timer.startTimer();
+      releaseBird();
+      clockRestart = 1;
+      birdsIndx ++;
+    }
+    else if(timer.intervalFinished()){
+      clockRestart = 0;
+    }
+    return true;
   }
     
   private void releaseBird(){
@@ -242,9 +263,9 @@ class GameScreen extends Screen {
     w.addBody(new Ground(new PVector(width /*+ 10*/ , height/2 - 200), 1, 1, 20, height - 10, 0)); // Right
     
     //Bird Attack Vectors (xCoorForce, yCoorForce, xPositionOfBird)
-    BirdAttackVectors.add(new PVector(90, 90, width/6));
+    //BirdAttackVectors.add(new PVector(90, 90, width/6));
     BirdAttackVectors.add(new PVector(0, 180, width/2));
-    BirdAttackVectors.add(new PVector(-90, 270, 5 * width/6));
+    //BirdAttackVectors.add(new PVector(-90, 270, 5 * width/6));
   }
   
   public void setButtons(){

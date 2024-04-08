@@ -34,6 +34,14 @@ public abstract class RigidBody{
   protected abstract void calculateArea();
   protected abstract void calculateAngularInertia();
   
+  public ShapeType getShapeType(){
+    return shapeType;  
+  }
+  
+  public float getImpulse(){
+    return largestImpulse;  
+  }
+  
   public float getMass() {
     return mass;
   }
