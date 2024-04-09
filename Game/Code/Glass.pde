@@ -4,8 +4,12 @@ class Glass extends Material {
   }
 
   @Override
-  void draw(PGraphics pg) {
-    pg.fill(100, 255, 127, 128); 
-    super.drawBase(pg); 
+  void display() {
+    pushMatrix();
+    translate(position.x, position.y);
+    fill(100, 255, 127, 128); 
+    rotate(rotation);
+    rect(0, 0, rectWidth, rectHeight);
+    popMatrix();
   }
 }

@@ -58,6 +58,14 @@ public abstract class RigidBody{
     this.position = position;
   }
   
+  public float getRotation() {
+    return rotation;
+  }
+  
+  public void setRotation(float rotation) {
+    this.rotation = rotation;
+  }
+  
   public float getRestitution() {
     return restitution;
   }

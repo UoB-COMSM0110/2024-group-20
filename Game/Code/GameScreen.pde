@@ -72,9 +72,6 @@ class GameScreen extends Screen {
         button.update(); 
         button.display(); 
       }      
-      for (Material material : materials) {
-        material.draw(g); 
-      }
     }     
     if(allLevels[currentLevel].getStage() == 2){
       buttons.get(0).update();
@@ -246,10 +243,10 @@ class GameScreen extends Screen {
     }
 //////////////////////////////////////////////////////////////////////////
       if ((key == 'd' ||key=='D') && draggedMaterial != null) {  
-        draggedMaterial.rotate(PI / 36); // Rotate by 10 degrees
+        draggedMaterial.setRotation(draggedMaterial.getRotation() + PI / 18); // Rotate by 10 degrees
       }
       if ((key == 'a'||key == 'A' ) && draggedMaterial != null) {
-        draggedMaterial.rotate(-PI / 18); 
+        draggedMaterial.setRotation(draggedMaterial.getRotation() - PI / 18);
       }
   }
 
