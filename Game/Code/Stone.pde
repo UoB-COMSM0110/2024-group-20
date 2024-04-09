@@ -4,8 +4,12 @@ class Stone extends Material {
   }
 
   @Override
-  void draw(PGraphics pg) {
-    pg.fill(128, 128, 128); 
-    super.drawBase(pg);
+  void display() {
+    pushMatrix();
+    translate(position.x, position.y);
+    fill(128, 128, 128); 
+    rotate(rotation);
+    rect(0, 0, rectWidth, rectHeight);
+    popMatrix();
   }
 }

@@ -3,20 +3,8 @@ abstract class Material extends Rectangle {
     super(position, density, restitution, isStatic, rectWidth, rectHeight, rotation);
   }
 
-  abstract void draw(PGraphics pg); // Abstract draw method to be implemented by subclasses
+  abstract void display(); // Abstract draw method to be implemented by subclasses
  
-  public void rotate(float angle) {
-    rotation += angle; // Adjust the rotation angle
-  }
-
-  protected void drawBase(PGraphics pg) {
-    pg.pushMatrix();
-    pg.translate(position.x, position.y);
-    pg.rotate(rotation);
-    pg.rect(0, 0, rectWidth, rectHeight);
-    pg.popMatrix();
-  }
-  
   boolean isMouseOver(int mouseX, int mouseY) {
   return mouseX >= position.x - rectWidth / 2 && mouseX <= position.x + rectWidth / 2 &&
          mouseY >= position.y - rectHeight / 2 && mouseY <= position.y + rectHeight / 2;
