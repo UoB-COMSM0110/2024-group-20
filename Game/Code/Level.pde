@@ -2,7 +2,7 @@ public enum Resource {
   WOOD, GLASS, STONE
 }
 
-class Level{
+public class Level{
   private boolean levelFailed;
   private int levelStage; // 0 - not set, 1 - set and building, 2 - structures build, birds attack
   private int levelNo;

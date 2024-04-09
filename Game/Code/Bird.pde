@@ -5,7 +5,7 @@ public enum BirdType {
 public class Bird extends Circle{
   protected float impulseToughness;
   
-  BirdType birdType;
+  protected BirdType birdType;
   
   public Bird(PVector location,float density, float restitution, boolean isStatic, float radius, BirdType birdType){
     //PVector position, float density, float restitution, boolean isStatic, float circleRadius, float rotation

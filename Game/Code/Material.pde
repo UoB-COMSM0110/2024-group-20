@@ -5,8 +5,8 @@ abstract class Material extends Rectangle {
 
   abstract void display(); // Abstract draw method to be implemented by subclasses
  
-  boolean isMouseOver(int mouseX, int mouseY) {
-  return mouseX >= position.x - rectWidth / 2 && mouseX <= position.x + rectWidth / 2 &&
+  public boolean isMouseOver(int mouseX, int mouseY) {
+    return mouseX >= position.x - rectWidth / 2 && mouseX <= position.x + rectWidth / 2 &&
          mouseY >= position.y - rectHeight / 2 && mouseY <= position.y + rectHeight / 2;
   }
 

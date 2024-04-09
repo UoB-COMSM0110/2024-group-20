@@ -1,4 +1,4 @@
-class Timer{
+public class Timer{
   int startTime;
   int interval;
  

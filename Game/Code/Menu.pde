@@ -2,11 +2,11 @@ interface ButtonCallback {
   void onButtonPressed();
 }
 
-PImage nextImage;
-PImage skipImage;
-PImage woodBoardImage;
-
 public class Menu {
+  PImage nextImage;
+  PImage skipImage;
+  PImage woodBoardImage;
+  
   float x, y; // Position of the menu
   float width, height; // Dimensions of the menu
   String menuText; // Predefined text for the menu

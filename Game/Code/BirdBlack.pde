@@ -1,6 +1,6 @@
 public class BirdBlack extends Bird{
-  float explosionImpulse = 5E7;
-  float explosionRadius = circleRadius * 4;
+  private float explosionImpulse = 5E7;
+  private float explosionRadius = circleRadius * 4;
   
   public BirdBlack(PVector location){
     //PVector location,float density, float restitution, boolean isStatic, float radius, BirdType birdType
@@ -16,7 +16,7 @@ public class BirdBlack extends Bird{
     popMatrix();
   }
   
-  void explode(World w) {
+  public void explode(World w) {
     ArrayList<RigidBody> bodyList = w.getBodyList();
     float distance, impulse;
     PVector body1Position = this.getPosition();

@@ -1,4 +1,4 @@
-class LooseScreen extends Screen {
+public class LoseScreen extends Screen {
   ScreenManager screenManager;
   Player player;
   PImage bgImage, menuImage;
@@ -6,7 +6,7 @@ class LooseScreen extends Screen {
   ArrayList<ImageButton> buttons;
   
   //constuctor
-  LooseScreen(ScreenManager screenManager) {
+  public LoseScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
     this.player = screenManager.player;
     bgImage = gameImages.get("map");
@@ -15,7 +15,7 @@ class LooseScreen extends Screen {
   }
 
   //load all the image
-  void display(){
+  public void display(){
     // setting background
     image(bgImage, width/2, height/2, width, height);
     // lose text
@@ -31,15 +31,15 @@ class LooseScreen extends Screen {
  
   }
 
-  void mousePressed(){
+  public void mousePressed(){
     if(menuButton.clicked()){
       player.deletePlayer();
       screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
     }
   }
   
-  void keyPressed(){}
-  void mouseDragged(){}
-  void mouseReleased(){}
+  public void keyPressed(){}
+  public void mouseDragged(){}
+  public void mouseReleased(){}
   
 }

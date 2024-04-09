@@ -1,5 +1,5 @@
 public class BirdBlue extends Bird{
-  boolean hasAbility = true;
+  private boolean hasAbility = true;
   
   public BirdBlue(PVector location){
     //PVector location,float density, float restitution, boolean isStatic, float radius, BirdType birdType
@@ -16,11 +16,11 @@ public class BirdBlue extends Bird{
     popMatrix();
   }
   
-  boolean hasAbility() {
+  public boolean hasAbility() {
     return hasAbility;
   }
   
-  void reverseGravity(PVector gravity) {
+  public void reverseGravity(PVector gravity) {
     RigidBody body = this.lastContactBody;
     body.setLinearAcceleration(PVector.mult(gravity, -2));
     hasAbility = false;
