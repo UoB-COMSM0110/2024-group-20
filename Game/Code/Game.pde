@@ -3,16 +3,14 @@ import java.io.*;
 
 HashMap<String, PImage> gameImages;
 ScreenManager screenManager;
-PFont font;
 
 void setup (){
-  font = createFont("angrybirds-regular.ttf", 128);
   fullScreen(FX2D);
   //fullScreen();
   rectMode(CENTER);
   imageMode(CENTER);
   textAlign(CENTER);
-  textFont(font);
+  textFont(createFont("angrybirds-regular.ttf", 128));
 
   loadImages();
   screenManager = new ScreenManager();

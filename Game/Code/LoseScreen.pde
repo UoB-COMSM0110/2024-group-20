@@ -1,9 +1,9 @@
 public class LoseScreen extends Screen {
-  ScreenManager screenManager;
-  Player player;
-  PImage bgImage, menuImage;
-  ImageButton menuButton;
-  ArrayList<ImageButton> buttons;
+  private ScreenManager screenManager;
+  private Player player;
+  private PImage bgImage, menuImage;
+  private ImageButton menuButton;
+  private ArrayList<ImageButton> buttons;
   
   //constuctor
   public LoseScreen(ScreenManager screenManager) {
@@ -20,7 +20,6 @@ public class LoseScreen extends Screen {
     image(bgImage, width/2, height/2, width, height);
     // lose text
     fill(0,0,0);
-    textFont(font);
     text("You LOST!!!", width/2, height/3);
     textSize(40);
     text("Your Final Score is: " + str(player.getPlayerScore()), width/2, height/2);

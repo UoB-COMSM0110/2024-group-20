@@ -1,9 +1,9 @@
 public class StartScreen extends Screen {
-  ScreenManager screenManager;
-  Player player;
-  PImage bgImage, logoImage, startImage, scoreImage, exitImage;
-  ImageButton startButton, scoreButton, exitButton;
-  ArrayList<ImageButton> buttons;
+  private ScreenManager screenManager;
+  private Player player;
+  private PImage bgImage, logoImage, startImage, scoreImage, exitImage;
+  private ImageButton startButton, scoreButton, exitButton;
+  private ArrayList<ImageButton> buttons;
   
   //constuctor
   public StartScreen(ScreenManager screenManager) {

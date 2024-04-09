@@ -7,7 +7,7 @@ public class DifficultyScreen extends Screen {
   
   
   //constuctor
-  DifficultyScreen(ScreenManager screenManager) {
+  public DifficultyScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
     this.allLevels = screenManager.allLevels;
     

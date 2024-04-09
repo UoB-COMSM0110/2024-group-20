@@ -1,8 +1,8 @@
 public class ImageButton {
-  float x, y; // Position of the button
-  float width, height; // Size of the button
-  PImage image; // Image used for the button
-  boolean isOver = false; 
+  private float x, y; // Position of the button
+  private float width, height; // Size of the button
+  private PImage image; // Image used for the button
+  private boolean isOver = false; 
 
   // Constructor
   public ImageButton(PImage image,float x, float y, float width, float height) {

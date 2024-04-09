@@ -1,9 +1,9 @@
 public class PlayerNameScreen extends Screen {
-  ScreenManager screenManager;
-  Player player;
-  String playerName;
-  String displayName;
-  PImage bgImage;
+  private ScreenManager screenManager;
+  private Player player;
+  private String playerName;
+  private String displayName;
+  private PImage bgImage;
   
   public PlayerNameScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;

@@ -1,9 +1,9 @@
 public class WinScreen extends Screen {
-  ScreenManager screenManager;
-  Player player;
-  PImage bgImage, menuImage;
-  ImageButton menuButton;
-  ArrayList<ImageButton> buttons;
+  private ScreenManager screenManager;
+  private Player player;
+  private PImage bgImage, menuImage;
+  private ImageButton menuButton;
+  private ArrayList<ImageButton> buttons;
   
   //constuctor
   public WinScreen(ScreenManager screenManager) {

@@ -1,9 +1,10 @@
 public class Tutorial {
-  Menu[] menus;
+  private Menu[] menus;
 
-  int currentStep;
-  int totalSteps;
-  Tutorial() {
+  private int currentStep;
+  private int totalSteps;
+  
+  public Tutorial() {
     currentStep = 0;
     totalSteps = 5;
     menus = new Menu[totalSteps]; // Assuming 5 steps in the tutorial

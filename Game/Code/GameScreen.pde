@@ -17,7 +17,6 @@ public class GameScreen extends Screen {
   
   private Timer timer;
   private int clockRestart = 0; // 0->True, 1-> False, 2-> Level Ended and we need to start final clock
-  private int birdCount = 0;
   private boolean pflag = false;//If is true,enable physics to materials and turn off drags
   
   private PImage bgImage,menuImage,emptyButtonImage,readyImage;
