@@ -34,7 +34,7 @@ class Level{
     this.noBirds = noBirdsRed + noBirdsBlue + noBirdsBlack;
     birdsOnLevel = new Bird[this.noBirds];
     for(int i = 0; i < noBirdsRed; i++){
-     birdsOnLevel[i] = new BirdRed(new PVector(2 * width/5 + (10 * i), 2*  height/5));
+     birdsOnLevel[i] = new BirdBlack(new PVector(2 * width/5 + (10 * i), 2*  height/5));
     }
     for(int i = noBirdsRed; i <  noBirdsRed + noBirdsBlue; i++){
       birdsOnLevel[i] = new BirdBlue(new PVector(2 * width/5 + (10 * i), 3 * height/5));

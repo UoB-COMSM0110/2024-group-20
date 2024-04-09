@@ -3,6 +3,7 @@ public enum BirdType {
 }
 
 public class Bird extends Circle{
+  protected float impulseToughness;
   
   BirdType birdType;
   
@@ -13,5 +14,9 @@ public class Bird extends Circle{
   }
   
   public void display(){}
+  
+  public float getImpulseToughness(){
+    return impulseToughness;
+  }
   
 }

@@ -1,4 +1,5 @@
-public class Pig extends Circle{
+public class Pig extends Circle {
+  private float impulseToughness;
   
   // If pig gets hit by a bird it get's killed and dissapears
   private boolean alive;
@@ -6,6 +7,7 @@ public class Pig extends Circle{
   public Pig(PVector location){
     //PVector position, float density, float restitution, boolean isStatic, float circleRadius, float rotation
     super(location, 0.6f, 0.5f, false, 55, 0);
+    impulseToughness = 5e6;
     alive = true;
   }
 
@@ -31,5 +33,7 @@ public class Pig extends Circle{
     return alive;
   }
   
-  
+  public float getImpulseToughness() {
+    return impulseToughness;
+  }
 }

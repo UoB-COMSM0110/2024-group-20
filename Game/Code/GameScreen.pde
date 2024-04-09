@@ -50,7 +50,7 @@ class GameScreen extends Screen {
         w.step(1/frameRate/10);
         w.collideBodies();
       }
-      checkAnimalsKilled();
+      checkAnimalActions();
     }
     w.collideBodies();
     w.display();
@@ -87,12 +87,43 @@ class GameScreen extends Screen {
     textDisplay();
   }
   
-  private void checkAnimalsKilled() {
-    for(Circle animal : animals) {
-      if(animal instanceof Pig && animal.getLargestImpulse() > 5E6) {
+  private void checkAnimalActions() {
+    for(int i=0; i<animals.size(); i++) {
+      Circle animal = animals.get(i);
+      if(animal instanceof Pig) {
         //print(animal.getLargestImpulse()+"\n");
         Pig pig = (Pig) animal;
-        pig.killPig();
+        if(pig.getLargestImpulse() > pig.getImpulseToughness()) {
+          pig.killPig();
+        }
+      }
+      if(animal instanceof BirdRed) {
+        BirdRed birdRed = (BirdRed) animal;
+        if(birdRed.getLargestImpulse() > birdRed.getImpulseToughness()) {
+          w.removeBody(animal);
+          animals.remove(animal);
+          i--;
+        }
+      }
+      if(animal instanceof BirdBlue) {
+        BirdBlue birdBlue = (BirdBlue) animal;
+        if(birdBlue.hasAbility() && birdBlue.getLastContactBody()!=null) {
+          birdBlue.reverseGravity(w.getGravity());
+        }
+        if(birdBlue.getLargestImpulse() > birdBlue.getImpulseToughness()) {
+          w.removeBody(animal);
+          animals.remove(animal);
+          i--;
+        }
+      }
+      if(animal instanceof BirdBlack) {
+        if(animal.getLastContactBody() != null) {
+          BirdBlack birdBlack = (BirdBlack) animal;
+          birdBlack.explode(w);
+          w.removeBody(animal);
+          animals.remove(animal);
+          i--;
+        }
       }
     }
   }
@@ -185,7 +216,7 @@ class GameScreen extends Screen {
     //add glass
     if(glassButton.clicked()){
       if(allLevels[currentLevel].buyResource(Resource.GLASS)){
-        Glass newGlass = new Glass(newPosition, 0.5, 0.3, false, 50, 200,0);
+        Glass newGlass = new Glass(newPosition, 0.5, 0.8, false, 50, 200,0);
         materials.add(newGlass);
         w.addBody(newGlass);
       }
