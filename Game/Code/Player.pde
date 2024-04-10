@@ -45,12 +45,7 @@ public class Player{
   
   ////SETTING GAME DIFFICULTY/////////////////////////////////////////////////////////////////////////
   public void setDifficulty(Difficulty chosen){
-    if(chosen == Difficulty.EASY){
-      this.difficulty = Difficulty.EASY;
-    }
-    if(chosen == Difficulty.HARD){
-      this.difficulty = Difficulty.HARD;
-    }
+    this.difficulty = chosen;
   }
   
   public void deletePlayer(){
@@ -110,15 +105,5 @@ public class Player{
       this.scoreSet = true;
     }
   }
-  
-  ////PRINTING/////////////////////////////////////////////////////////////////////////
-  
-  
-  // Method for gameScreen printin the name and score to screen
-  public void printCurrentPlayerScore(){
-     fill(0, 0, 0);
-     textSize(40);
-     text(playerName + "   Score: " + str(playerScore), width-width/5,height/15);
-  }  
   
 }

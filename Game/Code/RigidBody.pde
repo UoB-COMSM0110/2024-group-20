@@ -103,6 +103,10 @@ public abstract class RigidBody{
     return angularInertia;
   }
   
+  public void setStatic(boolean bool) {
+    this.isStatic = bool;
+  }
+  
   public boolean isStatic() {
     return isStatic;
   }

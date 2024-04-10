@@ -3,11 +3,8 @@ public class Timer{
   private int interval;
  
   public Timer(int interval){
-    this.interval = interval;  
-  }
-  
-  public void startTimer(){
-    startTime = millis();
+    this.interval = interval; 
+    this.startTime = millis();
   }
   
   public boolean intervalFinished(){
