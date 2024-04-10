@@ -24,7 +24,7 @@ public class GameScreen extends Screen {
 
   public void display(){
     currentLevel.display();
-    if(currentLevelNumber<3 && currentLevelNumber>0){
+    if(currentLevelNumber<gameLevelData.length && currentLevelNumber>0){
       levelMenu.displayMenu();
       levelMenu.clicked();
     }
