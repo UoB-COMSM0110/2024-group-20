@@ -24,6 +24,10 @@ public class GameScreen extends Screen {
 
   public void display(){
     currentLevel.display();
+    for (ImageButton button : buttons) {
+      button.update(); 
+      button.display(); 
+    }
     if(currentLevelNumber<gameLevelData.length && currentLevelNumber>0){
       levelMenu.displayMenu();
       levelMenu.clicked();
