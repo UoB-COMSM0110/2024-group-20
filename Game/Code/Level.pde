@@ -120,6 +120,22 @@ public class Level{
     return false;
   }
 
+    public boolean sellResource(Material material){
+    if (material instanceof Glass){
+      budget += 50;
+    }
+    else if (material instanceof Wood){
+      budget += 100;
+    }
+    else if (material instanceof Stone){
+      budget += 150;
+    }
+    else {
+      return false;
+    }
+    return true;
+  }
+  
   public void printLevelBudget(){
      fill(0, 0, 0);
      textSize(40);
