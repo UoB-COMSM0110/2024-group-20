@@ -13,12 +13,10 @@ public class ScreenManager {
   private HashMap<ScreenType, Screen> screens;
   private Screen currentScreen;
   private Player player;
-  private Level allLevels[];
 
   public ScreenManager() {
     screens = new HashMap<ScreenType, Screen>();
     player = new Player();
-    allLevels = new Level[3];   
 
     setupScreens();
     setCurrentScreen(ScreenType.STARTSCREEN);

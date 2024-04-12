@@ -1,6 +1,5 @@
 public class DifficultyScreen extends Screen {
   private ScreenManager screenManager;
-  private Level allLevels[];
   private PImage bgImage, easyImage, hardImage;
   private ImageButton easyButton, hardButton;
   private ArrayList<ImageButton> buttons;
@@ -9,7 +8,6 @@ public class DifficultyScreen extends Screen {
   //constuctor
   public DifficultyScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
-    this.allLevels = screenManager.allLevels;
     
     bgImage = gameImages.get("map");
     buttons = new ArrayList<ImageButton>();
@@ -50,14 +48,10 @@ public class DifficultyScreen extends Screen {
   public void mouseReleased(){}
   
   private void setEasyLevels(){
-    allLevels[0] = new Level(200, 1, 3, 0, 0, Difficulty.EASY, 0);
-    allLevels[1] = new Level(150, 2, 3, 3, 0, Difficulty.EASY, 1);
-    allLevels[2] = new Level(100, 3, 3, 3, 3, Difficulty.EASY, 2);
+    screenManager.player.difficulty = Difficulty.EASY;
   }
 
   private void setHardLevels(){
-    allLevels[0] = new Level(200, 1, 3, 3, 0, Difficulty.HARD, 0);
-    allLevels[1] = new Level(150, 2, 3, 3, 3, Difficulty.HARD, 1);
-    allLevels[2] = new Level(100, 3, 0, 6, 6, Difficulty.HARD, 2);
+    screenManager.player.difficulty = Difficulty.HARD;
   }
 }

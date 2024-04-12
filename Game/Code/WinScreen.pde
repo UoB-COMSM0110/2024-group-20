@@ -3,7 +3,7 @@ public class WinScreen extends Screen {
   private Player player;
   private PImage bgImage, menuImage;
   private ImageButton menuButton;
-  private ArrayList<ImageButton> buttons;
+  //private ArrayList<ImageButton> buttons;
   
   //constuctor
   public WinScreen(ScreenManager screenManager) {

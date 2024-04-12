@@ -2,6 +2,8 @@ import processing.javafx.*;
 import java.io.*;
 
 HashMap<String, PImage> gameImages;
+JSONArray[] gameLevelData;
+
 ScreenManager screenManager;
 
 void setup (){
@@ -13,6 +15,7 @@ void setup (){
   textFont(createFont("angrybirds-regular.ttf", 128));
 
   loadImages();
+  loadLevelJSONArrays();
   screenManager = new ScreenManager();
 }
 
@@ -41,9 +44,8 @@ void mouseReleased() {
 void loadImages() {
   gameImages = new HashMap();
   File directoryPath = new File(sketchPath("../Images"));
-  File filesList[] = directoryPath.listFiles();
-  for(int i=0; i<filesList.length; i++) {
-    File file = filesList[i];
+  File fileList[] = directoryPath.listFiles();
+  for(File file:fileList) {
     String fileName = file.getName();
     String imageName = fileName.replaceFirst("[.][^.]+$", "");
     String imagePath = "../Images/" + fileName;
@@ -51,6 +53,19 @@ void loadImages() {
     gameImages.put(imageName, image);
   }
 }
+
+void loadLevelJSONArrays() {
+  File directoryPath = new File(sketchPath("../Levels"));
+  File fileList[] = directoryPath.listFiles();
+  gameLevelData = new JSONArray[fileList.length];
+  for(File file:fileList) {
+    String fileName = file.getName();
+    String levelName = fileName.replaceFirst("[.][^.]+$", "");
+    int levelNumber = Integer.valueOf(levelName);
+    gameLevelData[levelNumber] = loadJSONArray(file);
+  }
+}
+  
 
 
  //World w;
