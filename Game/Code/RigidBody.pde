@@ -105,6 +105,8 @@ public abstract class RigidBody{
   
   public void setStatic(boolean bool) {
     this.isStatic = bool;
+    calculateMass();
+    calculateAngularInertia();
   }
   
   public boolean isStatic() {

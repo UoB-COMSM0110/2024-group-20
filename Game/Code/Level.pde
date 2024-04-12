@@ -104,7 +104,7 @@ public class Level extends Screen {
       }
       //undo buy material
       if(undoButton.clicked()){
-        if(!materials.isEmpty()){
+        if(!materialList.isEmpty()){
           Material lastMaterial = materialList.get(materialList.size() - 1);
           if(sellResource(lastMaterial)){
             w.removeBody(lastMaterial);
@@ -114,6 +114,9 @@ public class Level extends Screen {
       }
       if(readyButton.clicked()){
         zeroImpulses();
+        for(Pig pig:pigList) {
+          pig.setStatic(false);
+        }
         ready=true;
       }
     }
@@ -162,6 +165,7 @@ public class Level extends Screen {
     float positionY = levelContent.getFloat("positionY") * height;
     PVector position = new PVector(positionX, positionY);
     Pig pig = new Pig(position);
+    pig.setStatic(true);
     pigList.add(pig);
   }
   
@@ -216,8 +220,13 @@ public class Level extends Screen {
       }
       if(body instanceof BirdBlue) {
         BirdBlue birdBlue = (BirdBlue) body;
-        if(birdBlue.hasAbility() && birdBlue.getLastContactBody()!=null) {
+        RigidBody contactBody = birdBlue.getLastContactBody();
+        if(birdBlue.hasAbility() && contactBody!=null && !contactBody.isStatic()) {
           birdBlue.reverseGravity(w.getGravity());
+          if(contactBody instanceof Pig) {
+            Pig pig = (Pig) contactBody;
+            pig.killPig();
+          }
         }
         if(birdBlue.getLargestImpulse() > birdBlue.getImpulseToughness()) {
           birdFrontStageList.remove(birdBlue);
@@ -229,6 +238,13 @@ public class Level extends Screen {
           BirdBlack birdBlack = (BirdBlack) body;
           birdBlack.explode(w);
           birdFrontStageList.remove(birdBlack);
+          setupWorld();
+        }
+      }
+      if(body instanceof Material) {
+        Material material = (Material) body;
+        if(material.getLargestImpulse() > material.getImpulseToughness()) {
+          materialList.remove(material);
           setupWorld();
         }
       }
@@ -325,14 +341,14 @@ public class Level extends Screen {
   
   private void setButtons(){
     buttons = new ArrayList<ImageButton>();
-    //wood
-    woodButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f+1/10f),width/10,height/20);
-    buttons.add(woodButton);
     //glass
-    glassButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f),width/10,height/20);
+    glassButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f-1/10f),width/10,height/20);
     buttons.add(glassButton);
+    //wood
+    woodButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f),width/10,height/20);
+    buttons.add(woodButton);
     //stone
-    stoneButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f-1/10f),width/10,height/20);
+    stoneButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f+1/10f),width/10,height/20);
     buttons.add(stoneButton);
     //undo
     undoButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f+3/10f),width/10,height/20);

@@ -2,6 +2,7 @@ public class Glass extends Material {
   public Glass(PVector position, float density, float restitution, boolean isStatic, float rectWidth, float rectHeight, float rotation) {
     super(position, density, restitution, isStatic, rectWidth, rectHeight, rotation);
     this.frictionRestitution = 0.2;
+    impulseToughness = 1e6;
   }
 
   @Override

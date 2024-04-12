@@ -60,7 +60,8 @@ public class Menu {
     String footerText = stepNumber + "/" + totalSteps;
     text(footerText, x, y + height/2 - height * 0.02); // Centered at the bottom
    
-    displayWrappedText(menuText, x, y - height * 0.4, width * 0.9);
+    textSize(40);
+    displayWrappedText(menuText, x, y - height * 0.3, width * 0.9);
   }
   //Display menu for level
   public void displayMenu() {
@@ -107,23 +108,23 @@ public class Menu {
   }
   //self-adjusted text display.
   public void displayWrappedText(String text, float x, float y, float maxWidth) {
-      //textSize(20); // Set a standard text size,maybe should restrict to one certain size.
-      String[] words = text.split(" ");
-      String line = "";
-      float lineHeight = 20; // Height of each line of text
+    String[] words = text.split(" ");
+    String testLine = "";
+    String newLine = "";
+    String line = "";
 
-      for (String word : words) {
-          String testLine = line + word + " ";
-          if (textWidth(testLine) > maxWidth) {
-            text(line, x, y);
-            line = word + " ";
-             y += lineHeight;
-           }
-           else {
-             line = testLine;
-           }
+    for (String word : words) {
+      testLine = newLine + word + " ";
+      if (textWidth(testLine) > maxWidth) {
+        line = line + newLine + "\n";
+        newLine = word + " ";
       }
-      text(line, x, y);
+      else {
+        newLine = newLine + word + " ";
+      }
+    }
+    line = line + newLine;
+    text(line, x, y);
   }
  
 }
