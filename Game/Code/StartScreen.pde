@@ -1,12 +1,12 @@
-class StartScreen extends Screen {
-  ScreenManager screenManager;
-  Player player;
-  PImage bgImage, logoImage, startImage, scoreImage, exitImage;
-  ImageButton startButton, scoreButton, exitButton;
-  ArrayList<ImageButton> buttons;
+public class StartScreen extends Screen {
+  private ScreenManager screenManager;
+  private Player player;
+  private PImage bgImage, logoImage, startImage, scoreImage, exitImage;
+  private ImageButton startButton, scoreButton, exitButton;
+  private ArrayList<ImageButton> buttons;
   
   //constuctor
-  StartScreen(ScreenManager screenManager) {
+  public StartScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
     this.player = screenManager.player;
     bgImage = gameImages.get("map");
@@ -29,7 +29,7 @@ class StartScreen extends Screen {
   }
 
   //load all the image
-  void display(){
+  public void display(){
     // setting background
     image(bgImage, width/2, height/2, width, height);
     //setting logo
@@ -41,7 +41,7 @@ class StartScreen extends Screen {
       }
   }
 
-  void mousePressed(){
+  public void mousePressed(){
     if(startButton.clicked()){
       if(player.isNameSet()) {
         screenManager.setCurrentScreen(ScreenType.DIFFICULTYSCREEN);
@@ -56,8 +56,8 @@ class StartScreen extends Screen {
     if(exitButton.clicked()){exit();}
   }
   
-  void keyPressed(){}
-  void mouseDragged(){}
-  void mouseReleased(){}
+  public void keyPressed(){}
+  public void mouseDragged(){}
+  public void mouseReleased(){}
   
 }

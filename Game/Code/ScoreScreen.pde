@@ -1,14 +1,12 @@
-class ScoreScreen extends Screen {
-  ScreenManager screenManager;
-  Player player;
-  PImage bgImage, woodBoardImage, menuImage;
-  ImageButton menuButton;
+public class ScoreScreen extends Screen {
+  private ScreenManager screenManager;
+  private PImage bgImage, woodBoardImage, menuImage;
+  private ImageButton menuButton;
   //ArrayList<ImageButton> buttons;
   
     //constuctor
-    ScoreScreen(ScreenManager screenManager) {
+  public ScoreScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
-    this.player = screenManager.player;
     bgImage = gameImages.get("map");
     woodBoardImage = gameImages.get("woodBoard");
     menuImage = gameImages.get("menuButton");
@@ -16,7 +14,7 @@ class ScoreScreen extends Screen {
   }
 
   //load all the image
-  void display(){
+  public void display(){
     // setting background
     image(bgImage, width/2, height/2, width, height);
     // Board to display scores on
@@ -28,13 +26,13 @@ class ScoreScreen extends Screen {
     menuButton.display();
   }
 
-  void mousePressed(){
+  public void mousePressed(){
     if(menuButton.clicked()){screenManager.setCurrentScreen(ScreenType.STARTSCREEN);}
   }
   
-  void keyPressed(){}
-  void mouseDragged(){}
-  void mouseReleased(){}
+  public void keyPressed(){}
+  public void mouseDragged(){}
+  public void mouseReleased(){}
   
   // Method for scoreScreen printin the score.txt file to screen
   public void printScoresFile(){

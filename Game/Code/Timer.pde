@@ -1,8 +1,8 @@
-class Timer{
-  int startTime;
-  int interval;
+public class Timer{
+  private int startTime;
+  private int interval;
  
-  Timer(int interval){
+  public Timer(int interval){
     this.interval = interval;  
   }
   

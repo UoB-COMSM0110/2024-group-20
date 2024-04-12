@@ -11,7 +11,7 @@ public class Player{
   private Difficulty difficulty;
 
   
-  Player(){
+  public Player(){
     playerName = "";
     scoreSet = false;
     nameSet = false;
@@ -53,7 +53,7 @@ public class Player{
     }
   }
   
-  void deletePlayer(){
+  public void deletePlayer(){
     playerName = ""; 
     playerScore = 0;
     scoreSet = false;

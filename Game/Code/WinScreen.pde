@@ -1,12 +1,12 @@
-class WinScreen extends Screen {
-  ScreenManager screenManager;
-  Player player;
-  PImage bgImage, menuImage;
-  ImageButton menuButton;
-  ArrayList<ImageButton> buttons;
+public class WinScreen extends Screen {
+  private ScreenManager screenManager;
+  private Player player;
+  private PImage bgImage, menuImage;
+  private ImageButton menuButton;
+  private ArrayList<ImageButton> buttons;
   
   //constuctor
-  WinScreen(ScreenManager screenManager) {
+  public WinScreen(ScreenManager screenManager) {
     this.screenManager = screenManager;
     this.player = screenManager.player;
     bgImage = gameImages.get("map");
@@ -15,7 +15,7 @@ class WinScreen extends Screen {
   }
 
   //load all the image
-  void display(){
+  public void display(){
     // setting background
     image(bgImage, width/2, height/2, width, height);
     // win text
@@ -30,14 +30,14 @@ class WinScreen extends Screen {
  
   }
 
-  void mousePressed(){
+  public void mousePressed(){
     if(menuButton.clicked()){
     player.deletePlayer();
     screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
     }
   }
   
-  void keyPressed(){}
-  void mouseDragged(){}
-  void mouseReleased(){}
+  public void keyPressed(){}
+  public void mouseDragged(){}
+  public void mouseReleased(){}
 }

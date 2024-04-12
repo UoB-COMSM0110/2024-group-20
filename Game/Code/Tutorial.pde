@@ -1,9 +1,10 @@
 public class Tutorial {
-  Menu[] menus;
+  private Menu[] menus;
 
-  int currentStep;
-  int totalSteps;
-  Tutorial() {
+  private int currentStep;
+  private int totalSteps;
+  
+  public Tutorial() {
     currentStep = 0;
     totalSteps = 5;
     menus = new Menu[totalSteps]; // Assuming 5 steps in the tutorial
@@ -15,7 +16,7 @@ public class Tutorial {
     menus[4] = new Menu(width-width/10,height/20+height/7, width/10, height/7, "Use less material and survive more to gain higher score.", 5, totalSteps, this::nextStep, this::skipTutorial);
   }
 
-  void display() {
+  public void display() {
     if (currentStep < menus.length) {
       fill(0,0,0,150);
       rect(width/2,height/2,width,height);
@@ -23,14 +24,14 @@ public class Tutorial {
     }
   }
 
-  void nextStep() {
+  public void nextStep() {
     currentStep++;
   }
-  void skipTutorial() {
+  public void skipTutorial() {
     currentStep = totalSteps;
   }
     
-  void mousePressed() {
+  public void mousePressed() {
     if (currentStep < menus.length) {
       menus[currentStep].mousePressed();
     }

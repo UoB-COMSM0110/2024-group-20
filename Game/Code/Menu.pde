@@ -1,24 +1,24 @@
-interface ButtonCallback {
-  void onButtonPressed();
+public interface ButtonCallback {
+  public void onButtonPressed();
 }
 
-PImage nextImage;
-PImage skipImage;
-PImage woodBoardImage;
-
 public class Menu {
-  float x, y; // Position of the menu
-  float width, height; // Dimensions of the menu
-  String menuText; // Predefined text for the menu
-  int stepNumber, totalSteps; // For page footer (e.g., "1/4")
-  ButtonCallback callbackNext; // Callback for Next button
-  ButtonCallback callbackSkip; // Callback for Skip button
-  ImageButton nextButton,skipButton;
-  boolean nextPressed;//check whether next is pressed
-  String levelText = "Survived! Click NEXT to next attack wave!";
+  private PImage nextImage;
+  private PImage skipImage;
+  private PImage woodBoardImage;
+  
+  private float x, y; // Position of the menu
+  private float width, height; // Dimensions of the menu
+  private String menuText; // Predefined text for the menu
+  private int stepNumber, totalSteps; // For page footer (e.g., "1/4")
+  private ButtonCallback callbackNext; // Callback for Next button
+  private ButtonCallback callbackSkip; // Callback for Skip button
+  private ImageButton nextButton,skipButton;
+  private boolean nextPressed;//check whether next is pressed
+  private String levelText = "Survived! Click NEXT to next attack wave!";
 
   // Constructor for tutorial
-  Menu(float x, float y, float width, float height,String menuText,int stepNumber, int totalSteps, ButtonCallback callbackNext, ButtonCallback callbackSkip) {
+  public Menu(float x, float y, float width, float height,String menuText,int stepNumber, int totalSteps, ButtonCallback callbackNext, ButtonCallback callbackSkip) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -35,7 +35,7 @@ public class Menu {
     nextButton = new ImageButton(nextImage,x + width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button
   }
   //Constructor for level
-  Menu(float x, float y, float width, float height){
+  public Menu(float x, float y, float width, float height){
     this.x = x;
     this.y = y;
     this.width = width;
@@ -46,7 +46,7 @@ public class Menu {
     nextButton = new ImageButton(nextImage,x, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button
   }
    // Display the menu for tutorial.
-  void display() {
+  public void display() {
     // Draw the menu background
     image(woodBoardImage, x, y, width, height);
        
@@ -63,7 +63,7 @@ public class Menu {
     displayWrappedText(menuText, x, y - height * 0.4, width * 0.9);
   }
   //Display menu for level
-  void displayMenu() {
+  public void displayMenu() {
     if(!nextPressed){
       return;
     }
@@ -75,7 +75,7 @@ public class Menu {
       text(levelText, x, y  + height * 0.02);
   }
 
-  void clicked(){
+  public void clicked(){
      if(!nextPressed){
       return;
     }
@@ -85,11 +85,11 @@ public class Menu {
     }
   }
 
-  void resetMenu(){
+  public void resetMenu(){
     nextPressed = true;
   }
 
-  void mousePressed() {
+  public void mousePressed() {
     // Check if a button is pressed
     // Next
       if (skipButton.clicked()) {
@@ -106,7 +106,7 @@ public class Menu {
       }
   }
   //self-adjusted text display.
-  void displayWrappedText(String text, float x, float y, float maxWidth) {
+  public void displayWrappedText(String text, float x, float y, float maxWidth) {
       //textSize(20); // Set a standard text size,maybe should restrict to one certain size.
       String[] words = text.split(" ");
       String line = "";

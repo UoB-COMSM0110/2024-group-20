@@ -21,6 +21,7 @@ public abstract class RigidBody{
   protected ShapeType shapeType;
   protected boolean isStatic;
   protected float largestImpulse;
+  protected RigidBody lastContactBody;
   
   public void calculateMass() {
     if(isStatic) {
@@ -42,8 +43,12 @@ public abstract class RigidBody{
     return largestImpulse;  
   }
   
-  public void setLargestImpulse(int impulse){
+  public void setLargestImpulse(float impulse){
     largestImpulse = impulse;  
+  }
+  
+  public void updateLargestImpulse(float impulse) {
+    this.largestImpulse = max(this.largestImpulse, abs(impulse));
   }
   
   public float getMass() {
@@ -78,6 +83,10 @@ public abstract class RigidBody{
     this.linearVelocity = linearVelocity;
   }
   
+  public void setLinearAcceleration(PVector linearAcceleration) {
+    this.linearAcceleration = linearAcceleration;
+  }
+  
   public PVector getLinearAcceleration(){
     return this.linearAcceleration;
   }
@@ -100,6 +109,14 @@ public abstract class RigidBody{
   
   public float getFrictionRestitution() {
     return frictionRestitution;
+  }
+  
+  public void setLastContactBody(RigidBody body) {
+    this.lastContactBody = body;
+  }
+  
+  public RigidBody getLastContactBody() {
+    return lastContactBody;
   }
   
   public void step(float frameTime, PVector gravity, float linearVelocityFactor) {
@@ -177,8 +194,8 @@ public abstract class RigidBody{
     float body2NewAngVelocity = body2AngVelocity + body2DiffAngVelocity;
     //body2.setAngularVelocity(body2NewAngVelocity);
     
-    body1.largestImpulse = max(body1.largestImpulse, abs(impulse));
-    body2.largestImpulse = max(body2.largestImpulse, abs(impulse));
+    body1.updateLargestImpulse(impulse);
+    body2.updateLargestImpulse(impulse);
     
     // for friction  //////////////////////////////////////////////////////////
     float tangDiffLinVelocity = PVector.dot(diffLinVelocity, tangentDirection);

@@ -1,11 +1,21 @@
-class ScreenManager {
+public enum ScreenType {
+  STARTSCREEN,
+  PLAYERNAMESCREEN,
+  SCORESCREEN,
+  GAMESCREEN,
+  ATTACKSCREEN,
+  DIFFICULTYSCREEN,
+  WINSCREEN,
+  LOSESCREEN
+}
+
+public class ScreenManager {
   private HashMap<ScreenType, Screen> screens;
   private Screen currentScreen;
-  Player player;
-  Level allLevels[];
+  private Player player;
+  private Level allLevels[];
 
-
-  ScreenManager() {
+  public ScreenManager() {
     screens = new HashMap<ScreenType, Screen>();
     player = new Player();
     allLevels = new Level[3];   
@@ -21,36 +31,36 @@ class ScreenManager {
     screens.put(ScreenType.GAMESCREEN, new GameScreen(this));
     screens.put(ScreenType.SCORESCREEN, new ScoreScreen(this));
     screens.put(ScreenType.WINSCREEN, new WinScreen(this));
-    screens.put(ScreenType.LOOSESCREEN, new LooseScreen(this));
+    screens.put(ScreenType.LOSESCREEN, new LoseScreen(this));
   }
   
-  void setCurrentScreen(ScreenType screenType) {
+  public void setCurrentScreen(ScreenType screenType) {
     currentScreen = screens.get(screenType);
   }
   
-  void display() {
+  public void display() {
     if (currentScreen != null) {
       currentScreen.display();
     }
   }
   
-  void mousePressed() {
+  public void mousePressed() {
     if (currentScreen != null) {
       currentScreen.mousePressed();
     }
   }
   
-  void keyPressed() {
+  public void keyPressed() {
     if (currentScreen != null) {
       currentScreen.keyPressed(); 
     }
   }
-   void mouseDragged() {
+  public void mouseDragged() {
     if (currentScreen != null) {
       currentScreen.mouseDragged(); 
     }
   }
-  void mouseReleased() {
+  public void mouseReleased() {
     if (currentScreen != null) {
       currentScreen.mouseReleased();
     }

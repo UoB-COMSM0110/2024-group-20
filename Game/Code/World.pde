@@ -9,10 +9,6 @@ public class World {
     this.linearVelocityFactor = 0.9999;
   }
   
-  public int size(){
-    return bodyList.size();
-  }
-  
   public void addBody(RigidBody body) {
     this.bodyList.add(body);
   }
@@ -33,8 +29,16 @@ public class World {
     }
   }
   
+  public ArrayList<RigidBody> getBodyList() {
+    return this.bodyList;
+  }
+  
   public int getBodyListSize() {
     return bodyList.size();
+  }
+  
+  public PVector getGravity() {
+    return gravity;
   }
   
   public void step(float frameTime) {
@@ -47,9 +51,15 @@ public class World {
   public boolean collideBodies(){
     boolean occurs = false;
     for(int i=0; i<this.bodyList.size()-1; i++){
+      RigidBody body1 = bodyList.get(i);
       for(int j=i+1; j<this.bodyList.size(); j++){
-        if(!bodyList.get(i).isStatic() || !bodyList.get(j).isStatic()) {
-          if(bodyList.get(i).intersect(bodyList.get(j))) occurs = true;
+        RigidBody body2 = bodyList.get(j);
+        if(!body1.isStatic() || !body2.isStatic()) {
+          if(body1.intersect(body2)) {
+            occurs = true;
+            body1.setLastContactBody(body2);
+            body2.setLastContactBody(body1);
+          }
         }
       }
     }

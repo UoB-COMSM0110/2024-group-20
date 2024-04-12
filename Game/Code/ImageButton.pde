@@ -1,11 +1,11 @@
-class ImageButton {
-  float x, y; // Position of the button
-  float width, height; // Size of the button
-  PImage image; // Image used for the button
-  boolean isOver = false; 
+public class ImageButton {
+  private float x, y; // Position of the button
+  private float width, height; // Size of the button
+  private PImage image; // Image used for the button
+  private boolean isOver = false; 
 
   // Constructor
-  ImageButton(PImage image,float x, float y, float width, float height) {
+  public ImageButton(PImage image,float x, float y, float width, float height) {
     this.image = image;
     this.x = x;
     this.y = y;
@@ -14,7 +14,7 @@ class ImageButton {
     this.image = image;
   }
 
-  void display() {
+  public void display() {
     image(image, x, y, width, height);
     
     if (isOver) { 
@@ -23,7 +23,7 @@ class ImageButton {
     }
   }
 
-  void update() {
+  public void update() {
     if (mouseX >= x-width/2 && mouseX <= x +width/2&& mouseY >= y - height/2 && mouseY <= y + height/2) {
         isOver = true;
     } else {
@@ -31,7 +31,7 @@ class ImageButton {
     }
   }
 
-  boolean clicked() {
+  public boolean clicked() {
     return isOver && mousePressed;
   }
 }

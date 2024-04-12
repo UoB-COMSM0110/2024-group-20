@@ -1,28 +1,27 @@
-class GameScreen extends Screen {
-  ScreenManager screenManager;
-  Player player;
-  Level allLevels[];
-  Menu levelMenu;
-  Tutorial tutorial;
-  World w = new World();
-  Material draggedMaterial = null;
+public class GameScreen extends Screen {
+  private ScreenManager screenManager;
+  private Player player;
+  private Level allLevels[];
+  private Menu levelMenu;
+  private Tutorial tutorial;
+  private World w = new World();
+  private Material draggedMaterial = null;
     
-  ArrayList<Circle> animals =  new ArrayList<>(); // A list to keep track of all animals
-  ArrayList<Material> materials =  new ArrayList<>(); // A list to keep track of all materials
-  ArrayList<PVector> BirdAttackVectors = new ArrayList<>();
+  private ArrayList<Circle> animals =  new ArrayList<>(); // A list to keep track of all animals
+  private ArrayList<Material> materials =  new ArrayList<>(); // A list to keep track of all materials
+  private ArrayList<PVector> BirdAttackVectors = new ArrayList<>();
   
-  int birdsIndx;
+  private int birdsIndx;
 
-  int currentLevel = 0;
+  private int currentLevel = 0;
   
-  Timer timer;
-  int clockRestart = 0; // 0->True, 1-> False, 2-> Level Ended and we need to start final clock
-  int birdCount = 0;
-  boolean pflag = false;//If is true,enable physics to materials and turn off drags
+  private Timer timer;
+  private int clockRestart = 0; // 0->True, 1-> False, 2-> Level Ended and we need to start final clock
+  private boolean pflag = false;//If is true,enable physics to materials and turn off drags
   
-  PImage bgImage,menuImage,emptyButtonImage,readyImage;
-  ImageButton menuButton, woodButton, glassButton,stoneButton,readyButton;
-  ArrayList<ImageButton> buttons;
+  private PImage bgImage,menuImage,emptyButtonImage,readyImage;
+  private ImageButton menuButton, woodButton, glassButton,stoneButton,readyButton,undoButton;
+  private ArrayList<ImageButton> buttons;
   
   //constuctor
   public GameScreen(ScreenManager screenManager){
@@ -40,7 +39,7 @@ class GameScreen extends Screen {
     levelMenu = new Menu(width/2, height/2, width/2, height/2);
   }
 
-  void display(){
+  public void display(){
     // setting background
     image(bgImage, width/2, height/2, width, height);
     
@@ -50,7 +49,7 @@ class GameScreen extends Screen {
         w.step(1/frameRate/10);
         w.collideBodies();
       }
-      checkAnimalsKilled();
+      checkAnimalActions();
     }
     w.collideBodies();
     w.display();
@@ -84,12 +83,43 @@ class GameScreen extends Screen {
     textDisplay();
   }
   
-  private void checkAnimalsKilled() {
-    for(Circle animal : animals) {
-      if(animal instanceof Pig && animal.getLargestImpulse() > 5E6) {
+  private void checkAnimalActions() {
+    for(int i=0; i<animals.size(); i++) {
+      Circle animal = animals.get(i);
+      if(animal instanceof Pig) {
         //print(animal.getLargestImpulse()+"\n");
         Pig pig = (Pig) animal;
-        pig.killPig();
+        if(pig.getLargestImpulse() > pig.getImpulseToughness()) {
+          pig.killPig();
+        }
+      }
+      if(animal instanceof BirdRed) {
+        BirdRed birdRed = (BirdRed) animal;
+        if(birdRed.getLargestImpulse() > birdRed.getImpulseToughness()) {
+          w.removeBody(animal);
+          animals.remove(animal);
+          i--;
+        }
+      }
+      if(animal instanceof BirdBlue) {
+        BirdBlue birdBlue = (BirdBlue) animal;
+        if(birdBlue.hasAbility() && birdBlue.getLastContactBody()!=null) {
+          birdBlue.reverseGravity(w.getGravity());
+        }
+        if(birdBlue.getLargestImpulse() > birdBlue.getImpulseToughness()) {
+          w.removeBody(animal);
+          animals.remove(animal);
+          i--;
+        }
+      }
+      if(animal instanceof BirdBlack) {
+        if(animal.getLastContactBody() != null) {
+          BirdBlack birdBlack = (BirdBlack) animal;
+          birdBlack.explode(w);
+          w.removeBody(animal);
+          animals.remove(animal);
+          i--;
+        }
       }
     }
   }
@@ -104,7 +134,7 @@ class GameScreen extends Screen {
       if(allLevels[currentLevel].numberPigsAlive() == 0){
         cleanLevel();
         currentLevel = 0;
-        screenManager.setCurrentScreen(ScreenType.LOOSESCREEN); 
+        screenManager.setCurrentScreen(ScreenType.LOSESCREEN); 
       }
       else if(currentLevel < 2){
         currentLevel++;
@@ -150,7 +180,7 @@ class GameScreen extends Screen {
     w.addBody(bird);
   }
 
-  void textDisplay(){
+  private void textDisplay(){
     //score Display
     player.printCurrentPlayerScore();
     //budget
@@ -158,43 +188,53 @@ class GameScreen extends Screen {
     tutorial.display(); 
   }
   
-  void mousePressed(){
+  public void mousePressed(){
     //check tutorial
     tutorial.mousePressed();
     if(!pflag){
-    //drag materials
-    for (Material material : materials) {
-      if (material.isMouseOver(mouseX, mouseY)) {
-        draggedMaterial = material;
-        break;
+      //drag materials
+      for (Material material : materials) {
+        if (material.isMouseOver(mouseX, mouseY)) {
+          draggedMaterial = material;
+          break;
+        }
       }
-    }
 
-    //add wood
-     PVector newPosition = new PVector(random(width/10,width/3), random(height/3,5*height/9));
-    if(woodButton.clicked()){
-      if(allLevels[currentLevel].buyResource(Resource.WOOD)){
-        Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 50, 200,0);
-        materials.add(newWood);
-        w.addBody(newWood);
+      //add wood
+      PVector newPosition = new PVector(random(width/10,width/3), random(height/3,5*height/9));
+      if(woodButton.clicked()){
+        if(allLevels[currentLevel].buyResource(Resource.WOOD)){
+          Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 50, 200,0);
+          materials.add(newWood);
+          w.addBody(newWood);
+        }
       }
-    }
-    //add glass
-    if(glassButton.clicked()){
-      if(allLevels[currentLevel].buyResource(Resource.GLASS)){
-        Glass newGlass = new Glass(newPosition, 0.5, 0.3, false, 50, 200,0);
-        materials.add(newGlass);
-        w.addBody(newGlass);
+      //add glass
+      if(glassButton.clicked()){
+        if(allLevels[currentLevel].buyResource(Resource.GLASS)){
+          Glass newGlass = new Glass(newPosition, 0.5, 0.8, false, 50, 200,0);
+          materials.add(newGlass);
+          w.addBody(newGlass);
+        }
       }
-    }
-    //add stone
-    if(stoneButton.clicked()){
-      if(allLevels[currentLevel].buyResource(Resource.STONE)){
-        Stone newStone = new Stone(newPosition, 0.5, 0.3, false, 50, 200,0);
-        materials.add(newStone);
-        w.addBody(newStone);
+      //add stone
+      if(stoneButton.clicked()){
+        if(allLevels[currentLevel].buyResource(Resource.STONE)){
+          Stone newStone = new Stone(newPosition, 0.5, 0.3, false, 50, 200,0);
+          materials.add(newStone);
+          w.addBody(newStone);
+        }
       }
-    }
+      //undo buy material
+      if(undoButton.clicked()){
+        if(!materials.isEmpty()){
+          Material lastMaterial = materials.get(materials.size() - 1);
+          if(allLevels[currentLevel].sellResource(lastMaterial)){
+            w.removeBody(lastMaterial);
+            materials.remove(materials.size()-1);
+          }
+        }
+      }
     }
     if(readyButton.clicked()){
       zeroImpulses();
@@ -222,7 +262,7 @@ class GameScreen extends Screen {
     }
   }
 
-  void keyPressed(){
+  public void keyPressed(){
     
 ////////////////////////////////JUST FOR DEMONSTRATION PURPOSES////////////
     if(key == '['){
@@ -236,10 +276,10 @@ class GameScreen extends Screen {
        screenManager.setCurrentScreen(ScreenType.WINSCREEN); 
      }
    }
-   if(key == ']'){
+    if(key == ']'){
        cleanLevel();
        currentLevel = 0;
-       screenManager.setCurrentScreen(ScreenType.LOOSESCREEN);
+       screenManager.setCurrentScreen(ScreenType.LOSESCREEN);
     }
 //////////////////////////////////////////////////////////////////////////
       if ((key == 'd' ||key=='D') && draggedMaterial != null) {  
@@ -250,18 +290,18 @@ class GameScreen extends Screen {
       }
   }
 
-  void mouseDragged() {
+  public void mouseDragged() {
     if (draggedMaterial != null) {
       draggedMaterial.position.set(mouseX, mouseY);
     }
   }
 
-  void mouseReleased() {
+  public void mouseReleased() {
     draggedMaterial = null;
   }
 
 //method to clean the level
- public void cleanLevel() {
+  private void cleanLevel() {
     for (Material material : materials){
       w.removeBody(material);
     }
@@ -272,7 +312,7 @@ class GameScreen extends Screen {
     animals.clear();
   }
   
-  public void setBoundariesAndForces(){
+  private void setBoundariesAndForces(){
     //Adding boundaries to game screen
     w.addBody(new Ground(new PVector(width/2 ,height - 100), 1, 1, width, 200, 0)); // Ground  
     w.addBody(new Ground(new PVector(0 /*- 10*/, height/2 - 200), 1, 1, 20, height - 10, 0)); // Left
@@ -284,21 +324,24 @@ class GameScreen extends Screen {
     //BirdAttackVectors.add(new PVector(-90, 270, 5 * width/6));
   }
   
-  public void setButtons(){
+  private void setButtons(){
     buttons = new ArrayList<ImageButton>();
     //menu
     menuImage = gameImages.get("menuButton");
     menuButton = new ImageButton(menuImage, width - width/10 - 10,height - height/20 - 10,width/5,height/10);
     buttons.add(menuButton);
-    //wood
-    woodButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f+1/10f),width/10,height/20);
-    buttons.add(woodButton);
     //glass
-    glassButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f),width/10,height/20);
+    glassButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f-1/10f),width/10,height/20);
     buttons.add(glassButton);
+    //wood
+    woodButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f),width/10,height/20);
+    buttons.add(woodButton);
     //stone
-    stoneButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f-1/10f),width/10,height/20);
+    stoneButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f+1/10f),width/10,height/20);
     buttons.add(stoneButton);
+    //undo
+    undoButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f+3/10f),width/10,height/20);
+    buttons.add(undoButton);
     //ready
     readyImage = gameImages.get("readyButton");
     readyButton = new ImageButton(readyImage, width/2, height/10,width/5,height/10);
