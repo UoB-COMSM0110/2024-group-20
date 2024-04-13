@@ -4,6 +4,7 @@ public enum Resource {
 
 public class Level extends Screen {
   private GameScreen gameScreen;
+  private Difficulty difficulty;
   private int budget;
   private ArrayList<Ground> groundList;
   private ArrayList<Pig> pigList;
@@ -16,12 +17,13 @@ public class Level extends Screen {
   private Timer timer;
   
   private PImage bgImage,emptyButtonImage,readyImage;
-  ImageButton woodButton, glassButton,stoneButton,readyButton,undoButton;
+  private ImageButton woodButton, glassButton,stoneButton,readyButton,undoButton;
   private ArrayList<ImageButton> buttons;
   
   
   public Level(GameScreen gameScreen, JSONArray levelContents){
     this.gameScreen = gameScreen;
+    this.difficulty = gameScreen.getPlayer().getDifficulty();
     budget = 0;
     groundList = new ArrayList<>();
     pigList = new ArrayList<>();
@@ -54,7 +56,9 @@ public class Level extends Screen {
         button.update(); 
         button.display(); 
       }
-      w.collideBodies();
+      for(int i=0; i<10; i++) {
+        w.collideBodies();
+      }
     }
     else {
       for(int i=0; i<10; i++) {
@@ -74,7 +78,7 @@ public class Level extends Screen {
       for (Material material : materialList) {
         if (material.isMouseOver(mouseX, mouseY)) {
           draggedMaterial = material;
-          break;
+          return;
         }
       }
       //add wood
@@ -170,12 +174,26 @@ public class Level extends Screen {
   }
   
   private void addBirdBackStage(JSONObject levelContent) {
-    float positionX = levelContent.getFloat("positionX") * width;
-    float positionY = levelContent.getFloat("positionY") * height;
-    PVector position = new PVector(positionX, positionY);
-    float velocityX = levelContent.getFloat("velocityX");
-    float velocityY = levelContent.getFloat("velocityY");
-    PVector linearVelocity = new PVector(velocityX, velocityY);
+    float positionX, positionY, velocityX, velocityY;
+    PVector position = new PVector(), linearVelocity = new PVector();
+    if(difficulty == Difficulty.EASY) {
+      positionX = levelContent.getFloat("positionX") * width;
+      positionY = levelContent.getFloat("positionY") * height;
+      position.set(positionX, positionY);
+      velocityX = levelContent.getFloat("velocityX");
+      velocityY = levelContent.getFloat("velocityY");
+      linearVelocity.set(velocityX, velocityY);
+    }
+    else {
+      float randNum = random(0.1, 0.9);
+      positionX = randNum * width;
+      positionY = 0.1 * height;
+      position.set(positionX, positionY);
+      velocityX = (0.5 - randNum) * 2500;
+      velocityY = 1000;
+      linearVelocity.set(velocityX, velocityY);
+    }
+    
     String type = levelContent.getString("type");
     Bird bird = new BirdRed(position);
     switch(type) {
@@ -337,6 +355,10 @@ public class Level extends Screen {
        }
     }
     return alivePigs;
+  }
+  
+  public int numberPigsTotal() {
+    return pigList.size();
   }
   
   private void setButtons(){

@@ -15,7 +15,6 @@ public class GameScreen extends Screen {
     this.screenManager = screenManager;
     this.player = screenManager.player;
     this.currentLevelNumber = 0;
-    this.currentLevel = new Level(this, gameLevelData[currentLevelNumber]);
   
     setButtons();
     tutorial = new Tutorial();  
@@ -28,7 +27,7 @@ public class GameScreen extends Screen {
       button.update(); 
       button.display(); 
     }
-    if(currentLevelNumber<gameLevelData.length && currentLevelNumber>0){
+    if(currentLevelNumber < gameLevelData.get(player.getDifficulty()).length && currentLevelNumber>0){
       levelMenu.displayMenu();
       levelMenu.clicked();
     }
@@ -36,23 +35,41 @@ public class GameScreen extends Screen {
     tutorial.display(); 
   }
   
+  public Player getPlayer() {
+    return this.player;
+  }
+  
+  public void setLevel(int levelNumber) {
+    Difficulty difficulty = player.getDifficulty();
+    currentLevelNumber = levelNumber;
+    currentLevel = new Level(this, gameLevelData.get(difficulty)[currentLevelNumber]);
+  }
+  
   public void endLevel(){
+    Difficulty difficulty = player.getDifficulty();
     player.updateScore(currentLevel, currentLevelNumber);
-    if(currentLevel.numberPigsAlive() == 0){
-      currentLevelNumber = 0;
-      currentLevel = new Level(this, gameLevelData[currentLevelNumber]);
-      screenManager.setCurrentScreen(ScreenType.LOSESCREEN); 
+    if(difficulty == Difficulty.EASY) {
+      if(currentLevel.numberPigsAlive() == 0){
+        setLevel(0);
+        screenManager.setCurrentScreen(ScreenType.LOSESCREEN);
+        return;
+      }
     }
-    else if(currentLevelNumber < gameLevelData.length-1){
-      currentLevelNumber++;
-      currentLevel = new Level(this, gameLevelData[currentLevelNumber]);
-      levelMenu.resetMenu();
-    }else{
-      currentLevelNumber = 0;
-      currentLevel = new Level(this, gameLevelData[currentLevelNumber]);
-      screenManager.setCurrentScreen(ScreenType.WINSCREEN); 
+    else {
+      if(currentLevel.numberPigsAlive() != currentLevel.numberPigsTotal()){
+        setLevel(0);
+        screenManager.setCurrentScreen(ScreenType.LOSESCREEN);
+        return;
+      }
     }
     
+    if(currentLevelNumber < gameLevelData.get(player.getDifficulty()).length-1){
+      setLevel(currentLevelNumber+1);
+      levelMenu.resetMenu();
+    }else{
+      setLevel(0);
+      screenManager.setCurrentScreen(ScreenType.WINSCREEN); 
+    }
   }
 
   private void textDisplay(){
@@ -69,9 +86,8 @@ public class GameScreen extends Screen {
     
     if(menuButton.clicked()){
       screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
+      setLevel(0);
       player.deletePlayer();
-      currentLevelNumber = 0;
-      currentLevel = new Level(this, gameLevelData[currentLevelNumber]);
     }
   }
   
@@ -79,18 +95,15 @@ public class GameScreen extends Screen {
     currentLevel.keyPressed();
 ////////////////////////////////JUST FOR DEMONSTRATION PURPOSES////////////
     if(key == '['){
-      if(currentLevelNumber < gameLevelData.length-1){
-        currentLevelNumber++;
-        currentLevel = new Level(this, gameLevelData[currentLevelNumber]);
+      if(currentLevelNumber < gameLevelData.get(player.getDifficulty()).length-1){
+        setLevel(currentLevelNumber+1);
       }else{
-        currentLevelNumber = 0;
-        currentLevel = new Level(this, gameLevelData[currentLevelNumber]);
+        setLevel(0);
         screenManager.setCurrentScreen(ScreenType.WINSCREEN); 
       }
     }
     if(key == ']'){
-      currentLevelNumber = 0;
-      currentLevel = new Level(this, gameLevelData[currentLevelNumber]);
+      setLevel(0);
       screenManager.setCurrentScreen(ScreenType.LOSESCREEN); 
     }
 //////////////////////////////////////////////////////////////////////////

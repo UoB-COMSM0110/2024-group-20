@@ -11,7 +11,6 @@ public class ImageButton {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.image = image;
   }
 
   public void display() {

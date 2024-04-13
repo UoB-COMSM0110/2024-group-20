@@ -1,0 +1,70 @@
+[
+  {
+    "//COMMENT": "",
+    "type": "Budget",
+    "amount": 1000
+  },
+  {
+    "//COMMENT": "the ground",
+    "type": "Ground",
+    "positionX": 0.5,
+    "positionY": 1.5,
+    "width": 3,
+    "height": 1.2,
+    "rotation": 0
+  },
+  {
+    "//COMMENT": "the left wall",
+    "type": "Ground",
+    "positionX": -0.5,
+    "positionY": 0,
+    "width": 1,
+    "height": 4,
+    "rotation": 0
+  },
+  {
+    "//COMMENT": "the right wall",
+    "type": "Ground",
+    "positionX": 1.5,
+    "positionY": 0,
+    "width": 1,
+    "height": 4,
+    "rotation": 0
+  },
+  {
+    "//COMMENT": "",
+    "type": "Pig",
+    "positionX": 0.2,
+    "positionY": 0.85
+  },
+  {
+    "//COMMENT": "",
+    "type": "Pig",
+    "positionX": 0.5,
+    "positionY": 0.85
+  },
+  {
+    "//COMMENT": "",
+    "type": "BirdBlue",
+    "positionX": 0.2,
+    "positionY": 0.2,
+    "velocityX": 1000,
+    "velocityY": 1000
+  },
+  {
+    "//COMMENT": "",
+    "type": "BirdBlue",
+    "positionX": 0.2,
+    "positionY": 0.2,
+    "velocityX": 1000,
+    "velocityY": 1000
+  },
+  {
+    "//COMMENT": "",
+    "type": "BirdBlue",
+    "positionX": 0.2,
+    "positionY": 0.2,
+    "velocityX": 2000,
+    "velocityY": 2000
+  }
+]

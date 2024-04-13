@@ -35,11 +35,14 @@ public class DifficultyScreen extends Screen {
   public void mousePressed(){
     if(easyButton.clicked()){
       setEasyLevels();
-      screenManager.setCurrentScreen(ScreenType.GAMESCREEN);
     }
     if(hardButton.clicked()){
       setHardLevels();
+    }
+    if(easyButton.clicked() || hardButton.clicked()) {
       screenManager.setCurrentScreen(ScreenType.GAMESCREEN);
+      GameScreen gameScreen = (GameScreen) screenManager.getScreens().get(ScreenType.GAMESCREEN);
+      gameScreen.setLevel(0);
     }
   }
   
@@ -48,10 +51,10 @@ public class DifficultyScreen extends Screen {
   public void mouseReleased(){}
   
   private void setEasyLevels(){
-    screenManager.player.difficulty = Difficulty.EASY;
+    screenManager.getPlayer().setDifficulty(Difficulty.EASY);
   }
 
   private void setHardLevels(){
-    screenManager.player.difficulty = Difficulty.HARD;
+    screenManager.getPlayer().setDifficulty(Difficulty.HARD);
   }
 }

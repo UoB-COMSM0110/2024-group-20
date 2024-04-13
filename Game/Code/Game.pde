@@ -2,7 +2,7 @@ import processing.javafx.*;
 import java.io.*;
 
 HashMap<String, PImage> gameImages;
-JSONArray[] gameLevelData;
+HashMap<Difficulty, JSONArray[]> gameLevelData;
 
 ScreenManager screenManager;
 
@@ -55,15 +55,29 @@ void loadImages() {
 }
 
 void loadLevelJSONArrays() {
-  File directoryPath = new File(sketchPath("../Levels"));
+  gameLevelData = new HashMap<>();
+  // load easy levels
+  File directoryPath = new File(sketchPath("../Levels/Easy"));
   File fileList[] = directoryPath.listFiles();
-  gameLevelData = new JSONArray[fileList.length];
+  JSONArray[] gameEasyLevelData = new JSONArray[fileList.length];
   for(File file:fileList) {
     String fileName = file.getName();
     String levelName = fileName.replaceFirst("[.][^.]+$", "");
     int levelNumber = Integer.valueOf(levelName);
-    gameLevelData[levelNumber] = loadJSONArray(file);
+    gameEasyLevelData[levelNumber] = loadJSONArray(file);
   }
+  gameLevelData.put(Difficulty.EASY, gameEasyLevelData);
+  // load hard levels
+  directoryPath = new File(sketchPath("../Levels/Hard"));
+  fileList = directoryPath.listFiles();
+  JSONArray[]gameHardLevelData = new JSONArray[fileList.length];
+  for(File file:fileList) {
+    String fileName = file.getName();
+    String levelName = fileName.replaceFirst("[.][^.]+$", "");
+    int levelNumber = Integer.valueOf(levelName);
+    gameHardLevelData[levelNumber] = loadJSONArray(file);
+  }
+  gameLevelData.put(Difficulty.HARD, gameEasyLevelData);
 }
   
 
