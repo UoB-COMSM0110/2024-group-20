@@ -8,8 +8,9 @@ abstract class Material extends Rectangle {
   abstract void display(); // Abstract draw method to be implemented by subclasses
  
   public boolean isMouseOver(int mouseX, int mouseY) {
-    return mouseX >= position.x - rectWidth / 2 && mouseX <= position.x + rectWidth / 2 &&
-         mouseY >= position.y - rectHeight / 2 && mouseY <= position.y + rectHeight / 2;
+    PVector mousePosition = new PVector(mouseX - position.x, mouseY - position.y).rotate(rotation);
+    return mousePosition.x >= - rectWidth / 2 && mousePosition.x <= rectWidth / 2 &&
+         mousePosition.y >= - rectHeight / 2 && mousePosition.y <= rectHeight / 2;
   }
   
   public float getImpulseToughness(){
