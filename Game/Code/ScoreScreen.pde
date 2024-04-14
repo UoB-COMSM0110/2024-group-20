@@ -18,7 +18,11 @@ public class ScoreScreen extends Screen {
     // setting background
     image(bgImage, width/2, height/2, width, height);
     // Board to display scores on
-    image(woodBoardImage, width/2, height/2, width - 2 * width/5, height - height/5);
+    image(woodBoardImage, width/2, height/2, width/2, 2*height/3);
+    //print the score title
+    fill(0, 0, 0);
+    textSize(60);
+    text("Best Pig Protectors",width/2,height/2-height/7,width/3,height/3);
     // printing scores from a text file
     printScoresFile();
     
@@ -34,21 +38,36 @@ public class ScoreScreen extends Screen {
   public void mouseDragged(){}
   public void mouseReleased(){}
   
-  // Method for scoreScreen printin the score.txt file to screen
+  // Method for scoreScreen printin the score.csv file to screen
   public void printScoresFile(){
     fill(0, 0, 0);
-    textSize(50);
-    String[] scores = loadStrings("scores.txt");
-    for(int i=0; i<6;i=i +2){
-      int noDots = 40 - 2*scores[i].length()- 2*scores[i + 1].length();
-      fill(0,0,0);
-      String toPrint = scores[i];
-      for(int j = 0; j < noDots; j++){
-        toPrint = toPrint + ".";
+    textSize(40);
+    StringBuilder toPrint = new StringBuilder();
+    int count = 0;
+
+
+    for (TableRow row : scoreTable.rows()) {
+      if (count >= 7 ){
+        break;
       }
-      toPrint = toPrint + scores[i+1];
-      text(toPrint,width/2 - width/7.5,height/3+i*height/10);
+
+      String player = row.getString("Player");
+      int score = row.getInt("Score");
+      int noDots = 40 - 2*player.length()- 2*String.valueOf(score).length();
+      toPrint.append(player);
+      for (int i = 0; i< noDots; i++){
+        toPrint.append(".");
+      }
+
+      toPrint.append(score).append("\n");
+      
+      count++;
     }
+    String scores = toPrint.toString();
+
+    text(scores,width/2,height/3);
+
+
   }
   
 }
