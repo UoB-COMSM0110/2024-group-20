@@ -10,7 +10,6 @@ public class Player{
   private boolean nameSet;
   private Difficulty difficulty;
 
-  
   public Player(){
     playerName = "";
     scoreSet = false;
@@ -75,33 +74,12 @@ public class Player{
   // Method writting current player's score to the text file
   public void updateScoresFile(){
     if(!this.scoreSet){
-      int flag = 0;
-      String[] loadedScores = loadStrings("scores.txt");
-      String[] finalScores = loadStrings("scores.txt");
-    
-      for(int i = 0; i < 6; i = i + 2){
-        if(Integer.parseInt(loadedScores[i]) <= playerScore && flag == 0){
-          if(i == 0){
-            finalScores[i+4] = loadedScores[i+2];
-            finalScores[i+5] = loadedScores[i+3];
-            finalScores[i+2] = loadedScores[i];
-            finalScores[i+3] = loadedScores[i+1];
-            finalScores[i] = str(playerScore);
-            finalScores[i+1] = playerName;
-            flag = 1;  
-          }else if(i == 2){
-            finalScores[i+2] = loadedScores[i];
-            finalScores[i+3] = loadedScores[i+1];
-            finalScores[i] = str(playerScore);
-            finalScores[i+1] = playerName;
-            flag = 1;
-          }else{
-            finalScores[i] = str(playerScore);
-            finalScores[i+1] = playerName;
-          }
-        }
-      }
-      saveStrings("scores.txt", finalScores);
+      TableRow newRow = scoreTable.addRow();
+      newRow.setString("Player", playerName);
+      newRow.setInt("Score", playerScore);
+      scoreTable.sortReverse("Score");
+
+      saveTable(scoreTable,"scores.csv");
       this.scoreSet = true;
     }
   }

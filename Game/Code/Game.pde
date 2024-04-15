@@ -3,7 +3,7 @@ import java.io.*;
 
 HashMap<String, PImage> gameImages;
 HashMap<Difficulty, JSONArray[]> gameLevelData;
-
+Table scoreTable;
 ScreenManager screenManager;
 
 void setup (){
@@ -15,6 +15,7 @@ void setup (){
   textFont(createFont("angrybirds-regular.ttf", 128));
 
   loadImages();
+  loadTableFile();
   loadLevelJSONArrays();
   screenManager = new ScreenManager();
 }
@@ -80,7 +81,15 @@ void loadLevelJSONArrays() {
   gameLevelData.put(Difficulty.HARD, gameEasyLevelData);
 }
   
-
+ void loadTableFile(){
+    try {
+      scoreTable = loadTable("scores.csv", "header");
+    } catch (Exception e) {
+      scoreTable = new Table();
+      scoreTable.addColumn("Player");
+      scoreTable.addColumn("Score");
+    }
+  }
 
  //World w;
  //ArrayList<Integer> keysPressed;
