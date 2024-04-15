@@ -9,9 +9,8 @@ public class Wood extends Material {
   public void display() {
     pushMatrix();
     translate(position.x, position.y);
-    fill(139, 69, 19); 
     rotate(rotation);
-    rect(0, 0, rectWidth, rectHeight);
+    image(gameImages.get("wood"), 0, 0); 
     popMatrix();
   }
 }

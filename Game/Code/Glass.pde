@@ -9,9 +9,10 @@ public class Glass extends Material {
   public void display() {
     pushMatrix();
     translate(position.x, position.y);
-    fill(100, 255, 127, 128); 
     rotate(rotation);
-    rect(0, 0, rectWidth, rectHeight);
+    tint(255, 150);
+    image(gameImages.get("glass"), 0, 0); 
+    noTint();
     popMatrix();
   }
 }

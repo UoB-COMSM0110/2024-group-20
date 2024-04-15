@@ -16,10 +16,11 @@ public class Level extends Screen {
   private boolean ready;
   private Timer timer;
   
-  private PImage bgImage,emptyButtonImage,readyImage;
+  private PImage bgImage, readyImage, groundImage;
   private ImageButton woodButton, glassButton,stoneButton,readyButton,undoButton;
   private ArrayList<ImageButton> buttons;
   
+  private PVector groundCoordinates;
   
   public Level(GameScreen gameScreen, JSONArray levelContents){
     this.gameScreen = gameScreen;
@@ -32,8 +33,8 @@ public class Level extends Screen {
     materialList = new ArrayList<>();
     
     bgImage = gameImages.get("map");
-    emptyButtonImage = gameImages.get("emptyButton");
     readyImage = gameImages.get("readyButton");
+    groundImage = gameImages.get("ground");
     
     for (int i = 0; i < levelContents.size(); i++) {
       JSONObject levelContent = levelContents.getJSONObject(i); 
@@ -50,8 +51,13 @@ public class Level extends Screen {
   
   public void display() {
     image(bgImage, width/2, height/2, width, height);
+    imageMode(CORNER);
+    //float groundRatio = groundImage.width/(groundImage.height * width);
+    image(groundImage, 0, height - height/10, width, height);
+    imageMode(CENTER);
     
     if(!ready){
+
       for (ImageButton button : buttons) {
         button.update(); 
         button.display(); 
@@ -85,7 +91,7 @@ public class Level extends Screen {
       PVector newPosition = new PVector(random(width/10,width/3), random(height/3,5*height/9));
       if(woodButton.clicked()){
         if(buyResource(Resource.WOOD)){
-          Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 50, 200,0);
+          Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 48, 195,0);
           materialList.add(newWood);
           w.addBody(newWood);
         }
@@ -93,7 +99,7 @@ public class Level extends Screen {
       //add glass
       if(glassButton.clicked()){
         if(buyResource(Resource.GLASS)){
-          Glass newGlass = new Glass(newPosition, 0.5, 0.8, false, 50, 200,0);
+          Glass newGlass = new Glass(newPosition, 0.5, 0.8, false, 48, 195,0);
           materialList.add(newGlass);
           w.addBody(newGlass);
         }
@@ -101,7 +107,7 @@ public class Level extends Screen {
       //add stone
       if(stoneButton.clicked()){
         if(buyResource(Resource.STONE)){
-          Stone newStone = new Stone(newPosition, 0.5, 0.3, false, 50, 200,0);
+          Stone newStone = new Stone(newPosition, 0.5, 0.3, false, 48, 195,0);
           materialList.add(newStone);
           w.addBody(newStone);
         }
@@ -157,6 +163,7 @@ public class Level extends Screen {
     float positionX = levelContent.getFloat("positionX") * width;
     float positionY = levelContent.getFloat("positionY") * height;
     PVector position = new PVector(positionX, positionY);
+    groundCoordinates = position;
     float groundWidth = levelContent.getFloat("width") * width;
     float groundHeight = levelContent.getFloat("height") * height;
     float groundRotation = levelContent.getFloat("rotation");
@@ -364,16 +371,16 @@ public class Level extends Screen {
   private void setButtons(){
     buttons = new ArrayList<ImageButton>();
     //glass
-    glassButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f-1/10f),width/10,height/20);
+    glassButton = new ImageButton(gameImages.get("glassButton"), width/20 + 10,height*(1/2f-1/10f),width/10,height/20);
     buttons.add(glassButton);
     //wood
-    woodButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f),width/10,height/20);
+    woodButton = new ImageButton(gameImages.get("woodButton"), width/20 + 10,height*(1/2f),width/10,height/20);
     buttons.add(woodButton);
     //stone
-    stoneButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f+1/10f),width/10,height/20);
+    stoneButton = new ImageButton(gameImages.get("stoneButton"), width/20 + 10,height*(1/2f+1/10f),width/10,height/20);
     buttons.add(stoneButton);
     //undo
-    undoButton = new ImageButton(emptyButtonImage, width/20 + 10,height*(1/2f+3/10f),width/10,height/20);
+    undoButton = new ImageButton(gameImages.get("deleteButton"), width/20 + 10,height*(1/2f+3/10f),width/10,height/20);
     buttons.add(undoButton);
     //ready
     readyImage = gameImages.get("readyButton");

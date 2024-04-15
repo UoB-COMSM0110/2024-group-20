@@ -9,9 +9,8 @@ public class Stone extends Material {
   public void display() {
     pushMatrix();
     translate(position.x, position.y);
-    fill(128, 128, 128); 
     rotate(rotation);
-    rect(0, 0, rectWidth, rectHeight);
+    image(gameImages.get("stone"), 0, 0); 
     popMatrix();
   }
 }

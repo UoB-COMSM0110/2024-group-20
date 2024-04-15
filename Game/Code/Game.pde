@@ -7,8 +7,8 @@ HashMap<Difficulty, JSONArray[]> gameLevelData;
 ScreenManager screenManager;
 
 void setup (){
-  fullScreen(FX2D);
-  //fullScreen();
+  //fullScreen(FX2D);
+  fullScreen();
   rectMode(CENTER);
   imageMode(CENTER);
   textAlign(CENTER);
