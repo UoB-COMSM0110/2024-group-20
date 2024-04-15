@@ -388,7 +388,7 @@ public class Level extends Screen {
   private void displayAttackDirection(){
     
       if(attackDirection == AttackDirection.FROMLEFT){
-         image(gameImages.get("attackAreaCornerLeft"), 0,0);
+         image(gameImages.get("attackAreaCornerLeft"), width/20,0);
       }
       if(attackDirection == AttackDirection.ALLDIRECTIONS){
         image(gameImages.get("attackAreaAll"), 0 + width/2,0 - height/8 + height/4, width, height/2); 
