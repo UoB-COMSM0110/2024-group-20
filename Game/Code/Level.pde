@@ -17,6 +17,8 @@ public class Level extends Screen {
   private ArrayList<Bird> birdFrontStageList;
   private ArrayList<Material> materialList;
   private Material draggedMaterial;
+  private Material lastSelectedMaterial;
+  private PVector relativeDragPosition;
   private World w;
   private boolean ready;
   private Timer timer;
@@ -90,6 +92,8 @@ public class Level extends Screen {
       for (Material material : materialList) {
         if (material.isMouseOver(mouseX, mouseY)) {
           draggedMaterial = material;
+          lastSelectedMaterial = material;
+          relativeDragPosition = PVector.sub(material.getPosition(), new PVector(mouseX, mouseY));
           return;
         }
       }
@@ -120,11 +124,10 @@ public class Level extends Screen {
       }
       //undo buy material
       if(undoButton.clicked()){
-        if(!materialList.isEmpty()){
-          Material lastMaterial = materialList.get(materialList.size() - 1);
-          if(sellResource(lastMaterial)){
-            w.removeBody(lastMaterial);
-            materialList.remove(materialList.size()-1);
+        if(lastSelectedMaterial!=null && materialList.contains(lastSelectedMaterial)){
+          if(sellResource(lastSelectedMaterial)){
+            w.removeBody(lastSelectedMaterial);
+            materialList.remove(lastSelectedMaterial);
           }
         }
       }
@@ -139,17 +142,17 @@ public class Level extends Screen {
   }
   
   public void keyPressed(){
-    if (draggedMaterial != null && key=='D') {  
-       draggedMaterial.setRotation(draggedMaterial.getRotation() + PI / 18);
+    if (lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial) && key=='D') {  
+       lastSelectedMaterial.setRotation(lastSelectedMaterial.getRotation() + PI / 18);
     }
-    if (draggedMaterial != null && key=='A') {  
-      draggedMaterial.setRotation(draggedMaterial.getRotation() - PI / 18); 
+    if (lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial) && key=='A') {  
+      lastSelectedMaterial.setRotation(lastSelectedMaterial.getRotation() - PI / 18); 
     }
   }
   
   public void mouseDragged(){
     if (draggedMaterial != null) {
-      draggedMaterial.position.set(mouseX, mouseY);
+      draggedMaterial.setPosition(PVector.add(new PVector(mouseX, mouseY), relativeDragPosition));
     }
   }
   
