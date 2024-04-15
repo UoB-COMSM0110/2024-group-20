@@ -6,8 +6,8 @@ public class GameScreen extends Screen {
   private Level currentLevel;
   private int currentLevelNumber;
   
-  private PImage menuImage;
-  private ImageButton menuButton;
+  private PImage menuImage, tutorialImage;
+  private ImageButton menuButton, tutorialButton;
   private ArrayList<ImageButton> buttons;
   
   //constuctor
@@ -76,7 +76,7 @@ public class GameScreen extends Screen {
     //score Display
     fill(0, 0, 0);
     textSize(40);
-    text(player.getPlayerName() + "   Score: " + str(player.getPlayerScore()), width-width/5,height/15);
+    text(player.getPlayerName() + "   Score: " + str(player.getPlayerScore()), 3 * width/4, height/10);
   }
   
   public void mousePressed(){
@@ -88,6 +88,9 @@ public class GameScreen extends Screen {
       screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
       setLevel(0);
       player.deletePlayer();
+    }
+    if(tutorialButton.clicked()){
+      tutorial.resetTutorial();
     }
   }
   
@@ -123,5 +126,9 @@ public class GameScreen extends Screen {
     menuImage = gameImages.get("menuButton");
     menuButton = new ImageButton(menuImage, width - width/10 - 10,height - height/20 - 10,width/5,height/10);
     buttons.add(menuButton);
+    //tutorial
+    tutorialImage = gameImages.get("tutorialButton");
+    tutorialButton = new ImageButton(tutorialImage, 11 * width/12, height/10,  height/10, height/10);
+    buttons.add(tutorialButton);
   }
 }

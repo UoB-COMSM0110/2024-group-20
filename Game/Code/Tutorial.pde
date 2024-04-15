@@ -28,8 +28,13 @@ public class Tutorial {
   public void nextStep() {
     currentStep++;
   }
+  
   public void skipTutorial() {
     currentStep = totalSteps;
+  }
+  
+  public void resetTutorial(){
+    currentStep = 0;
   }
     
   public void mousePressed() {

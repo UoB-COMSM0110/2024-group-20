@@ -22,7 +22,7 @@ public class ScoreScreen extends Screen {
     //print the score title
     fill(0, 0, 0);
     textSize(60);
-    text("Best Pig Protectors",width/2,height/2-height/7,width/3,height/3);
+    text("\nBest Pig Protectors",width/2,height/2-height/7,width/3,height/3);
     // printing scores from a text file
     printScoresFile();
     
@@ -45,6 +45,7 @@ public class ScoreScreen extends Screen {
     StringBuilder toPrint = new StringBuilder();
     int count = 0;
 
+    toPrint.append("\n");
 
     for (TableRow row : scoreTable.rows()) {
       if (count >= 7 ){
@@ -59,7 +60,7 @@ public class ScoreScreen extends Screen {
         toPrint.append(".");
       }
 
-      toPrint.append(score).append("\n");
+      toPrint.append(score).append("\n\n");
       
       count++;
     }

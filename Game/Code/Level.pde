@@ -52,7 +52,6 @@ public class Level extends Screen {
   public void display() {
     image(bgImage, width/2, height/2, width, height);
     imageMode(CORNER);
-    //float groundRatio = groundImage.width/(groundImage.height * width);
     image(groundImage, 0, height - height/10, width, height);
     imageMode(CENTER);
     
@@ -230,7 +229,6 @@ public class Level extends Screen {
   private void checkWorldItemActions() {
     for(RigidBody body:w.getBodyList()) {
       if(body instanceof Pig) {
-        //print(animal.getLargestImpulse()+"\n");
         Pig pig = (Pig) body;
         if(pig.getLargestImpulse() > pig.getImpulseToughness()) {
           pig.killPig();
@@ -351,7 +349,7 @@ public class Level extends Screen {
   private void textDisplay(){
      fill(0, 0, 0);
      textSize(40);
-     text("Budget: " + str(budget), width-width/5,height/10);
+     text("Budget: " + str(budget), 3 * width/4, height/10 + 40);
   }  
   
   public int numberPigsAlive(){
@@ -383,8 +381,8 @@ public class Level extends Screen {
     undoButton = new ImageButton(gameImages.get("deleteButton"), width/20 + 10,height*(1/2f+3/10f),width/10,height/20);
     buttons.add(undoButton);
     //ready
-    readyImage = gameImages.get("readyButton");
     readyButton = new ImageButton(readyImage, width/2, height/10,width/5,height/10);
     buttons.add(readyButton);
+    
   }
 }
