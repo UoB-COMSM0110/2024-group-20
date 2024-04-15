@@ -66,5 +66,10 @@
     "positionY": 0.2,
     "velocityX": 2000,
     "velocityY": 2000
+  },
+  {
+    "//COMMENT": "",
+    "type": "Attack Direction",
+    "direction": "All Directions"
   }
 ]

@@ -2,9 +2,14 @@ public enum Resource {
   WOOD, GLASS, STONE
 }
 
+public enum AttackDirection {
+  FROMLEFT, ALLDIRECTIONS, FROMRIGHT
+}
+
 public class Level extends Screen {
   private GameScreen gameScreen;
   private Difficulty difficulty;
+  private AttackDirection attackDirection;
   private int budget;
   private ArrayList<Ground> groundList;
   private ArrayList<Pig> pigList;
@@ -43,6 +48,7 @@ public class Level extends Screen {
       else if(type.equals("Ground"))  addGround(levelContent);
       else if(type.contains("Pig"))   addPig(levelContent);
       else if(type.contains("Bird"))  addBirdBackStage(levelContent);
+      else if(type.contains("Attack Direction")) setAttackDirection(levelContent);
     }
     setupWorld();
     setButtons();
@@ -56,7 +62,8 @@ public class Level extends Screen {
     imageMode(CENTER);
     
     if(!ready){
-
+      
+      displayAttackDirection();
       for (ImageButton button : buttons) {
         button.update(); 
         button.display(); 
@@ -156,6 +163,18 @@ public class Level extends Screen {
   
   public int getBudget() {
     return budget;
+  }
+  
+  private void setAttackDirection(JSONObject levelContent){
+    if(levelContent.getString("direction").equals("Left")){
+      this.attackDirection = AttackDirection.FROMLEFT;
+    }
+    if(levelContent.getString("direction").equals("All Directions")){
+      this.attackDirection = AttackDirection.ALLDIRECTIONS;
+    }
+    if(levelContent.getString("direction").equals("Right")){
+      this.attackDirection = AttackDirection.FROMRIGHT;
+    }
   }
   
   private void addGround(JSONObject levelContent) {
@@ -364,6 +383,20 @@ public class Level extends Screen {
   
   public int numberPigsTotal() {
     return pigList.size();
+  }
+  
+  private void displayAttackDirection(){
+    
+      if(attackDirection == AttackDirection.FROMLEFT){
+         image(gameImages.get("attackAreaCornerLeft"), 0,0);
+      }
+      if(attackDirection == AttackDirection.ALLDIRECTIONS){
+        image(gameImages.get("attackAreaAll"), 0 + width/2,0 - height/8 + height/4, width, height/2); 
+      }      
+      if(attackDirection == AttackDirection.FROMRIGHT){
+        image(gameImages.get("attackAreaCornerRight"), width - width/15, 0);        
+      }
+    
   }
   
   private void setButtons(){
