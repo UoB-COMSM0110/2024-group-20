@@ -83,7 +83,7 @@ public class Level extends Screen {
       timerActions();
     }
     w.display();
-    textDisplay();
+    otherDisplay();
   }
   
   public void mousePressed(){
@@ -368,10 +368,16 @@ public class Level extends Screen {
     return true;
   }
   
-  private void textDisplay(){
-     fill(0, 0, 0);
-     textSize(40);
-     text("Budget: " + str(budget), 3 * width/4, height/10 + 40);
+  private void otherDisplay(){
+    fill(0, 0, 0);
+    textSize(40);
+    text("Budget: " + str(budget), 3 * width/4, height/10 + 40);
+    text("Birds:\t\t", 1 * width/4, height/10 + 40);
+    int x = width/4 + 40, y = height/10 + 40;
+    for(Bird bird:birdBackStageList) {
+      image(bird.getIcon(), x, y, 40, 40);
+      x += 40;
+    }
   }  
   
   public int numberPigsAlive(){

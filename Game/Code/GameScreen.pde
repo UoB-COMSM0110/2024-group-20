@@ -31,7 +31,7 @@ public class GameScreen extends Screen {
       levelMenu.displayMenu();
       levelMenu.clicked();
     }
-    textDisplay();
+    otherDisplay();
     tutorial.display(); 
   }
   
@@ -72,11 +72,12 @@ public class GameScreen extends Screen {
     }
   }
 
-  private void textDisplay(){
+  private void otherDisplay(){
     //score Display
     fill(0, 0, 0);
     textSize(40);
     text(player.getPlayerName() + "   Score: " + str(player.getPlayerScore()), 3 * width/4, height/10);
+    text("Level: " + str(currentLevelNumber+1) + " / " + str(gameLevelData.get(player.getDifficulty()).length), 1 * width/4, height/10);
   }
   
   public void mousePressed(){
