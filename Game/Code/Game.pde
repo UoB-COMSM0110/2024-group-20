@@ -3,7 +3,7 @@ import java.io.*;
 
 HashMap<String, PImage> gameImages;
 HashMap<Difficulty, JSONArray[]> gameLevelData;
-Table scoreTable;
+Table easyScoreTable,hardScoreTable;
 ScreenManager screenManager;
 
 void setup (){
@@ -82,13 +82,8 @@ void loadLevelJSONArrays() {
 }
   
  void loadTableFile(){
-    try {
-      scoreTable = loadTable("scores.csv", "header");
-    } catch (Exception e) {
-      scoreTable = new Table();
-      scoreTable.addColumn("Player");
-      scoreTable.addColumn("Score");
-    }
+    easyScoreTable = loadTable("easyScores.csv", "header");
+    hardScoreTable = loadTable("hardScores.csv", "header");
   }
 
  //World w;

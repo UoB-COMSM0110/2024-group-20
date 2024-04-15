@@ -21,8 +21,14 @@ public class ScoreScreen extends Screen {
     image(woodBoardImage, width/2, height/2, width/2, 2*height/3);
     //print the score title
     fill(0, 0, 0);
-    textSize(60);
-    text("\nBest Pig Protectors",width/2,height/2-height/7,width/3,height/3);
+    textSize(65);
+    text("Best Pig Protectors",width/2,height/2-height/4);
+    textSize(45);
+    text("EASY",width/2-width/8,height/2-height/6);
+    text("HARD",width/2+width/8,height/2-height/6);
+    strokeWeight(8);
+    line(width/2,height/2-height/6,width/2,5*height/7);
+    strokeWeight(1);
     // printing scores from a text file
     printScoresFile();
     
@@ -41,32 +47,54 @@ public class ScoreScreen extends Screen {
   // Method for scoreScreen printin the score.csv file to screen
   public void printScoresFile(){
     fill(0, 0, 0);
-    textSize(40);
-    StringBuilder toPrint = new StringBuilder();
-    int count = 0;
+    textSize(35);
+    StringBuilder easyToPrint = new StringBuilder();
+    StringBuilder hardToPrint = new StringBuilder();
+    int eCount = 0,hCount = 0;
 
-    toPrint.append("\n");
+    easyToPrint.append("\n");
+    hardToPrint.append("\n");
 
-    for (TableRow row : scoreTable.rows()) {
-      if (count >= 7 ){
+    for (TableRow row : easyScoreTable.rows()) {
+      if (eCount >= 7 ){
         break;
       }
 
       String player = row.getString("Player");
       int score = row.getInt("Score");
-      int noDots = 40 - 2*player.length()- 2*String.valueOf(score).length();
-      toPrint.append(player);
+      int noDots = 20 - 2*player.length()- 2*String.valueOf(score).length();
+      easyToPrint.append(player);
       for (int i = 0; i< noDots; i++){
-        toPrint.append(".");
+        easyToPrint.append(".");
       }
 
-      toPrint.append(score).append("\n\n");
+      easyToPrint.append(score).append("\n\n");
       
-      count++;
+      eCount++;
     }
-    String scores = toPrint.toString();
 
-    text(scores,width/2,height/3);
+    for (TableRow row : hardScoreTable.rows()) {
+      if (hCount >= 7 ){
+        break;
+      }
+
+      String player = row.getString("Player");
+      int score = row.getInt("Score");
+      int noDots = 30 - 2*player.length()- 2*String.valueOf(score).length();
+      hardToPrint.append(player);
+      for (int i = 0; i< noDots; i++){
+        hardToPrint.append(".");
+      }
+
+      hardToPrint.append(score).append("\n\n");
+      
+      hCount++;
+    }
+    String easyScores = easyToPrint.toString();
+    text(easyScores,width/2-width/8,height/3);
+
+    String hardScores = hardToPrint.toString();
+    text(hardScores,width/2+width/8,height/3);
 
 
   }

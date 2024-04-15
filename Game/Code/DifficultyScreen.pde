@@ -13,11 +13,11 @@ public class DifficultyScreen extends Screen {
     buttons = new ArrayList<ImageButton>();
 
     easyImage = gameImages.get("easyButton");
-    easyButton = new ImageButton(easyImage, width/3,height/2, width/5, height/10); 
+    easyButton = new ImageButton(easyImage, width/3,height/3, width/5, height/10); 
     buttons.add(easyButton);
     
     hardImage = gameImages.get("hardButton");  
-    hardButton = new ImageButton(hardImage, 2 * width/3, height/2 , width/5, height/10);  
+    hardButton = new ImageButton(hardImage, 2 * width/3, height/3 , width/5, height/10);  
     buttons.add(hardButton);
   }
   

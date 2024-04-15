@@ -74,12 +74,22 @@ public class Player{
   // Method writting current player's score to the text file
   public void updateScoresFile(){
     if(!this.scoreSet){
-      TableRow newRow = scoreTable.addRow();
-      newRow.setString("Player", playerName);
-      newRow.setInt("Score", playerScore);
-      scoreTable.sortReverse("Score");
+      if (this.difficulty == Difficulty.EASY){
+        TableRow newRow = easyScoreTable.addRow();
+        newRow.setString("Player", playerName);
+        newRow.setInt("Score", playerScore);
+        easyScoreTable.sortReverse("Score");
 
-      saveTable(scoreTable,"scores.csv");
+        saveTable(easyScoreTable,"easyScores.csv");
+      }
+      if (this.difficulty == Difficulty.HARD){
+        TableRow newRow = hardScoreTable.addRow();
+        newRow.setString("Player", playerName);
+        newRow.setInt("Score", playerScore);
+        hardScoreTable.sortReverse("Score");
+
+        saveTable(hardScoreTable,"hardScores.csv");
+      }
       this.scoreSet = true;
     }
   }
