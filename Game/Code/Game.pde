@@ -7,8 +7,8 @@ Table easyScoreTable,hardScoreTable;
 ScreenManager screenManager;
 
 void setup (){
-  //fullScreen(FX2D);
-  fullScreen();
+  fullScreen(FX2D);
+  //fullScreen();
   rectMode(CENTER);
   imageMode(CENTER);
   textAlign(CENTER);
@@ -78,7 +78,7 @@ void loadLevelJSONArrays() {
     int levelNumber = Integer.valueOf(levelName);
     gameHardLevelData[levelNumber] = loadJSONArray(file);
   }
-  gameLevelData.put(Difficulty.HARD, gameEasyLevelData);
+  gameLevelData.put(Difficulty.HARD, gameHardLevelData);
 }
   
  void loadTableFile(){
