@@ -2,7 +2,7 @@
   {
     "//COMMENT": "",
     "type": "Budget",
-    "amount": 1000
+    "amount": 800
   },
   {
     "//COMMENT": "the ground",
@@ -46,25 +46,25 @@
   {
     "//COMMENT": "",
     "type": "BirdBlue",
-    "positionX": 0.2,
-    "positionY": 0.2,
-    "velocityX": 1000,
+    "positionX": 0.9,
+    "positionY": 0.1,
+    "velocityX": -1000,
     "velocityY": 1000
   },
   {
     "//COMMENT": "",
     "type": "BirdBlue",
-    "positionX": 0.2,
-    "positionY": 0.2,
-    "velocityX": 1000,
+    "positionX": 0.9,
+    "positionY": 0.1,
+    "velocityX": -1000,
     "velocityY": 1000
   },
   {
     "//COMMENT": "",
     "type": "BirdBlue",
-    "positionX": 0.2,
-    "positionY": 0.2,
-    "velocityX": 2000,
+    "positionX": 0.9,
+    "positionY": 0.1,
+    "velocityX": -2000,
     "velocityY": 2000
   },
   {
