@@ -1,9 +1,7 @@
 # Group 20 Team Photo
-![alt text](https://raw.githubusercontent.com/UoB-COMSM0110/2024-group-20/main/OrganisationFiles/AGC_20240129_105205114.jpg?raw=true)
+![alt text](https://raw.githubusercontent.com/UoB-COMSM0110/2024-group-20/main/OrganisationFiles/IMG_3797.jpg?raw=true)
 # Members
 Klaudia Żymełka, ex23530@bristol.ac.uk, klaudz9
-
-Nishtha Singh, ga23124@bristol.ac.uk, ananishtha98
 
 Ziang Zhang, ma23462@bristol.ac.uk, Zazhang3
 
