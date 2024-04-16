@@ -51,7 +51,7 @@ public class ScreenManager {
     else if(screenType == ScreenType.WINSCREEN) {
       gameAudios.get("backgroundMusic").pause();
       gameAudios.get("winMusic").loop();
-      gameAudios.get("winMusic").amp(0.4);
+      gameAudios.get("winMusic").amp(0.5);
     }
   }
   
