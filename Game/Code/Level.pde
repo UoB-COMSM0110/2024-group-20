@@ -57,7 +57,6 @@ public class Level extends Screen {
   
   public void display() {
     image(bgImage, width/2, height/2, width, height);
-    image(groundImage, width/2, 1.4*height, width, height);
     
     if(!ready){
       
@@ -79,6 +78,7 @@ public class Level extends Screen {
       timerActions();
     }
     w.display();
+    image(groundImage, width/2, 1.4*height - 24, width, height);
     otherDisplay();
   }
   
@@ -220,7 +220,7 @@ public class Level extends Screen {
     String type = levelContent.getString("type");
     Bird bird = new BirdRed(position);
     switch(type) {
-      case "BirdBlue" : bird = new BirdBlue(position); break;
+      case "BirdPurple" : bird = new BirdPurple(position); break;
       case "BirdBlack" : bird = new BirdBlack(position); break;
     }
     bird.setLinearVelocity(linearVelocity);
@@ -258,18 +258,18 @@ public class Level extends Screen {
           setupWorld();
         }
       }
-      if(body instanceof BirdBlue) {
-        BirdBlue birdBlue = (BirdBlue) body;
-        RigidBody contactBody = birdBlue.getLastContactBody();
-        if(birdBlue.hasAbility() && contactBody!=null && !contactBody.isStatic()) {
-          birdBlue.reverseGravity(w.getGravity());
+      if(body instanceof BirdPurple) {
+        BirdPurple birdPurple = (BirdPurple) body;
+        RigidBody contactBody = birdPurple.getLastContactBody();
+        if(birdPurple.hasAbility() && contactBody!=null && !contactBody.isStatic()) {
+          birdPurple.reverseGravity(w.getGravity());
           if(contactBody instanceof Pig) {
             Pig pig = (Pig) contactBody;
             pig.killPig();
           }
         }
-        if(birdBlue.getLargestImpulse() > birdBlue.getImpulseToughness()) {
-          birdFrontStageList.remove(birdBlue);
+        if(birdPurple.getLargestImpulse() > birdPurple.getImpulseToughness()) {
+          birdFrontStageList.remove(birdPurple);
           setupWorld();
         }
       }
@@ -392,13 +392,17 @@ public class Level extends Screen {
   private void displayAttackDirection(){
     
       if(attackDirection == AttackDirection.FROMLEFT){
+         tint(255, 200);
          image(gameImages.get("attackAreaCornerLeft"), width/20,0);
+         noTint();
       }
       if(attackDirection == AttackDirection.ALLDIRECTIONS){
         image(gameImages.get("attackAreaAll"), 0 + width/2,0 - height/8 + height/4, width, height/2); 
       }      
       if(attackDirection == AttackDirection.FROMRIGHT){
-        image(gameImages.get("attackAreaCornerRight"), width - width/15, 0);        
+        tint(255, 200);
+        image(gameImages.get("attackAreaCornerRight"), width - width/15, 0);     
+        noTint();
       }
     
   }

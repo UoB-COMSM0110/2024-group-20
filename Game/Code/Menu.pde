@@ -45,8 +45,8 @@ public class Menu {
     nextImage = gameImages.get("nextButton");
     nextButton = new ImageButton(nextImage,x, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button
     this.levelTexts = new String[]{
-        "Survived!\n Click NEXT for the next attack wave!\nBe prepared,\nthe purple bird can reverse gravity!",
-        "Survived!\n Click NEXT for the next attack wave!\nBe prepared,\nthe black bird can explode!"
+        "Survived!\n Click NEXT to prepare for the next attack wave!\nBe carefull,\nthe purple bird can reverse gravity!",
+        "Survived!\n Click NEXT to prepare for the next attack wave!\nBe carefull,\nthe black bird explodes!"
 
     };
   }

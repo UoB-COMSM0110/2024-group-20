@@ -1,5 +1,5 @@
 public enum BirdType {
-  RED, BLUE, BLACK
+  RED, BLUE, BLACK, PURPLE
 }
 
 public class Bird extends Circle{

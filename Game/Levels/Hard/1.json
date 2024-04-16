@@ -45,7 +45,7 @@
   },
   {
     "//COMMENT": "",
-    "type": "BirdBlue",
+    "type": "BirdPurple",
     "positionX": 0.2,
     "positionY": 0.2,
     "velocityX": 1000,
@@ -53,7 +53,7 @@
   },
   {
     "//COMMENT": "",
-    "type": "BirdBlue",
+    "type": "BirdPurple",
     "positionX": 0.2,
     "positionY": 0.2,
     "velocityX": 1000,
@@ -61,7 +61,7 @@
   },
   {
     "//COMMENT": "",
-    "type": "BirdBlue",
+    "type": "BirdPurple",
     "positionX": 0.2,
     "positionY": 0.2,
     "velocityX": 2000,
