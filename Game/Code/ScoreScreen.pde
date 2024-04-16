@@ -68,7 +68,7 @@ public class ScoreScreen extends Screen {
         easyToPrint.append(".");
       }
 
-      easyToPrint.append(score).append("\n\n");
+      easyToPrint.append(score).append("\n");
       
       eCount++;
     }
@@ -86,7 +86,7 @@ public class ScoreScreen extends Screen {
         hardToPrint.append(".");
       }
 
-      hardToPrint.append(score).append("\n\n");
+      hardToPrint.append(score).append("\n");
       
       hCount++;
     }
