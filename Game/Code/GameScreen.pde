@@ -28,7 +28,7 @@ public class GameScreen extends Screen {
       button.display(); 
     }
     if(currentLevelNumber < gameLevelData.get(player.getDifficulty()).length && currentLevelNumber>0){
-      levelMenu.displayMenu();
+      levelMenu.displayMenu(currentLevelNumber-1);
       levelMenu.clicked();
     }
     otherDisplay();

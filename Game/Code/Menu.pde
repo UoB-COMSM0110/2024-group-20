@@ -15,7 +15,7 @@ public class Menu {
   private ButtonCallback callbackSkip; // Callback for Skip button
   private ImageButton nextButton,skipButton;
   private boolean nextPressed;//check whether next is pressed
-  private String levelText = "Survived! Click NEXT to next attack wave!";
+  private String[] levelTexts;
 
   // Constructor for tutorial
   public Menu(float x, float y, float width, float height,String menuText,int stepNumber, int totalSteps, ButtonCallback callbackNext, ButtonCallback callbackSkip) {
@@ -44,6 +44,11 @@ public class Menu {
     woodBoardImage = gameImages.get("woodBoard");
     nextImage = gameImages.get("nextButton");
     nextButton = new ImageButton(nextImage,x, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button
+    this.levelTexts = new String[]{
+        "Survived!\n Click NEXT for the next attack wave!\nBe prepared,\nthe purple bird can reverse gravity!",
+        "Survived!\n Click NEXT for the next attack wave!\nBe prepared,\nthe black bird can explode!"
+
+    };
   }
    // Display the menu for tutorial.
   public void display() {
@@ -64,7 +69,7 @@ public class Menu {
     displayWrappedText(menuText, x, y - height * 0.3, width * 0.9);
   }
   //Display menu for level
-  public void displayMenu() {
+  public void displayMenu(int i) {
     if(!nextPressed){
       return;
     }
@@ -73,7 +78,7 @@ public class Menu {
       nextButton.display();
       fill(0);
       textSize(40);
-      text(levelText, x, y  + height * 0.02);
+      text(levelTexts[i], x, y-height/3);
   }
 
   public void clicked(){
