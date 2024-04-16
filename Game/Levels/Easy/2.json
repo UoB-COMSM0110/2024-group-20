@@ -46,31 +46,31 @@
   {
     "//COMMENT": "",
     "type": "Pig",
-    "positionX": 0.7,
+    "positionX": 0.8,
     "positionY": 0.85
   },
   {
     "//COMMENT": "",
     "type": "BirdBlack",
-    "positionX": 0.2,
-    "positionY": 0.2,
-    "velocityX": 1000,
+    "positionX": 0.1,
+    "positionY": 0.1,
+    "velocityX": 200,
     "velocityY": 1000
   },
   {
     "//COMMENT": "",
     "type": "BirdBlack",
-    "positionX": 0.2,
-    "positionY": 0.2,
-    "velocityX": 1000,
+    "positionX": 0.5,
+    "positionY": 0.1,
+    "velocityX": 0,
     "velocityY": 1000
   },
   {
     "//COMMENT": "",
     "type": "BirdBlack",
-    "positionX": 0.2,
-    "positionY": 0.2,
-    "velocityX": 2000,
+    "positionX": 0.9,
+    "positionY": 0.1,
+    "velocityX": -200,
     "velocityY": 2000
   },
   {
