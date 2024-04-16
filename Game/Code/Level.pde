@@ -27,8 +27,6 @@ public class Level extends Screen {
   private ImageButton woodButton, glassButton,stoneButton,readyButton,undoButton;
   private ArrayList<ImageButton> buttons;
   
-  private PVector groundCoordinates;
-  
   public Level(GameScreen gameScreen, JSONArray levelContents){
     this.gameScreen = gameScreen;
     this.difficulty = gameScreen.getPlayer().getDifficulty();
@@ -59,9 +57,7 @@ public class Level extends Screen {
   
   public void display() {
     image(bgImage, width/2, height/2, width, height);
-    imageMode(CORNER);
-    image(groundImage, 0, height - height/10, width, height);
-    imageMode(CENTER);
+    image(groundImage, width/2, 1.4*height, width, height);
     
     if(!ready){
       
@@ -184,7 +180,6 @@ public class Level extends Screen {
     float positionX = levelContent.getFloat("positionX") * width;
     float positionY = levelContent.getFloat("positionY") * height;
     PVector position = new PVector(positionX, positionY);
-    groundCoordinates = position;
     float groundWidth = levelContent.getFloat("width") * width;
     float groundHeight = levelContent.getFloat("height") * height;
     float groundRotation = levelContent.getFloat("rotation");
@@ -372,7 +367,7 @@ public class Level extends Screen {
     fill(0, 0, 0);
     textSize(40);
     text("Budget: " + str(budget), 3 * width/4, height/10 + 40);
-    text("Birds:\t\t", 1 * width/4, height/10 + 40);
+    text("Birds:\t\t", 1 * width/4, height/10 + 55);
     int x = width/4 + 40, y = height/10 + 40;
     for(Bird bird:birdBackStageList) {
       image(bird.getIcon(), x, y, 40, 40);
