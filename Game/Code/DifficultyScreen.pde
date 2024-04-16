@@ -1,6 +1,6 @@
 public class DifficultyScreen extends Screen {
   private ScreenManager screenManager;
-  private PImage bgImage, easyImage, hardImage;
+  private PImage bgImage, easyImage, hardImage,woodBoardImage;
   private ImageButton easyButton, hardButton;
   private ArrayList<ImageButton> buttons;
   
@@ -10,6 +10,7 @@ public class DifficultyScreen extends Screen {
     this.screenManager = screenManager;
     
     bgImage = gameImages.get("map");
+    woodBoardImage = gameImages.get("woodBoard");
     buttons = new ArrayList<ImageButton>();
 
     easyImage = gameImages.get("easyButton");
@@ -17,14 +18,20 @@ public class DifficultyScreen extends Screen {
     buttons.add(easyButton);
     
     hardImage = gameImages.get("hardButton");  
-    hardButton = new ImageButton(hardImage, 2 * width/3, height/3 , width/5, height/10);  
+    hardButton = new ImageButton(hardImage, 2 * width/3, height/3, width/5, height/10);  
     buttons.add(hardButton);
   }
   
   //load all the image
   public void display(){
     // setting background
+    textSize(30);
+    fill(0);
     image(bgImage, width/2, height/2, width, height);
+    image(woodBoardImage, width/3,height/3 + height/4, 2*width/7, height/3);
+    text("Show birds attacking directions.\nWin with at least one pig survive",width/3,height/3+height/4);
+    image(woodBoardImage, 2 * width/3, height/3 + height/4, 2*width/7, height/3);
+    text("birds attack from all directions.\nWin with all pigs survive",2*width/3,height/3+height/4);
 
     for (ImageButton button : buttons) {
         button.update(); 
