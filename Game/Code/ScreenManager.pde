@@ -38,6 +38,19 @@ public class ScreenManager {
   
   public void setCurrentScreen(ScreenType screenType) {
     currentScreen = screens.get(screenType);
+    if(screenType == ScreenType.STARTSCREEN) {
+      gameAudios.get("loseMusic").pause();
+      gameAudios.get("winMusic").pause();
+      gameAudios.get("backgroundMusic").loop();
+    }
+    else if(screenType == ScreenType.LOSESCREEN) {
+      gameAudios.get("backgroundMusic").pause();
+      gameAudios.get("loseMusic").loop();
+    }
+    else if(screenType == ScreenType.WINSCREEN) {
+      gameAudios.get("backgroundMusic").pause();
+      gameAudios.get("winMusic").loop();
+    }
   }
   
   public Player getPlayer() {

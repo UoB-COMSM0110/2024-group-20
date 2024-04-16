@@ -1,8 +1,10 @@
+import processing.sound.*;
 import processing.javafx.*;
 import java.io.*;
 
 HashMap<String, PImage> gameImages;
 HashMap<Difficulty, JSONArray[]> gameLevelData;
+HashMap<String, SoundFile> gameAudios;
 Table easyScoreTable,hardScoreTable;
 ScreenManager screenManager;
 
@@ -15,6 +17,7 @@ void setup (){
   textFont(createFont("angrybirds-regular.ttf", 128));
 
   loadImages();
+  loadGameAudios();
   loadTableFile();
   loadLevelJSONArrays();
   screenManager = new ScreenManager();
@@ -52,6 +55,19 @@ void loadImages() {
     String imagePath = "../Images/" + fileName;
     PImage image = loadImage(imagePath);
     gameImages.put(imageName, image);
+  }
+}
+
+void loadGameAudios() {
+  gameAudios = new HashMap();
+  File directoryPath = new File(sketchPath("../Audios"));
+  File fileList[] = directoryPath.listFiles();
+  for(File file:fileList) {
+    String fileName = file.getName();
+    String audioName = fileName.replaceFirst("[.][^.]+$", "");
+    String audioPath = "../Audios/" + fileName;
+    SoundFile audioFile = new SoundFile(this, audioPath);
+    gameAudios.put(audioName, audioFile);
   }
 }
 
