@@ -46,10 +46,12 @@ public class ScreenManager {
     else if(screenType == ScreenType.LOSESCREEN) {
       gameAudios.get("backgroundMusic").pause();
       gameAudios.get("loseMusic").loop();
+      gameAudios.get("loseMusic").amp(0.4);
     }
     else if(screenType == ScreenType.WINSCREEN) {
       gameAudios.get("backgroundMusic").pause();
       gameAudios.get("winMusic").loop();
+      gameAudios.get("winMusic").amp(0.4);
     }
   }
   
