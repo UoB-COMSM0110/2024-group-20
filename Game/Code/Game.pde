@@ -98,8 +98,8 @@ void loadLevelJSONArrays() {
 }
   
  void loadTableFile(){
-    (easyScoreTable = loadTable("easyScores.csv", "header")).setColumnType("Score", Table.INT);;
-    (hardScoreTable = loadTable("hardScores.csv", "header")).setColumnType("Score", Table.INT);;
+    (easyScoreTable = loadTable("easyScores.csv", "header")).setColumnType("Score", Table.INT);
+    (hardScoreTable = loadTable("hardScores.csv", "header")).setColumnType("Score", Table.INT);
   }
 
  //World w;

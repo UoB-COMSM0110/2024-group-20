@@ -27,6 +27,7 @@ public class ScoreScreen extends Screen {
     text("EASY",width/2-width/8,height/2-height/6);
     text("HARD",width/2+width/8,height/2-height/6);
     strokeWeight(8);
+    stroke(0);
     line(width/2,height/2-height/6,width/2,5*height/7);
     strokeWeight(1);
     // printing scores from a text file
@@ -62,7 +63,7 @@ public class ScoreScreen extends Screen {
 
       String player = row.getString("Player");
       int score = row.getInt("Score");
-      int noDots = 20 - 2*player.length()- 2*String.valueOf(score).length();
+      int noDots = 30 - 2*player.length()- 2*String.valueOf(score).length();
       easyToPrint.append(player);
       for (int i = 0; i< noDots; i++){
         easyToPrint.append(".");
