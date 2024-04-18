@@ -85,37 +85,46 @@ public class Level extends Screen {
   public void mousePressed(){
     if(!ready){
       //drag materials
+      PVector mousePosition = new PVector(mouseX, mouseY);
       for (Material material : materialList) {
         if (material.isMouseOver(mouseX, mouseY)) {
           draggedMaterial = material;
           lastSelectedMaterial = material;
-          relativeDragPosition = PVector.sub(material.getPosition(), new PVector(mouseX, mouseY));
+          relativeDragPosition = PVector.sub(material.getPosition(), mousePosition);
           return;
         }
       }
       //add wood
-      PVector newPosition = new PVector(random(width/10,width/3), random(height/3,5*height/9));
       if(woodButton.clicked()){
         if(buyResource(Resource.WOOD)){
-          Wood newWood = new Wood(newPosition, 0.5, 0.3, false, 48, 195,0);
+          Wood newWood = new Wood(mousePosition, 0.5, 0.3, false, 48, 195,0);
           materialList.add(newWood);
           w.addBody(newWood);
+          draggedMaterial = newWood;
+          lastSelectedMaterial = newWood;
+          relativeDragPosition = new PVector(0,0);
         }
       }
       //add glass
       if(glassButton.clicked()){
         if(buyResource(Resource.GLASS)){
-          Glass newGlass = new Glass(newPosition, 0.5, 0.8, false, 48, 195,0);
+          Glass newGlass = new Glass(mousePosition, 0.5, 0.8, false, 48, 195,0);
           materialList.add(newGlass);
           w.addBody(newGlass);
+          draggedMaterial = newGlass;
+          lastSelectedMaterial = newGlass;
+          relativeDragPosition = new PVector(0,0);
         }
       }
       //add stone
       if(stoneButton.clicked()){
         if(buyResource(Resource.STONE)){
-          Stone newStone = new Stone(newPosition, 0.5, 0.3, false, 48, 195,0);
+          Stone newStone = new Stone(mousePosition, 0.5, 0.3, false, 48, 195,0);
           materialList.add(newStone);
           w.addBody(newStone);
+          draggedMaterial = newStone;
+          lastSelectedMaterial = newStone;
+          relativeDragPosition = new PVector(0,0);
         }
       }
       //undo buy material
@@ -138,11 +147,17 @@ public class Level extends Screen {
   }
   
   public void keyPressed(){
-    if (lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial) && key=='D') {  
+    if(key=='D' && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {  
        lastSelectedMaterial.setRotation(lastSelectedMaterial.getRotation() + PI / 18);
     }
-    if (lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial) && key=='A') {  
+    if(key=='A' && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {  
       lastSelectedMaterial.setRotation(lastSelectedMaterial.getRotation() - PI / 18); 
+    }
+    if(key==DELETE && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {
+      if(sellResource(lastSelectedMaterial)){
+        w.removeBody(lastSelectedMaterial);
+        materialList.remove(lastSelectedMaterial);
+      }
     }
   }
   

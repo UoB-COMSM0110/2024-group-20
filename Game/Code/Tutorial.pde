@@ -15,7 +15,7 @@ public class Tutorial {
     menus[3] = new Menu(width/3, 3 * height/5, width/3, height/3, "There are three types of materials, the more resilient ones cost more!", 4, totalSteps, this::nextStep, this::skipTutorial);
     menus[4] = new Menu(width/3, 3 * height/5, width/3, height/3, "You can use A and D buttons to rotate the materials!", 5, totalSteps, this::nextStep, this::skipTutorial);
     menus[5] = new Menu(width-width/8-width/10,height/5+height/8, width/3, height/3, "Use less materials and protect more pigs to gain higher score.", 6, totalSteps, this::nextStep, this::skipTutorial);
-    menus[6] = new Menu(width/2, height/3, width/3, height/3, "\n\nOnce finish, click READY! for the gravity to turn on and for birds to start attacking!", 7, totalSteps, this::nextStep, this::skipTutorial);
+    menus[6] = new Menu(width/2, height/3, width/3, height/3, "Once finish, click READY! for the gravity to turn on and for birds to start attacking!", 7, totalSteps, this::nextStep, this::skipTutorial);
   }
 
   public void display() {
