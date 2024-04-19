@@ -151,7 +151,7 @@ public class Level extends Screen {
           }
         }
       }
-      if(readyButton.clicked()){
+      if(readyButton.clicked() && materialList.size() != 0){
         lastSelectedMaterial.unselect();
         zeroImpulses();
         for(Pig pig:pigList) {

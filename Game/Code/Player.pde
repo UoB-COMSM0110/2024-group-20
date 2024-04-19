@@ -48,7 +48,6 @@ public class Player{
   }
   
   public void deletePlayer(){
-    playerName = ""; 
     playerScore = 0;
     scoreSet = false;
     nameSet = false;
