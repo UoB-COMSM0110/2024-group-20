@@ -148,10 +148,10 @@ public class Level extends Screen {
   }
   
   public void keyPressed(){
-    if(key=='D' && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {  
+    if(key=='D' || key=='d' && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {  
        lastSelectedMaterial.setRotation(lastSelectedMaterial.getRotation() + PI / 18);
     }
-    if(key=='A' && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {  
+    if(key=='A' || key=='a' && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {  
       lastSelectedMaterial.setRotation(lastSelectedMaterial.getRotation() - PI / 18); 
     }
     if(key==DELETE && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {
