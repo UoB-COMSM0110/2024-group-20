@@ -1,6 +1,6 @@
 public class Wood extends Material {
-  public Wood(PVector position, float density, float restitution, boolean isStatic, float rectWidth, float rectHeight,float rotation) {
-    super(position, density, restitution, isStatic, rectWidth, rectHeight,rotation);
+  public Wood(PVector position,float rotation) {
+    super(position, 0.7, 0.5, false, 48, 195, rotation);
     this.frictionRestitution = 0.6;
     impulseToughness = 6e6;
   }
