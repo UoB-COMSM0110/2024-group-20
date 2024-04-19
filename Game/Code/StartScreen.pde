@@ -34,13 +34,11 @@ public class StartScreen extends Screen {
     image(bgImage, width/2, height/2, width, height);
     //setting logo
     image(logoImage, width/2,height/2 - height/4,width/3,height/3);
-
     
     for (ImageButton button : buttons) {
         button.update(); 
         button.display(); 
       }
-
   }
 
   public void mousePressed(){

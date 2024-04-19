@@ -31,6 +31,10 @@ public class ImageButton {
   }
 
   public boolean clicked() {
-    return isOver && mousePressed;
+    if(isOver && mousePressed){
+      gameAudios.get("buttonSound").play();
+      return true;
+    }
+    return false;
   }
 }

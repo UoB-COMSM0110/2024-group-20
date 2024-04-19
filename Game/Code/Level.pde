@@ -308,6 +308,7 @@ public class Level extends Screen {
         if(body.getLastContactBody() != null) {
           BirdBlack birdBlack = (BirdBlack) body;
           birdBlack.explode(w);
+          gameAudios.get("birdBlackExplosion").play();
           birdFrontStageList.remove(birdBlack);
           setupWorld();
         }
