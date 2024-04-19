@@ -57,9 +57,9 @@ public class Level extends Screen {
   
   public void display() {
     image(bgImage, width/2, height/2, width, height);
+    image(groundImage, width/2, 1.4*height - 24, width, height);
     
     if(!ready){
-      
       displayAttackDirection();
       for (ImageButton button : buttons) {
         button.update(); 
@@ -78,7 +78,6 @@ public class Level extends Screen {
       timerActions();
     }
     w.display();
-    image(groundImage, width/2, 1.4*height - 24, width, height);
     otherDisplay();
   }
   
@@ -94,21 +93,10 @@ public class Level extends Screen {
           return;
         }
       }
-      //add wood
-      if(woodButton.clicked()){
-        if(buyResource(Resource.WOOD)){
-          Wood newWood = new Wood(mousePosition, 0.5, 0.3, false, 48, 195,0);
-          materialList.add(newWood);
-          w.addBody(newWood);
-          draggedMaterial = newWood;
-          lastSelectedMaterial = newWood;
-          relativeDragPosition = new PVector(0,0);
-        }
-      }
       //add glass
       if(glassButton.clicked()){
         if(buyResource(Resource.GLASS)){
-          Glass newGlass = new Glass(mousePosition, 0.5, 0.8, false, 48, 195,0);
+          Glass newGlass = new Glass(mousePosition, 0);
           materialList.add(newGlass);
           w.addBody(newGlass);
           draggedMaterial = newGlass;
@@ -116,10 +104,21 @@ public class Level extends Screen {
           relativeDragPosition = new PVector(0,0);
         }
       }
+      //add wood
+      if(woodButton.clicked()){
+        if(buyResource(Resource.WOOD)){
+          Wood newWood = new Wood(mousePosition, 0);
+          materialList.add(newWood);
+          w.addBody(newWood);
+          draggedMaterial = newWood;
+          lastSelectedMaterial = newWood;
+          relativeDragPosition = new PVector(0,0);
+        }
+      }
       //add stone
       if(stoneButton.clicked()){
         if(buyResource(Resource.STONE)){
-          Stone newStone = new Stone(mousePosition, 0.5, 0.3, false, 48, 195,0);
+          Stone newStone = new Stone(mousePosition, 0);
           materialList.add(newStone);
           w.addBody(newStone);
           draggedMaterial = newStone;

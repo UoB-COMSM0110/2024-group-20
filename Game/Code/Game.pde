@@ -9,8 +9,8 @@ Table easyScoreTable,hardScoreTable;
 ScreenManager screenManager;
 
 void setup (){
-  //fullScreen(FX2D);
-  fullScreen();
+  fullScreen(FX2D);
+  //fullScreen();
   rectMode(CENTER);
   imageMode(CENTER);
   textAlign(CENTER);
@@ -31,7 +31,8 @@ void mousePressed(){
   screenManager.mousePressed();
 }
 
-void keyPressed(){
+// use keyTyped() because keyPressed() will always return key as capitalized when using fx2d
+void keyTyped(){
   screenManager.keyPressed();
 }
 
