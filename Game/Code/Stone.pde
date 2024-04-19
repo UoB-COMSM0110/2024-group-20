@@ -10,7 +10,14 @@ public class Stone extends Material {
     pushMatrix();
     translate(position.x, position.y);
     rotate(rotation);
-    image(gameImages.get("stone"), 0, 0); 
+    if(isSelected == false){
+      image(gameImages.get("stone"), 0, 0); 
+    }
+    else{
+      image(gameImages.get("stone"), 0, 0); 
+      fill(255, 255, 0, 100); 
+      rect(0, 0, rectWidth, rectHeight);    
+    }  
     popMatrix();
   }
 }

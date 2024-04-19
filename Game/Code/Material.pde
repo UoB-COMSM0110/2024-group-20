@@ -1,8 +1,10 @@
 abstract class Material extends Rectangle {
   protected float impulseToughness;
-  
+  protected boolean isSelected;
+
   public Material(PVector position, float density, float restitution, boolean isStatic, float rectWidth, float rectHeight, float rotation) {
     super(position, density, restitution, isStatic, rectWidth, rectHeight, rotation);
+    isSelected = false;
   }
 
   abstract void display(); // Abstract draw method to be implemented by subclasses
@@ -15,6 +17,14 @@ abstract class Material extends Rectangle {
   
   public float getImpulseToughness(){
     return impulseToughness;
+  }
+  
+  public void select(){
+    isSelected = true; 
+  }
+  
+  public void unselect(){
+    isSelected = false; 
   }
 
 }

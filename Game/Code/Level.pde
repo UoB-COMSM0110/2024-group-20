@@ -89,7 +89,9 @@ public class Level extends Screen {
       for (Material material : materialList) {
         if (material.isMouseOver(mouseX, mouseY)) {
           draggedMaterial = material;
+          lastSelectedMaterial.unselect();
           lastSelectedMaterial = material;
+          lastSelectedMaterial.select();
           relativeDragPosition = PVector.sub(material.getPosition(), mousePosition);
           return;
         }
@@ -101,7 +103,11 @@ public class Level extends Screen {
           materialList.add(newWood);
           w.addBody(newWood);
           draggedMaterial = newWood;
+          if(lastSelectedMaterial != null){
+            lastSelectedMaterial.unselect();
+          }
           lastSelectedMaterial = newWood;
+          lastSelectedMaterial.select();
           relativeDragPosition = new PVector(0,0);
         }
       }
@@ -112,7 +118,11 @@ public class Level extends Screen {
           materialList.add(newGlass);
           w.addBody(newGlass);
           draggedMaterial = newGlass;
+          if(lastSelectedMaterial != null){
+            lastSelectedMaterial.unselect();
+          }
           lastSelectedMaterial = newGlass;
+          lastSelectedMaterial.select();
           relativeDragPosition = new PVector(0,0);
         }
       }
@@ -123,7 +133,11 @@ public class Level extends Screen {
           materialList.add(newStone);
           w.addBody(newStone);
           draggedMaterial = newStone;
+          if(lastSelectedMaterial != null){
+            lastSelectedMaterial.unselect();
+          }
           lastSelectedMaterial = newStone;
+          lastSelectedMaterial.select();
           relativeDragPosition = new PVector(0,0);
         }
       }
@@ -131,12 +145,14 @@ public class Level extends Screen {
       if(undoButton.clicked()){
         if(lastSelectedMaterial!=null && materialList.contains(lastSelectedMaterial)){
           if(sellResource(lastSelectedMaterial)){
+            lastSelectedMaterial.unselect();
             w.removeBody(lastSelectedMaterial);
             materialList.remove(lastSelectedMaterial);
           }
         }
       }
       if(readyButton.clicked()){
+        lastSelectedMaterial.unselect();
         zeroImpulses();
         for(Pig pig:pigList) {
           pig.setStatic(false);
