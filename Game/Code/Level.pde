@@ -148,10 +148,10 @@ public class Level extends Screen {
   }
   
   public void keyPressed(){
-    if(key=='D' || key=='d' && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {  
+    if((key=='D'|| key=='d') && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {  
        lastSelectedMaterial.setRotation(lastSelectedMaterial.getRotation() + PI / 18);
     }
-    if(key=='A' || key=='a' && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {  
+    if((key=='A'|| key=='a') && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {  
       lastSelectedMaterial.setRotation(lastSelectedMaterial.getRotation() - PI / 18); 
     }
     if(key==DELETE && lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {
@@ -293,6 +293,7 @@ public class Level extends Screen {
         if(body.getLastContactBody() != null) {
           BirdBlack birdBlack = (BirdBlack) body;
           birdBlack.explode(w);
+          gameAudios.get("birdBlackExplosion").play();
           birdFrontStageList.remove(birdBlack);
           setupWorld();
         }

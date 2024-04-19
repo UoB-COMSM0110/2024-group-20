@@ -33,8 +33,8 @@ public class WinScreen extends Screen {
 
   public void mousePressed(){
     if(menuButton.clicked()){
-    player.deletePlayer();
-    screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
+      player.deletePlayer();
+      screenManager.setCurrentScreen(ScreenType.STARTSCREEN);
     }
   }
   
