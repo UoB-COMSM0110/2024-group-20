@@ -10,14 +10,7 @@ public class Wood extends Material {
     pushMatrix();
     translate(position.x, position.y);
     rotate(rotation);
-    if(isSelected == false){
-      image(gameImages.get("wood"), 0, 0); 
-    }
-    else{
-      image(gameImages.get("wood"), 0, 0); 
-      fill(255, 255, 0, 100); 
-      rect(0, 0, rectWidth, rectHeight);
-    }
+    image(gameImages.get("wood"), 0, 0); 
     popMatrix();
   }
 }

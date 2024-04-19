@@ -10,18 +10,9 @@ public class Glass extends Material {
     pushMatrix();
     translate(position.x, position.y);
     rotate(rotation);
-    if(isSelected == false){
-      tint(255, 150);
-      image(gameImages.get("glass"), 0, 0); 
-      noTint();
-    }
-    else{
-      tint(255, 150);
-      image(gameImages.get("glass"), 0, 0); 
-      noTint();     
-      fill(255, 255, 0, 100); 
-      rect(0, 0, rectWidth, rectHeight);
-    }
+    tint(255, 150);
+    image(gameImages.get("glass"), 0, 0); 
+    noTint();
     popMatrix();
   }
 }
