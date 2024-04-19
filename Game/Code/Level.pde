@@ -412,17 +412,13 @@ public class Level extends Screen {
   private void displayAttackDirection(){
     
       if(attackDirection == AttackDirection.FROMLEFT){
-         tint(255, 200);
          image(gameImages.get("attackAreaCornerLeft"), width/20,0);
-         noTint();
       }
       if(attackDirection == AttackDirection.ALLDIRECTIONS){
-        image(gameImages.get("attackAreaAll"), 0 + width/2,0 - height/8 + height/4, width, height/2); 
+        image(gameImages.get("attackAreaAll"), 0 + width/2,0 - height/8 + height/4, width, 3*height/4); 
       }      
       if(attackDirection == AttackDirection.FROMRIGHT){
-        tint(255, 200);
         image(gameImages.get("attackAreaCornerRight"), width - width/15, 0);     
-        noTint();
       }
     
   }
