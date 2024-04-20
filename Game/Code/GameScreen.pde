@@ -24,7 +24,6 @@ public class GameScreen extends Screen {
   public void display(){
     currentLevel.display();
     for (ImageButton button : buttons) {
-      button.update(); 
       button.display(); 
     }
     if(currentLevelNumber < gameLevelData.get(player.getDifficulty()).length && currentLevelNumber>0){

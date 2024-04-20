@@ -26,7 +26,6 @@ public class LoseScreen extends Screen {
     text("Your Final Score is: " + str(player.getPlayerScore()), width/2, height/2);
     player.updateScoresFile();
     
-    menuButton.update();
     menuButton.display();
  
   }

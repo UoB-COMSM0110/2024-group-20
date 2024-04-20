@@ -35,8 +35,7 @@ public class StartScreen extends Screen {
     //setting logo
     image(logoImage, width/2,height/2 - height/4,width/3,height/3);
     
-    for (ImageButton button : buttons) {
-        button.update(); 
+    for (ImageButton button : buttons) { 
         button.display(); 
       }
   }

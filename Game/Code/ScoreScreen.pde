@@ -33,7 +33,6 @@ public class ScoreScreen extends Screen {
     // printing scores from a text file
     printScoresFile();
     
-    menuButton.update();
     menuButton.display();
   }
 

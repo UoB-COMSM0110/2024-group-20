@@ -34,7 +34,6 @@ public class DifficultyScreen extends Screen {
     text("birds attack from all directions.\nWin with all pigs survive",2*width/3,height/3+height/4);
 
     for (ImageButton button : buttons) {
-        button.update(); 
         button.display(); 
     }
   }

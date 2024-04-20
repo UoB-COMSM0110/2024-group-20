@@ -1,40 +1,45 @@
 public class ImageButton {
-  private float x, y; // Position of the button
-  private float width, height; // Size of the button
-  private PImage image; // Image used for the button
-  private boolean isOver = false; 
+  private float buttonX, buttonY;
+  private float buttonWidth, buttonHeight;
+  private PImage buttonImage;
+  private boolean isMouseOver = false;
 
   // Constructor
-  public ImageButton(PImage image,float x, float y, float width, float height) {
-    this.image = image;
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
+  public ImageButton(PImage buttonImage,float buttonX, float buttonY, float buttonWidth, float buttonHeight) {
+    this.buttonImage = buttonImage;
+    this.buttonX = buttonX;
+    this.buttonY = buttonY;
+    this.buttonWidth = buttonWidth;
+    this.buttonHeight = buttonHeight;
   }
-
+  
   public void display() {
-    image(image, x, y, width, height);
+    image(buttonImage, buttonX, buttonY, buttonWidth, buttonHeight);
     
-    if (isOver) { 
+    update();
+
+    if (isMouseOver) { 
+      noStroke();
       fill(255, 255, 255, 100);
-      rect(x, y, width, height);
+      rect(buttonX, buttonY, buttonWidth, buttonHeight);
     }
   }
 
-  public void update() {
-    if (mouseX >= x-width/2 && mouseX <= x +width/2&& mouseY >= y - height/2 && mouseY <= y + height/2) {
-        isOver = true;
+  private void update() {
+    if (mouseX >= buttonX - buttonWidth/2 && mouseX <= buttonX + buttonWidth/2 && 
+        mouseY >= buttonY - buttonHeight/2 && mouseY <= buttonY + buttonHeight/2) {
+        isMouseOver = true;
     } else {
-        isOver = false;
+        isMouseOver = false;
     }
   }
 
   public boolean clicked() {
-    if(isOver && mousePressed){
+    if(isMouseOver && mousePressed){
       gameAudios.get("buttonSound").play();
       return true;
     }
     return false;
   }
+
 }

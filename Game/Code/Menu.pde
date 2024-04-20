@@ -7,22 +7,22 @@ public class Menu {
   private PImage skipImage;
   private PImage woodBoardImage;
   
-  private float x, y; // Position of the menu
-  private float width, height; // Dimensions of the menu
-  private String menuText; // Predefined text for the menu
+  private float menuX, menuY;
+  private float menuWidth, menuHeight; 
+  private String menuText; // Predefined text for the tutorial
   private int stepNumber, totalSteps; // For page footer (e.g., "1/4")
   private ButtonCallback callbackNext; // Callback for Next button
   private ButtonCallback callbackSkip; // Callback for Skip button
   private ImageButton nextButton,skipButton;
-  private boolean nextPressed;//check whether next is pressed
+  private boolean nextPressed;//check whether next is pressed for level
   private String[] levelTexts;
 
   // Constructor for tutorial
-  public Menu(float x, float y, float width, float height,String menuText,int stepNumber, int totalSteps, ButtonCallback callbackNext, ButtonCallback callbackSkip) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
+  public Menu(float menuX, float menuY, float menuWidth, float menuHeight,String menuText,int stepNumber, int totalSteps, ButtonCallback callbackNext, ButtonCallback callbackSkip) {
+    this.menuX = menuX;
+    this.menuY = menuY;
+    this.menuWidth = menuWidth;
+    this.menuHeight = menuHeight;
     this.menuText = menuText;
     this.stepNumber = stepNumber;
     this.totalSteps = totalSteps;
@@ -31,19 +31,19 @@ public class Menu {
     woodBoardImage = gameImages.get("woodBoard");
     nextImage = gameImages.get("nextButton");
     skipImage = gameImages.get("skipButton");
-    skipButton = new ImageButton(skipImage,x - width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // skip Button
-    nextButton = new ImageButton(nextImage,x + width * 0.25, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button
+    skipButton = new ImageButton(skipImage,menuX - menuWidth * 0.25, menuY + menuHeight/2 - menuHeight * 0.2, menuWidth * 0.2, menuHeight * 0.15); // skip Button
+    nextButton = new ImageButton(nextImage,menuX + menuWidth * 0.25, menuY + menuHeight/2 - menuHeight * 0.2, menuWidth * 0.2, menuHeight * 0.15); // next Button
   }
   //Constructor for level
-  public Menu(float x, float y, float width, float height){
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
+  public Menu(float menuX, float menuY, float menuWidth, float menuHeight){
+    this.menuX = menuX;
+    this.menuY = menuY;
+    this.menuWidth = menuWidth;
+    this.menuHeight = menuHeight;
     nextPressed = true;
     woodBoardImage = gameImages.get("woodBoard");
     nextImage = gameImages.get("nextButton");
-    nextButton = new ImageButton(nextImage,x, y + height/2 - height * 0.2, width * 0.2, height * 0.15); // next Button
+    nextButton = new ImageButton(nextImage,menuX, menuY + menuHeight/2 - menuHeight * 0.2, menuWidth * 0.2, menuHeight * 0.15); // next Button
     this.levelTexts = new String[]{
         "Survived!\n Click NEXT to prepare for the next attack wave!\nBe carefull,\nthe purple bird can reverse gravity!",
         "Survived!\n Click NEXT to prepare for the next attack wave!\nBe carefull,\nthe black bird explodes!"
@@ -53,32 +53,29 @@ public class Menu {
    // Display the menu for tutorial.
   public void display() {
     // Draw the menu background
-    image(woodBoardImage, x, y, width, height);
+    image(woodBoardImage, menuX, menuY, menuWidth, menuHeight);
        
     // Draw buttons
-    skipButton.update();
     skipButton.display();
-    nextButton.update();
     nextButton.display();
     fill(0);
     textSize(20);
     String footerText = stepNumber + "/" + totalSteps;
-    text(footerText, x, y + height/2 - height * 0.02); // Centered at the bottom
+    text(footerText, menuX, menuY + menuHeight/2 - menuHeight * 0.02); // Centered at the bottom
    
     textSize(40);
-    displayWrappedText(menuText, x, y - height * 0.3, width * 0.9);
+    displayWrappedText(menuText, menuX, menuY - menuHeight * 0.3, menuWidth * 0.9);
   }
   //Display menu for level
   public void displayMenu(int i) {
     if(!nextPressed){
       return;
     }
-      image(woodBoardImage, x, y, width, height);
-      nextButton.update();
+      image(woodBoardImage, menuX, menuY, menuWidth, menuHeight);
       nextButton.display();
       fill(0);
       textSize(40);
-      text(levelTexts[i], x, y-height/3);
+      text(levelTexts[i], menuX, menuY-menuHeight/3);
   }
 
   public void clicked(){
@@ -97,13 +94,13 @@ public class Menu {
 
   public void mousePressed() {
     // Check if a button is pressed
-    // Next
+    // skip
       if (skipButton.clicked()) {
           if (callbackSkip != null) {
             callbackSkip.onButtonPressed();
           }
         }
-      // Skip
+      // next
       else if (nextButton.clicked()) {
         nextPressed = false;
         if (callbackNext != null) {
@@ -133,3 +130,6 @@ public class Menu {
   }
  
 }
+
+
+
