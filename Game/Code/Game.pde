@@ -9,8 +9,8 @@ Table easyScoreTable,hardScoreTable;
 ScreenManager screenManager;
 
 void setup (){
-  fullScreen(FX2D);
-  //fullScreen();
+  //fullScreen(FX2D);
+  fullScreen(P2D);
   rectMode(CENTER);
   imageMode(CENTER);
   textAlign(CENTER);
@@ -31,8 +31,10 @@ void mousePressed(){
   screenManager.mousePressed();
 }
 
-// use keyTyped() because keyPressed() will always return key as capitalized when using fx2d
-void keyTyped(){
+void keyPressed(KeyEvent event){
+  //if(event.isShiftDown()) key = Character.toUpperCase(key);
+  //else key = Character.toLowerCase(key);
+  
   screenManager.keyPressed();
 }
 
