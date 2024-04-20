@@ -120,6 +120,10 @@ public class GameScreen extends Screen {
     currentLevel.mouseReleased();
   }
   
+  public void mouseWheel(MouseEvent event){
+    currentLevel.mouseWheel(event);
+  }
+  
   private void setButtons(){
     buttons = new ArrayList<ImageButton>();
     //menu

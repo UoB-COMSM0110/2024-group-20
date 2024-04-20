@@ -55,6 +55,7 @@ public class DifficultyScreen extends Screen {
   public void keyPressed(){}
   public void mouseDragged(){}
   public void mouseReleased(){}
+  public void mouseWheel(MouseEvent event){}
   
   private void setEasyLevels(){
     screenManager.getPlayer().setDifficulty(Difficulty.EASY);

@@ -47,6 +47,9 @@ void mouseReleased() {
   screenManager.mouseReleased();
 }
 
+void mouseWheel(MouseEvent event) {
+  screenManager.mouseWheel(event);
+}
 
 void loadImages() {
   gameImages = new HashMap();

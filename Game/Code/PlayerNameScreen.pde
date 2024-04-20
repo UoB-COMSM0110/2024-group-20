@@ -35,6 +35,7 @@ public class PlayerNameScreen extends Screen {
   public void mousePressed(){}
   public void mouseReleased(){}
   public void mouseDragged(){}
+  public void mouseWheel(MouseEvent event){}
   
   public void addLetter(char letter){
     String playerName = player.getPlayerName();

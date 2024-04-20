@@ -4,4 +4,5 @@ abstract class Screen {
   abstract void keyPressed();
   abstract void mouseDragged();
   abstract void mouseReleased();
+  abstract void mouseWheel(MouseEvent event);
 }

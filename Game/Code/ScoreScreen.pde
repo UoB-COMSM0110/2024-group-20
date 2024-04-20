@@ -43,6 +43,7 @@ public class ScoreScreen extends Screen {
   public void keyPressed(){}
   public void mouseDragged(){}
   public void mouseReleased(){}
+  public void mouseWheel(MouseEvent event){}
   
   // Method for scoreScreen printin the score.csv file to screen
   public void printScoresFile(){

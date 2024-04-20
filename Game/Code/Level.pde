@@ -171,6 +171,13 @@ public class Level extends Screen {
     draggedMaterial = null;
   }
   
+  public void mouseWheel(MouseEvent event){
+    if(lastSelectedMaterial != null && materialList.contains(lastSelectedMaterial)) {
+      int wheelMoves = event.getCount();
+      lastSelectedMaterial.setRotation(lastSelectedMaterial.getRotation() + PI / 18f * wheelMoves);
+    }
+  }
+  
   private void setBudget(JSONObject levelContent){
     this.budget = levelContent.getInt("amount");
   }

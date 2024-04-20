@@ -40,4 +40,5 @@ public class WinScreen extends Screen {
   public void keyPressed(){}
   public void mouseDragged(){}
   public void mouseReleased(){}
+  public void mouseWheel(MouseEvent event){}
 }

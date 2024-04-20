@@ -86,4 +86,9 @@ public class ScreenManager {
       currentScreen.mouseReleased();
     }
   }
+  public void mouseWheel(MouseEvent event){
+    if (currentScreen != null) {
+      currentScreen.mouseWheel(event);
+    }
+  }
 }
