@@ -32,8 +32,8 @@ public class ScreenManager {
     screens.put(ScreenType.LOSESCREEN, new LoseScreen(this));
   }
   
-  public HashMap<ScreenType, Screen> getScreens() {
-    return screens;
+  public Screen getCurrentScreen() {
+    return currentScreen;
   }
   
   public void setCurrentScreen(ScreenType screenType) {

@@ -47,7 +47,7 @@ public class DifficultyScreen extends Screen {
     }
     if(easyButton.clicked() || hardButton.clicked()) {
       screenManager.setCurrentScreen(ScreenType.GAMESCREEN);
-      GameScreen gameScreen = (GameScreen) screenManager.getScreens().get(ScreenType.GAMESCREEN);
+      GameScreen gameScreen = (GameScreen) screenManager.getCurrentScreen();
       gameScreen.setLevel(0);
     }
   }
