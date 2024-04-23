@@ -139,7 +139,7 @@ Exit Game
 The most beneficial for the group turned out to be the exercises that required us to create a user-case diagram and user-case specifications. After creating the paper prototype of the game we knew that everyone had the same idea about how the game would look like and what needed to be implemented. However, it turned out we didn't think deeply enough about some of the game elements. For example, we did not discuss how the points would be calculated. In order to find the scenario that would allow for achieving a wide range of scores we changed some of the initial ideas. Now pigs instead of being placed by the player would stay on the ground and only one pig remaining after the birds' attack would be enough to move to another level. The amount of pig that would stay alive at the end of the level would impact the score. Another element that we realised was that we didn't discuss in what way the levels would become harder and harder.  
 
 ## How To Play
-1) First you need to download the Processing development environment for the game from the following link: download here.
+1) First you need to download the Processing development environment for the game from the following link: [download here](https://processing.org/download).
 2) Download the above GitHub repository that contains the game program as a ZIP file and extract it.
 3) Open the extracted folder and open the Game.pde which can be found in: Game -> Code.
 4) in Processing go to: Tools -> Manage Tools… -> Libraries. Install the following libraries: javafx, sound 
