@@ -141,6 +141,6 @@ The most beneficial for the group turned out to be the exercises that required u
 ## How To Play
 1) First you need to download the Processing development environment for the game from the following link: [download here](https://processing.org/download).
 2) Download the above GitHub repository that contains the game program as a ZIP file and extract it.
-3) Open the extracted folder and open the Game.pde which can be found in: Game -> Code.
-4) in Processing go to: Tools -> Manage Tools… -> Libraries. Install the following libraries: javafx, sound 
+3) Open the extracted folder and open the Game.pde which can be found in: Game -> Code. By doing so, Processing should be up and running.
+4) In Processing go to: Tools -> Manage Tools… -> Libraries. Install the following libraries: javafx, sound 
 5) Press the play button in the left upper corner of the Processing window in order to play!
