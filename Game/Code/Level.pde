@@ -56,9 +56,7 @@ public class Level extends Screen {
   
   
   public void display() {
-    image(bgImage, width/2, height/2, width, height);
-    image(groundImage, width/2, 1.4*height - 24, width, height);
-    
+    image(bgImage, width/2, height/2, width, height);    
     if(!ready){
       displayAttackDirection();
       for (ImageButton button : buttons) {
@@ -78,6 +76,7 @@ public class Level extends Screen {
       timerActions();
     }
     w.display();
+    image(groundImage, width/2, 1.4*height - 24, width, height);
     otherDisplay();
   }
   
