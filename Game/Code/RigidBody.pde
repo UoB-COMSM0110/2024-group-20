@@ -14,7 +14,6 @@ public abstract class RigidBody{
   protected float density;
   protected float area;
   protected float mass;
-  protected float massInvers;
   protected float restitution;
   protected float frictionRestitution = 0.8;
   protected float angularInertia;
