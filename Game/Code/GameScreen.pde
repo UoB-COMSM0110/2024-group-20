@@ -96,20 +96,6 @@ public class GameScreen extends Screen {
   
   public void keyPressed(){
     currentLevel.keyPressed();
-////////////////////////////////JUST FOR DEMONSTRATION PURPOSES////////////
-    if(key == '['){
-      if(currentLevelNumber < gameLevelData.get(player.getDifficulty()).length-1){
-        setLevel(currentLevelNumber+1);
-      }else{
-        setLevel(0);
-        screenManager.setCurrentScreen(ScreenType.WINSCREEN); 
-      }
-    }
-    if(key == ']'){
-      setLevel(0);
-      screenManager.setCurrentScreen(ScreenType.LOSESCREEN); 
-    }
-//////////////////////////////////////////////////////////////////////////
   }
 
   public void mouseDragged() {
