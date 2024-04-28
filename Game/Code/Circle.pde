@@ -111,33 +111,33 @@ public class Circle extends RigidBody {
       forceDirection = normalVector.copy();
     }
     
-    // For the vertical axis of rectangle (using Vertex 0 and vertices 1)
-    normalVector = PVector.sub(vertices[1],vertices[0]).normalize();
+    //// For the vertical axis of rectangle (using Vertex 0 and vertices 1)
+    //normalVector = PVector.sub(vertices[1],vertices[0]).normalize();
     
-    rectMin = PVector.dot(normalVector,rectPosition)-rectWidth/2;
-    rectMax = rectMin+rectWidth;
-    circleCentre = PVector.dot(normalVector,circlePosition);
-    circleMin = circleCentre-circleRadius;
-    circleMax = circleMin+circleRadius*2;
+    //rectMin = PVector.dot(normalVector,rectPosition)-rectWidth/2;
+    //rectMax = rectMin+rectWidth;
+    //circleCentre = PVector.dot(normalVector,circlePosition);
+    //circleMin = circleCentre-circleRadius;
+    //circleMax = circleMin+circleRadius*2;
     
-    if(rectMin>circleMax || circleMin>rectMax) {
-      return false;
-    }
-    if(circleCentre > rectMin && circleCentre < rectMax){
-      isSideContact = true;
-    }
+    //if(rectMin>circleMax || circleMin>rectMax) {
+    //  return false;
+    //}
+    //if(circleCentre > rectMin && circleCentre < rectMax){
+    //  isSideContact = true;
+    //}
     
-    // Getting values for collision resolution
-    positiveOverlap = rectMax - circleMin;
-    negativeOverlap = circleMax - rectMin;
-    if(positiveOverlap < negativeOverlap && positiveOverlap < overlap) {
-      overlap = positiveOverlap;
-      forceDirection = normalVector.copy().mult(-1);
-    }
-    else if(negativeOverlap < overlap) {
-      overlap = negativeOverlap;
-      forceDirection = normalVector.copy();
-    }
+    //// Getting values for collision resolution
+    //positiveOverlap = rectMax - circleMin;
+    //negativeOverlap = circleMax - rectMin;
+    //if(positiveOverlap < negativeOverlap && positiveOverlap < overlap) {
+    //  overlap = positiveOverlap;
+    //  forceDirection = normalVector.copy().mult(-1);
+    //}
+    //else if(negativeOverlap < overlap) {
+    //  overlap = negativeOverlap;
+    //  forceDirection = normalVector.copy();
+    //}
     
     if(!isSideContact){
       // Finding the point of contact

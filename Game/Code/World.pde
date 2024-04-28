@@ -5,7 +5,7 @@ public class World {
   
   public World() {
     this.bodyList = new ArrayList<RigidBody>();
-    this.gravity = new PVector(0, 1000);
+    this.gravity = new PVector(0, 0);
     this.linearVelocityFactor = 0.9999;
   }
   
