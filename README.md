@@ -1,12 +1,3 @@
-<style>
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-</style>
-
 # Table of Contents
 - [Team](#team)
 - [Introduction](#introduction)
@@ -85,6 +76,55 @@ As a team, we believe we successfully managed to implement the game we envisione
 # Implementation
 
 # Evaluation
+## Qualitative Evaluation
+
+## Quantitative Evaluation
+The team decided to use the System Usability Scale (SUS) to evaluate the game's interface design. We did not distinguish between the difficulty levels as their designs were very similar. Users were asked to fill out the questionnaire after playing both difficulty levels. The achieved results are presented below:
+
+<figure>
+  <img src="OrganisationFiles\EvaluationsData/SUS_evaluation_result_table.png" alt="Table with results from the SUS evaluation." class="center">
+  <figcaption>Table with results from the SUS evaluation.</figcaption>
+</figure>
+
+Overall achieved score was above the average of 68 suggesting that our system was easy to use and understandable. We believe such a high score was achieved because of the qualitative evaluation being conducted in the early development stages.  
+
+In the raw NASA TLX evaluation, the users were asked to fill in the provided form after completing the game on easy mode and once more after the hard mode. Achieved scores are presented below.
+
+
+<figure>
+  <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_EASY_table.png" alt="Table with raw NASA TLX results from Easy mode." class="center">
+  <figcaption>Table with raw NASA TLX results from Easy mode.</figcaption>
+</figure>
+
+
+<figure>
+  <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_HARD_table.png" alt="Table with raw NASA TLX results from Hard mode." class="center">
+  <figcaption>Table with raw NASA TLX results from Hard mode.</figcaption>
+</figure>
+
+
+<figure>
+  <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_graph.png" alt="Raw NASA TLX results in a graph form." class="center">
+  <figcaption>Raw NASA TLX results in a graph form.</figcaption>
+</figure>
+ 
+The results indicated that the hard mode demanded more workload which matches the design intention. However, it is worth pointing out that 3 out of 10 users perceived the easy mode as the harder one. This could have been caused by the fact that the users gained experience while playing the easy mode and thus they possessed more skills while playing the hard mode. Wilcoxon Signed Rank Test was conducted and according to the following <a href="https://www.statology.org/wilcoxon-signed-rank-test-calculator/">website</a>: 
+
+W test statistic = 8 
+
+Number of non-tied pairs (n) = 10 
+
+According to the table found on the same website, the alpha value equals 0.1 which suggested that in future game versions, the difference in difficulty levels should be increased as the team's aim was to achieve the alpha value of 0.05. 
+
+## Testing
+
+The physics engine was developed separately from the game code. To make sure that all collisions were working properly, birds, pigs and squares were created on a screen and collided with each other in all possible scenarios.  
+
+The scoreboard was tested by checking the top players each time after the game was played. 
+
+During the process of developing different levels, special 'cheat keys' were defined to easily test levels two and three. This was very useful when testing different birds' abilities and attack directions as well as the displays of budget, level and amount of birds preparing for the attack on a given level. 
+
+Additionally, every new feature was developed on a separate branch and tested by all team members separately thinking about edge cases before being merged with the main.
 
 # Process
 
