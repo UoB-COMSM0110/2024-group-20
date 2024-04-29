@@ -5,6 +5,9 @@
 - [Design](#design)
 - [Implementation](#implementation)
 - [Evaluation](#evaluation)
+    - [Qualitative Evaluation](#qualitative-evaluation)
+    - [Quantitative Evaluation](#quantitative-evaluation)
+    - [Testing](#testing)
 - [Process](#process)
 - [Conclusion](#concludion)
 - [Documentation of Code](#documentation-of-code)
@@ -76,7 +79,34 @@ As a team, we believe we successfully managed to implement the game we envisione
 # Implementation
 
 # Evaluation
+
 ## Qualitative Evaluation
+The qualitative evaluation was conducted at three stages during the development process. With this approach, the team made design improvements before having a fully developed game.  
+
+Think-aloud evaluation was conducted during all three stages and heuristic evaluation was conducted during stages two and three. All results can be viewed here. 
+
+<em>Stage 1</em> - Conducted before the game was playable: 
+<ol>
+    <li>Start a game and enter your name.</li>
+    <li>Complete the tutorial.</li>
+    <li>From the game screen check the scoreboard.</li>
+</ol>
+The following issues were identified: 
+<ul>
+  <li>The tutorial structure was confusing, users would close the tutorial without reading it.</li>
+  <li>The tutorial was poorly noticeable on the background </li>
+  <figure>
+  <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution1.png" alt="Tutorial evolution." class="center">
+  <figcaption>Evolution of the tutorial.</figcaption>
+</figure>
+  <li>Lack of upper case letters during name-entering </li>
+  <figure>
+  <img src="OrganisationFiles\EvaluationsDataImplementedChangesImages\ImageSolution2.png" alt="Upper case letters were added." class="center">
+  <figcaption>Upper case letters were added.</figcaption>
+</figure>
+</ul>
+
+
 
 ## Quantitative Evaluation
 The team decided to use the System Usability Scale (SUS) to evaluate the game's interface design. We did not distinguish between the difficulty levels as their designs were very similar. Users were asked to fill out the questionnaire after playing both difficulty levels. The achieved results are presented below:
