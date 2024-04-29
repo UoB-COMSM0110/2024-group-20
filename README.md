@@ -6,12 +6,16 @@
 - [Implementation](#implementation)
 - [Evaluation](#evaluation)
 - [Process](#process)
-- [Conclusion] (#concludion)
+- [Conclusion](#concludion)
 - [Documentation of Code](#documentation-of-code)
 - [Individual Contributions](#individual-contributions)
 
 # Team
-![alt text](https://raw.githubusercontent.com/UoB-COMSM0110/2024-group-20/main/OrganisationFiles/IMG_3797.jpg?raw=true)
+
+<figure>
+  <img src="OrganisationFiles/GroupPhotos/IMG_3797.jpg" alt="Group photo." class="center">
+  <figcaption>Group photo.</figcaption>
+</figure>
 
 <table align="center">
     <thread>
@@ -55,7 +59,11 @@ Attacks come in three waves and are conducted by three types of birds with diffe
 
 Find out why pigs became so anxious, discover the most efficient ways to protect pigs, compare your score to other players included in the ‘Best Pig Protector’ ranking and become the next Pig King!   
 
-![alt text](https://raw.githubusercontent.com/UoB-COMSM0110/2024-group-20/main/OrganisationFiles/IntroGif.gif?raw=true)
+
+<figure>
+  <img src="OrganisationFiles/ReportGifs/IntroGif.gif" alt="Example of gameplay." class="center">
+  <figcaption>Demonstration of a gameplay.</figcaption>
+</figure>
 
 All of the art included in the game was drawn by one of the members in a free software Krita (except for the background which was generated with the AI image generator DALL-E).   
 
