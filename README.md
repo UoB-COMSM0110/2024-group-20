@@ -94,19 +94,87 @@ Think-aloud evaluation was conducted during all three stages and heuristic evalu
 The following issues were identified: 
 <ul>
   <li>The tutorial structure was confusing, users would close the tutorial without reading it.</li>
-  <li>The tutorial was poorly noticeable on the background </li>
+  <li>The tutorial was poorly noticeable on the background.</li>
   <figure>
-  <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution1.png" alt="Tutorial evolution." class="center">
-  <figcaption>Evolution of the tutorial.</figcaption>
-</figure>
-  <li>Lack of upper case letters during name-entering </li>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution1.png" alt="Tutorial evolution." class="center">
+    <figcaption>Evolution of the tutorial.</figcaption>
+  </figure>
+  <li>Lack of upper case letters during name-entering.</li>
   <figure>
-  <img src="OrganisationFiles\EvaluationsDataImplementedChangesImages\ImageSolution2.png" alt="Upper case letters were added." class="center">
-  <figcaption>Upper case letters were added.</figcaption>
-</figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution2.png" alt="Upper case letters were added." class="center">
+    <figcaption>Upper case letters were added.</figcaption>
+  </figure>
 </ul>
 
+<em>Stage 2</em> - Conducted after the game was playable (not all differences between difficulty levels were implemented): 
+<ol>
+    <li>Start the game and try to process as far as you can.</li>
+    <li>Return to the home page after finishing the game.</li>
+    <li>Check the scoreboard.</li>
+</ol>
+The following issues were identified: 
+<ul>
+  <li>The wording of the tutorial was confusing. – <em>Solved</em> by rewriting the tutorial </li>
+  <li>Confusion about the attack direction.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution3.png" alt="Highlighted directions from which the attack was coming." class="center">
+    <figcaption>Highlighted directions from which the attack was coming.</figcaption>
+  </figure>
+  <li>It was hard to gain a high enough score to appear on the scoreboard.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution4.png" alt="Divided scoreboard into two sections." class="center">
+    <figcaption>Divided scoreboard into two sections.</figcaption>
+  </figure>
+  <li>Confusion about birds’ superpowers.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution5.png" alt="Modified the tutorial in a way that it displays birds' abilities." class="center">
+    <figcaption>Modified the tutorial in a way that it displays birds' abilities.</figcaption>
+  </figure>
+</ul>
 
+The heuristic evaluation resulted in adding the ‘Help’ button which would display the tutorial whenever clicked. (violation of 'Help and Documentation' heuristic) 
+
+<figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\GifSolution1.gif" alt="Modified the tutorial in a way that it displays birds' abilities." class="center">
+    <figcaption>Modified the tutorial in a way that it displays birds' abilities.</figcaption>
+</figure>
+
+<em>Stage 3</em> -  Conducted after the game was fully playable: 
+<ol>
+    <li>Start the game in the easy mode.</li>
+    <li>Try to win the game using as much money as you can.</li>
+    <li>Try to win the game using as much money as you can.</li>
+    <li>Start the game in the hard mode.</li>
+    <li>Try to reopen the tutorial.</li>
+</ol>
+The following issues were identified:
+<ul>
+  <li><ul>
+  <li>The wording of the tutorial was confusing.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution5.png" alt="Moved Main Menu button to make it more visible." class="center">
+    <figcaption>Moved Main Menu button to make it more visible.</figcaption>
+  </figure>
+  <li>Confusion about the attack direction was still present. </li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution6.png" alt="Highlighted directions from which the attack was coming." class="center">
+    <figcaption>Added arrows indicating the directions from which the attack was coming.</figcaption>
+  </figure>
+  <li>Confusion about the number of levels and enemies.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution7.png" alt="Added information about the number of levels and amount of birds about to attack." class="center">
+    <figcaption>Added information about the number of levels and amount of birds about to attack.</figcaption>
+  </figure>
+  <li>Not knowing which material was selected.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution8.png" alt="Added yellowish color to the selected material." class="center">
+    <figcaption>Added yellowish color to the selected material.</figcaption>
+  </figure>
+  <li>Some people started the birds’ attack before building the structure. – <em>Solved</em> by disabling the button until the first material was placed on the level.
+  </li>
+</ul> 
+
+The heuristic evaluation identified the same issue as found in the think-aloud evaluation. 
 
 ## Quantitative Evaluation
 The team decided to use the System Usability Scale (SUS) to evaluate the game's interface design. We did not distinguish between the difficulty levels as their designs were very similar. Users were asked to fill out the questionnaire after playing both difficulty levels. The achieved results are presented below:
