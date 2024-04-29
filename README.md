@@ -1,13 +1,37 @@
 # Group 20 Team Photo
 ![alt text](https://raw.githubusercontent.com/UoB-COMSM0110/2024-group-20/main/OrganisationFiles/IMG_3797.jpg?raw=true)
 # Members
-Klaudia Żymełka, ex23530@bristol.ac.uk, klaudz9
-
-Ziang Zhang, ma23462@bristol.ac.uk, Zazhang3
-
-Kelvin Lu, rl17487@bristol.ac.uk, LurchK
-
-Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
+<table align="center">
+    <thread>
+        <tr>
+            <th style="text-aligh:centre">Name</th>
+            <th style="text-aligh:centre">Email</th>
+            <th style="text-aligh:centre">GitHub Name</th>
+        </tr>
+    </thread>
+    <tbody>
+        <tr>
+            <th style="text-aligh:centre">Yiding Chen</th>
+            <th style="text-aligh:centre">vf23652@bristol.ac.uk</th>
+            <th style="text-aligh:centre">Ch1eti</th>
+        </tr>
+        <tr>
+            <th style="text-aligh:centre">Kelvin Lu</th>
+            <th style="text-aligh:centre">rl17487@bristol.ac.uk</th>
+            <th style="text-aligh:centre">LurchK</th>
+        </tr>
+        <tr>
+            <th style="text-aligh:centre">Ziang Zhang</th>
+            <th style="text-aligh:centre">ma23462@bristol.ac.uk</th>
+            <th style="text-aligh:centre">Zazhang3</th>
+        </tr>
+        <tr>
+            <th style="text-aligh:centre">Klaudia Żymełka</th>
+            <th style="text-aligh:centre">ex23530@bristol.ac.uk</th>
+            <th style="text-aligh:centre">klaudz9</th>
+        </tr>
+    </tbody>
+<\table>
 
 # Final Game
  -> Nervous Pigs 
