@@ -1,3 +1,12 @@
+<style>
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
+
 # Table of Contents
 - [Team](#team)
 - [Introduction](#introduction)
