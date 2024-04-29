@@ -1,146 +1,265 @@
-# Group 20 Team Photo
-![alt text](https://raw.githubusercontent.com/UoB-COMSM0110/2024-group-20/main/OrganisationFiles/IMG_3797.jpg?raw=true)
-# Members
-Klaudia Żymełka, ex23530@bristol.ac.uk, klaudz9
+# Table of Contents
+- [Team](#team)
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Design](#design)
+- [Implementation](#implementation)
+- [Evaluation](#evaluation)
+    - [Qualitative Evaluation](#qualitative-evaluation)
+    - [Quantitative Evaluation](#quantitative-evaluation)
+    - [Testing](#testing)
+- [Process](#process)
+- [Conclusion](#concludion)
+- [Documentation of Code](#documentation-of-code)
+- [Individual Contributions](#individual-contributions)
 
-Ziang Zhang, ma23462@bristol.ac.uk, Zazhang3
+# Team
 
-Kelvin Lu, rl17487@bristol.ac.uk, LurchK
+<figure>
+  <img src="OrganisationFiles/GroupPhotos/IMG_3797.jpg" alt="Group photo." class="center">
+  <figcaption>Group photo.</figcaption>
+</figure>
 
-Yiding Chen, vf23652@bristol.ac.uk, Ch1eti
+<table align="center">
+    <thread>
+        <tr>
+            <th style="text-aligh:centre">Name</th>
+            <th style="text-aligh:centre">Email</th>
+            <th style="text-aligh:centre">GitHub Name</th>
+        </tr>
+    </thread>
+    <tbody>
+        <tr>
+            <th style="text-aligh:centre">Yiding Chen</th>
+            <th style="text-aligh:centre">vf23652@bristol.ac.uk</th>
+            <th style="text-aligh:centre">Ch1eti</th>
+        </tr>
+        <tr>
+            <th style="text-aligh:centre">Kelvin Lu</th>
+            <th style="text-aligh:centre">rl17487@bristol.ac.uk</th>
+            <th style="text-aligh:centre">LurchK</th>
+        </tr>
+        <tr>
+            <th style="text-aligh:centre">Ziang Zhang</th>
+            <th style="text-aligh:centre">ma23462@bristol.ac.uk</th>
+            <th style="text-aligh:centre">Zazhang3</th>
+        </tr>
+        <tr>
+            <th style="text-aligh:centre">Klaudia Żymełka</th>
+            <th style="text-aligh:centre">ex23530@bristol.ac.uk</th>
+            <th style="text-aligh:centre">klaudz9</th>
+        </tr>
+    </tbody>
+</table>
 
-# Final Game
- -> Nervous Pigs 
-+ twist: The game was inspired by a well-known game where birds try to kill green pigs. In our version, the roles are reversed and the player is in charge of building a structure that can protect the pigs.
-+ challenges: implementing real-life physics in the game so that all elements of the game are affected by it, making the levels different and increasingly hard, implementing of the highest scores page for all users   
-+ Paper prototype:
-    [![Paper prototype of Nervous Pig](OrganisationFiles/PigVideoCover.jpg "PigVideoCover")](https://youtu.be/iyaCUZtQJD4)
+# Introduction
 
-# Previous Game ideas
--> Snake 
-+ twist: two snakes
-+ challenges: detect collisions, snake movement, trails logic
+Our project is based on the famous 2010s game, Angry Birds. In the original game, the player would shoot birds with the slingshot to kill pigs which were protected by different structures. In our version called Anxious Pigs players act as protectors, taking the quest from the Pig King to help the pigs survive the attacks.   
 
--> flappy bat 
-+ twist: you don't see the whole map just the area around the bat (ultrasound)
-+ challenges: radar, map generation, moving pipes or two players
+Players have a budget that they can spend on buying basic materials like glass, wood and stone. Those materials can be used to build strong structures shielding pigs from upcoming attacks. Cheaper structures are less resilient but if used creatively they can be game-changing.   
 
--> space invaders 
-+ twist: we're the aliens invading
-+ challenge: enemy movement, making barriers that lose life, shooting system
+Attacks come in three waves and are conducted by three types of birds with different abilities. Red birds don’t have any superpowers. Purple birds can reverse gravity upon the first object they collide with. Black birds can explode, destroying the players’ carefully built structures in an instant!   
 
--> doodle jump 
-+ twist: multi player 
-+ challenge: multi-player game, different objects to collect which have functions, map generation
+Find out why pigs became so anxious, discover the most efficient ways to protect pigs, compare your score to other players included in the ‘Best Pig Protector’ ranking and become the next Pig King!   
 
 
-# Other Paper Prototypes
-## Flappy Bat
-[<img src="OrganisationFiles/BatVideoCover.jpg" alt="Paper prototype of flappy bat" title="BatVideoCover" style="zoom: 50%;" />](https://youtube.com/shorts/NdrY11o-Ys4)
+<figure>
+  <img src="OrganisationFiles/ReportGifs/IntroGif.gif" alt="Example of gameplay." class="center">
+  <figcaption>Demonstration of a gameplay.</figcaption>
+</figure>
 
+All of the art included in the game was drawn by one of the members in a free software Krita (except for the background which was generated with the AI image generator DALL-E).   
+
+As a team, we believe we successfully managed to implement the game we envisioned. Good luck protecting all the pigs and remember the Pig King counts on you! 
 
 # Requirements
-## Stakeholders
-+ players
-+ developers (our team)
-+ markers (teachers)
 
-## User Stories
-+ As a player I want to protect the pigs the best I can so that I get a high score.
-+ As a player I want to get a high score in order to be the best at the game.
-+ As a player I want to be informed how to play in order for me to be able to enjoy the gameplay.
-+ As a developer I want to have a clear idea of what I am expected to implement to be able to deliver the best code.
-+ As a developer I want to have a clear idea of what I am expected to implement to find the task enjoyable.
-+ As a marker I want to see clear documentation so I can mark the game fairly and accurately.
+# Design
 
-## Use-case Specifications
-Viewing the scoreboard
->  Description: The player starts the game and wants to see the scoreboard.
->
-> Basic Flow:
-> 1) When a user starts the game main menu opens with options to select from.
-> 2) The user uses a mouse or touchpad to click on the "Scoreboard" button.
-> 3) A new page is opened with the top 5 players (their names) and the scores they achieved.
-> 4) To return to the main menu the user clicks on the "Return" button.
+# Implementation
 
-Start A Game
-> Description: The player wants to start a game.
->
-> Basic Flow:
-> 1) The user is back to the main menu.
-> 2) The user uses a mouse or touchpad to click on the "Start" button.
-> 3) The user is asked to enter the name which will be then displayed on the scoreboard page if the score achieved is high enough.
-> 4) The user uses the keyboard to enter the name and clicks enter to confirm that the name was entered. 
-> 5) The user is displayed a 'building screen'.
+# Evaluation
 
-Building Shelter for Pigs
-> Description: In the first stage of the game the player is asked to build a structure to protect the pigs.
->
-> Basic Flow:
-> 1) The user is in the 'building screen'.
-> 2) The player uses buttons representing different materials (e.g. wood, steel) to build a structure that won't collapse. (The player has a budget for this task)
-> 3) The player uses a button to place n amount of pigs on the screen (n is different for different levels and the user can't start the game without placing all of the required pigs)
-> 4) The user clicks on the "Start" button.
->
-> Alternative Flow: 
-> 1) The user is in the 'building screen'.
-> 2) The player uses a button to place n amount of pigs on the screen (n is different for different levels and the user can't start the game without placing all of the required pigs)
-> 3) The player uses buttons representing different materials (e.g. wood, steel) to build a structure that won't collapse. (The player has a budget for this task)
-> 4) The user clicks on the "Start" button.
+## Qualitative Evaluation
+The qualitative evaluation was conducted at three stages during the development process. With this approach, the team made design improvements before having a fully developed game.  
 
-Birds Attack
-> Description: In the second stage of the game the player does nothing but watch the events happening.
->
-> Basic Flow: Player Wins
-> 1) Birds start falling.
-> 2) Materials get damaged.
-> 3) At least one pig survives the attack.
-> 4) Points are calculated (points are given for the amount of budget left and amount of pigs that survived)
-> 5) The "Win" screen is displayed with the current score.
->
-> Alternative Flow: Player Loses
-> 1) Birds start falling.
-> 2) Materials get damaged.
-> 3) All pigs are killed.
-> 4) Points are calculated (points are given for the amount of budget left and amount of pigs that survived)
-> 5) A "Loose" screen is displayed with the final score.
+Think-aloud evaluation was conducted during all three stages and heuristic evaluation was conducted during stages two and three. All results can be viewed here. 
 
-Win Screen
-> Description: When a user wins a level they are displayed a "win" screen.
->
-> Basic Flow: The player won level 1 or level 2.
-> 1) Player can see their current score displayed on the screen.
-> 2) There is one button on the screen -> "Next Level" button that needs to be pressed in order to continue.
->
-> Alternative Flow: The player won level 3 which is the last level in the game.
-> 1) Player can see their current score displayed on the screen.
-> 2) There is one button on the screen -> "End Game" button that needs to be pressed to display the main menu.
+<em>Stage 1</em> - Conducted before the game was playable: 
+<ol>
+    <li>Start a game and enter your name.</li>
+    <li>Complete the tutorial.</li>
+    <li>From the game screen check the scoreboard.</li>
+</ol>
+The following issues were identified: 
+<ul>
+  <li>The tutorial structure was confusing, users would close the tutorial without reading it.</li>
+  <li>The tutorial was poorly noticeable on the background.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution1.png" alt="Tutorial evolution." class="center">
+    <figcaption>Evolution of the tutorial.</figcaption>
+  </figure>
+  <li>Lack of upper case letters during name-entering.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution2.png" alt="Upper case letters were added." class="center">
+    <figcaption>Upper case letters were added.</figcaption>
+  </figure>
+</ul>
 
-Loose Screen
-> Description: When a user loses a level they are displayed a "loose" screen.
->
-> Basic Flow: 
-> 1) Player can see their final score displayed on the screen.
-> 2) There is one button on the screen -> "Return" button that needs to be pressed to display the main menu.
+<em>Stage 2</em> - Conducted after the game was playable (not all differences between difficulty levels were implemented): 
+<ol>
+    <li>Start the game and try to process as far as you can.</li>
+    <li>Return to the home page after finishing the game.</li>
+    <li>Check the scoreboard.</li>
+</ol>
+The following issues were identified: 
+<ul>
+  <li>The wording of the tutorial was confusing. – <em>Solved</em> by rewriting the tutorial </li>
+  <li>Confusion about the attack direction.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution3.png" alt="Highlighted directions from which the attack was coming." class="center">
+    <figcaption>Highlighted directions from which the attack was coming.</figcaption>
+  </figure>
+  <li>It was hard to gain a high enough score to appear on the scoreboard.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution4.png" alt="Divided scoreboard into two sections." class="center">
+    <figcaption>Divided scoreboard into two sections.</figcaption>
+  </figure>
+  <li>Confusion about birds’ superpowers.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution5.png" alt="Modified the tutorial in a way that it displays birds' abilities." class="center">
+    <figcaption>Modified the tutorial in a way that it displays birds' abilities.</figcaption>
+  </figure>
+</ul>
 
-Exit Game
-> Description: The player wants to exit the game after finishing the game.
->
-> Basic Flow:
-> 1) The user is back to the main menu.
-> 2) The user uses a mouse or touchpad to click on the "Scoreboard" button.
-> 3) A new page is opened with the top 5 players (their names) and the scores they achieved.
-> 4) To return to the main menu the user clicks on the "Return" button.
+The heuristic evaluation resulted in adding the ‘Help’ button which would display the tutorial whenever clicked. (violation of 'Help and Documentation' heuristic) 
 
-## Case-use Diagram
-![alt text](https://github.com/UoB-COMSM0110/2024-group-20/blob/main/OrganisationFiles/Use-Case%20Diagram.png)
+<figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\GifSolution1.gif" alt="Added buttton reopening the tutorial." class="center">
+    <figcaption>Added buttton reopening the tutorial.</figcaption>
+</figure>
 
-## Reflections 
-The most beneficial for the group turned out to be the exercises that required us to create a user-case diagram and user-case specifications. After creating the paper prototype of the game we knew that everyone had the same idea about how the game would look like and what needed to be implemented. However, it turned out we didn't think deeply enough about some of the game elements. For example, we did not discuss how the points would be calculated. In order to find the scenario that would allow for achieving a wide range of scores we changed some of the initial ideas. Now pigs instead of being placed by the player would stay on the ground and only one pig remaining after the birds' attack would be enough to move to another level. The amount of pig that would stay alive at the end of the level would impact the score. Another element that we realised was that we didn't discuss in what way the levels would become harder and harder.  
+<em>Stage 3</em> -  Conducted after the game was fully playable: 
+<ol>
+    <li>Start the game in the easy mode.</li>
+    <li>Try to win the game using as much money as you can.</li>
+    <li>Try to win the game using as much money as you can.</li>
+    <li>Start the game in the hard mode.</li>
+    <li>Try to reopen the tutorial.</li>
+</ol>
+The following issues were identified:
+<ul>
+  <li><ul>
+  <li>The wording of the tutorial was confusing.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution5.png" alt="Moved Main Menu button to make it more visible." class="center">
+    <figcaption>Moved Main Menu button to make it more visible.</figcaption>
+  </figure>
+  <li>Confusion about the attack direction was still present. </li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution6.png" alt="Highlighted directions from which the attack was coming." class="center">
+    <figcaption>Added arrows indicating the directions from which the attack was coming.</figcaption>
+  </figure>
+  <li>Confusion about the number of levels and enemies.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution7.png" alt="Added information about the number of levels and amount of birds about to attack." class="center">
+    <figcaption>Added information about the number of levels and amount of birds about to attack.</figcaption>
+  </figure>
+  <li>Not knowing which material was selected.</li>
+  <figure>
+    <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution8.png" alt="Added yellowish color to the selected material." class="center">
+    <figcaption>Added yellowish color to the selected material.</figcaption>
+  </figure>
+  <li>Some people started the birds’ attack before building the structure. – <em>Solved</em> by disabling the button until the first material was placed on the level.
+  </li>
+</ul> 
 
-## How To Play
-1) First you need to download the Processing development environment for the game from the following link: [download here](https://processing.org/download).
-2) Download the above GitHub repository that contains the game program as a ZIP file and extract it.
-3) Open the extracted folder and open the Game.pde which can be found in: Game -> Code. By doing so, Processing should be up and running.
-4) In Processing go to: Tools -> Manage Tools… -> Libraries. Install the following libraries: sound 
-5) Press the play button in the left upper corner of the Processing window in order to play!
+The heuristic evaluation identified the same issue as found in the think-aloud evaluation. 
+
+## Quantitative Evaluation
+The team decided to use the System Usability Scale (SUS) to evaluate the game's interface design. We did not distinguish between the difficulty levels as their designs were very similar. Users were asked to fill out the questionnaire after playing both difficulty levels. The achieved results are presented below:
+
+<figure>
+  <img src="OrganisationFiles\EvaluationsData/SUS_evaluation_result_table.png" alt="Table with results from the SUS evaluation." class="center">
+  <figcaption>Table with results from the SUS evaluation.</figcaption>
+</figure>
+
+Overall achieved score was above the average of 68 suggesting that our system was easy to use and understandable. We believe such a high score was achieved because of the qualitative evaluation being conducted in the early development stages.  
+
+In the raw NASA TLX evaluation, the users were asked to fill in the provided form after completing the game on easy mode and once more after the hard mode. Achieved scores are presented below.
+
+
+<figure>
+  <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_EASY_table.png" alt="Table with raw NASA TLX results from Easy mode." class="center">
+  <figcaption>Table with raw NASA TLX results from Easy mode.</figcaption>
+</figure>
+
+
+<figure>
+  <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_HARD_table.png" alt="Table with raw NASA TLX results from Hard mode." class="center">
+  <figcaption>Table with raw NASA TLX results from Hard mode.</figcaption>
+</figure>
+
+
+<figure>
+  <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_graph.png" alt="Raw NASA TLX results in a graph form." class="center">
+  <figcaption>Raw NASA TLX results in a graph form.</figcaption>
+</figure>
+ 
+The results indicated that the hard mode demanded more workload which matches the design intention. However, it is worth pointing out that 3 out of 10 users perceived the easy mode as the harder one. This could have been caused by the fact that the users gained experience while playing the easy mode and thus they possessed more skills while playing the hard mode. Wilcoxon Signed Rank Test was conducted and according to the following <a href="https://www.statology.org/wilcoxon-signed-rank-test-calculator/">website</a>: 
+
+W test statistic = 8 
+
+Number of non-tied pairs (n) = 10 
+
+According to the table found on the same website, the alpha value equals 0.1 which suggested that in future game versions, the difference in difficulty levels should be increased as the team's aim was to achieve the alpha value of 0.05. 
+
+## Testing
+
+The physics engine was developed separately from the game code. To make sure that all collisions were working properly, birds, pigs and squares were created on a screen and collided with each other in all possible scenarios.  
+
+The scoreboard was tested by checking the top players each time after the game was played. 
+
+During the process of developing different levels, special 'cheat keys' were defined to easily test levels two and three. This was very useful when testing different birds' abilities and attack directions as well as the displays of budget, level and amount of birds preparing for the attack on a given level. 
+
+Additionally, every new feature was developed on a separate branch and tested by all team members separately thinking about edge cases before being merged with the main.
+
+# Process
+
+# Conclusion
+
+# Documentation of Code
+
+# Individual Contributions
+
+<table align="center">
+    <thread>
+        <tr>
+            <th style="text-aligh:centre">Member</th>
+            <th style="text-aligh:centre">Score</th>
+            <th style="text-aligh:centre">Contribution</th>
+        </tr>
+    </thread>
+    <tbody>
+        <tr>
+            <th style="text-aligh:centre">Yiding Chen</th>
+            <th style="text-aligh:centre">1</th>
+            <th style="text-aligh:centre"></th>
+        </tr>
+        <tr>
+            <th style="text-aligh:centre">Kelvin Lu</th>
+            <th style="text-aligh:centre">1</th>
+            <th style="text-aligh:centre"></th>
+        </tr>
+        <tr>
+            <th style="text-aligh:centre">Ziang Zhang</th>
+            <th style="text-aligh:centre">1</th>
+            <th style="text-aligh:centre"></th>
+        </tr>
+        <tr>
+            <th style="text-aligh:centre">Klaudia Żymełka</th>
+            <th style="text-aligh:centre">1</th>
+            <th style="text-aligh:centre"></th>
+        </tr>
+    </tbody>
+</table>
