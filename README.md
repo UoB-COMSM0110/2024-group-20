@@ -135,8 +135,8 @@ The following issues were identified:
 The heuristic evaluation resulted in adding the ‘Help’ button which would display the tutorial whenever clicked. (violation of 'Help and Documentation' heuristic) 
 
 <figure>
-    <img src="OrganisationFiles\ImplementedChangesImages\GifSolution1.gif" alt="Modified the tutorial in a way that it displays birds' abilities." class="center">
-    <figcaption>Modified the tutorial in a way that it displays birds' abilities.</figcaption>
+    <img src="OrganisationFiles\ImplementedChangesImages\GifSolution1.gif" alt="Added buttton reopening the tutorial." class="center">
+    <figcaption>Added buttton reopening the tutorial.</figcaption>
 </figure>
 
 <em>Stage 3</em> -  Conducted after the game was fully playable: 
