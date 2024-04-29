@@ -31,7 +31,7 @@
             <th style="text-aligh:centre">klaudz9</th>
         </tr>
     </tbody>
-<\table>
+</table>
 
 # Final Game
  -> Nervous Pigs 
