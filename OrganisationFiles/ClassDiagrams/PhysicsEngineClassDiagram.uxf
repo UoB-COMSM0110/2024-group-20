@@ -1,0 +1,62 @@
+<diagram program="umletino" version="15.1"><zoom_level>5</zoom_level><element><id>UMLClass</id><coordinates><x>115</x><y>210</y><w>120</w><h>85</h></coordinates><panel_attributes>Rectangle
+--
+# rectWidth, rectHeight, rectAngle: float
+--
+# calculateArea()
+# calculateAngularInertia()
++ display()
++ getWidth(): float
++ getHeight(): float
++ getVertex(int): PVector
++ intersect(RigidBody): boolean
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>355</y><w>105</w><h>65</h></coordinates><panel_attributes>Circle
+--
+# circleRadius: float
+--
+# calculateArea()
+# calculateAngularInertia()
++ display()
++ getRadius(): float
++ intersect(RigidBody): boolean
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>385</x><y>140</y><w>220</w><h>200</h></coordinates><panel_attributes>RigidBody
+--
+# position: Pvector
+# rotation: float
+# angularVelocity,angularAcceleration: float
+# density: float
+# area, mass, restitution, frictionRestitution, isStatic,largestImpulse, float
+# lastContactBody: RigidBody
+--
++ calculateMass()
++ getShapeType(): ShapeType
++ getLArgestImpulse(): float
++ setLargestImpule(float)
++ updateLargestImpulse(float)
++ getMass(): float
++ getPosition(): PVector
++ setPosition(PVector)
++ getRotation(): float
++ setRotation(float)
++ getRestitution(): float
++ getLinearVelocity(): PVector
++ setLinearVelocity(PVector)
++ isStatic(): boolean
++ getLastContactBody(rigidBody)
++ step(float,PVector,float)
++ intersect(RigidBody)
++ resolveCollision(RigidbBody, RigidBody,PVector)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>115</x><y>55</y><w>120</w><h>115</h></coordinates><panel_attributes>World
+--
+- bodyList: ArrayList&lt;RigidBody&gt;
+- gravity: PVector
+- linearVelocityFactor: float
+--
++ addBody(RigidBody)
++ removeBody(RigidBody)
++ removeBodyindx(int)
++ getBody(int): RigidBody
++ getBodyList(): ArrayList&lt;RigidBody&gt;
++ getGravity(): PVector
++ step(float)
++ collideBodies(): boolean
++ display()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>315</y><w>175</w><h>65</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>330;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>70</y><w>165</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;310;180</additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>220</y><w>165</w><h>25</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>310;30;10;10</additional_attributes></element></diagram>

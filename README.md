@@ -1,16 +1,37 @@
+<head>
+  <style>
+    figcaption{
+      font-size: 12px;
+      font-style: italic;
+      color:rgb(220,220,220);
+    }
+
+  </style>
+</head>
+
+
 # Table of Contents
 - [Team](#team)
 - [Introduction](#introduction)
 - [Requirements](#requirements)
+  - [Early Stages Design](#early-stages-design)
+  - [Use Case Stories and Use Case Diagram](#user-case-stories-and-use-case-diagram)
 - [Design](#design)
+  - [Physics Engine](#physics-engine)
+  - [Game](#game)
 - [Implementation](#implementation)
+  - [Physics Engine](#physics-engine)
+  - [Level Generation](#level-generation)
+  - [Performance Optimisation](#performance-optimisation)
 - [Evaluation](#evaluation)
-    - [Qualitative Evaluation](#qualitative-evaluation)
-    - [Quantitative Evaluation](#quantitative-evaluation)
-    - [Testing](#testing)
+  - [Qualitative Evaluation](#qualitative-evaluation)
+  - [Quantitative Evaluation](#quantitative-evaluation)
+  - [Testing](#testing)
 - [Process](#process)
+  - [GitHub](#github)
+  - [Kanban Board](#kanban-board)
+  - [Microsoft Teams](#Microsoft Teams)
 - [Conclusion](#concludion)
-- [Documentation of Code](#documentation-of-code)
 - [Individual Contributions](#individual-contributions)
 
 # Team
@@ -74,16 +95,167 @@ As a team, we believe we successfully managed to implement the game we envisione
 
 # Requirements
 
+The game development started with the whole team having an in-person brainstorming meeting. The session was divided into two parts. In the first one, everyone shared their expectations towards the project and the type of game we were supposed to develop. We agreed that we wanted our game: 
+
+<lu>
+  <li>To be challenging for us to develop.</li>
+  <li>To be more of a logic-based game.</li>
+  <li>To consist of levels with increasing difficulty.  </li>
+</lu>
+
+During the second part of the meeting, we came up with 5 different game ideas: Snake, Flappy Bat, Space Invaders, Doodle Jumps and Anxious Pigs. 
+
+Our team's ideation process was dynamic. During many meetings, we analysed the novelty, interest, and technical challenges of each idea, and then assessed whether the game was feasible. Finally, the team decided to move to the paper prototype stage with Anxious Pigs and Flappy Bat. Those two ideas were chosen because: 
+
+<lu>
+  <li>Snake and Doodle Jump games were not challenging enough to develop in our opinion.</li>
+  <li>Space Invaders was more of a dexterity game than a logic game.</li>
+  <li>The chosen games seemed to have the most original twist ideas.</li>
+</lu>
+
+## Early Stages Design 
+After choosing two games, the team decided to concentrate on creating user stories. This allowed us to analyse users' needs clearly and additionally to decide on the game's most crucial elements. The process helped us to further lay the foundation of what we wanted to achieve with our game. 
+
+Main User stories from the game the team ended up choosing: 
++ As a player I want to protect the pigs the best I can so that I get satisfaction from winning.
++ As a player I want to get a high score and to be the best at the game. 
++ As a player I want to be informed about how to play in order for me to be able to enjoy the gameplay.
++ As a developer I want to have a clear idea of what I am expected to implement to be able to deliver the best code.
++ As a developer I want to have a clear idea of what I am expected to implement to find the task enjoyable.
++ As a developer I want to have a clear idea of what I am expected to implement to find the task enjoyable.
+
+To unify the team's vision of the games, we created paper prototypes representing basic ideas for the gameplay. 
+
+[img src=OrganisationFilesBatVideoCover.jpg alt=Paper prototype of flappy bat title=BatVideoCover style=zoom 50%; ](httpsyoutube.comshortsNdrY11o-Ys4)
+
+[![Paper prototype of Nervous Pig](OrganisationFilesPigVideoCover.jpg PigVideoCover)](httpsyoutu.beiyaCUZtQJD4)
+
+During the process, the team further discussed the nuances of the chosen games. Based on this, we compared the two ideas again and concluded that Anxious Pigs would be more creative and challenging. Team members also seemed to resonate more with the game's themes. The following main idea of the game was finished:
+
+<lu>
+  <li>The player would have to protect pigs by spending money to purchase materials to build structures shielding pigs.</li>
+  <li>The player would have to protect pigs by spending money to purchase materials to build structures shielding pigs.</li>
+  <li>After the birds’ attacks, if there was at least one pig left, the player would proceed to the next level.</li>
+</lu>
+
+## Use Case Specifications and Use Case Diagram
+
+The system architecture of our game can be separated into two parts, the physics engine and the game. 
+After that, we had to decide on the core mechanics that needed to be implemented. We created use-case stories which are essential for refining and visualising the interactions of in-game features. The main Use-case Specifications include the following sections: 
+
++ Viewing the scoreboard: The player wants to view the scoreboard. 
++ Start A Game: The player selects "Start" and enters a name. 
++ Building Shelter for Pigs: The player is forced to choose and place materials to protect pigs with a limited budget. 
++ Birds’ Attack: The game code handles this phase automatically and the player can only observe the results of the attack. 
++ Score: calculated based on difficulty level, budget left and the number of successfully protected pigs. 
++ Win Screen and Lose Screen: Display the results of the player's game. 
++ Exit Game: The player wants to exit the game after finishing the game. 
+
+These Specifications describe the basic flow of the game and more detailed use case specifications can be viewed <a href="OrganisationFiles\UseCaseDiagram\UseCaseSpecifications.docx">here</a>. 
+The final Use Case diagram was as follows:
+
+<figure>
+  <img src="OrganisationFiles\UseCaseDiagram\UseCaseDiagram.png" alt="Use case diagram." class="center">
+  <figcaption>Use case diagram.</figcaption>
+</figure>
+
+All of the creative decisions were made by the whole team and we made sure that everyone had a chance to voice their concerns and ideas. The most challenging part of the ideation process was making the decisions. The team came up with a lot of good ideas and thus initially we had trouble choosing only one. However, by following the agile development techniques all the decisions made had good reasons behind them which allowed the team to be much more confident in the final game choice. 
+
 # Design
 
+## Physics Enqine
+
+The physics engine comprises the classes World, Rigidbody, Circle and Rectangle, where Circle and Rectangle are extended from Rigidbody. 
+
+<figure>
+  <img src="OrganisationFiles\ClassDiagrams\PhysicsEngineClassDiagram.png" alt="Physics engine class diagram." class="center">
+  <figcaption>Physics engine class diagram.</figcaption>
+</figure>
+
+The RigidBody class contains the general properties that a rigid body holds like for example mass or position. Some of the most important methods are the ones to update the velocity and location of the body given a duration of time step, and a method which resolves a collision between two bodies given the collision information. 
+
+The Circle and Rectangle classes include some more specific properties of their bodies, as well as methods from a visitor pattern to detect if two bodies are in contact with each other. If two bodies are detected to be in contact, then the resolve collisions method in the Rigidbody class will be called to resolve it.  
+
+The World class is there to help organize the bodies which are to be physically interacting with each other. Its attributes include a list to keep track of the bodies, the values of the gravity as well as velocity drag. The class also contains methods which are used to alter the list of bodies, check and resolve collisions between the bodies, update their status given a duration of time step, and display the bodies.
+
+
+
+## Game
+
 # Implementation
+
+A number of challenges were encountered while developing the game however three stand out the most: the physics engine, the level generation and the optimisation of the game. 
+
+## Physics Engine
+
+The physics engine can be broken down into three parts, contact detection, collision resolution, and engine incorporation into the game. The former two were done mostly by following a tutorial of building a C# physics engine on YouTube by a programmer whose account name is Two Bit Coding. We followed the ideas and did some performance optimisation along the way  when writing our Java version. 
+
+### Collision Detection
+
+To detect if two circles are in contact with each other, their positions and radii are analysed. If the distance between their centres is less than the sum of their radii, they are in contact with each other, and the forcing direction is defined by vector subtraction of one’s position to the other. To detect if a polygon is in contact with another shape, the Separating Axis Theorem was used. The theorem is stated as the following analogy, for each side of each body, we shine a light source that is parallel to the side, to both bodies, then if there is a gap between the shadows of the bodies, it proves that they are separated. On the other hand, if there is no gap at all, then the bodies are in collision with each other, where the shortest penetration of shadows hints at the forcing direction. 
+
+### Collision Resolution
+
+Once the collision occurs and the force direction is determined the following equation is used in order to resolve the collision: 
+
+EQUATION 
+
+Where ... is ..., ... 
+
+Above equation was also used to calculate friction that occurs during the collision. Thanks to that body slows down as it’s velocity decreases until it reaches zero. 
+
+### Incorporation with the game 
+
+Each bird, pig and material had a maximum momentum value assigned. That value would be compared with a variable extending from a RigidBody class which stores the maximum momentum that the body has ever experienced. If the experienced momentum is greater than the assigned threshold the entity will be killed.  
+
+In order to implement birds' superpowers a new variable was created in RigidBody which would have assigned to it the last object that the body was in contact with. This allowed us to determine if a collision happened with the ground, material, bird or a pig. 
+
+For purple birds, a variable was created which would remember the body's acceleration which would then be used to inverse gravity upon the first touch object. 
+
+When a black bird collides with something a list of objects within a certain radius away from it is created. On each of those bodies, an impulse is then exerted with a value corresponding to the distance to the black bird. 
+
+## Level Generation
+
+To enable a more versatile way of designing and storing the levels, JSON files were used. Each level would be described by one JSON file which contains an array of JSON objects. Each object represents an element of the level and its first attribute is a String corresponding to a class present in the game. The rest of the attributes correspond to for example position on a screen, rotation or size. 
+
+To demonstrate it, the following attributes would be needed to define a red bird: 
+
++ "type": "BirdRed" 
++ "positionX": 0.2 
++ "positionY": 0.1 
++ "velocityX": 1000 
++ "velocityY": 1000 
+
+The objects are loaded in the Level class. 
+
+## Performance Optimisation
+
+The following aspects were considered while performing the optimisation:  
+
+<lu>
+  <li>Optimization of the physics engine</li>
+  <li>Reduce repeated operations</li> 
+  <li>Renderer</li> 
+</lu>
+
+### Optimisation of the physics engine
+
+As the only form of polygons present in the game are rectangles the calculations needed for collision detection were simplified. This could be done because rectangles possess two pairs of parallel sides which decreases the number of sides that need to be checked for collisions to two. 
+
+### Reduce repeated operations
+
+Before this optimisation the images would be loaded to variables in the draw() function which is an infinite loop. The code was improved by reading the images into created global HashMap structures during setup. This way the images can be extracted from a HashMap with a key instead of being constantly reading from files.  
+
+### Renderer
+
+After experimenting with various available renderers in Processing, it was concluded that the FX2D renderer (JavaFX library) was slightly faster than P2D and vastly faster than the default. However, the team eventually used P2D due to a problem relating to the scaling settings used on Windows for FX2D. 
 
 # Evaluation
 
 ## Qualitative Evaluation
 The qualitative evaluation was conducted at three stages during the development process. With this approach, the team made design improvements before having a fully developed game.  
 
-Think-aloud evaluation was conducted during all three stages and heuristic evaluation was conducted during stages two and three. All results can be viewed here. 
+Think-aloud evaluation was conducted during all three stages and heuristic evaluation was conducted during stages two and three. All results can be viewed <a src="OrganisationFiles\EvaluationsData\Qualitative Evaluations.xlsx">here</a>. 
 
 <em>Stage 1</em> - Conducted before the game was playable: 
 <ol>
@@ -149,7 +321,6 @@ The heuristic evaluation resulted in adding the ‘Help’ button which would di
 </ol>
 The following issues were identified:
 <ul>
-  <li><ul>
   <li>The wording of the tutorial was confusing.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution5.png" alt="Moved Main Menu button to make it more visible." class="center">
@@ -226,9 +397,85 @@ Additionally, every new feature was developed on a separate branch and tested by
 
 # Process
 
-# Conclusion
+At the beginning of the game development, the team decided that the physics engine should be implemented separately from the game. We believed this approach would allow us to test the code in more detail. Thus the team was divided into two subteams: 
 
-# Documentation of Code
+<lu>
+<li>Physics Engine – Yiding, Kelvin </li>
+<li>Game – Ziang, Klaudia  </li>
+</lu>
+
+(More detailed role descriptions are covered in the Individual Contributions section.) 
+
+The tasks were initially assigned based on members' preferences and with time people became ‘experts’ in the topics they chose during early development stages.  
+
+The team would meet in -person weekly and each meeting would follow the same, previously agreed agenda: 
+
+<ol>
+<li>Updates on everyone's tasks. (How much progress was made? Any obstacles encountered? Help needed? Showing progress.)</li>
+<li>Discussion about the development stage. (What next? Improvement ideas. Possible delays. Discussions about game mechanics.) </li>
+<li>Dividing tasks for next week. </li>
+<li>Questions and organisation matters. </li>
+</ol>
+
+The tasks were initially assigned with the expectation of being completed within a week.  
+
+In weeks 7 and 8 the team tried the playing poker method but because of the following reasons we decided not to use it: 
+
+<lu>
+<li>None of the team members had experience in game development and thus each of us dedicated a lot of time at the beginning of the project to conduct research related to the assigned role. With each member gaining knowledge in a different area we believed that each member would know the best how much time it would take them to complete assigned tasks. </li>
+<li>Subteams were dividing smaller tasks within themselves. Playing poker between two people seemed to us like a longer and requiring more effort alternative to just having a conversation. </li>
+</lu>
+
+Throughout the rest of the project, we continued with our previously working method of each member committing to a specific amount of work they believed they would be able to achieve within a week. We also conducted a few sessions during which sub-team members would do pair coding. We found it especially useful during the early stages of the development process when we were all getting used to Processing and when we didn’t have much experience in OOP. 
+
+Entering the easter break we had a goal to have a working game by the end of it. As not everyone was in the UK during that time we had Team’s calls every 3 days. We also agreed on the following goals: 
+
+<lu>
+<li><em>Week 1</em> – Work on the physics engine, restructure Game code </li>
+<li><em>Week 2</em> – Have the physics engine working, design how levels are going to be implemented </li>
+<li><em>Week 3</em>  - Combine the physics engine with Game </li>
+</lu>
+
+Even though tasks from week 2 had to be finished at the beginning of week 3 we managed to deliver our initial goal and after the easter break, we had a playable game that we were able to conduct qualitative and quantitative evaluations on. 
+
+## GitHub
+
+The GitHub page was set up during the team’s first meeting. The repository structure was discussed as well as a few coding practice rules were established.  We believed it would make our code and repository easier to navigate and more consistent. We agreed that initially, everyone would work on different branches. Code would be merged to the main branch after being tested by each subteam member. We also agreed to conduct merges during our weekly meetings to prevent unintentional deletion of someone else's code during merge conflicts.  To keep the repository as simple as possible we agreed to delete branches that were not used for an extended amount of time. 
+
+## Kanban Board
+
+In order to keep track of all the future and current tasks the team was using Kanban Board provided by GitHub.  
+
+In the beginning, there were no issues with that, however, as more progress on the project was made the board became more and more crowded. As a solution, the team created 6 main categories and divided all the tasks between them. 
+
+<figure>
+  <img src="OrganisationFiles\ProcessSection\KanbanBoard.gif" alt="Kanban Board organisation." class="center">
+  <figcaption>Kanban Board organisation.</figcaption>
+</figure>
+
+We used four status options to classify the tasks: to do, in progress, done and future improvements.  
+
+If a more complicated task was assigned a short note was usually added to make sure that all the intended features were implemented. 
+
+<figure>
+  <img src="OrganisationFiles\ProcessSection\TeamsMessages.png" alt="Kanban Board organisation." class="center">
+  <figcaption>Kanban Board organisation.</figcaption>
+</figure>
+
+## Microsoft Teams
+
+Between our weekly meetings, all communication was conducted via Teams.  
+
+After each in-person meeting, the chairman would send group chat messages with tasks for the next week. 
+
+<figure>
+  <img src="OrganisationFiles\ProcessSection\KanbanBoardMessage.png" alt="Example of task description on Kanban Board." class="center">
+  <figcaption>Example of task description on Kanban Board.</figcaption>
+</figure>
+
+In rare cases when someone was absent from an in-person meeting a summary of everything discussed and established was also posted there. During the easter break, Teams was used to conduct video calls. 
+
+# Conclusion
 
 # Individual Contributions
 
@@ -244,22 +491,55 @@ Additionally, every new feature was developed on a separate branch and tested by
         <tr>
             <th style="text-aligh:centre">Yiding Chen</th>
             <th style="text-aligh:centre">1</th>
-            <th style="text-aligh:centre"></th>
+            <th style="text-aligh:centre">
+            <ul>
+              <li>Development of the physics engine.</li>
+              <li>Finding music and sound effects and later adding them to the game.</li>
+              <li>Research.</li>
+              <li>Writing the report.</li>
+              <li>Making the video.</li>
+              </ul>
+            </th>
         </tr>
         <tr>
             <th style="text-aligh:centre">Kelvin Lu</th>
             <th style="text-aligh:centre">1</th>
-            <th style="text-aligh:centre"></th>
+            <th style="text-aligh:centre">
+            <ul>
+              <li>The head of development of the physics engine.</li>
+              <li>Game optimization.</li>
+              <li>Designed JSON files implementing levels.</li>
+              <li>Writing the report.</li>
+              <li>Making the video.</li>
+              </ul>
+            </th>
         </tr>
         <tr>
             <th style="text-aligh:centre">Ziang Zhang</th>
             <th style="text-aligh:centre">1</th>
-            <th style="text-aligh:centre"></th>
+            <th style="text-aligh:centre">
+              <ul>
+              <li>The head of development of the game interface.</li>
+              <li>Developed the main code structure (ImageButton, ScreenManager and Tutorial classes).</li>
+              <li>Material class implementation. </li>
+              <li>Writing the report.</li>
+              <li>Making the video.</li>
+              </ul>
+            </th>
         </tr>
         <tr>
             <th style="text-aligh:centre">Klaudia Żymełka</th>
             <th style="text-aligh:centre">1</th>
-            <th style="text-aligh:centre"></th>
+            <th style="text-aligh:centre"> 
+              <ul>
+              <li>Developed the game interface.</li>
+              <li>Implemented Level class structure and Player class.</li>
+              <li>Drew all the images in the game (excluding background).</li>
+              <li>Responsible for team organization and ‘paperwork’ on GitHub.</li>
+              <li>Writing the report.</li>
+              <li>Making the video.</li>
+              </ul>
+            </th>
         </tr>
     </tbody>
 </table>
