@@ -9,6 +9,10 @@
   </style>
 </head>
 
+<figure>
+  <img src="GameIdeaImage\Baner.png" alt="Game baner." class="center">
+  <figcaption></figcaption>
+</figure>
 
 # Table of Contents
 - [Team](#team)
@@ -30,7 +34,7 @@
 - [Process](#process)
   - [GitHub](#github)
   - [Kanban Board](#kanban-board)
-  - [Microsoft Teams](#Microsoft Teams)
+  - [Microsoft Teams](#microsoft-teams)
 - [Conclusion](#concludion)
 - [Individual Contributions](#individual-contributions)
 
