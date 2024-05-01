@@ -640,7 +640,7 @@ All the members worked very well together and due to weekly in-person meetings w
 </table>
 
 # How To Play
-1) First you need to download the Processing development environment for the game from the following link [download here](httpsprocessing.orgdownload).
+1) First you need to download the Processing development environment for the game from the following link [download here](https://processing.org/download).
 2) Download the above GitHub repository that contains the game program as a ZIP file and extract it.
 3) Open the extracted folder and open the Game.pde which can be found in Game - Code. By doing so, Processing should be up and running.
 4) In Processing go to Tools - Manage Tools… - Libraries. Install the sound library.
