@@ -1,18 +1,9 @@
-<head>
-  <style>
-    figcaption{
-      font-size: 12px;
-      font-style: italic;
-      color:rgb(220,220,220);
-    }
-
-  </style>
-</head>
 
 <figure>
   <img src="GameIdeaImage\Baner.png" alt="Game baner." class="center">
   <figcaption></figcaption>
 </figure>
+<a href="">Link to "Anxious Pigs" trailer.</a>
 
 # Table of Contents
 - [Team](#team)
@@ -42,7 +33,7 @@
 
 <figure>
   <img src="OrganisationFiles/GroupPhotos/IMG_3797.jpg" alt="Group photo." class="center">
-  <figcaption>Group photo.</figcaption>
+  <figcaption><i><span style="font-size:0.5em; color: grey">Group photo.</span></i></figcaption>
 </figure>
 
 <table align="center">
@@ -90,7 +81,7 @@ Find out why pigs became so anxious, discover the most efficient ways to protect
 
 <figure>
   <img src="OrganisationFiles/ReportGifs/IntroGif.gif" alt="Example of gameplay." class="center">
-  <figcaption>Demonstration of a gameplay.</figcaption>
+  <figcaption><i><span style="font-size:0.5em; color: grey">Demonstration of a gameplay.</span></i></figcaption>
 </figure>
 
 All of the art included in the game was drawn by one of the members in a free software Krita (except for the background which was generated with the AI image generator DALL-E).   
@@ -130,9 +121,10 @@ Main User stories from the game the team ended up choosing:
 
 To unify the team's vision of the games, we created paper prototypes representing basic ideas for the gameplay. 
 
-[img src=OrganisationFilesBatVideoCover.jpg alt=Paper prototype of flappy bat title=BatVideoCover style=zoom 50%; ](httpsyoutube.comshortsNdrY11o-Ys4)
 
-[![Paper prototype of Nervous Pig](OrganisationFilesPigVideoCover.jpg PigVideoCover)](httpsyoutu.beiyaCUZtQJD4)
+<a href="https://youtube.com/shorts/NdrY11o-Ys4"><img src="OrganisationFiles\PaperPrototypes\BatVideoCover.jpg" alt="Flappy Bat paper prototype."></a>
+
+<a href="https://youtu.be/iyaCUZtQJD4"><img src="OrganisationFiles\PaperPrototypes\PigVideoCover.jpg" alt="Anxious Pigs paper prototype."></a>
 
 During the process, the team further discussed the nuances of the chosen games. Based on this, we compared the two ideas again and concluded that Anxious Pigs would be more creative and challenging. Team members also seemed to resonate more with the game's themes. The following main idea of the game was finished:
 
@@ -160,7 +152,7 @@ The final Use Case diagram was as follows:
 
 <figure>
   <img src="OrganisationFiles\UseCaseDiagram\UseCaseDiagram.png" alt="Use case diagram." class="center">
-  <figcaption>Use case diagram.</figcaption>
+  <figcaption><i><span style="font-size:0.5em; color: grey">Use case diagram.</span></i></figcaption>
 </figure>
 
 All of the creative decisions were made by the whole team and we made sure that everyone had a chance to voice their concerns and ideas. The most challenging part of the ideation process was making the decisions. The team came up with a lot of good ideas and thus initially we had trouble choosing only one. However, by following the agile development techniques all the decisions made had good reasons behind them which allowed the team to be much more confident in the final game choice. 
@@ -173,7 +165,7 @@ The physics engine comprises the classes World, Rigidbody, Circle and Rectangle,
 
 <figure>
   <img src="OrganisationFiles\ClassDiagrams\PhysicsEngineClassDiagram.png" alt="Physics engine class diagram." class="center">
-  <figcaption>Physics engine class diagram.</figcaption>
+  <figcaption><i><span style="font-size:0.5em; color: grey">Physics engine class diagram.</span></i></figcaption>
 </figure>
 
 The RigidBody class contains the general properties that a rigid body holds like for example mass or position. Some of the most important methods are the ones to update the velocity and location of the body given a duration of time step, and a method which resolves a collision between two bodies given the collision information. 
@@ -182,9 +174,39 @@ The Circle and Rectangle classes include some more specific properties of their 
 
 The World class is there to help organize the bodies which are to be physically interacting with each other. Its attributes include a list to keep track of the bodies, the values of the gravity as well as velocity drag. The class also contains methods which are used to alter the list of bodies, check and resolve collisions between the bodies, update their status given a duration of time step, and display the bodies.
 
-
-
 ## Game
+
+As users interact with the game mainly by clicking buttons on the screen, the ImageButton class was defined. It solved two encountered issues of code repetition and human error when defining the button area. 
+The ScreenManager class was created to optimise managing different screens of the game. The class stores all the available screens into a variable, keeps track of which screen is currently displayed and has the current player information.
+
+<figure>
+  <img src="OrganisationFiles\ClassDiagrams\GameClassDiagram.png" alt="Game class diagram." class="center">
+  <figcaption><i><span style="font-size:0.5em; color: grey">Game class diagram.</span></i></figcaption>
+</figure>
+
+The game has seven different screens with each of them being a separate class extending the abstract Screen class. The Screen class defines abstract methods responsible for display and user input handling.
+The StartScreen class creates the initial interface of the game also called the main menu. 
+PlayerNameScreen class allows user to enter their name.  
+The Player class stores information about the current user of the game like the player’s name, score and the selected difficulty level. The most important methods are responsible for deleting the player information, automated score calculation and updating the external file that stores users' scores. The Player class instance is saved in the ScreenManager and passed to relevant Screen objects.
+DifficultyScreen allows the player to select between two difficulty levels and saves the information in the Player class.
+The GameScreen is responsible for the screen of core gameplay. The class initialises a Level object based on the current level number and selected difficulty. In order to allow user interactions with the current level, the GameScreen class calls Level class methods in its own functions. The class is also responsible for printing out the player's name, current score and the current level.
+The Level class contains all the level information loaded from a JSON file. For easy levels, bird attack directions are the same as in the read JSON files however, for hard levels those directions are randomised to introduce an element of challenge. All the objects are loaded as a list object to the newly instantiated World object responsible for executing physics engine methods.
+The Tutorial class together with the Menu class were designed to display a series of texts guiding the player during their first gameplay. The Tutorial class constructs a list of Menu objects in classes inheriting from Screen with any text. 
+Bird and Pig classes extend from the Circle class and thus can be treated by the physics engine as a circular elements. 
+BirdRed, BirdPurple and BirdBlack extend the Bird class and implement methods responsible for birds' super abilities (excluding red bird).
+The Material class was extended from the Rectangle class. It describes the basic method that all materials have: detect whether the mouse is on a material, highlight the selected material and an abstract display method to be implemented by subclasses. The Glass, Stone and Wood classes inherit from the Material classes and have different attributes.
+The WinScreen and LoseScreen classes act as a cue for the game's end. They would display information about the game result and the score the player achieved. Both screens also implement a button that allows the player to return to the main menu.
+The ScoreScreen class was designed to display the top players’ names and their scores. The most important class method loads the table files to the data structures and prints them to the screen. 
+
+<figure>
+  <img src="OrganisationFiles\ClassDiagrams\ClassDiagram.png" alt="Class diagram." class="center">
+  <figcaption><i><span style="font-size:0.5em; color: grey">Class diagram.</span></i></figcaption>
+</figure>
+
+<figure>
+  <img src="OrganisationFiles\ClassDiagrams\BehaviourDiagram.png" alt="Behaviour diagram." class="center">
+  <figcaption><i><span style="font-size:0.5em; color: grey">Behaviour diagram.</span></i></figcaption>
+</figure>
 
 # Implementation
 
@@ -200,11 +222,7 @@ To detect if two circles are in contact with each other, their positions and rad
 
 ### Collision Resolution
 
-Once the collision occurs and the force direction is determined the following equation is used in order to resolve the collision: 
-
-EQUATION 
-
-Where ... is ..., ... 
+Once the collision occurs and the force direction is determined an equation number 9 from the <a href="https://chrishecker.com/images/e/e7/Gdmphys3.pdf">articel by Chris Hecker</a> is used to resolve the collision.
 
 Above equation was also used to calculate friction that occurs during the collision. Thanks to that body slows down as it’s velocity decreases until it reaches zero. 
 
@@ -273,12 +291,12 @@ The following issues were identified:
   <li>The tutorial was poorly noticeable on the background.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution1.png" alt="Tutorial evolution." class="center">
-    <figcaption>Evolution of the tutorial.</figcaption>
+    <figcaption><i><span style="font-size:0.5em; color: grey">Evolution of the tutorial.</span></i></figcaption>
   </figure>
   <li>Lack of upper case letters during name-entering.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution2.png" alt="Upper case letters were added." class="center">
-    <figcaption>Upper case letters were added.</figcaption>
+    <figcaption><i><span style="font-size:0.5em; color: grey">Upper case letters were added.</span></i></figcaption>
   </figure>
 </ul>
 
@@ -294,17 +312,17 @@ The following issues were identified:
   <li>Confusion about the attack direction.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution3.png" alt="Highlighted directions from which the attack was coming." class="center">
-    <figcaption>Highlighted directions from which the attack was coming.</figcaption>
+    <figcaption><i><span style="font-size:0.5em; color: grey">Highlighted directions from which the attack was coming.</span></i></figcaption>
   </figure>
   <li>It was hard to gain a high enough score to appear on the scoreboard.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution4.png" alt="Divided scoreboard into two sections." class="center">
-    <figcaption>Divided scoreboard into two sections.</figcaption>
+    <figcaption><i><span style="font-size:0.5em; color: grey">Divided scoreboard into two sections.</span></i></figcaption>
   </figure>
   <li>Confusion about birds’ superpowers.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution5.png" alt="Modified the tutorial in a way that it displays birds' abilities." class="center">
-    <figcaption>Modified the tutorial in a way that it displays birds' abilities.</figcaption>
+    <figcaption><i><span style="font-size:0.5em; color: grey">Modified the tutorial in a way that it displays birds' abilities.</span></i></figcaption>
   </figure>
 </ul>
 
@@ -312,7 +330,7 @@ The heuristic evaluation resulted in adding the ‘Help’ button which would di
 
 <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\GifSolution1.gif" alt="Added buttton reopening the tutorial." class="center">
-    <figcaption>Added buttton reopening the tutorial.</figcaption>
+    <figcaption><i><span style="font-size:0.5em; color: grey">Added buttton reopening the tutorial.</span></i></figcaption>
 </figure>
 
 <em>Stage 3</em> -  Conducted after the game was fully playable: 
@@ -328,22 +346,22 @@ The following issues were identified:
   <li>The wording of the tutorial was confusing.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution5.png" alt="Moved Main Menu button to make it more visible." class="center">
-    <figcaption>Moved Main Menu button to make it more visible.</figcaption>
+    <figcaption><i><span style="font-size:0.5em; color: grey">Moved Main Menu button to make it more visible.</span></i></figcaption>
   </figure>
   <li>Confusion about the attack direction was still present. </li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution6.png" alt="Highlighted directions from which the attack was coming." class="center">
-    <figcaption>Added arrows indicating the directions from which the attack was coming.</figcaption>
+    <figcaption><i><span style="font-size:0.5em; color: grey">Added arrows indicating the directions from which the attack was coming.</span></i></figcaption>
   </figure>
   <li>Confusion about the number of levels and enemies.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution7.png" alt="Added information about the number of levels and amount of birds about to attack." class="center">
-    <figcaption>Added information about the number of levels and amount of birds about to attack.</figcaption>
+    <figcaption><i><span style="font-size:0.5em; color: grey">Added information about the number of levels and amount of birds about to attack.</span></i></figcaption>
   </figure>
   <li>Not knowing which material was selected.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution8.png" alt="Added yellowish color to the selected material." class="center">
-    <figcaption>Added yellowish color to the selected material.</figcaption>
+    <figcaption><i><span style="font-size:0.5em; color: grey">Added yellowish color to the selected material.</span></i></figcaption>
   </figure>
   <li>Some people started the birds’ attack before building the structure. – <em>Solved</em> by disabling the button until the first material was placed on the level.
   </li>
@@ -356,7 +374,7 @@ The team decided to use the System Usability Scale (SUS) to evaluate the game's 
 
 <figure>
   <img src="OrganisationFiles\EvaluationsData/SUS_evaluation_result_table.png" alt="Table with results from the SUS evaluation." class="center">
-  <figcaption>Table with results from the SUS evaluation.</figcaption>
+  <figcaption><i><span style="font-size:0.5em; color: grey">Table with results from the SUS evaluation.</span></i></figcaption>
 </figure>
 
 Overall achieved score was above the average of 68 suggesting that our system was easy to use and understandable. We believe such a high score was achieved because of the qualitative evaluation being conducted in the early development stages.  
@@ -366,19 +384,19 @@ In the raw NASA TLX evaluation, the users were asked to fill in the provided for
 
 <figure>
   <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_EASY_table.png" alt="Table with raw NASA TLX results from Easy mode." class="center">
-  <figcaption>Table with raw NASA TLX results from Easy mode.</figcaption>
+  <figcaption><i><span style="font-size:0.5em; color: grey">Table with raw NASA TLX results from Easy mode.</span></i></figcaption>
 </figure>
 
 
 <figure>
   <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_HARD_table.png" alt="Table with raw NASA TLX results from Hard mode." class="center">
-  <figcaption>Table with raw NASA TLX results from Hard mode.</figcaption>
+  <figcaption><i><span style="font-size:0.5em; color: grey">Table with raw NASA TLX results from Hard mode.</span></i></figcaption>
 </figure>
 
 
 <figure>
   <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_graph.png" alt="Raw NASA TLX results in a graph form." class="center">
-  <figcaption>Raw NASA TLX results in a graph form.</figcaption>
+  <figcaption><i><span style="font-size:0.5em; color: grey">Raw NASA TLX results in a graph form.</span></i></figcaption>
 </figure>
  
 The results indicated that the hard mode demanded more workload which matches the design intention. However, it is worth pointing out that 3 out of 10 users perceived the easy mode as the harder one. This could have been caused by the fact that the users gained experience while playing the easy mode and thus they possessed more skills while playing the hard mode. Wilcoxon Signed Rank Test was conducted and according to the following <a href="https://www.statology.org/wilcoxon-signed-rank-test-calculator/">website</a>: 
@@ -454,7 +472,7 @@ In the beginning, there were no issues with that, however, as more progress on t
 
 <figure>
   <img src="OrganisationFiles\ProcessSection\KanbanBoard.gif" alt="Kanban Board organisation." class="center">
-  <figcaption>Kanban Board organisation.</figcaption>
+  <figcaption><i><span style="font-size:0.5em; color: grey">Kanban Board organisation.</span></i></figcaption>
 </figure>
 
 We used four status options to classify the tasks: to do, in progress, done and future improvements.  
@@ -463,7 +481,7 @@ If a more complicated task was assigned a short note was usually added to make s
 
 <figure>
   <img src="OrganisationFiles\ProcessSection\TeamsMessages.png" alt="Kanban Board organisation." class="center">
-  <figcaption>Kanban Board organisation.</figcaption>
+  <figcaption><i><span style="font-size:0.5em; color: grey">Kanban Board organisation.</span></i></figcaption>
 </figure>
 
 ## Microsoft Teams
@@ -474,12 +492,27 @@ After each in-person meeting, the chairman would send group chat messages with t
 
 <figure>
   <img src="OrganisationFiles\ProcessSection\KanbanBoardMessage.png" alt="Example of task description on Kanban Board." class="center">
-  <figcaption>Example of task description on Kanban Board.</figcaption>
+  <figcaption><i><span style="font-size:0.5em; color: grey">Example of task description on Kanban Board.</span></i></figcaption>
 </figure>
 
 In rare cases when someone was absent from an in-person meeting a summary of everything discussed and established was also posted there. During the easter break, Teams was used to conduct video calls. 
 
 # Conclusion
+
+In conclusion, we managed to successfully develop a game that followed our initial designs. In the early stages of the development process user stories and paper prototypes allowed us to gain a clear understanding of all the features we wanted to implement. We tried agile development techniques from which the Kanban board helped us to track our timeline and tasks. Unfortunately, playing poker didn’t work well due to our strategy of dividing the team into two subteams.  
+We successfully managed to overcome three challenges of which the hardest one was to develop a physics engine. We also wanted to design level implementation in a way that would be easy to modify and would allow players who know how to code to easily implement their own level ideas. To achieve this we used JSON files. Optimisation Of the game was very much needed and due to out modifications the final gameplay is a very smooth experience. In order to overcome mentioned challenges we needed to conduct a lot of research going above the scope of the module.  
+We conducted two qualitative and two quantitative evaluations in order to further improve our game. Most changes to the game were implemented based on the Think Aloud evaluation as we included in our test group both experience and not experienced gamers. We gained score of 84 in the System Usability Scale which proved that our game is above the average. As a team we contribute it to us conducting qualitative evaluation in three stages which allowed us to detect more potential issues and act on them as fast as possible. The results for the raw NASA Task Load Index suggest that the difference between easy and hard mode is not as big as the team intended. This can be easily modified in future game implementations by changing the JSON files that describe each level.
+As a group we discussed many potential improvements that can be implemented in the future work, but the most impactful ones are:
+
+<lu>
+  <li>Adding more bird types with new superpowers.</li>
+  <li>Adding more variation to materials by for example changing their shapes or sizes.</li>
+  <li>Modifying the ground on which pigs are located which would add new challenge to building the structures.</li>
+  <li>Potential multiplayer in which each player has to protect their own pig.</li>
+</lu>
+
+All the members worked very well together and due to weekly in-person meetings we managed to form a trust in each other which provided sense of calmness during the project. By setting rules at the very beginning of the project like agenda for our weekly meetings or coding standards we made work easier for ourselves. By using the agile development techniques, we also had a sense of control over what should happen next which allowed us to act early on some potential issues.
+
 
 # Individual Contributions
 

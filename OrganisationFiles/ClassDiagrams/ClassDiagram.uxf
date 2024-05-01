@@ -1,0 +1,358 @@
+<diagram program="umletino" version="15.1"><zoom_level>7</zoom_level><element><id>UMLClass</id><coordinates><x>231</x><y>155</y><w>175</w><h>161</h></coordinates><panel_attributes>ScreenManager
+--
+- screens: HashMap&lt;ScreenType, Screen&gt; 
+- currentScreen: Screen 
+- player: Player 
+--
+- setupScreens()
++ getCurrentScreen(ScreenType): Screen 
++ setCurrentScreen(ScreenType)
++ getPlayer(): Player
++ display()
++ mousePressed()
++ keyPressed()
++ mouseDragged()
++ mouseReleased()
++ mouseWheel(MouseEvent)
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>483</x><y>155</y><w>119</w><h>70</h></coordinates><panel_attributes>/Screen/
+--
++ display();
++ mousePressed()
++ keyPressed()
++ mouseDragged()
++ mouseReleased()
++ mouseWheel(MouseEvent)
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>889</x><y>323</y><w>252</w><h>161</h></coordinates><panel_attributes>LevelScreen
+--
+- screenManager: ScreenManager
+-bgImage, easyImage, hardImage, woodBoardImage: PImage
+- easyButton, hardButton: ImageButton
+- buttons: ArrayList&lt;ImageButton&gt; 
+--
++ display();
++ mousePressed()
++ keyPressed()
++ mouseDragged()
++ mouseReleased()
++ mouseWheel(MouseEvent)
+-  setEasyLevels()
+-  setHardLevels()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>434</x><y>428</y><w>161</w><h>231</h></coordinates><panel_attributes>GameScreen
+--
+- screenManager: ScreenManager
+- player Player
+- levelMenu: Menu
+- tutorial: Tutorial
+- currentLevel: Level
+- currentLevelNumber: int
+- menuImage, tutorialImage: PImage
+- menuButton, tutorialButton: ImageButton
+- buttons: ArrayList&lt;ImageButton&gt; 
+--
++ display();
++ mousePressed()
++ keyPressed()
++ mouseDragged()
++ mouseReleased()
++ mouseWheel(MouseEvent)
++ getPlayer(): Player
++ setLevel(int)
++ endLevel()
+- otherDisplay()
+- setButtons()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>644</x><y>547</y><w>154</w><h>147</h></coordinates><panel_attributes>WinScreen
+--
+- screenManager: ScreenManager
+- player: Player
+- bgImage, menuImage: PImage
+- menuButton: ImageButton
+
+--
++ display();
++ mousePressed()
++ keyPressed()
++ mouseDragged()
++ mouseReleased()
++ mouseWheel(MouseEvent)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>728</x><y>316</y><w>147</w><h>161</h></coordinates><panel_attributes>PlayerNameScreen
+--
+- screenManager: ScreenManager
+- player Player
+- displayName: String
+- bgImage: PImage
+--
++ display();
++ mousePressed()
++ keyPressed()
++ mouseDragged()
++ mouseReleased()
++ mouseWheel(MouseEvent)
++  addLetter(char)
++  deleteLetter()
+-  updateDisplayName()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>623</x><y>141</y><w>280</w><h>147</h></coordinates><panel_attributes>StartScreen
+--
+- screenManager: ScreenManager
+- player: Player
+- bgImage, logoImage, startImage, scoreImage, exitImage: PImage
+- startButton, scoreButton, exitButton: ImageButton
+- buttons: ArrayList&lt;ImageButton&gt;
+--
++ display();
++ mousePressed()
++ keyPressed()
++ mouseDragged()
++ mouseReleased()
++ mouseWheel(MouseEvent)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>924</x><y>141</y><w>217</w><h>168</h></coordinates><panel_attributes>ScoreScreen
+--
+- screenManager: ScreenManager
+- player Player
+- bgImage, woodBoardImage, menuImage: PImage
+- menuButton: ImageButton
+ 
+--
++ display();
++ mousePressed()
++ keyPressed()
++ mouseDragged()
++ mouseReleased()
++ mouseWheel(MouseEvent)
++ printScoresFile
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>224</x><y>358</y><w>175</w><h>133</h></coordinates><panel_attributes>ImageButton
+--
+- buttonX, buttonY: float
+- buttonWidth, buttonHeight: float
+- buttonImage: PImage
+- isMouseOver: boolean
+--
++ display()
+- update()
++ clicked(): boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>231</x><y>673</y><w>217</w><h>182</h></coordinates><panel_attributes>Menu
+--
+- nextImage, skipImage, woodBoardImage: PImage
+- menuX, menuY: float
+- menuWidth, menuheight: float
+- menuText: String
+- stepNumber, totalSteps: int
+- callBackNext, callbackSkip: ButtonCallBack
+- nextButton, skipButton: ImageButton
+- nextPressed: boolean
+- levelTexts: String[]
+--
++ display()
++ dispalyMenu(int)
++ clicked()
++ resetMenu()
++ mousePressed()
++ displayWraapedText(String, float, floar, float)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>224</x><y>512</y><w>175</w><h>112</h></coordinates><panel_attributes>Tutorial
+--
+- menus: Menu[]
+- currentStep, totalStep: int
+--
++ display()
++ nextStep
++ skipTutorial()
++ resetTutorial()
++ mousePressed()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>819</x><y>498</y><w>329</w><h>357</h></coordinates><panel_attributes>Level
+--
+- gameScreen: GameScreen
+- difficulty: Difficulty
+- attackDirection: attackDirection
+- budget: int
+- groundList: ArrayList&lt;Ground&gt;
+- pigList: ArrayList&lt;Pig&gt;
+- birdBackStageList: ArrayList&lt;Bird&gt;
+- birdFrontStageList: ArrayList&lt;Bird&gt;
+-materialList: ArrayList&lt;material&gt;
+- draggedMaterial: Material
+- lastSelectedMaterial: Material
+relativeDragPosition: PVector
+- w: World
+- ready: boolean
+- timer: Timer
+- bgImage, readyImage, groundImage: PImage
+- woodButton, glassButtonstoneButton,readyButton,undoButton: ImageButton
+- buttons: ArrayList&lt;ImageButton&gt; 
+--
++ display();
++ mousePressed()
++ keyPressed()
++ mouseDragged()
++ mouseReleased()
++ mouseWheel(MouseEvent)
+-  setBudget(JSONObject)
++ getBudget()
+- setAttackDirection(JSONObject)
+- addGround(JSONObject)
+- addBirdBackStage(JSONObject)
+- setupWorld()
+- checkWorldItemActions()
+- timerActions
+- setTimer()
+- stageBird()
+- zeroImpulses()
+- buyResource(Resource): boolean
++ sellResource(Material): boolean
+- otherDisplay()
++ numberPigsAlive(): int
++ numberPigsTotal(): int
+- displayAttackDirection()
+- setButtons()
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1008</x><y>897</y><w>147</w><h>56</h></coordinates><panel_attributes>Timer
+--
+- startTime: int
+- interval: int
+--
++ intervalFinished()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>162</y><w>147</w><h>182</h></coordinates><panel_attributes>Player
+--
+- playerName: String
+- playerScore: int
+- scoreSet, nameSet: boolean
+- difficulty: Difficulty
+--
++ setPlayerName(String)
++ getPlayerName(): String
++ isNameSet(): boolean
++ setScore: int
++ getPlayerScore: int
++ getDifficulty: Difficulty
++ setDifficulty(Difficulty)
++ deletePlayer()
++ updateScore(Level,int)
++ updateScoresFile()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>644</x><y>708</y><w>154</w><h>147</h></coordinates><panel_attributes>LoseScreen
+--
+- screenManager: ScreenManager
+- player: Player
+- bgImage, menuImage: PImage
+- menuButton: ImageButton
+
+--
++ display();
++ mousePressed()
++ keyPressed()
++ mouseDragged()
++ mouseReleased()
++ mouseWheel(MouseEvent)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>595</x><y>169</y><w>42</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;40;10</additional_attributes></element><element><id>Relation</id><coordinates><x>539</x><y>218</y><w>203</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;180;270;180</additional_attributes></element><element><id>Relation</id><coordinates><x>581</x><y>218</y><w>357</w><h>91</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;110;490;110</additional_attributes></element><element><id>Relation</id><coordinates><x>553</x><y>218</y><w>364</w><h>119</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;120;500;120;500;150</additional_attributes></element><element><id>Relation</id><coordinates><x>483</x><y>218</y><w>21</w><h>224</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;300</additional_attributes></element><element><id>Relation</id><coordinates><x>497</x><y>218</y><w>161</w><h>532</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;290;170;290;170;740;210;740</additional_attributes></element><element><id>Relation</id><coordinates><x>525</x><y>218</y><w>308</w><h>329</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;230;250;230;250;450;420;450</additional_attributes></element><element><id>Relation</id><coordinates><x>511</x><y>218</y><w>175</w><h>343</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;270;230;270;230;470</additional_attributes></element><element><id>Relation</id><coordinates><x>140</x><y>183</y><w>105</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>336</x><y>204</y><w>161</w><h>168</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes><additional_attributes>210;10;150;10;150;190;10;190;10;220</additional_attributes></element><element><id>Relation</id><coordinates><x>392</x><y>456</y><w>49</w><h>231</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes><additional_attributes>30;310;30;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1057</x><y>848</y><w>21</w><h>63</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>441</x><y>652</y><w>98</w><h>112</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>120;10;120;140;10;140</additional_attributes></element><element><id>Relation</id><coordinates><x>322</x><y>617</y><w>35</w><h>70</h></coordinates><panel_attributes>lt=&lt;-
+m1=1..n</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>182</x><y>617</y><w>378</w><h>280</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>520;60;520;380;10;380;10;60;130;60;130;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1491</x><y>631</y><w>147</w><h>98</h></coordinates><panel_attributes>Bird
+--
+# impulseToughness: float
+# birdType: birdType
+# icon: PImage
+# iconOffsewtX, iconOffsetY; float
+--
++ display()
++ getImpulseToughness(): float
++ getIcon(): PImage</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1288</x><y>694</y><w>147</w><h>63</h></coordinates><panel_attributes>BirdBlack
+--
+- explosionImpulse: float
+- explosionRadius: float
+--
++ explode()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1288</x><y>610</y><w>147</w><h>70</h></coordinates><panel_attributes>BirdPurple
+--
+-- hasAbility: boolean
+--
++ hasAbility(): boolean
++ reverseGravity(Pvector)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1288</x><y>575</y><w>147</w><h>14</h></coordinates><panel_attributes>BirdRed</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1288</x><y>785</y><w>147</w><h>63</h></coordinates><panel_attributes>Pig
+--
+- impulseToughness: float
+- alive: boolean
+--
++ display()
++ killPig()
++ isAlive(): boolean
++ getImpulseToughness(): float</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1715</x><y>260</y><w>168</w><h>119</h></coordinates><panel_attributes>Rectangle
+--
+# rectWidth, rectHeight, rectAngle: float
+--
+# calculateArea()
+# calculateAngularInertia()
++ display()
++ getWidth(): float
++ getHeight(): float
++ getVertex(int): PVector
++ intersect(RigidBody): boolean
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1708</x><y>631</y><w>147</w><h>91</h></coordinates><panel_attributes>Circle
+--
+# circleRadius: float
+--
+# calculateArea()
+# calculateAngularInertia()
++ display()
++ getRadius(): float
++ intersect(RigidBody): boolean
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1267</x><y>351</y><w>147</w><h>35</h></coordinates><panel_attributes>Wood
+--
++ display()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1491</x><y>218</y><w>147</w><h>35</h></coordinates><panel_attributes>Ground
+--
++ display()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1491</x><y>302</y><w>147</w><h>98</h></coordinates><panel_attributes>Material
+--
+# impulseToughness: float
+--
++ display()
++ isMouseOver(int, int): boolean
++ getImpluseToughness(): float
++ highlight()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2037</x><y>316</y><w>308</w><h>280</h></coordinates><panel_attributes>RigidBody
+--
+# position: Pvector
+# rotation: float
+# angularVelocity,angularAcceleration: float
+# density: float
+# area, mass, restitution, frictionRestitution, isStatic,largestImpulse, float
+# lastContactBody: RigidBody
+--
++ calculateMass()
++ getShapeType(): ShapeType
++ getLArgestImpulse(): float
++ setLargestImpule(float)
++ updateLargestImpulse(float)
++ getMass(): float
++ getPosition(): PVector
++ setPosition(PVector)
++ getRotation(): float
++ setRotation(float)
++ getRestitution(): float
++ getLinearVelocity(): PVector
++ setLinearVelocity(PVector)
++ isStatic(): boolean
++ getLastContactBody(rigidBody)
++ step(float,PVector,float)
++ intersect(RigidBody)
++ resolveCollision(RigidbBody, RigidBody,PVector)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1498</x><y>428</y><w>168</w><h>161</h></coordinates><panel_attributes>World
+--
+- bodyList: ArrayList&lt;RigidBody&gt;
+- gravity: PVector
+- linearVelocityFactor: float
+--
++ addBody(RigidBody)
++ removeBody(RigidBody)
++ removeBodyindx(int)
++ getBody(int): RigidBody
++ getBodyList(): ArrayList&lt;RigidBody&gt;
++ getGravity(): PVector
++ step(float)
++ collideBodies(): boolean
++ display()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1267</x><y>281</y><w>147</w><h>35</h></coordinates><panel_attributes>Glass
+--
++ display()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1267</x><y>421</y><w>147</w><h>35</h></coordinates><panel_attributes>Stone
+--
++ display()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1631</x><y>225</y><w>98</w><h>63</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;70;40;70;40;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1631</x><y>337</y><w>98</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1407</x><y>302</y><w>98</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1869</x><y>337</y><w>182</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>240;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1400</x><y>358</y><w>105</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1407</x><y>386</y><w>98</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;10;40;10;40;60;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1841</x><y>561</y><w>210</w><h>119</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>280;10;200;10;200;150;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>1624</x><y>659</y><w>98</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>120;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1428</x><y>575</y><w>77</w><h>77</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;90;70;90;70;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1428</x><y>666</y><w>77</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1428</x><y>701</y><w>77</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1428</x><y>722</y><w>84</w><h>98</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>100;10;100;120;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>1134</x><y>225</y><w>364</w><h>329</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;450;50;450;50;10;500;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1141</x><y>295</y><w>133</w><h>287</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes><additional_attributes>10;380;70;380;70;10;170;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1141</x><y>435</y><w>140</w><h>189</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes><additional_attributes>10;240;120;240;120;10;180;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1141</x><y>372</y><w>147</w><h>231</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes><additional_attributes>10;300;90;300;90;10;190;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1134</x><y>575</y><w>168</w><h>70</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes><additional_attributes>10;70;170;70;170;10;220;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1134</x><y>645</y><w>168</w><h>28</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes><additional_attributes>10;10;220;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1134</x><y>715</y><w>161</w><h>28</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes><additional_attributes>10;10;210;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1134</x><y>799</y><w>161</w><h>28</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes><additional_attributes>10;10;210;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1659</x><y>512</y><w>385</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;530;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1138</x><y>518</y><w>378</w><h>112</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;140;150;140;150;10;520;10</additional_attributes></element></diagram>
