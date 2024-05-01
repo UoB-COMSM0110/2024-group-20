@@ -3,7 +3,7 @@
   <img src="GameIdeaImage\Baner.png" alt="Game baner." class="center">
   <figcaption></figcaption>
 </figure>
-<a href="">Link to "Anxious Pigs" trailer.</a>
+<p align="center"><a href="" align="center">Link to "Anxious Pigs" trailer.</a></p>
 
 # Table of Contents
 - [Team](#team)
@@ -28,6 +28,7 @@
   - [Microsoft Teams](#microsoft-teams)
 - [Conclusion](#concludion)
 - [Individual Contributions](#individual-contributions)
+- [How to Play](#how-to-play)
 
 # Team
 
@@ -84,6 +85,8 @@ Find out why pigs became so anxious, discover the most efficient ways to protect
   <figcaption><i><span style="font-size:0.5em; color: grey">Demonstration of a gameplay.</span></i></figcaption>
 </figure>
 
+<br />
+
 All of the art included in the game was drawn by one of the members in a free software Krita (except for the background which was generated with the AI image generator DALL-E).   
 
 As a team, we believe we successfully managed to implement the game we envisioned. Good luck protecting all the pigs and remember the Pig King counts on you! 
@@ -97,7 +100,7 @@ The game development started with the whole team having an in-person brainstormi
   <li>To be more of a logic-based game.</li>
   <li>To consist of levels with increasing difficulty.  </li>
 </lu>
-
+<br />
 During the second part of the meeting, we came up with 5 different game ideas: Snake, Flappy Bat, Space Invaders, Doodle Jumps and Anxious Pigs. 
 
 Our team's ideation process was dynamic. During many meetings, we analysed the novelty, interest, and technical challenges of each idea, and then assessed whether the game was feasible. Finally, the team decided to move to the paper prototype stage with Anxious Pigs and Flappy Bat. Those two ideas were chosen because: 
@@ -155,9 +158,12 @@ The final Use Case diagram was as follows:
   <figcaption><i><span style="font-size:0.5em; color: grey">Use case diagram.</span></i></figcaption>
 </figure>
 
+<br />
 All of the creative decisions were made by the whole team and we made sure that everyone had a chance to voice their concerns and ideas. The most challenging part of the ideation process was making the decisions. The team came up with a lot of good ideas and thus initially we had trouble choosing only one. However, by following the agile development techniques all the decisions made had good reasons behind them which allowed the team to be much more confident in the final game choice. 
 
 # Design
+
+The system architecture of our game can be separated into two parts, the physics engine and the game.  
 
 ## Physics Enqine
 
@@ -167,6 +173,8 @@ The physics engine comprises the classes World, Rigidbody, Circle and Rectangle,
   <img src="OrganisationFiles\ClassDiagrams\PhysicsEngineClassDiagram.png" alt="Physics engine class diagram." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Physics engine class diagram.</span></i></figcaption>
 </figure>
+
+<br />
 
 The RigidBody class contains the general properties that a rigid body holds like for example mass or position. Some of the most important methods are the ones to update the velocity and location of the body given a duration of time step, and a method which resolves a collision between two bodies given the collision information. 
 
@@ -183,6 +191,8 @@ The ScreenManager class was created to optimise managing different screens of th
   <img src="OrganisationFiles\ClassDiagrams\GameClassDiagram.png" alt="Game class diagram." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Game class diagram.</span></i></figcaption>
 </figure>
+
+<br />
 
 The game has seven different screens with each of them being a separate class extending the abstract Screen class. The Screen class defines abstract methods responsible for display and user input handling.
 The StartScreen class creates the initial interface of the game also called the main menu. 
@@ -202,6 +212,8 @@ The ScoreScreen class was designed to display the top players’ names and their
   <img src="OrganisationFiles\ClassDiagrams\ClassDiagram.png" alt="Class diagram." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Class diagram.</span></i></figcaption>
 </figure>
+
+<br />
 
 <figure>
   <img src="OrganisationFiles\ClassDiagrams\BehaviourDiagram.png" alt="Behaviour diagram." class="center">
@@ -293,6 +305,8 @@ The following issues were identified:
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution1.png" alt="Tutorial evolution." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Evolution of the tutorial.</span></i></figcaption>
   </figure>
+  <br />
+
   <li>Lack of upper case letters during name-entering.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution2.png" alt="Upper case letters were added." class="center">
@@ -314,11 +328,15 @@ The following issues were identified:
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution3.png" alt="Highlighted directions from which the attack was coming." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Highlighted directions from which the attack was coming.</span></i></figcaption>
   </figure>
+  <br />
+
   <li>It was hard to gain a high enough score to appear on the scoreboard.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution4.png" alt="Divided scoreboard into two sections." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Divided scoreboard into two sections.</span></i></figcaption>
   </figure>
+  <br />
+
   <li>Confusion about birds’ superpowers.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution5.png" alt="Modified the tutorial in a way that it displays birds' abilities." class="center">
@@ -332,6 +350,8 @@ The heuristic evaluation resulted in adding the ‘Help’ button which would di
     <img src="OrganisationFiles\ImplementedChangesImages\GifSolution1.gif" alt="Added buttton reopening the tutorial." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Added buttton reopening the tutorial.</span></i></figcaption>
 </figure>
+
+<br />
 
 <em>Stage 3</em> -  Conducted after the game was fully playable: 
 <ol>
@@ -348,21 +368,29 @@ The following issues were identified:
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution5.png" alt="Moved Main Menu button to make it more visible." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Moved Main Menu button to make it more visible.</span></i></figcaption>
   </figure>
+  <br />
+
   <li>Confusion about the attack direction was still present. </li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution6.png" alt="Highlighted directions from which the attack was coming." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Added arrows indicating the directions from which the attack was coming.</span></i></figcaption>
   </figure>
+  <br />
+
   <li>Confusion about the number of levels and enemies.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution7.png" alt="Added information about the number of levels and amount of birds about to attack." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Added information about the number of levels and amount of birds about to attack.</span></i></figcaption>
   </figure>
+  <br />
+
   <li>Not knowing which material was selected.</li>
   <figure>
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution8.png" alt="Added yellowish color to the selected material." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Added yellowish color to the selected material.</span></i></figcaption>
   </figure>
+  <br />
+
   <li>Some people started the birds’ attack before building the structure. – <em>Solved</em> by disabling the button until the first material was placed on the level.
   </li>
 </ul> 
@@ -377,6 +405,8 @@ The team decided to use the System Usability Scale (SUS) to evaluate the game's 
   <figcaption><i><span style="font-size:0.5em; color: grey">Table with results from the SUS evaluation.</span></i></figcaption>
 </figure>
 
+<br />
+
 Overall achieved score was above the average of 68 suggesting that our system was easy to use and understandable. We believe such a high score was achieved because of the qualitative evaluation being conducted in the early development stages.  
 
 In the raw NASA TLX evaluation, the users were asked to fill in the provided form after completing the game on easy mode and once more after the hard mode. Achieved scores are presented below.
@@ -387,6 +417,8 @@ In the raw NASA TLX evaluation, the users were asked to fill in the provided for
   <figcaption><i><span style="font-size:0.5em; color: grey">Table with raw NASA TLX results from Easy mode.</span></i></figcaption>
 </figure>
 
+<br />
+
 
 <figure>
   <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_HARD_table.png" alt="Table with raw NASA TLX results from Hard mode." class="center">
@@ -394,11 +426,17 @@ In the raw NASA TLX evaluation, the users were asked to fill in the provided for
 </figure>
 
 
+<br />
+
+
 <figure>
   <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_graph.png" alt="Raw NASA TLX results in a graph form." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Raw NASA TLX results in a graph form.</span></i></figcaption>
 </figure>
  
+ <br />
+
+
 The results indicated that the hard mode demanded more workload which matches the design intention. However, it is worth pointing out that 3 out of 10 users perceived the easy mode as the harder one. This could have been caused by the fact that the users gained experience while playing the easy mode and thus they possessed more skills while playing the hard mode. Wilcoxon Signed Rank Test was conducted and according to the following <a href="https://www.statology.org/wilcoxon-signed-rank-test-calculator/">website</a>: 
 
 W test statistic = 8 
@@ -426,6 +464,9 @@ At the beginning of the game development, the team decided that the physics engi
 <li>Game – Ziang, Klaudia  </li>
 </lu>
 
+<br />
+
+
 (More detailed role descriptions are covered in the Individual Contributions section.) 
 
 The tasks were initially assigned based on members' preferences and with time people became ‘experts’ in the topics they chose during early development stages.  
@@ -439,6 +480,8 @@ The team would meet in -person weekly and each meeting would follow the same, pr
 <li>Questions and organisation matters. </li>
 </ol>
 
+
+
 The tasks were initially assigned with the expectation of being completed within a week.  
 
 In weeks 7 and 8 the team tried the playing poker method but because of the following reasons we decided not to use it: 
@@ -447,6 +490,9 @@ In weeks 7 and 8 the team tried the playing poker method but because of the foll
 <li>None of the team members had experience in game development and thus each of us dedicated a lot of time at the beginning of the project to conduct research related to the assigned role. With each member gaining knowledge in a different area we believed that each member would know the best how much time it would take them to complete assigned tasks. </li>
 <li>Subteams were dividing smaller tasks within themselves. Playing poker between two people seemed to us like a longer and requiring more effort alternative to just having a conversation. </li>
 </lu>
+
+<br />
+
 
 Throughout the rest of the project, we continued with our previously working method of each member committing to a specific amount of work they believed they would be able to achieve within a week. We also conducted a few sessions during which sub-team members would do pair coding. We found it especially useful during the early stages of the development process when we were all getting used to Processing and when we didn’t have much experience in OOP. 
 
@@ -457,6 +503,9 @@ Entering the easter break we had a goal to have a working game by the end of it.
 <li><em>Week 2</em> – Have the physics engine working, design how levels are going to be implemented </li>
 <li><em>Week 3</em>  - Combine the physics engine with Game </li>
 </lu>
+
+<br />
+
 
 Even though tasks from week 2 had to be finished at the beginning of week 3 we managed to deliver our initial goal and after the easter break, we had a playable game that we were able to conduct qualitative and quantitative evaluations on. 
 
@@ -474,6 +523,9 @@ In the beginning, there were no issues with that, however, as more progress on t
   <img src="OrganisationFiles\ProcessSection\KanbanBoard.gif" alt="Kanban Board organisation." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Kanban Board organisation.</span></i></figcaption>
 </figure>
+
+<br />
+
 
 We used four status options to classify the tasks: to do, in progress, done and future improvements.  
 
@@ -495,6 +547,9 @@ After each in-person meeting, the chairman would send group chat messages with t
   <figcaption><i><span style="font-size:0.5em; color: grey">Example of task description on Kanban Board.</span></i></figcaption>
 </figure>
 
+<br />
+
+
 In rare cases when someone was absent from an in-person meeting a summary of everything discussed and established was also posted there. During the easter break, Teams was used to conduct video calls. 
 
 # Conclusion
@@ -510,6 +565,9 @@ As a group we discussed many potential improvements that can be implemented in t
   <li>Modifying the ground on which pigs are located which would add new challenge to building the structures.</li>
   <li>Potential multiplayer in which each player has to protect their own pig.</li>
 </lu>
+
+<br />
+
 
 All the members worked very well together and due to weekly in-person meetings we managed to form a trust in each other which provided sense of calmness during the project. By setting rules at the very beginning of the project like agenda for our weekly meetings or coding standards we made work easier for ourselves. By using the agile development techniques, we also had a sense of control over what should happen next which allowed us to act early on some potential issues.
 
@@ -580,3 +638,10 @@ All the members worked very well together and due to weekly in-person meetings w
         </tr>
     </tbody>
 </table>
+
+# How To Play
+1) First you need to download the Processing development environment for the game from the following link [download here](httpsprocessing.orgdownload).
+2) Download the above GitHub repository that contains the game program as a ZIP file and extract it.
+3) Open the extracted folder and open the Game.pde which can be found in Game - Code. By doing so, Processing should be up and running.
+4) In Processing go to Tools - Manage Tools… - Libraries. Install the sound library.
+5) Press the play button in the left upper corner of the Processing window in order to play!
