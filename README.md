@@ -1,8 +1,9 @@
 
-<figure align="center"  text-align="center">
+<figure align="center">
   <img src="GameIdeaImage\Baner.png" alt="Game baner.">
-  <figcaption><a href="https://youtu.be/Fx1-8QmGgEU">Link to "Anxious Pigs" trailer.</a></figcaption>
+  <figcaption></figcaption>
 </figure>
+<p align="center"><a href="https://youtu.be/Fx1-8QmGgEU">Link to "Anxious Pigs" trailer.</a></p>
 
 # Table of Contents
 - [Team](#team)
