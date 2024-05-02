@@ -1,9 +1,8 @@
 
-<figure>
-  <img src="GameIdeaImage\Baner.png" alt="Game baner." class="center">
-  <figcaption></figcaption>
+<figure align="center">
+  <img src="GameIdeaImage\Baner.png" alt="Game baner.">
+  <figcaption><a href="https://youtu.be/Fx1-8QmGgEU">Link to "Anxious Pigs" trailer.</a></figcaption>
 </figure>
-<p align="center"><a href="https://youtu.be/Fx1-8QmGgEU" align="center">Link to "Anxious Pigs" trailer.</a></p>
 
 # Table of Contents
 - [Team](#team)
@@ -32,7 +31,7 @@
 
 # Team
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles/GroupPhotos/IMG_3797.jpg" alt="Group photo." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Group photo.</span></i></figcaption>
 </figure>
@@ -80,7 +79,7 @@ Attacks come in three waves and are conducted by three types of birds with diffe
 Find out why pigs became so anxious, discover the most efficient ways to protect pigs, compare your score to other players included in the ‘Best Pig Protector’ ranking and become the next Pig King!   
 
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles/ReportGifs/IntroGif.gif" alt="Example of gameplay." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Demonstration of a gameplay.</span></i></figcaption>
 </figure>
@@ -125,9 +124,9 @@ Main User stories from the game the team ended up choosing:
 To unify the team's vision of the games, we created paper prototypes representing basic ideas for the gameplay. 
 
 
-<a href="https://youtube.com/shorts/NdrY11o-Ys4"><img src="OrganisationFiles\PaperPrototypes\BatVideoCover.jpg" alt="Flappy Bat paper prototype."></a>
+<a href="https://youtube.com/shorts/NdrY11o-Ys4"><img src="OrganisationFiles\PaperPrototypes\BatVideoCover.jpg" alt="Flappy Bat paper prototype." align="center"></a>
 
-<a href="https://youtu.be/iyaCUZtQJD4"><img src="OrganisationFiles\PaperPrototypes\PigVideoCover.jpg" alt="Anxious Pigs paper prototype."></a>
+<a href="https://youtu.be/iyaCUZtQJD4"><img src="OrganisationFiles\PaperPrototypes\PigVideoCover.jpg" alt="Anxious Pigs paper prototype." align="center"></a>
 
 During the process, the team further discussed the nuances of the chosen games. Based on this, we compared the two ideas again and concluded that Anxious Pigs would be more creative and challenging. Team members also seemed to resonate more with the game's themes. The following main idea of the game was finished:
 
@@ -153,7 +152,7 @@ After that, we had to decide on the core mechanics that needed to be implemented
 These Specifications describe the basic flow of the game and more detailed use case specifications can be viewed <a href="OrganisationFiles\UseCaseDiagram\UseCaseSpecifications.docx">here</a>. 
 The final Use Case diagram was as follows:
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\UseCaseDiagram\UseCaseDiagram.png" alt="Use case diagram." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Use case diagram.</span></i></figcaption>
 </figure>
@@ -169,7 +168,7 @@ The system architecture of our game can be separated into two parts, the physics
 
 The physics engine comprises the classes World, Rigidbody, Circle and Rectangle, where Circle and Rectangle are extended from Rigidbody. 
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\ClassDiagrams\PhysicsEngineClassDiagram.png" alt="Physics engine class diagram." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Physics engine class diagram.</span></i></figcaption>
 </figure>
@@ -187,7 +186,7 @@ The World class is there to help organize the bodies which are to be physically 
 As users interact with the game mainly by clicking buttons on the screen, the ImageButton class was defined. It solved two encountered issues of code repetition and human error when defining the button area. 
 The ScreenManager class was created to optimise managing different screens of the game. The class stores all the available screens into a variable, keeps track of which screen is currently displayed and has the current player information.
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\ClassDiagrams\GameClassDiagram.png" alt="Game class diagram." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Game class diagram.</span></i></figcaption>
 </figure>
@@ -208,14 +207,14 @@ The Material class was extended from the Rectangle class. It describes the basic
 The WinScreen and LoseScreen classes act as a cue for the game's end. They would display information about the game result and the score the player achieved. Both screens also implement a button that allows the player to return to the main menu.
 The ScoreScreen class was designed to display the top players’ names and their scores. The most important class method loads the table files to the data structures and prints them to the screen. 
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\ClassDiagrams\ClassDiagram.png" alt="Class diagram." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Class diagram.</span></i></figcaption>
 </figure>
 
 <br />
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\ClassDiagrams\BehaviourDiagram.png" alt="Behaviour diagram." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Behaviour diagram.</span></i></figcaption>
 </figure>
@@ -301,14 +300,14 @@ The following issues were identified:
 <ul>
   <li>The tutorial structure was confusing, users would close the tutorial without reading it.</li>
   <li>The tutorial was poorly noticeable on the background.</li>
-  <figure>
+  <figure align="center">
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution1.png" alt="Tutorial evolution." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Evolution of the tutorial.</span></i></figcaption>
   </figure>
   <br />
 
   <li>Lack of upper case letters during name-entering.</li>
-  <figure>
+  <figure align="center">
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution2.png" alt="Upper case letters were added." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Upper case letters were added.</span></i></figcaption>
   </figure>
@@ -324,21 +323,21 @@ The following issues were identified:
 <ul>
   <li>The wording of the tutorial was confusing. – <em>Solved</em> by rewriting the tutorial </li>
   <li>Confusion about the attack direction.</li>
-  <figure>
+  <figure align="center">
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution3.png" alt="Highlighted directions from which the attack was coming." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Highlighted directions from which the attack was coming.</span></i></figcaption>
   </figure>
   <br />
 
   <li>It was hard to gain a high enough score to appear on the scoreboard.</li>
-  <figure>
+  <figure align="center">
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution4.png" alt="Divided scoreboard into two sections." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Divided scoreboard into two sections.</span></i></figcaption>
   </figure>
   <br />
 
   <li>Confusion about birds’ superpowers.</li>
-  <figure>
+  <figure align="center">
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution5.png" alt="Modified the tutorial in a way that it displays birds' abilities." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Modified the tutorial in a way that it displays birds' abilities.</span></i></figcaption>
   </figure>
@@ -346,7 +345,7 @@ The following issues were identified:
 
 The heuristic evaluation resulted in adding the ‘Help’ button which would display the tutorial whenever clicked. (violation of 'Help and Documentation' heuristic) 
 
-<figure>
+<figure align="center">
     <img src="OrganisationFiles\ImplementedChangesImages\GifSolution1.gif" alt="Added buttton reopening the tutorial." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Added buttton reopening the tutorial.</span></i></figcaption>
 </figure>
@@ -364,28 +363,28 @@ The heuristic evaluation resulted in adding the ‘Help’ button which would di
 The following issues were identified:
 <ul>
   <li>The wording of the tutorial was confusing.</li>
-  <figure>
+  <figure align="center">
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution5.png" alt="Moved Main Menu button to make it more visible." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Moved Main Menu button to make it more visible.</span></i></figcaption>
   </figure>
   <br />
 
   <li>Confusion about the attack direction was still present. </li>
-  <figure>
+  <figure align="center">
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution6.png" alt="Highlighted directions from which the attack was coming." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Added arrows indicating the directions from which the attack was coming.</span></i></figcaption>
   </figure>
   <br />
 
   <li>Confusion about the number of levels and enemies.</li>
-  <figure>
+  <figure align="center">
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution7.png" alt="Added information about the number of levels and amount of birds about to attack." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Added information about the number of levels and amount of birds about to attack.</span></i></figcaption>
   </figure>
   <br />
 
   <li>Not knowing which material was selected.</li>
-  <figure>
+  <figure align="center">
     <img src="OrganisationFiles\ImplementedChangesImages\ImageSolution8.png" alt="Added yellowish color to the selected material." class="center">
     <figcaption><i><span style="font-size:0.5em; color: grey">Added yellowish color to the selected material.</span></i></figcaption>
   </figure>
@@ -400,7 +399,7 @@ The heuristic evaluation identified the same issue as found in the think-aloud e
 ## Quantitative Evaluation
 The team decided to use the System Usability Scale (SUS) to evaluate the game's interface design. We did not distinguish between the difficulty levels as their designs were very similar. Users were asked to fill out the questionnaire after playing both difficulty levels. The achieved results are presented below:
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\EvaluationsData/SUS_evaluation_result_table.png" alt="Table with results from the SUS evaluation." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Table with results from the SUS evaluation.</span></i></figcaption>
 </figure>
@@ -412,7 +411,7 @@ Overall achieved score was above the average of 68 suggesting that our system wa
 In the raw NASA TLX evaluation, the users were asked to fill in the provided form after completing the game on easy mode and once more after the hard mode. Achieved scores are presented below.
 
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_EASY_table.png" alt="Table with raw NASA TLX results from Easy mode." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Table with raw NASA TLX results from Easy mode.</span></i></figcaption>
 </figure>
@@ -420,7 +419,7 @@ In the raw NASA TLX evaluation, the users were asked to fill in the provided for
 <br />
 
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_HARD_table.png" alt="Table with raw NASA TLX results from Hard mode." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Table with raw NASA TLX results from Hard mode.</span></i></figcaption>
 </figure>
@@ -429,7 +428,7 @@ In the raw NASA TLX evaluation, the users were asked to fill in the provided for
 <br />
 
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\EvaluationsData/NASATLX_evaluation_result_graph.png" alt="Raw NASA TLX results in a graph form." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Raw NASA TLX results in a graph form.</span></i></figcaption>
 </figure>
@@ -519,7 +518,7 @@ In order to keep track of all the future and current tasks the team was using Ka
 
 In the beginning, there were no issues with that, however, as more progress on the project was made the board became more and more crowded. As a solution, the team created 6 main categories and divided all the tasks between them. 
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\ProcessSection\KanbanBoard.gif" alt="Kanban Board organisation." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Kanban Board organisation.</span></i></figcaption>
 </figure>
@@ -531,7 +530,7 @@ We used four status options to classify the tasks: to do, in progress, done and 
 
 If a more complicated task was assigned a short note was usually added to make sure that all the intended features were implemented. 
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\ProcessSection\TeamsMessages.png" alt="Kanban Board organisation." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Kanban Board organisation.</span></i></figcaption>
 </figure>
@@ -542,7 +541,7 @@ Between our weekly meetings, all communication was conducted via Teams.
 
 After each in-person meeting, the chairman would send group chat messages with tasks for the next week. 
 
-<figure>
+<figure align="center">
   <img src="OrganisationFiles\ProcessSection\KanbanBoardMessage.png" alt="Example of task description on Kanban Board." class="center">
   <figcaption><i><span style="font-size:0.5em; color: grey">Example of task description on Kanban Board.</span></i></figcaption>
 </figure>
