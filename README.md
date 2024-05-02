@@ -644,4 +644,4 @@ All the members worked very well together and due to weekly in-person meetings w
 2) Download the above GitHub repository that contains the game program as a ZIP file and extract it.
 3) Open the extracted folder and open the Game.pde which can be found in Game - Code. By doing so, Processing should be up and running.
 4) In Processing go to Tools - Manage Tools… - Libraries. Install the sound library.
-5) Press the play button in the left upper corner of the Processing window in order to play!
+5) Make sure the screen resolution is at least 1920x1080. Press the Present option in the drop down menu of Sketch in the Processing window in order to play!

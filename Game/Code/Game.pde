@@ -8,7 +8,8 @@ Table easyScoreTable,hardScoreTable;
 ScreenManager screenManager;
 
 void setup (){
-  fullScreen(P2D);
+  //fullScreen(P2D);
+  size(1920,1080,P2D);
   rectMode(CENTER);
   imageMode(CENTER);
   textAlign(CENTER);
